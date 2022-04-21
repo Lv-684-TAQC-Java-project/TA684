@@ -3,6 +3,8 @@ import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class TestHomePage extends SpeakUkrainianRunner{
+    private final userData data = new userData();
+
     @Test
     public void testActualPage() {
         System.out.println("Check pageURL");

@@ -1,10 +1,10 @@
-public class Data {
+public class userData {
         private String email;
         private String password;
 
 
 
-        public Data(){
+        public userData(){
             email = " admin@gmail.com";
             password = "admin";
         }
