@@ -21,8 +21,6 @@ public class SpeakUkrainianRunner {
     @BeforeClass
     public void SetUpBeforeClass() {
         System.out.println("@BeforeClass");
-
-
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
@@ -31,20 +29,15 @@ public class SpeakUkrainianRunner {
     }
 
     @BeforeMethod
-    public void setUp() throws Exception {
+    public void setUp() {
         System.out.println("BeforeMethod");
-
-
         driver.get("https://speak-ukrainian.org.ua/dev/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
-        driver.manage().window().maximize();
-        // driver.manage().window().setSize(new Dimension(480,640));
     }
 
     @AfterMethod
-    public void tearDown(ITestResult result) throws Exception {
+    public void tearDown(ITestResult result){
         System.out.println("AfterMethod");
-
         if (!result.isSuccess()) {
             System.out.println("Test " + result.getName() + " Error");
         }
@@ -53,21 +46,16 @@ public class SpeakUkrainianRunner {
 
     @AfterClass
             (alwaysRun = true)
-    public void tearDownAfterClass() throws InterruptedException {
+    public void tearDownAfterClass() {
         System.out.println("@AfterClass");
-
         if (driver != null) {
             driver.quit();
         }
     }
 
-
     public HomePage LoadApplication() {
         System.out.println("LoadApplication");
         return new HomePage(driver);
-
     }
-
-
 }
 
