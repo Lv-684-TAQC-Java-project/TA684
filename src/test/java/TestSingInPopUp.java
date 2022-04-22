@@ -13,7 +13,7 @@ public class TestSingInPopUp extends SpeakUkrainianRunner{
         assertEquals("Навчай українською", driver.getTitle());
     }
 
-    @Test
+    @Test(dependsOnMethods = {"testActualPage"})
     public void CheckLoginAbility() {
         SingIn  singIn = new SingIn(driver);
             singIn.singIn(userData.getEmail(), userData.getPassword());
