@@ -1,16 +1,25 @@
+package com.ita.speakukrainian.ui.pages;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HeaderMenu {
+public class HeaderMenuComponent {
     protected WebDriver driver;
 
     @FindBy(xpath = "//div[@id='root']/section/header/div[3]/div[2]/span[2]")
     private WebElement userProFileButton;
     @FindBy(xpath = "//li[2]/span/div")
     private WebElement singInButton;
-    public HeaderMenu(WebDriver driver) {
+    @FindBy(xpath = "//*[@id='root']/section/header/div[1]/a/div")
+    private WebElement homePageButton;
+    @FindBy(xpath = "//*[@id=\"root\"]/section/header/div[3]/div[2]/span[1]/img")
+    private WebElement avatar;
+
+
+
+    public HeaderMenuComponent(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -22,10 +31,11 @@ public class HeaderMenu {
         return userProFileButton;
     }
 
-    public void clickUserProFileButton() {
+    public HeaderMenuComponent clickUserProFileButton() {
         if (isDisplayedUserProFileButton()){
             getUserProFileButton().click();
         }
+        return this;
     }
 
     public boolean isDisplayedUserProFileButton() {
@@ -39,14 +49,23 @@ public class HeaderMenu {
         return singInButton;
     }
 
-    public void clickSingInButton() {
+    public SingInPopup clickSingInButton() {
         if(isDisplayedSingInButton()) {
             getSingInButton().click();
         }
+        return new SingInPopup(driver);
     }
 
     public boolean isDisplayedSingInButton() {
         return singInButton.isDisplayed();
+    }
+
+    public HomePage cliHomePage(){
+        homePageButton.click();
+        return new HomePage(driver);
+    }
+    public String getAvatarImgPath() {
+        return avatar.getAttribute("src");
     }
 
 }

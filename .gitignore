@@ -41,3 +41,7 @@ target
 .idea
 *.iml
 
+#project
+data.properties
+
+
