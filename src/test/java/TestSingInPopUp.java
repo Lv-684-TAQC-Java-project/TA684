@@ -14,15 +14,10 @@ public class TestSingInPopUp extends SpeakUkrainianRunner{
     }
 
     @Test
-    public void CheckLoginAbility(){
+    public void CheckLoginAbility() {
         SingIn  singIn = new SingIn(driver);
-        if (singIn.isDisplayedEnterName()) {
             singIn.singIn(userData.getEmail(), userData.getPassword());
             System.out.println("Registration was successful");
-        } else {
-            System.out.println("Try again");
-        }
-
 
     }
 

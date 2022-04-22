@@ -6,7 +6,7 @@ public class userData {
 
 
         public userData(){
-            email = " admin@gmail.com";
+            email = "admin@gmail.com";
             password = "admin";
             url = "https://speak-ukrainian.org.ua/dev/";
         }
