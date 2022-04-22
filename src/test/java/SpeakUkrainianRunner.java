@@ -36,7 +36,7 @@ public class SpeakUkrainianRunner {
     }
 
     @AfterMethod
-    public void tearDown(ITestResult result){
+    public void tearDown(ITestResult result) {
         System.out.println("AfterMethod");
         if (!result.isSuccess()) {
             System.out.println("Test " + result.getName() + " Error");

@@ -3,25 +3,26 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SingIn{
+public class SingIn {
     protected WebDriver driver;
-    @FindBy(xpath="//input[@id='basic_email']")
+    @FindBy(xpath = "//input[@id='basic_email']")
     private WebElement enterName;
-    @FindBy(xpath="//input[@id='basic_password']")
+    @FindBy(xpath = "//input[@id='basic_password']")
     private WebElement enterPassword;
-    @FindBy(css =".login-button > span")
+    @FindBy(css = ".login-button > span")
     private WebElement loginButton;
-    @FindBy (css = ".ant-modal-wrap:nth-child(2) .ant-modal-close svg")
+    @FindBy(css = ".ant-modal-wrap:nth-child(2) .ant-modal-close svg")
     private WebElement closeButton;
     private HeaderMenu headerManu;
 
-    public SingIn(WebDriver driver){
+    public SingIn(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         initElements();
     }
+
     private void initElements() {
-        headerManu=new HeaderMenu(driver);
+        headerManu = new HeaderMenu(driver);
     }
 
 
@@ -32,17 +33,18 @@ public class SingIn{
         return enterName;
     }
 
-    public void clickEnterName () {
-        if(isDisplayedEnterName()) {
+    public void clickEnterName() {
+        if (isDisplayedEnterName()) {
             getEnterName().click();
         }
     }
 
-    public void sendKeysEnterName(String enterName){
+    public void sendKeysEnterName(String enterName) {
         getEnterName().sendKeys(enterName);
     }
 
     public boolean isDisplayedEnterName() {
+
         return enterName.isDisplayed();
     }
 
@@ -50,31 +52,35 @@ public class SingIn{
      * EnterPassword
      */
     public WebElement getEnterPassword() {
+
         return enterPassword;
     }
 
     public void clickEnterPassword() {
-        if(isDisplayedEnterPassword()) {
+        if (isDisplayedEnterPassword()) {
             getEnterPassword().click();
         }
     }
 
-    public void sendKeysPassword(String password){
+    public void sendKeysPassword(String password) {
         getEnterPassword().sendKeys(password);
+
     }
 
     public boolean isDisplayedEnterPassword() {
         return enterPassword.isDisplayed();
     }
+
     /**
      * LoginButton
      */
     public WebElement getLoginButton() {
+
         return loginButton;
     }
 
     public void clickLoginButton() {
-        if(isDisplayedLoginButton()) {
+        if (isDisplayedLoginButton()) {
             getLoginButton().click();
         }
     }
@@ -91,7 +97,7 @@ public class SingIn{
     }
 
     public void clickCloseButton() {
-        if(isDisplayedCloseButton()) {
+        if (isDisplayedCloseButton()) {
             getCloseButton().click();
         }
     }
