@@ -12,7 +12,6 @@ public class SpeakUkrainianRunner {
 
 
     @BeforeSuite
-
     public void beforeSuite() {
         WebDriverManager.chromedriver().setup();
     }
@@ -32,7 +31,7 @@ public class SpeakUkrainianRunner {
     public void setUp() {
         System.out.println("BeforeMethod");
         driver.get("https://speak-ukrainian.org.ua/dev/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
     @AfterMethod

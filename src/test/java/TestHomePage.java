@@ -2,7 +2,8 @@ import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
 
-public class TestHomePage extends SpeakUkrainianRunner{
+public class TestHomePage extends SpeakUkrainianRunner {
+
     @Test
     public void testActualPage() {
         System.out.println("Check pageURL");
@@ -13,8 +14,12 @@ public class TestHomePage extends SpeakUkrainianRunner{
     }
 
     @Test
-    public void Check(){
+    public void Check() throws InterruptedException {
         HomePage homePage = LoadApplication();
+        homePage = homePage
+                .navigatEnterSingIn()
+                .navigatEnterData()
+                .navigateMenuHome();
 
 
     }

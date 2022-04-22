@@ -7,10 +7,15 @@ public class HeaderManu {
     protected WebDriver driver;
 
 
-    @FindBy(css = "user-profile > .anticon path")
+   // @FindBy(css = "user-profile > .anticon path")
+    @FindBy(css = ".user-profile .anticon.anticon-caret-down>svg>path")
     private WebElement userProFileButton;
-    @FindBy(xpath = "//li[2]/span/div")
+   // @FindBy(xpath = "//li[2]/span/div")
+    @FindBy(css = ".ant-dropdown-placement-bottom li:nth-child(2)>span>div")
     private WebElement singInButton;
+    @FindBy(css = "div.logo")
+    private WebElement homePage;
+
     public HeaderManu(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -24,7 +29,7 @@ public class HeaderManu {
     }
 
     public void clickUserProFileButton() {
-        if (isDisplayedUserProFileButton()){
+        if (isDisplayedUserProFileButton()) {
             getUserProFileButton().click();
         }
     }
@@ -45,7 +50,7 @@ public class HeaderManu {
     }
 
     public void clickSingInButton() {
-        if(isDisplayedSingInButton()) {
+        if (isDisplayedSingInButton()) {
             getSingInButton().click();
         }
     }
@@ -58,4 +63,23 @@ public class HeaderManu {
         return singInButton.isDisplayed();
     }
 
+
+    /**
+     * HomePage
+     */
+    private WebElement getHomePage() {
+        return homePage;
+    }
+
+    public String getHomePageText() {
+        return getHomePage().getText();
+    }
+
+    public void clickHomePage() {
+        getHomePage().click();
+    }
+
+    public boolean isDisplayedHomePage() {
+        return getHomePage().isDisplayed();
+    }
 }

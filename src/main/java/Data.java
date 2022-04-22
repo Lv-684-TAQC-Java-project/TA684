@@ -5,7 +5,7 @@ public class Data {
 
 
         public Data(){
-            email = " admin@gmail.com";
+            email = "admin@gmail.com";
             password = "admin";
         }
 

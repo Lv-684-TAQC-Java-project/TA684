@@ -21,6 +21,7 @@ public class SingIn extends TopPage{
         initElements();
     }
     private void initElements() {
+
         headerManu=new HeaderManu(driver);
     }
 
@@ -36,6 +37,13 @@ public class SingIn extends TopPage{
         if(isDisplayedEnterName()) {
             getEnterName().click();
         }
+    }
+    public void clearEnterName(){
+        getEnterName().clear();
+    }
+
+    public void sendKeysName(String userMail){
+        getEnterName().sendKeys(userMail);
     }
 
     public String getEnterNameText() {
@@ -57,6 +65,13 @@ public class SingIn extends TopPage{
         if(isDisplayedEnterPassword()) {
             getEnterPassword().click();
         }
+    }
+    public void clearEnterPassword(){
+        getEnterPassword().clear();
+    }
+
+    public void sendKeysPassword(String userMail){
+        getEnterPassword().sendKeys(userMail);
     }
 
     public String getEnterPasswordText() {
