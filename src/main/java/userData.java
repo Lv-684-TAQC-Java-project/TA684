@@ -1,12 +1,14 @@
 public class userData {
-        private String email;
-        private String password;
+        private static String email;
+        private static String password;
+        private String url;
 
 
 
         public userData(){
             email = " admin@gmail.com";
             password = "admin";
+            url = "https://speak-ukrainian.org.ua/dev/";
         }
 
         // setters
@@ -19,17 +21,24 @@ public class userData {
             this.password = password;
         }
 
+         public void setUrl(String url) {
+        this.url = password;
+    }
+
 
         // getters
 
-        public String getEmail() {
+        public static String getEmail() {
             return email;
         }
 
-        public String getPassword() {
+        public static String getPassword() {
             return password;
         }
 
+        public String getUrl() {
+        return url;
+    }
 
         @Override
         public String toString() {

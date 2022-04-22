@@ -3,7 +3,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SingIn extends TopPage{
+public class SingIn{
     protected WebDriver driver;
     @FindBy(xpath="//input[@id='basic_email']")
     private WebElement enterName;
@@ -13,15 +13,15 @@ public class SingIn extends TopPage{
     private WebElement loginButton;
     @FindBy (css = ".ant-modal-wrap:nth-child(2) .ant-modal-close svg")
     private WebElement closeButton;
-    private HeaderManu headerManu;
+    private HeaderMenu headerManu;
 
     public SingIn(WebDriver driver){
-        super(driver);
+        this.driver = driver;
         PageFactory.initElements(driver, this);
         initElements();
     }
     private void initElements() {
-        headerManu=new HeaderManu(driver);
+        headerManu=new HeaderMenu(driver);
     }
 
 
@@ -38,8 +38,8 @@ public class SingIn extends TopPage{
         }
     }
 
-    public String getEnterNameText() {
-        return getEnterName().getText();
+    public void sendKeysEnterName(String enterName){
+        getEnterName().sendKeys(enterName);
     }
 
     public boolean isDisplayedEnterName() {
@@ -59,8 +59,8 @@ public class SingIn extends TopPage{
         }
     }
 
-    public String getEnterPasswordText() {
-        return getEnterPassword().getText();
+    public void sendKeysPassword(String password){
+        getEnterPassword().sendKeys(password);
     }
 
     public boolean isDisplayedEnterPassword() {
@@ -77,10 +77,6 @@ public class SingIn extends TopPage{
         if(isDisplayedLoginButton()) {
             getLoginButton().click();
         }
-    }
-
-    public String getLoginButtonText() {
-        return getLoginButton().getText();
     }
 
     public boolean isDisplayedLoginButton() {
@@ -100,12 +96,17 @@ public class SingIn extends TopPage{
         }
     }
 
-    public String getCloseButtonText() {
-        return getCloseButton().getText();
-    }
-
     public boolean isDisplayedCloseButton() {
         return closeButton.isDisplayed();
+    }
+
+    public void singIn(String email, String password) {
+        headerManu.clickUserProFileButton();
+        headerManu.clickSingInButton();
+        clickEnterName();
+        sendKeysEnterName(email);
+        clickEnterPassword();
+        sendKeysPassword(password);
     }
 
 }

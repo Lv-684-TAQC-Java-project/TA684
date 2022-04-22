@@ -3,15 +3,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HeaderManu {
+public class HeaderMenu {
     protected WebDriver driver;
 
-
-    @FindBy(css = "user-profile > .anticon path")
+    @FindBy(css = ".ant-modal-wrap:nth-child(2) .ant-modal-close svg")
     private WebElement userProFileButton;
     @FindBy(xpath = "//li[2]/span/div")
     private WebElement singInButton;
-    public HeaderManu(WebDriver driver) {
+    public HeaderMenu(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

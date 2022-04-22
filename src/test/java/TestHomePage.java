@@ -1,5 +1,4 @@
 import org.testng.annotations.Test;
-
 import static org.testng.AssertJUnit.assertEquals;
 
 public class TestHomePage extends SpeakUkrainianRunner{
@@ -8,15 +7,22 @@ public class TestHomePage extends SpeakUkrainianRunner{
     @Test
     public void testActualPage() {
         System.out.println("Check pageURL");
-        assertEquals("https://speak-ukrainian.org.ua/dev/", driver.getCurrentUrl());
+        assertEquals(data.getUrl(), driver.getCurrentUrl());
 
         System.out.println("Check page title");
         assertEquals("Навчай українською", driver.getTitle());
     }
 
     @Test
-    public void Check(){
-        HomePage homePage = LoadApplication();
+    public void CheckLoginAbility(){
+        SingIn  singIn = new SingIn(driver);
+        if (singIn.isDisplayedEnterName()) {
+            singIn.clickEnterName ();
+            singIn.singIn(userData.getEmail(), userData.getPassword());
+            System.out.println("Registration was successful");
+        } else {
+            System.out.println("Try again");
+        }
 
 
     }
