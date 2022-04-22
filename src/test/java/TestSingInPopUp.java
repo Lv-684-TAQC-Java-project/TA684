@@ -1,7 +1,7 @@
 import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.assertEquals;
 
-public class TestHomePage extends SpeakUkrainianRunner{
+public class TestSingInPopUp extends SpeakUkrainianRunner{
     private final userData data = new userData();
 
     @Test
@@ -17,7 +17,6 @@ public class TestHomePage extends SpeakUkrainianRunner{
     public void CheckLoginAbility(){
         SingIn  singIn = new SingIn(driver);
         if (singIn.isDisplayedEnterName()) {
-            singIn.clickEnterName ();
             singIn.singIn(userData.getEmail(), userData.getPassword());
             System.out.println("Registration was successful");
         } else {
