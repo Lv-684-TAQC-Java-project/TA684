@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 public class HeaderMenu {
     protected WebDriver driver;
 
-    @FindBy(css = "div.ant-dropdown-trigger.ant-dropdown-open user-profile")
+    @FindBy(xpath = "//div[@id='root']/section/header/div[3]/div[2]/span[2]")
     private WebElement userProFileButton;
     @FindBy(xpath = "//li[2]/span/div")
     private WebElement singInButton;
@@ -28,10 +28,6 @@ public class HeaderMenu {
         }
     }
 
-    public String getUserProFileButtonText() {
-        return getUserProFileButton().getText();
-    }
-
     public boolean isDisplayedUserProFileButton() {
         return userProFileButton.isDisplayed();
     }
@@ -47,10 +43,6 @@ public class HeaderMenu {
         if(isDisplayedSingInButton()) {
             getSingInButton().click();
         }
-    }
-
-    public String getSingInButtonText() {
-        return getSingInButton().getText();
     }
 
     public boolean isDisplayedSingInButton() {
