@@ -101,12 +101,13 @@ public class SingIn{
     }
 
     public void singIn(String email, String password) {
-        headerManu.clickUserProFileButton();
-        headerManu.clickSingInButton();
+        //headerManu.clickUserProFileButton();
+        //headerManu.clickSingInButton();
         clickEnterName();
         sendKeysEnterName(email);
         clickEnterPassword();
         sendKeysPassword(password);
+        clickLoginButton();
     }
 
 }

@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 public class HeaderMenu {
     protected WebDriver driver;
 
-    @FindBy(css = ".ant-modal-wrap:nth-child(2) .ant-modal-close svg")
+    @FindBy(css = "div.ant-dropdown-trigger.ant-dropdown-open user-profile")
     private WebElement userProFileButton;
     @FindBy(xpath = "//li[2]/span/div")
     private WebElement singInButton;

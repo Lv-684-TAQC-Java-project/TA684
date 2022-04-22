@@ -52,10 +52,5 @@ public class SpeakUkrainianRunner {
             driver.quit();
         }
     }
-
-    public HomePage LoadApplication() {
-        System.out.println("LoadApplication");
-        return new HomePage(driver);
-    }
 }
 
