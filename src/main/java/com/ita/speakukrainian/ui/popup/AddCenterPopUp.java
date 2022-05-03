@@ -1,0 +1,32 @@
+package com.ita.speakukrainian.ui.popup;
+
+import com.ita.speakukrainian.ui.pages.BasePage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class AddCenterPopUp extends BasePage {
+    @FindBy(xpath = "//*[@id=\"basic\"]/div[2]/button")
+    private WebElement nextStepButton;
+    @FindBy(xpath = "//*[@id=\"basic_locations\"]/div/label/span[1]/input")
+    private WebElement checkbox;
+
+    @FindBy(xpath = "//*[@id=\"basic\"]/div[1]/div[1]/div[2]/div[2]/div")
+    private WebElement incorrectCenterName;
+    public AddCenterPopUp(WebDriver driver){
+        super(driver);
+    }
+
+    public AddCenterPopUp clickNextStepButton(){
+        nextStepButton.click();
+        return new AddCenterPopUp(driver);
+    }
+    public AddCenterPopUp clickCheckbox(){
+        checkbox.click();
+        return new AddCenterPopUp(driver);
+    }
+    public String getError(){
+        return incorrectCenterName.getText();
+    }
+
+}
