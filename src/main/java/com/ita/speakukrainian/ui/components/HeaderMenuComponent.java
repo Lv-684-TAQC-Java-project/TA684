@@ -38,7 +38,7 @@ public class HeaderMenuComponent {
     @FindBy(xpath = avatarSelector)
     private WebElement avatar;
 
-    @FindBy(xpath = "/html/body/div[5]/div/div/ul/li[3]")
+    @FindBy(css=".ant-dropdown-menu-title-content > a")
     private WebElement myProfileButton;
 
 
@@ -65,15 +65,16 @@ public class HeaderMenuComponent {
 
     public HeaderMenuComponent clickUserProFileButton() {
         userProFileButton.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if (isDisplayedUserProFileButton()) {
-            getUserProFileButton().click();
-        }
+        // try {
+        //    Thread.sleep(2000);
+        //} catch (InterruptedException e) {
+         //   e.printStackTrace();
+        //}
+        //if (isDisplayedUserProFileButton()) {
+         //   getUserProFileButton().click();
+        //}
         return this;
+
     }
 
     public boolean isDisplayedUserProFileButton() {
