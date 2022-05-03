@@ -14,6 +14,7 @@ public class ValueProvider {
     }
 
     public String getAdminEmail() {
+
         return properties.getProperty("adminEmail");
     }
 

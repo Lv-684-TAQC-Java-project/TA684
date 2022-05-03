@@ -17,7 +17,8 @@ public class HomePage extends BasePage {
         headerMenu = new HeaderMenuComponent(driver);
     }
     public HeaderMenuComponent header() {
-        return headerMenu;
+             sleep(4000);
+            return headerMenu;
     }
 
     public String getTitle() {
