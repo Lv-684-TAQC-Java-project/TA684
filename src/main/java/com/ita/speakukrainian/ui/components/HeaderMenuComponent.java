@@ -1,6 +1,11 @@
-package com.ita.speakukrainian.ui.pages;
+package com.ita.speakukrainian.ui.components;
 
+import com.ita.speakukrainian.ui.pages.AddClubPage;
+import com.ita.speakukrainian.ui.pages.ClubsPage;
 import org.openqa.selenium.By;
+import com.ita.speakukrainian.ui.pages.HomePage;
+import com.ita.speakukrainian.ui.pages.MyProfilePage;
+import com.ita.speakukrainian.ui.popup.SingInPopup;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -33,6 +38,10 @@ public class HeaderMenuComponent {
     @FindBy(xpath = avatarSelector)
     private WebElement avatar;
 
+    @FindBy(xpath = "/html/body/div[5]/div/div/ul/li[3]")
+    private WebElement myProfileButton;
+
+
 
     public HeaderMenuComponent(WebDriver driver) {
         this.driver = driver;
@@ -55,6 +64,7 @@ public class HeaderMenuComponent {
     }
 
     public HeaderMenuComponent clickUserProFileButton() {
+        userProFileButton.click();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -78,8 +88,8 @@ public class HeaderMenuComponent {
     }
 
     public SingInPopup clickSingInButton() {
-        if (isDisplayedSingInButton()) {
-            getSingInButton().click();
+        if(isDisplayedSingInButton()) {
+            singInButton.click();
         }
         return new SingInPopup(driver);
     }
@@ -103,10 +113,23 @@ public class HeaderMenuComponent {
         return new ClubsPage(driver);
     }
 
+    /**
+     * MyProfile
+     * @return MyProfilePage
+     */
+    public MyProfilePage clickMyProfileButton() {
+        if(isDisplayedMyProfileButton()) {
+            myProfileButton.click();
+        }
+        return new MyProfilePage(driver);
+    }
+
+    public boolean isDisplayedMyProfileButton() {
+        return myProfileButton.isDisplayed();
+    }
+
     public AddClubPage clickAddClubButton() {
         getAddClubButton().click();
         return new AddClubPage(driver);
     }
 }
-
-

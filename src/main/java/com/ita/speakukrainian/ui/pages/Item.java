@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.ui.pages;
 
+import com.ita.speakukrainian.ui.components.BaseComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
