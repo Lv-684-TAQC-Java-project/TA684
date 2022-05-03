@@ -1,4 +1,4 @@
-package com.ita.speakukrainian.ui.pages;
+package com.ita.speakukrainian.ui.components;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

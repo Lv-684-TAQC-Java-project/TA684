@@ -1,5 +1,7 @@
-package com.ita.speakukrainian.ui.pages;
+package com.ita.speakukrainian.ui.popup;
 
+import com.ita.speakukrainian.ui.pages.BasePage;
+import com.ita.speakukrainian.ui.pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,6 +32,7 @@ public class SingInPopup extends BasePage {
 
     public HomePage clickLoginButton() {
         loginButton.click();
+        sleep(3000);
         return new HomePage(driver);
     }
 

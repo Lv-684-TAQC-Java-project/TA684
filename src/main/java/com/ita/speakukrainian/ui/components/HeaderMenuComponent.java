@@ -1,5 +1,8 @@
-package com.ita.speakukrainian.ui.pages;
+package com.ita.speakukrainian.ui.components;
 
+import com.ita.speakukrainian.ui.pages.HomePage;
+import com.ita.speakukrainian.ui.pages.MyProfilePage;
+import com.ita.speakukrainian.ui.popup.SingInPopup;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +20,9 @@ public class HeaderMenuComponent {
     @FindBy(xpath = "//*[@id=\"root\"]/section/header/div[3]/div[2]/span[1]/img")
     private WebElement avatar;
 
+    @FindBy(xpath = "/html/body/div[5]/div/div/ul/li[3]")
+    private WebElement myProfileButton;
+
 
 
     public HeaderMenuComponent(WebDriver driver) {
@@ -27,14 +33,10 @@ public class HeaderMenuComponent {
     /**
      * UserProFileButton
      */
-    public WebElement getUserProFileButton() {
-        return userProFileButton;
-    }
+
 
     public HeaderMenuComponent clickUserProFileButton() {
-        if (isDisplayedUserProFileButton()){
-            getUserProFileButton().click();
-        }
+        userProFileButton.click();
         return this;
     }
 
@@ -45,17 +47,13 @@ public class HeaderMenuComponent {
     /**
      * SingInButton
      */
-    public WebElement getSingInButton() {
-        return singInButton;
-    }
 
     public SingInPopup clickSingInButton() {
         if(isDisplayedSingInButton()) {
-            getSingInButton().click();
+            singInButton.click();
         }
         return new SingInPopup(driver);
     }
-
     public boolean isDisplayedSingInButton() {
         return singInButton.isDisplayed();
     }
@@ -66,6 +64,21 @@ public class HeaderMenuComponent {
     }
     public String getAvatarImgPath() {
         return avatar.getAttribute("src");
+    }
+
+    /**
+     * MyProfile
+     * @return MyProfilePage
+     */
+    public MyProfilePage clickMyProfileButton() {
+        if(isDisplayedMyProfileButton()) {
+            myProfileButton.click();
+        }
+        return new MyProfilePage(driver);
+    }
+
+    public boolean isDisplayedMyProfileButton() {
+        return myProfileButton.isDisplayed();
     }
 
 }
