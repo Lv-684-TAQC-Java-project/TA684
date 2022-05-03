@@ -2,6 +2,7 @@ package com.ita.speakukrainian.ui.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
@@ -22,5 +23,10 @@ public class BasePage {
 
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
+    }
+
+    protected void scrollToElement(WebElement el) {
+        Actions action = new Actions(driver);
+        action.moveToElement(el).perform();
     }
 }
