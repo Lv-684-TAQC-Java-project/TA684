@@ -26,4 +26,28 @@ public class ValueProvider {
     public String getBaseURL() {
         return properties.getProperty("baseURL");
     }
+
+    public String getContactFacebook() {
+        return properties.getProperty("contactFacebook");
+    }
+
+    public String getContactEmail() {
+        return properties.getProperty("contactEmail");
+    }
+
+    public String getContactWhatsUpp() {
+        return properties.getProperty("contactWhatsUpp");
+    }
+
+    public String getContactName() {
+        return properties.getProperty("contactName");
+    }
+
+    public String getContactSkype() {
+        return properties.getProperty("contactSkype");
+    }
+
+    public String getContactPhoneNumber() {
+        return properties.getProperty("contactPhoneNumber");
+    }
 }
