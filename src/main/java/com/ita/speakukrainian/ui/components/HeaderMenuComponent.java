@@ -1,11 +1,8 @@
 package com.ita.speakukrainian.ui.components;
 
-import com.ita.speakukrainian.ui.pages.AddClubPage;
-import com.ita.speakukrainian.ui.pages.ClubsPage;
+import com.ita.speakukrainian.ui.pages.*;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
 import org.openqa.selenium.By;
-import com.ita.speakukrainian.ui.pages.HomePage;
-import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import com.ita.speakukrainian.ui.popup.SingInPopup;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,6 +42,12 @@ public class HeaderMenuComponent {
     private WebElement myProfileButton;
     @FindBy(xpath="//li[2]/span/div")
     private WebElement addCenterButton;
+    @FindBy(xpath="//div[2]/ul/li[1]/span/a")
+    private WebElement clubsPageHeader;
+    @FindBy(xpath = "//input[@id='rc_select_1']")
+    private  WebElement searchInput;
+    @FindBy(xpath = "//div[4]/div/div")
+    private WebElement searchInputDropdown;
 
 
 
@@ -146,4 +149,29 @@ public class HeaderMenuComponent {
         getAddClubButton().click();
         return new AddClubPage(driver);
     }
+
+    /**
+     * Go to
+     * ClubsPage
+     */
+    public ClubsPage clickClubsPageHeader() {
+        clubsPageHeader.click();
+        return new ClubsPage(driver);
+    }
+
+    /**
+     * click on
+     * "який гурток шукаєте?"
+     */
+    public HeaderMenuComponent clickSearchInput() {
+        searchInput.click();
+        new BasePage(driver).sleep(2000);
+        return this;
+    }
+
+    public boolean isDisplayedSearchInputDropdown() {
+        return searchInputDropdown.isDisplayed();
+    }
+
+
 }
