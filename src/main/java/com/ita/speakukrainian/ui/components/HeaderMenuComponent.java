@@ -2,6 +2,7 @@ package com.ita.speakukrainian.ui.components;
 
 import com.ita.speakukrainian.ui.pages.AddClubPage;
 import com.ita.speakukrainian.ui.pages.ClubsPage;
+import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
 import org.openqa.selenium.By;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.MyProfilePage;
@@ -42,6 +43,8 @@ public class HeaderMenuComponent {
 
     @FindBy(css=".ant-dropdown-menu-title-content > a")
     private WebElement myProfileButton;
+    @FindBy(xpath="//li[2]/span/div")
+    private WebElement addCenterButton;
 
 
 
@@ -114,6 +117,14 @@ public class HeaderMenuComponent {
     public ClubsPage clickExtendedSearchButton(){
         getExtendedSearchButton().click();
         return new ClubsPage(driver);
+    }
+    /**
+     * AddCenter
+     * @return AddCenterPopUp
+     */
+    public AddCenterPopUp clickAddCenterButton(){
+        addCenterButton.click();
+        return new AddCenterPopUp(driver);
     }
 
     /**
