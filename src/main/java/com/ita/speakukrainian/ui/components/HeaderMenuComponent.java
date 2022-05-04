@@ -17,6 +17,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class HeaderMenuComponent {
     protected WebDriver driver;
 
@@ -105,7 +107,7 @@ public class HeaderMenuComponent {
     }
 
     public String getAvatarImgPath() {
-        Wait wait = new WebDriverWait(driver, 10 * 1000);
+        Wait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(avatarSelector)));
         return avatar.getAttribute("src");
     }
