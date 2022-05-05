@@ -25,7 +25,7 @@ public class TestValidatePhoneNumber extends SpeakUkrainianRunner {
 
     @Test(dataProvider = "data1")
             public void testNotValidEnterPhoneNumber(String testCase1Value , String expected) {
-        String myProfile = new HomePage(driver)
+        String error = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickSingInButton()
@@ -38,14 +38,14 @@ public class TestValidatePhoneNumber extends SpeakUkrainianRunner {
                 .clickEditProfileButton()
                 .clearPhoneField()
                 .sendKeysPhoneField(testCase1Value)
-                .getError();
+                .getErrorWrongNumber();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(myProfile,expected);
+        softAssert.assertEquals(error,expected);
     }
 
     @Test
     public void testIsDisplayedSaveButton() {
-        boolean myProfile = new HomePage(driver)
+        String error = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickSingInButton()
@@ -57,7 +57,7 @@ public class TestValidatePhoneNumber extends SpeakUkrainianRunner {
                 .clickMyProfileButton()
                 .clickEditProfileButton()
                 .clearPhoneField()
-                .isDisplayedSaveButton();
-        Assert.assertEquals(myProfile,false);
+                .getEnterAnyNumberAlert();
+        Assert.assertEquals(error,"Будь ласка введіть Ваш номер телефону");
     }
 }
