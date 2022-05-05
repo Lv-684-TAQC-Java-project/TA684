@@ -149,6 +149,7 @@ public class AddClubPage extends BasePage {
 
     public AddClubPage fillInBasicDescriptionInput(String description) {
         getBasicDescriptionInput().sendKeys(description);
+        sleep(4000);
         return new AddClubPage(driver);
     }
 
