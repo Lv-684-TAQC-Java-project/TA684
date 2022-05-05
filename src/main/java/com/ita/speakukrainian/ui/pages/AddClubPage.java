@@ -33,6 +33,8 @@ public class AddClubPage extends BasePage {
     private WebElement basicDescriptionInput;
     @FindBy(css = "[role='alert']")
     private List<WebElement> alerts;
+    @FindBy(css = "#basic [class$='ant-form-item-feedback-icon-success']")
+    private WebElement successIcon;
 
     public AddClubPage (WebDriver driver){
         super(driver);
@@ -89,6 +91,10 @@ public class AddClubPage extends BasePage {
 
     public WebElement getBasicDescriptionInput() {
         return basicDescriptionInput;
+    }
+
+    public WebElement getSuccessIcon() {
+        return successIcon;
     }
 
     public AddClubPage fillInClubNameInput(String clubName) {
@@ -155,5 +161,9 @@ public class AddClubPage extends BasePage {
 
     public boolean isAlertDisplayed() {
         return getAlerts().stream().allMatch(el -> el.isDisplayed());
+    }
+
+    public boolean isSuccessIconDisplayed() {
+        return getSuccessIcon().isDisplayed();
     }
 }
