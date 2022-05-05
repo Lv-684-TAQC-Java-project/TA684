@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.ui.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,13 +26,14 @@ public class EditProfilePage extends BasePage{
     public EditProfilePage sendKeysPhoneField(String phoneNumber){
         sleep(1000);
         phoneField.click();
-        phoneField.clear();
         phoneField.sendKeys(phoneNumber);
         return this;
     }
 
     public EditProfilePage clearPhoneField(){
-        phoneField.clear();
+        phoneField.click();
+        String delete = Keys.chord(Keys.CONTROL,"a") + Keys.DELETE;
+        phoneField.sendKeys(delete);
         return this;
     }
 
