@@ -13,12 +13,19 @@ public class MyProfilePage extends BaseObjectPage{
     private WebElement addCenterButton;
     @FindBy(xpath = "/html/body/div[5]/div/div/ul/li[1]/span/div")
     private WebElement addClubButton;
+    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/section/main/div[2]/div/div[1]/button")
+    private WebElement editProfile;
 
     private HeaderMenuComponent headerMenu;
     public MyProfilePage(WebDriver driver) {
         super(driver);
 
         headerMenu = new HeaderMenuComponent(driver);
+    }
+
+    public EditProfilePage clickEditProfileButton(){
+        editProfile.click();
+        return new EditProfilePage(driver);
     }
 
     public  MyProfilePage clickAddButton(){
@@ -33,3 +40,4 @@ public class MyProfilePage extends BaseObjectPage{
 
 
 }
+

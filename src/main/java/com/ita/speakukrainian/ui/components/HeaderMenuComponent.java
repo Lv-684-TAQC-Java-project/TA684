@@ -1,10 +1,8 @@
 package com.ita.speakukrainian.ui.components;
 
-import com.ita.speakukrainian.ui.pages.AddClubPage;
-import com.ita.speakukrainian.ui.pages.ClubsPage;
+import com.ita.speakukrainian.ui.pages.*;
+import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
 import org.openqa.selenium.By;
-import com.ita.speakukrainian.ui.pages.HomePage;
-import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import com.ita.speakukrainian.ui.popup.SingInPopup;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +14,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HeaderMenuComponent {
     protected WebDriver driver;
@@ -40,6 +40,14 @@ public class HeaderMenuComponent {
 
     @FindBy(css=".ant-dropdown-menu-title-content > a")
     private WebElement myProfileButton;
+    @FindBy(xpath="//li[2]/span/div")
+    private WebElement addCenterButton;
+    @FindBy(xpath="//div[2]/ul/li[1]/span/a")
+    private WebElement clubsPageHeader;
+    @FindBy(xpath = "//input[@id='rc_select_1']")
+    private  WebElement searchInput;
+    @FindBy(xpath = "//div[4]/div/div")
+    private WebElement searchInputDropdown;
 
 
 
@@ -105,13 +113,21 @@ public class HeaderMenuComponent {
     }
 
     public String getAvatarImgPath() {
-        Wait wait = new WebDriverWait(driver, 10 * 1000);
+        Wait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(avatarSelector)));
         return avatar.getAttribute("src");
     }
     public ClubsPage clickExtendedSearchButton(){
         getExtendedSearchButton().click();
         return new ClubsPage(driver);
+    }
+    /**
+     * AddCenter
+     * @return AddCenterPopUp
+     */
+    public AddCenterPopUp clickAddCenterButton(){
+        addCenterButton.click();
+        return new AddCenterPopUp(driver);
     }
 
     /**
@@ -133,4 +149,29 @@ public class HeaderMenuComponent {
         getAddClubButton().click();
         return new AddClubPage(driver);
     }
+
+    /**
+     * Go to
+     * ClubsPage
+     */
+    public ClubsPage clickClubsPageHeader() {
+        clubsPageHeader.click();
+        return new ClubsPage(driver);
+    }
+
+    /**
+     * click on
+     * "який гурток шукаєте?"
+     */
+    public HeaderMenuComponent clickSearchInput() {
+        searchInput.click();
+        new BasePage(driver).sleep(2000);
+        return this;
+    }
+
+    public boolean isDisplayedSearchInputDropdown() {
+        return searchInputDropdown.isDisplayed();
+    }
+
+
 }
