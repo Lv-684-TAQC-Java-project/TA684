@@ -23,6 +23,11 @@ public class ValueProvider {
 
     }
 
+    public String getPhoneNumber() {
+        return properties.getProperty("phoneNumber");
+
+    }
+
     public String getBaseURL() {
         return properties.getProperty("baseURL");
     }
