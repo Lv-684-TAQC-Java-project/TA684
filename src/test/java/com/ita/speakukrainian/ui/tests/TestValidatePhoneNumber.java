@@ -36,6 +36,7 @@ public class TestValidatePhoneNumber extends SpeakUkrainianRunner {
                 .clickUserProFileButton()
                 .clickMyProfileButton()
                 .clickEditProfileButton()
+                .clearPhoneField()
                 .sendKeysPhoneField(testCase1Value)
                 .getError();
         SoftAssert softAssert = new SoftAssert();
