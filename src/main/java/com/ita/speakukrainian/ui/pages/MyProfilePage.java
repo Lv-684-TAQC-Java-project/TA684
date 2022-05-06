@@ -1,8 +1,8 @@
 package com.ita.speakukrainian.ui.pages;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
+import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
-import com.ita.speakukrainian.ui.popup.AddClubPopUp;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,9 +39,9 @@ public class MyProfilePage extends BaseObjectPage{
         return new AddCenterPopUp(driver);
     }
 
-    public AddClubPopUp clickAddClubButton(){
+    public MainInformation clickAddClubButton(){
         addClubButton.click();
-        return new AddClubPopUp(driver);
+        return new MainInformation(driver);
     }
 }
 
