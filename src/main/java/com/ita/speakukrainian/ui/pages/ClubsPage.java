@@ -16,7 +16,7 @@ public class ClubsPage extends BasePage {
     }
 
     public ExtendedSearchComponent getExtendedSearchComponent() {
-        return extendedSearchComponent;
+                return extendedSearchComponent;
     }
 
     public HeaderMenuComponent getHeaderMenuComponent() {

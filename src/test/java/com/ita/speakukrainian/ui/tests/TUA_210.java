@@ -3,48 +3,31 @@ package com.ita.speakukrainian.ui.tests;
 import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class TUA_210 extends SpeakUkrainianRunner {
 
-    @Test
-    public void verifyInputAcceptsPositiveIntegersFrom2To18() {
-        String actualAgeValue = new HomePage(driver)
-                .header().clickExtendedSearchButton()
-                .getExtendedSearchComponent().fillInAgeInput(1)
-                .getExtendedSearchComponent().readAgeInput();
-
-       Assert.assertEquals(Integer.valueOf(actualAgeValue),2);
+    @DataProvider(name = "data")
+    public Object[][] dataProvider() {
+        Object[][] data = new Object[][]{
+                {1,2},
+                {2,2},
+                {18,18},
+                {20,18}
+        };
+        return data;
     }
 
-    @Test
-    public void verifyInputAcceptsPositiveIntegersFrom2To182() {
+    @Test(dataProvider = "data")
+    public void verifyInputAcceptsPositiveIntegersFrom2To18(int age, int expected) {
         String actualAgeValue = new HomePage(driver)
                 .header().clickExtendedSearchButton()
-                .getExtendedSearchComponent().fillInAgeInput(2)
+                .getExtendedSearchComponent().fillInAgeInput(age)
                 .getExtendedSearchComponent().readAgeInput();
 
-        Assert.assertEquals(Integer.valueOf(actualAgeValue),2);
+       Assert.assertEquals(Integer.valueOf(actualAgeValue),expected);
     }
 
-    @Test
-    public void verifyInputAcceptsPositiveIntegersFrom2To183() {
-        String actualAgeValue = new HomePage(driver)
-                .header().clickExtendedSearchButton()
-                .getExtendedSearchComponent().fillInAgeInput(18)
-                .getExtendedSearchComponent().readAgeInput();
-
-        Assert.assertEquals(Integer.valueOf(actualAgeValue),18);
-    }
-
-    @Test
-    public void verifyInputAcceptsPositiveIntegersFrom2To184() {
-        String actualAgeValue = new HomePage(driver)
-                .header().clickExtendedSearchButton()
-                .getExtendedSearchComponent().fillInAgeInput(20)
-                .getExtendedSearchComponent().readAgeInput();
-
-        Assert.assertEquals(Integer.valueOf(actualAgeValue),18);
-    }
 }
 
