@@ -8,6 +8,9 @@ import org.openqa.selenium.support.FindBy;
 public class ClubsPage extends BasePage {
     private HeaderMenuComponent headerMenuComponent;
     private ExtendedSearchComponent extendedSearchComponent;
+//    @FindBy(css =".ant-layout-has-sider")
+//    private WebElement advancedSearch;
+
 
     public ClubsPage(WebDriver driver) {
         super(driver);
@@ -22,5 +25,7 @@ public class ClubsPage extends BasePage {
     public HeaderMenuComponent getHeaderMenuComponent() {
         return headerMenuComponent;
     }
+
+
 }
 
