@@ -39,14 +39,14 @@ private WebElement wrongDescriptionAlert;
         return  wrongDescriptionAlert.getText();
     }
 
-    public AddClubPopUp fillAgeField(){
-        ageFromField.sendKeys("6");
-        ageToField.sendKeys("18");
+    public AddClubPopUp fillAgeField(int ageTo , int ageFrom){
+        ageFromField.sendKeys(String.valueOf(ageFrom));
+        ageToField.sendKeys(String.valueOf(ageTo));
         return this;
     }
 
-    public AddClubPopUp fillNameField(){
-        nameField.sendKeys("Best club ever");
+    public AddClubPopUp fillNameField(String clubName){
+        nameField.sendKeys(clubName);
         return this;
     }
 

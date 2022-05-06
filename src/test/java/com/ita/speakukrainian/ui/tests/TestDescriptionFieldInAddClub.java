@@ -33,9 +33,9 @@ public class TestDescriptionFieldInAddClub extends SpeakUkrainianRunner {
                 .clickMyProfileButton()
                 .clickAddButton()
                 .clickAddClubButton()
-                .fillNameField()
+                .fillNameField("Best club")
                 .clickCategory()
-                .fillAgeField()
+                .fillAgeField(2,16)
                 .clickNextStepFirstStageButton()
                 .fillPhoneField(valueProvider.getPhoneNumber())
                 .clickNextStepSecondStageButton()
@@ -44,5 +44,4 @@ public class TestDescriptionFieldInAddClub extends SpeakUkrainianRunner {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(errorMassage,expected);
     }
-
 }
