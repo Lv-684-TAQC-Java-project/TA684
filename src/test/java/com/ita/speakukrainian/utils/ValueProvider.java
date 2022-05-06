@@ -23,8 +23,8 @@ public class ValueProvider {
 
     }
 
-    public String getPhoneNumber() {
-        return properties.getProperty("phoneNumber");
+    public String getContactPhoneNumber() {
+        return properties.getProperty("contactPhoneNumber");
 
     }
 

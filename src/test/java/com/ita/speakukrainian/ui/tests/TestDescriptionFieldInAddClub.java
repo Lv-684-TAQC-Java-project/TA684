@@ -33,15 +33,19 @@ public class TestDescriptionFieldInAddClub extends SpeakUkrainianRunner {
                 .clickMyProfileButton()
                 .clickAddButton()
                 .clickAddClubButton()
-                .fillNameField("Best club")
-                .clickCategory()
-                .fillAgeField(2,16)
-                .clickNextStepFirstStageButton()
-                .fillPhoneField(valueProvider.getPhoneNumber())
-                .clickNextStepSecondStageButton()
-                .fillDescriptionField(testCaseValue)
+                .fillInClubNameInput("Football")
+                .clickOptionCheckboxes(2)
+                .clickOptionCheckboxes(1)
+                .fillInAgeFromInput("2")
+                .fillInAgeToInput("18")
+                .clickNextStepButton()
+                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
+                .clickNextStepButton()
+                .fillInBasicDescriptionInput(testCaseValue)
                 .getWrongDescriptionAlert();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(errorMassage,expected);
     }
 }
+
+
