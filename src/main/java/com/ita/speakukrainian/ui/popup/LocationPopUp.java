@@ -15,13 +15,8 @@ public class LocationPopUp extends BasePage {
         super(driver);
     }
 
-    public String clickAddInLocationButton() {
-        scrollToElement(addInLocationButton);
-        sleep(5000);
-        if (addInLocationButton.isEnabled()) {
-            addInLocationButton.click();
-            return "Button is Enabled";
-        } else
-            return "Button is Disabled";
+    public boolean isDesabledAddLocationsButton() {
+        return addInLocationButton.isEnabled();
     }
+
 }
