@@ -10,29 +10,20 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TestDataLocationIsEmpty160 extends SpeakUkrainianRunner {
-    @BeforeMethod
-    public void toTest160 (){
-        setUp();
-         new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton();
-
-    }
 
     @Test
     public void CheckButtonIsUnavailable() {
         LocationPopUp locationPopUp = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
+                .clickSingInButton()
+                .sendKeysEmail(valueProvider.getAdminEmail())
+                .sendKeysPassword(valueProvider.getAdminPassword())
+                .clickLoginButton()
+                .header()
+                .clickUserProFileButton()
                 .clickAddCenterButton()
                 .clickAddLocation();
-
-
                 Assert.assertFalse(locationPopUp.isDesabledAddLocationsButton(), "Button is not disabled");
-                //Assert.assertFalse(addInLocationButton.isEnable());
     }
 }
