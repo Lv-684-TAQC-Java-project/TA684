@@ -45,6 +45,7 @@ public class TestDescriptionFieldInAddClub extends SpeakUkrainianRunner {
                 .getWrongDescriptionAlert();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(errorMassage,expected);
+        softAssert.assertAll();
     }
 }
 
