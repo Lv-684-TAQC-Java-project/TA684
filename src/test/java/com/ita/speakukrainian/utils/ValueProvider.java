@@ -23,6 +23,11 @@ public class ValueProvider {
 
     }
 
+    public String getContactPhoneNumber() {
+        return properties.getProperty("contactPhoneNumber");
+
+    }
+
     public String getBaseURL() {
         return properties.getProperty("baseURL");
     }
@@ -47,7 +52,4 @@ public class ValueProvider {
         return properties.getProperty("contactSkype");
     }
 
-    public String getContactPhoneNumber() {
-        return properties.getProperty("contactPhoneNumber");
-    }
 }

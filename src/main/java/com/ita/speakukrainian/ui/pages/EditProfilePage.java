@@ -14,6 +14,8 @@ public class EditProfilePage extends BasePage{
     private WebElement wrongTelephoneFieldFormatAlert;
     @FindBy(id = "//*[@id=\"edit_lastName\"]")
     private WebElement lastNameField;
+    @FindBy(xpath ="//*[@id=\"edit\"]/div[2]/div[4]/div[2]/div[2]/div")
+    private WebElement pleasEnterAnyNumberAlert;
     @FindBy(id = "//*[@id=\"edit_firstName\"]")
     private WebElement firstNameField;
     @FindBy(id = "//*[@id=\"edit_email\"]")
@@ -41,9 +43,13 @@ public class EditProfilePage extends BasePage{
         return saveChanges.isEnabled();
     }
 
-    public String getError(){
+    public String getErrorWrongNumber(){
         sleep(2000);
         return wrongTelephoneFieldFormatAlert.getText();
     }
 
+    public String getEnterAnyNumberAlert() {
+        sleep(2000);
+        return pleasEnterAnyNumberAlert.getText();
+    }
 }

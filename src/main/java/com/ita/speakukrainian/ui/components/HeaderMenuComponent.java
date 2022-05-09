@@ -1,16 +1,15 @@
 package com.ita.speakukrainian.ui.components;
 
 import com.ita.speakukrainian.ui.pages.*;
+import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
 import org.openqa.selenium.By;
 import com.ita.speakukrainian.ui.popup.SingInPopup;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -145,9 +144,9 @@ public class HeaderMenuComponent {
         return myProfileButton.isDisplayed();
     }
 
-    public AddClubPage clickAddClubButton() {
+    public MainInformation clickAddClubButton() {
         getAddClubButton().click();
-        return new AddClubPage(driver);
+        return new MainInformation(driver);
     }
 
     /**

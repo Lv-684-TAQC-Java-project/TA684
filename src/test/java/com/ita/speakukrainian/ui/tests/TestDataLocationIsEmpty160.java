@@ -1,16 +1,19 @@
 package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.popup.LocationPopUp;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TestDataLocationIsEmpty160 extends SpeakUkrainianRunner {
+
     @Test
     public void CheckButtonIsUnavailable() {
-       String buttonIsDisabled = new HomePage(driver)
+        LocationPopUp locationPopUp = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickSingInButton()
@@ -20,10 +23,7 @@ public class TestDataLocationIsEmpty160 extends SpeakUkrainianRunner {
                 .header()
                 .clickUserProFileButton()
                 .clickAddCenterButton()
-                .clickAddLocation()
-                .clickAddInLocationButton();
-
-                Assert.assertEquals(buttonIsDisabled, "Button is Disabled");
-                //Assert.assertFalse(addInLocationButton.isEnable());
+                .clickAddLocation();
+                Assert.assertFalse(locationPopUp.isDesabledAddLocationsButton(), "Button is not disabled");
     }
 }
