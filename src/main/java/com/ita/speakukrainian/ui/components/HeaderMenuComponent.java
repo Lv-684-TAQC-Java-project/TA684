@@ -19,9 +19,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class HeaderMenuComponent {
-    private final String avatarSelector = "//div[contains(@class,'user-profile')]//img";
+public class HeaderMenuComponent extends BaseComponent {
     protected WebDriver driver;
+        
+    private final String avatarSelector = "//div[contains(@class,'user-profile')]//img";
+  
     @FindBy(xpath = "//div[@id='root']/section/header/div[3]/div[2]/span[2]")
     private WebElement userProFileButton;
     @FindBy(xpath = "//li[2]/span/div")
@@ -50,8 +52,7 @@ public class HeaderMenuComponent {
 
 
     public HeaderMenuComponent(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     /**
@@ -71,14 +72,7 @@ public class HeaderMenuComponent {
 
     public HeaderMenuComponent clickUserProFileButton() {
         userProFileButton.click();
-        // try {
-        //    Thread.sleep(2000);
-        //} catch (InterruptedException e) {
-        //   e.printStackTrace();
-        //}
-        //if (isDisplayedUserProFileButton()) {
-        //   getUserProFileButton().click();
-        //}
+        sleep(500);
         return this;
 
     }
@@ -140,6 +134,7 @@ public class HeaderMenuComponent {
         if (isDisplayedMyProfileButton()) {
             myProfileButton.click();
         }
+        sleep(500);
         return new MyProfilePage(driver);
     }
 

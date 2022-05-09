@@ -32,7 +32,7 @@ public class SingInPopup extends BasePage {
 
     public HomePage clickLoginButton() {
         loginButton.click();
-        sleep(3000);
+        sleep(5000);
         return new HomePage(driver);
     }
 

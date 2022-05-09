@@ -46,35 +46,3 @@ public class TUA_178 extends SpeakUkrainianRunner {
         Assert.assertTrue(isAlertDisplayed);
     }
 }
-//    @Test
-//    public void verifyErrorMessageOnGermanLettersInDescription() {
-//        boolean isAlertDisplayed = new HomePage(driver)
-//                .header()
-//                .clickUserProFileButton()
-//                .clickSingInButton()
-//                .sendKeysEmail(valueProvider.getAdminEmail())
-//                .sendKeysPassword(valueProvider.getAdminPassword())
-//                .clickLoginButton()
-//                .header()
-//                .clickUserProFileButton()
-//                .clickAddClubButton()
-//                .fillInClubNameInput("Football")
-//                .clickOptionCheckboxes(2)
-//                .fillInAgeFromInput("2")
-//                .fillInAgeToInput("18")
-//                .clickNextStepButton()
-//                .fillInContactFacebookInput(valueProvider.getContactFacebook())
-//                .fillInContactMailInput(valueProvider.getContactEmail())
-//                .fillInContactWhatsAppInput(valueProvider.getContactWhatsUpp())
-//                .fillInContactInput(valueProvider.getContactName())
-//                .fillInContactSkypeInput(valueProvider.getContactSkype())
-//                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-//                .clickNextStepButton()
-//                .fillInBasicDescriptionInput("öl")
-//                .isAlertDisplayed();
-//
-//        Assert.assertTrue(isAlertDisplayed);
-//    }
-//}
-
-
