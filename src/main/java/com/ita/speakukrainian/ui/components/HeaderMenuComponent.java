@@ -1,10 +1,13 @@
 package com.ita.speakukrainian.ui.components;
 
-import com.ita.speakukrainian.ui.pages.*;
 import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
+import com.ita.speakukrainian.ui.pages.BasePage;
+import com.ita.speakukrainian.ui.pages.ClubsPage;
+import com.ita.speakukrainian.ui.pages.HomePage;
+import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
-import org.openqa.selenium.By;
 import com.ita.speakukrainian.ui.popup.SingInPopup;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,7 +20,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class HeaderMenuComponent extends BaseComponent {
-
+    protected WebDriver driver;
+        
+    private final String avatarSelector = "//div[contains(@class,'user-profile')]//img";
+  
     @FindBy(xpath = "//div[@id='root']/section/header/div[3]/div[2]/span[2]")
     private WebElement userProFileButton;
     @FindBy(xpath = "//li[2]/span/div")
@@ -27,26 +33,22 @@ public class HeaderMenuComponent extends BaseComponent {
     // @FindBy(xpath = "//*[@id=\"root\"]/section/header/div[3]/div[2]/span[1]/img")
     @FindBy(css = "[title='Розширений пошук']")
     private WebElement extendedSearchButton;
-    @FindBy(how = How.CSS, using= "[class*='ant-dropdown-menu-item']")
+    @FindBy(how = How.CSS, using = "[class*='ant-dropdown-menu-item']")
     // @FindAll(how = How.CSS, using= "[class*='ant-dropdown-menu-item']")
     private WebElement addClubButton;
-
-    private final String avatarSelector = "//div[contains(@class,'user-profile')]//img";
-
     @FindBy(xpath = avatarSelector)
     private WebElement avatar;
 
-    @FindBy(css=".ant-dropdown-menu-title-content > a")
+    @FindBy(css = ".ant-dropdown-menu-title-content > a")
     private WebElement myProfileButton;
-    @FindBy(xpath="//li[2]/span/div")
+    @FindBy(xpath = "//li[2]/span/div")
     private WebElement addCenterButton;
-    @FindBy(xpath="//div[2]/ul/li[1]/span/a")
+    @FindBy(xpath = "//div[2]/ul/li[1]/span/a")
     private WebElement clubsPageHeader;
     @FindBy(xpath = "//input[@id='rc_select_1']")
-    private  WebElement searchInput;
+    private WebElement searchInput;
     @FindBy(xpath = "//div[4]/div/div")
     private WebElement searchInputDropdown;
-
 
 
     public HeaderMenuComponent(WebDriver driver) {
@@ -64,17 +66,13 @@ public class HeaderMenuComponent extends BaseComponent {
         return extendedSearchButton;
     }
 
-    public WebElement getAddClubButton(){
-        return  addClubButton;
+    public WebElement getAddClubButton() {
+        return addClubButton;
     }
 
     public HeaderMenuComponent clickUserProFileButton() {
         userProFileButton.click();
-
         sleep(500);
-        //if (isDisplayedUserProFileButton()) {
-         //   getUserProFileButton().click();
-        //}
         return this;
 
     }
@@ -91,7 +89,7 @@ public class HeaderMenuComponent extends BaseComponent {
     }
 
     public SingInPopup clickSingInButton() {
-        if(isDisplayedSingInButton()) {
+        if (isDisplayedSingInButton()) {
             singInButton.click();
         }
         return new SingInPopup(driver);
@@ -111,25 +109,29 @@ public class HeaderMenuComponent extends BaseComponent {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(avatarSelector)));
         return avatar.getAttribute("src");
     }
-    public ClubsPage clickExtendedSearchButton(){
+
+    public ClubsPage clickExtendedSearchButton() {
         getExtendedSearchButton().click();
         return new ClubsPage(driver);
     }
+
     /**
      * AddCenter
+     *
      * @return AddCenterPopUp
      */
-    public AddCenterPopUp clickAddCenterButton(){
+    public AddCenterPopUp clickAddCenterButton() {
         addCenterButton.click();
         return new AddCenterPopUp(driver);
     }
 
     /**
      * MyProfile
+     *
      * @return MyProfilePage
      */
     public MyProfilePage clickMyProfileButton() {
-        if(isDisplayedMyProfileButton()) {
+        if (isDisplayedMyProfileButton()) {
             myProfileButton.click();
         }
         sleep(500);

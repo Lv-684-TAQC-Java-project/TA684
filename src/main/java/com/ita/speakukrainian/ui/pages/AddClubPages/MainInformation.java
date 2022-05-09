@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class MainInformation  extends BasePage {
+public class MainInformation extends BasePage {
 
     @FindBy(css = "#basic_name")
     private WebElement clubNameInput;
@@ -37,7 +37,7 @@ public class MainInformation  extends BasePage {
     }
 
     public WebElement getAgeToInput() {
-        return  ageToInput;
+        return ageToInput;
     }
 
     public WebElement getNextStepButton() {

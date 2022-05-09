@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class Description  extends BasePage {
+public class Description extends BasePage {
 
     @FindBy(css = "#basic_description")
     private WebElement basicDescriptionInput;
@@ -15,6 +15,8 @@ public class Description  extends BasePage {
     private List<WebElement> alerts;
     @FindBy(xpath = "//*[@id=\"basic\"]/div[4]/div[2]/div[2]/div[1]")
     private WebElement wrongDescriptionAlert;
+    @FindBy(xpath = "//form/div[4]/div[2]/div[2]/div")
+    private WebElement explainErrorAlotSymbols;
 
     public Description(WebDriver driver) {
         super(driver);
@@ -28,8 +30,8 @@ public class Description  extends BasePage {
         return alerts;
     }
 
-    public String getWrongDescriptionAlert(){
-        return  wrongDescriptionAlert.getText();
+    public String getWrongDescriptionAlert() {
+        return wrongDescriptionAlert.getText();
     }
 
     public Description fillInBasicDescriptionInput(String description) {
@@ -40,4 +42,14 @@ public class Description  extends BasePage {
     public boolean isAlertDisplayed() {
         return getAlerts().stream().allMatch(el -> el.isDisplayed());
     }
+
+    public boolean isDisplayedExplainErrorAlotSymbols() {
+        return explainErrorAlotSymbols.isDisplayed();
+    }
+
+    public String getTextExplainErrorAlotSymbols() {
+        return explainErrorAlotSymbols.getText();
+    }
+
+
 }
