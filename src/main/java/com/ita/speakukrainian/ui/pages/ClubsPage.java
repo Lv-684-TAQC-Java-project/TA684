@@ -2,12 +2,10 @@ package com.ita.speakukrainian.ui.pages;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class ClubsPage extends BasePage {
-    private HeaderMenuComponent headerMenuComponent;
-    private ExtendedSearchComponent extendedSearchComponent;
+    private final HeaderMenuComponent headerMenuComponent;
+    private final ExtendedSearchComponent extendedSearchComponent;
 //    @FindBy(css =".ant-layout-has-sider")
 //    private WebElement advancedSearch;
 
@@ -19,7 +17,7 @@ public class ClubsPage extends BasePage {
     }
 
     public ExtendedSearchComponent getExtendedSearchComponent() {
-                return extendedSearchComponent;
+        return extendedSearchComponent;
     }
 
     public HeaderMenuComponent getHeaderMenuComponent() {

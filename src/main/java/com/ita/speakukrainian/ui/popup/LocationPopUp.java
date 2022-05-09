@@ -6,9 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LocationPopUp extends BasePage {
-    @FindBy(css="div.add-club-content-footer.add-club-add-location-button>button")
+    @FindBy(css = "div.add-club-content-footer.add-club-add-location-button>button")
     private WebElement addInLocationButton;
-    @FindBy(id="phone")
+    @FindBy(id = "phone")
     private WebElement phonenumber;
 
     public LocationPopUp(WebDriver driver) {

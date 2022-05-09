@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Contacts  extends BasePage {
+public class Contacts extends BasePage {
 
     @FindBy(css = "#basic_contactFacebook")
     private WebElement contactFacebookInput;

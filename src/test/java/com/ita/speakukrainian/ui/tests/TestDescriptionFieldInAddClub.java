@@ -8,19 +8,19 @@ import org.testng.asserts.SoftAssert;
 
 public class TestDescriptionFieldInAddClub extends SpeakUkrainianRunner {
 
-   @DataProvider(name = "data")
-    public Object[][] dataProvider(){
-       Object[][] data = new Object[][]{
-               {"qwertyuiopasdfghjklk", "Некоректний опис гуртка"},
-               {"q", "Некоректний опис гуртка"},
-               {"qwertyuiopasdfghjkljzxcvbnmkmnbvczlkjhg", "Некоректний опис гуртка"},
-       };
-       return data;
-   }
+    @DataProvider(name = "data")
+    public Object[][] dataProvider() {
+        Object[][] data = new Object[][]{
+                {"qwertyuiopasdfghjklk", "Некоректний опис гуртка"},
+                {"q", "Некоректний опис гуртка"},
+                {"qwertyuiopasdfghjkljzxcvbnmkmnbvczlkjhg", "Некоректний опис гуртка"},
+        };
+        return data;
+    }
 
 
     @Test(dataProvider = "data")
-    public void testNotValidEnterPhoneNumber(String testCaseValue , String expected) {
+    public void testNotValidEnterPhoneNumber(String testCaseValue, String expected) {
         String errorMassage = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
@@ -44,7 +44,7 @@ public class TestDescriptionFieldInAddClub extends SpeakUkrainianRunner {
                 .fillInBasicDescriptionInput(testCaseValue)
                 .getWrongDescriptionAlert();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(errorMassage,expected);
+        softAssert.assertEquals(errorMassage, expected);
         softAssert.assertAll();
     }
 }

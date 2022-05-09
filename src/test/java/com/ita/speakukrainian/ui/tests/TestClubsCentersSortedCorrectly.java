@@ -3,17 +3,14 @@ package com.ita.speakukrainian.ui.tests;
 import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.Item;
-import org.checkerframework.checker.units.qual.A;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import org.testng.collections.CollectionUtils;
 
-import javax.management.ObjectName;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
@@ -148,7 +145,7 @@ public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
             for (String sri : sortedList) {
                 if (item.equals(sri)) {
                     count++;
-                    System.out.println(item+" = "+sri);
+                    System.out.println(item + " = " + sri);
                 }
             }
         }
@@ -157,7 +154,7 @@ public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
             System.out.println(cardsItem2.contains(e));
             Assert.assertTrue(cardsItem2.contains(e));
         }
-       softAssert.assertNotEquals(cardsItem2, sortedList);
+        softAssert.assertNotEquals(cardsItem2, sortedList);
         softAssert.assertFalse(cardsItem2.equals(sortedList));
         softAssert.assertAll();
 
@@ -232,7 +229,7 @@ public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
             for (String sri : sortedListrevers) {
                 if (item.equals(sri)) {
                     count++;
-                    System.out.println(item+" = "+sri);
+                    System.out.println(item + " = " + sri);
                 }
             }
         }
@@ -274,7 +271,7 @@ public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
             for (String sri : sortedList) {
                 if (item.equals(sri)) {
                     count++;
-                    System.out.println(item+" = "+sri);
+                    System.out.println(item + " = " + sri);
                 }
             }
         }

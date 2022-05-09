@@ -15,9 +15,9 @@ public class ExtendedSearchComponent {
     @FindBy(css = ".ant-layout-has-sider")
     private WebElement advancedSearch;
     @FindBy(xpath = "//*[@id='root']/section/section/main/section/section/main/div[2]/./div")
-    private  List<WebElement> card;
+    private List<WebElement> card;
     @FindBy(xpath = "//*[@id='root']/section/section/main/section/section/section/div[2]/./div")
-    private  List<WebElement> cardCentr;
+    private List<WebElement> cardCentr;
     @FindBy(css = ".anticon-arrow-up > svg")
     private WebElement arrowUpButton;
     @FindBy(css = ".anticon-arrow-down > svg")
@@ -55,24 +55,27 @@ public class ExtendedSearchComponent {
     public List<WebElement> getcard() {
         return card;
     }
+
     public List<WebElement> getcardCentr() {
         return cardCentr;
     }
 
-    public  ExtendedSearchComponent clickArrowUpButton() {
+    public ExtendedSearchComponent clickArrowUpButton() {
         arrowUpButton.click();
         new BasePage(driver).sleep(1000);
-        return  this;
+        return this;
     }
-    public  ExtendedSearchComponent clickArrowDownButton() {
+
+    public ExtendedSearchComponent clickArrowDownButton() {
         arrowdownButton.click();
         new BasePage(driver).sleep(1000);
-        return  this;
+        return this;
     }
-    public  ExtendedSearchComponent clickcheckedToCenterButtonon() {
+
+    public ExtendedSearchComponent clickcheckedToCenterButtonon() {
         checkedToCenterButton.click();
         new BasePage(driver).sleep(1000);
-        return  this;
+        return this;
     }
 }
 
