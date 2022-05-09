@@ -15,6 +15,11 @@ public class BaseComponent {
         PageFactory.initElements(parentContext, this);
     }
 
+    public BaseComponent(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
     public void sleep(long ms) {
         try {
             Thread.sleep(ms);
