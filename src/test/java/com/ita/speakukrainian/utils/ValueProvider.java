@@ -8,7 +8,7 @@ public class ValueProvider {
     private final Properties properties;
 
     public ValueProvider() throws IOException {
-        FileInputStream fileInputStream = new FileInputStream("src/test/resources/data.properties");
+        FileInputStream fileInputStream = new FileInputStream("src/main/resources/data.properties");
         properties = new Properties();
         properties.load(fileInputStream);
     }
@@ -20,6 +20,11 @@ public class ValueProvider {
 
     public String getAdminPassword() {
         return properties.getProperty("adminPassword");
+
+    }
+
+    public String getContactPhoneNumber() {
+        return properties.getProperty("contactPhoneNumber");
 
     }
 
@@ -47,7 +52,4 @@ public class ValueProvider {
         return properties.getProperty("contactSkype");
     }
 
-    public String getContactPhoneNumber() {
-        return properties.getProperty("contactPhoneNumber");
-    }
 }

@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class TestDescriptionWithValidData173 extends SpeakUkrainianRunner {
 
     @Test
-    public void verifySuccessIconDisplayedForValidNumberOfUkrainianEnglishLetters () {
+    public void verifySuccessIconDisplayedForValidNumberOfUkrainianEnglishLetters() {
         boolean isSuccessIconDisplayed = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
@@ -32,7 +32,7 @@ public class TestDescriptionWithValidData173 extends SpeakUkrainianRunner {
     }
 
     @Test
-    public void verifySuccessIconDisplayedForValidNumberOfDigits () {
+    public void verifySuccessIconDisplayedForValidNumberOfDigits() {
         boolean isSuccessIconDisplayed = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
@@ -56,7 +56,7 @@ public class TestDescriptionWithValidData173 extends SpeakUkrainianRunner {
     }
 
     @Test
-    public void verifySuccessIconDisplayedForValidNumberOfSpecialCharacters () {
+    public void verifySuccessIconDisplayedForValidNumberOfSpecialCharacters() {
         boolean isSuccessIconDisplayed = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
