@@ -37,7 +37,7 @@ public class ExampleTests extends SpeakUkrainianRunner {
             String name2 = element.findElement(By.xpath("./div/div[1]/div[1]")).getText();
 
             System.out.println(name1);
-            System.out.println(name2);
+           // System.out.println(name2);
         }
 
 
