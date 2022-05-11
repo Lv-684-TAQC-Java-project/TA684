@@ -17,8 +17,10 @@ public class Description extends BasePage {
     private WebElement wrongDescriptionAlert;
     @FindBy(css = ".ant-input-textarea-suffix")
     private WebElement explainTrueAlotSymbols;
-    @FindBy(xpath = "//form/div[4]/div[2]/div[2]/div")
+    @FindBy(css = ".ant-form-item-has-error")
     private WebElement explainErrorAlotSymbols;
+    @FindBy(xpath = "//form/div[4]/div[2]/div[2]/div")
+    private WebElement explainErrorAlotSymbolsText;
     @FindBy(css = "#basic [class$='ant-form-item-feedback-icon-success']")
     private WebElement successIcon;
 
@@ -53,11 +55,13 @@ public class Description extends BasePage {
     }
 
     public boolean isDisplayedTrueAlotSymbols() {
+        sleep(2000);
         return explainTrueAlotSymbols.isDisplayed();
     }
 
     public String getTextExplainErrorAlotSymbols() {
-        return explainErrorAlotSymbols.getText();
+        sleep(1000);
+        return explainErrorAlotSymbolsText.getText();
     }
 
     public boolean isSuccessIconDisplayed() {
