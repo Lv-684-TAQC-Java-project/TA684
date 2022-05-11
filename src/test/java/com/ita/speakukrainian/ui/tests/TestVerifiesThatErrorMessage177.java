@@ -50,7 +50,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(testCaseValue)
-                .isDisplayedTrueAlotSymbols();
+                .isSuccessIconDisplayed();
 
         Assert.assertTrue(isDisplayedMassage);
 
@@ -93,7 +93,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(testCaseValue)
-                .isDisplayedTrueAlotSymbols();
+                .isSuccessIconDisplayed();
 
         Assert.assertTrue(isDisplayedMassage);
 
@@ -102,6 +102,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     @DataProvider(name = "data1501symbols")
     public Object[][] dataProvider1501symbols() {
         int symbols=1501;
+
         List<String> list=new ArrayList<String>();
         for(int i=1; i<=symbols; i++){
             list.add("a");
@@ -136,8 +137,36 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(testCaseValue)
-                .getTextExplainErrorAlotSymbols();
-        Assert.assertEquals(errorMassage, "Опис гуртка може містити від 40 до 1500 символів.");
+                .TextWrongDescriptionDownAlert();
+        Assert.assertEquals(errorMassage,"Опис гуртка може містити від 40 до 1500 символів.");
+
+
+    }
+
+    @Test(dataProvider = "data1501symbols")
+    public void TestVerifiesTheErrorMessageWhenEnter1501Symbols2(String testCaseValue) {
+        Boolean IconErrorDisplayed = new HomePage(driver)
+                .header()
+                .clickUserProFileButton()
+                .clickSingInButton()
+                .sendKeysEmail(valueProvider.getAdminEmail())
+                .sendKeysPassword(valueProvider.getAdminPassword())
+                .clickLoginButton()
+                .header()
+                .clickUserProFileButton()
+                .clickMyProfileButton()
+                .clickAddButton()
+                .clickAddClubButton()
+                .fillInClubNameInput("Юність")
+                .clickOptionCheckboxes(0)
+                .fillInAgeFromInput("18")
+                .fillInAgeToInput("50")
+                .clickNextStepButton()
+                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
+                .clickNextStepButton()
+                .fillInBasicDescriptionInput(testCaseValue)
+                .issuccessIconErrorDisplayed();
+        Assert.assertTrue(IconErrorDisplayed);
 
 
     }
@@ -145,6 +174,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     @DataProvider(name = "dataMore1500symbols")
     public Object[][] dataProviderMore1500symbols() {
         int symbols=1550;
+
         List<String> list=new ArrayList<String>();
         for(int i=1; i<=symbols; i++){
             list.add("a");
@@ -179,7 +209,33 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(testCaseValue)
-                .getTextExplainErrorAlotSymbols();
-        Assert.assertEquals(errorMassage, "Опис гуртка може містити від 40 до 1500 символів.");
+                .TextWrongDescriptionDownAlert();
+        Assert.assertEquals(errorMassage,"Опис гуртка може містити від 40 до 1500 символів.");
+    }
+
+    @Test(dataProvider = "dataMore1500symbols")
+    public void TestVerifiesTheErrorMessageWhenEnterMore1500Symbols2(String testCaseValue) {
+        Boolean IconErrorDisplayed = new HomePage(driver)
+                .header()
+                .clickUserProFileButton()
+                .clickSingInButton()
+                .sendKeysEmail(valueProvider.getAdminEmail())
+                .sendKeysPassword(valueProvider.getAdminPassword())
+                .clickLoginButton()
+                .header()
+                .clickUserProFileButton()
+                .clickMyProfileButton()
+                .clickAddButton()
+                .clickAddClubButton()
+                .fillInClubNameInput("Юність")
+                .clickOptionCheckboxes(0)
+                .fillInAgeFromInput("18")
+                .fillInAgeToInput("50")
+                .clickNextStepButton()
+                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
+                .clickNextStepButton()
+                .fillInBasicDescriptionInput(testCaseValue)
+                .issuccessIconErrorDisplayed();
+        Assert.assertTrue(IconErrorDisplayed);
     }
 }

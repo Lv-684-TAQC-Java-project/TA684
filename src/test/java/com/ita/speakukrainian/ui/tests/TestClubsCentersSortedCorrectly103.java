@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
+public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
 
 
     @Test
@@ -248,7 +248,6 @@ public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
                 .clickClubsPageHeader()
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
-                .getExtendedSearchComponent()
                 .clickcheckedToCenterButtonon()
                 .clickArrowDownButton()
                 .getcardCentr();

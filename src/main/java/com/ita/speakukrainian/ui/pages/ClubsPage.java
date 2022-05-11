@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ClubsPage extends BasePage {
-    private  HeaderMenuComponent headerMenuComponent;
-    private  ExtendedSearchComponent extendedSearchComponent;
+    private HeaderMenuComponent headerMenuComponent;
+    private ExtendedSearchComponent extendedSearchComponent;
 
     @FindBy(css = "#basic_age input")
     private WebElement ageInputClubs;
@@ -15,12 +15,12 @@ public class ClubsPage extends BasePage {
     private WebElement checkedToCenterButton;
 
 
-
     public ClubsPage(WebDriver driver) {
         super(driver);
-//        headerMenuComponent = new HeaderMenuComponent(driver);
-//        extendedSearchComponent = new ExtendedSearchComponent(driver);
+        headerMenuComponent = new HeaderMenuComponent(driver);
+        extendedSearchComponent = new ExtendedSearchComponent(driver);
     }
+
     public WebElement getAgeInput() {
         return ageInputClubs;
     }
@@ -29,9 +29,10 @@ public class ClubsPage extends BasePage {
         getAgeInput().sendKeys(Integer.toString(age));
         return new ClubsPage(driver);
     }
+
     public ExtendedSearchComponent clickcheckedToCenterButtonon() {
         checkedToCenterButton.click();
-         return new ExtendedSearchComponent(driver);
+        return new ExtendedSearchComponent(driver);
     }
 
     public String readAgeInput() {
