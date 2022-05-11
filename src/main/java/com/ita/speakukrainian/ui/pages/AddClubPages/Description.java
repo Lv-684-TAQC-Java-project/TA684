@@ -17,6 +17,8 @@ public class Description extends BasePage {
     private WebElement wrongDescriptionAlert;
     @FindBy(xpath = "//form/div[4]/div[2]/div[2]/div")
     private WebElement explainErrorAlotSymbols;
+    @FindBy(css = "#basic [class$='ant-form-item-feedback-icon-success']")
+    private WebElement successIcon;
 
     public Description(WebDriver driver) {
         super(driver);
@@ -28,6 +30,10 @@ public class Description extends BasePage {
 
     public List<WebElement> getAlerts() {
         return alerts;
+    }
+
+    public WebElement getSuccessIcon() {
+        return successIcon;
     }
 
     public String getWrongDescriptionAlert() {
@@ -51,5 +57,7 @@ public class Description extends BasePage {
         return explainErrorAlotSymbols.getText();
     }
 
-
+    public boolean isSuccessIconDisplayed() {
+        return getSuccessIcon().isDisplayed();
+    }
 }

@@ -20,7 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class HeaderMenuComponent extends BaseComponent {
-    protected WebDriver driver;
+//    protected WebDriver driver;
         
     private final String avatarSelector = "//div[contains(@class,'user-profile')]//img";
   
