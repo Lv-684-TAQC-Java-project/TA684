@@ -41,7 +41,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
 
     @Test(dataProvider = "data1500Symbols")
     public void TestVerifiesTheErrorMessageWhenEnter1500Symbols(String testCaseValue) {
-        boolean isDisplayederrorMassage = new HomePage(driver)
+        boolean isDisplayedMassage = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickSingInButton()
@@ -61,9 +61,9 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(testCaseValue)
-                .isDisplayedExplainErrorAlotSymbols();
+                .isDisplayedTrueAlotSymbols();
 
-        Assert.assertFalse(isDisplayederrorMassage);
+        Assert.assertTrue(isDisplayedMassage);
 
     }
 
@@ -100,7 +100,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
 
     @Test(dataProvider = "dataLess1500Symbols")
     public void TestVerifiesTheErrorMessageWhenEnterLess1500Symbols(String testCaseValue) {
-        boolean isDisplayederrorMassage = new HomePage(driver)
+        boolean isDisplayedMassage = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickSingInButton()
@@ -120,9 +120,9 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(testCaseValue)
-                .isDisplayedExplainErrorAlotSymbols();
+                .isDisplayedTrueAlotSymbols();
 
-        Assert.assertFalse(isDisplayederrorMassage);
+        Assert.assertTrue(isDisplayedMassage);
 
     }
 
@@ -221,7 +221,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
         return data;
     }
 
-    @Test(dataProvider = "data1501symbols")
+    @Test(dataProvider = "dataMore1500symbols")
     public void TestVerifiesTheErrorMessageWhenEnterMore1500Symbols(String testCaseValue, String expected) {
         String errorMassage = new HomePage(driver)
                 .header()

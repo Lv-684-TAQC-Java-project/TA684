@@ -15,6 +15,8 @@ public class Description extends BasePage {
     private List<WebElement> alerts;
     @FindBy(xpath = "//*[@id=\"basic\"]/div[4]/div[2]/div[2]/div[1]")
     private WebElement wrongDescriptionAlert;
+    @FindBy(css = ".ant-input-textarea-suffix")
+    private WebElement explainTrueAlotSymbols;
     @FindBy(xpath = "//form/div[4]/div[2]/div[2]/div")
     private WebElement explainErrorAlotSymbols;
     @FindBy(css = "#basic [class$='ant-form-item-feedback-icon-success']")
@@ -49,8 +51,8 @@ public class Description extends BasePage {
         return getAlerts().stream().allMatch(el -> el.isDisplayed());
     }
 
-    public boolean isDisplayedExplainErrorAlotSymbols() {
-        return explainErrorAlotSymbols.isDisplayed();
+    public boolean isDisplayedTrueAlotSymbols() {
+        return explainTrueAlotSymbols.isDisplayed();
     }
 
     public String getTextExplainErrorAlotSymbols() {
