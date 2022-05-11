@@ -168,10 +168,9 @@ public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
                 .clickClubsPageHeader()
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
-                .getExtendedSearchComponent()
                 .clickcheckedToCenterButtonon()
                 .getcardCentr();
-        List<Item> cardsItem = new ArrayList<>();
+                        List<Item> cardsItem = new ArrayList<>();
         for (WebElement element : card) {
             cardsItem.add(new Item(driver, element));
         }
@@ -209,11 +208,10 @@ public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
                 .clickClubsPageHeader()
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
-                .getExtendedSearchComponent()
                 .clickcheckedToCenterButtonon()
                 .clickArrowUpButton()
                 .getcardCentr();
-        List<Item> cardsItem = new ArrayList<>();
+                List<Item> cardsItem = new ArrayList<>();
         for (WebElement element : card) {
             cardsItem.add(new Item(driver, element));
         }

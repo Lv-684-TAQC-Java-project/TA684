@@ -44,8 +44,9 @@ public class Description extends BasePage {
 
     public Description fillInBasicDescriptionInput(String description) {
         getBasicDescriptionInput().sendKeys(description);
+        sleep(2000);
         return new Description(driver);
-    }
+            }
 
     public boolean isAlertDisplayed() {
         return getAlerts().stream().allMatch(el -> el.isDisplayed());
