@@ -8,18 +8,8 @@ import org.testng.annotations.Test;
 
 public class TUA_210 extends SpeakUkrainianRunner {
 
-    @DataProvider(name = "data")
-    public Object[][] dataProvider() {
-        Object[][] data = new Object[][]{
-                {1, 2},
-                {2, 2},
-                {18, 18},
-                {20, 18}
-        };
-        return data;
-    }
 
-    @Test(dataProvider = "data")
+    @Test
     public void verifyInputAcceptsPositiveIntegersFrom2To18(int age, int expected) {
         String actualAgeValue = new HomePage(driver)
                 .header().clickExtendedSearchButton()
