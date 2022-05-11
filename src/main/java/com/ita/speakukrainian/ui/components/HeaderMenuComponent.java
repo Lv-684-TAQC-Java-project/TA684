@@ -20,7 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class HeaderMenuComponent extends BaseComponent {
-    protected WebDriver driver;
+    //protected WebDriver driver;
         
     private final String avatarSelector = "//div[contains(@class,'user-profile')]//img";
   
@@ -38,11 +38,7 @@ public class HeaderMenuComponent extends BaseComponent {
     private WebElement addClubButton;
     @FindBy(xpath = avatarSelector)
     private WebElement avatar;
-    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/section/section")
-    private WebElement mainSection;
     //*[@id="root"]/section/section/main/section/section
-    @FindBy(xpath = "//*[@class = \"ant-layout-sider ant-layout-sider-dark club-list-sider\"]")
-    private WebElement advancedSearchField;
     @FindBy(css = ".ant-dropdown-menu-title-content > a")
     private WebElement myProfileButton;
     @FindBy(xpath = "//li[2]/span/div")
@@ -70,13 +66,9 @@ public class HeaderMenuComponent extends BaseComponent {
         return extendedSearchButton;
     }
 
-    public WebElement getAdvancedSearchField(){return advancedSearchField;}
-
     public WebElement getAddClubButton() {
         return addClubButton;
     }
-
-    public WebElement getMainSection(){return mainSection;}
 
     public HeaderMenuComponent clickUserProFileButton() {
         userProFileButton.click();
@@ -116,26 +108,6 @@ public class HeaderMenuComponent extends BaseComponent {
         Wait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(avatarSelector)));
         return avatar.getAttribute("src");
-    }
-
-    public boolean clickAndOpenExtendedSearch(){
-        getExtendedSearchButton().click();
-        return getAdvancedSearchField().isDisplayed();
-    }
-
-    public boolean clickOpenAndCloseExtendedSearch(){
-        getExtendedSearchButton().click();
-        String attribute = getMainSection().getAttribute("class");
-
-        if(!attribute.equals("ant-layout ant-layout-has-sider club-list")){
-            return false;
-        }
-        getExtendedSearchButton().click();
-        String attribute1 = getMainSection().getAttribute("class");
-        if(!attribute1.equals("ant-layout club-list")){
-            return false;
-        }
-        return true;
     }
 
     public ClubsPage clickExtendedSearchButton() {

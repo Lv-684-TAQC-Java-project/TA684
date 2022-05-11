@@ -1,29 +1,55 @@
 package com.ita.speakukrainian.ui.pages;
 
-import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
+
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class ClubsPage extends BasePage {
-    private final HeaderMenuComponent headerMenuComponent;
+
     private final ExtendedSearchComponent extendedSearchComponent;
-//    @FindBy(css =".ant-layout-has-sider")
-//    private WebElement advancedSearch;
+
+    @FindBy(xpath = "//*[@class = \"ant-layout-sider ant-layout-sider-dark club-list-sider\"]")
+    private WebElement advancedSearchField;
+    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/section/section")
+    private WebElement mainSection;
+    @FindBy(css = "[title='Розширений пошук']")
+    private WebElement extendedSearchButton;
 
 
     public ClubsPage(WebDriver driver) {
         super(driver);
-        this.headerMenuComponent = new HeaderMenuComponent(driver);
         this.extendedSearchComponent = new ExtendedSearchComponent(driver);
+    }
+
+    public boolean clickAndOpenExtendedSearch(){
+        getExtendedSearchButton().click();
+        return getAdvancedSearchField().isDisplayed();
     }
 
     public ExtendedSearchComponent getExtendedSearchComponent() {
         return extendedSearchComponent;
     }
 
-    public HeaderMenuComponent getHeaderMenuComponent() {
-        return headerMenuComponent;
+    public WebElement getAdvancedSearchField(){return advancedSearchField;}
+
+    public WebElement getMainSection(){return mainSection;}
+
+    public WebElement getExtendedSearchButton() {
+        return extendedSearchButton;
     }
 
-
+        public boolean clickOpenAndCloseExtendedSearch() {
+                getExtendedSearchButton().click();
+                getAdvancedSearchField().isDisplayed();
+            try {
+                getExtendedSearchButton().click();
+                getAdvancedSearchField().isDisplayed();
+            }catch (NoSuchElementException e){
+                return true;
+            }
+            return false;
+        }
 }
 
