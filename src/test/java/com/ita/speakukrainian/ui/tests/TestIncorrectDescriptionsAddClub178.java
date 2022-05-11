@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TUA_178 extends SpeakUkrainianRunner {
+public class TestIncorrectDescriptionsAddClub178 extends SpeakUkrainianRunner {
     @DataProvider(name = "data")
     public Object[][] dataProvider() {
         Object[][] data = new Object[][]{
