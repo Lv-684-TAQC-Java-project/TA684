@@ -3,6 +3,7 @@ package com.ita.speakukrainian.ui.components;
 import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
 import com.ita.speakukrainian.ui.pages.BasePage;
 import com.ita.speakukrainian.ui.pages.ClubsPage;
+import com.ita.speakukrainian.ui.pages.ExtendedSearchComponent;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
@@ -20,7 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class HeaderMenuComponent extends BaseComponent {
-//    protected WebDriver driver;
+
         
     private final String avatarSelector = "//div[contains(@class,'user-profile')]//img";
   
@@ -30,15 +31,12 @@ public class HeaderMenuComponent extends BaseComponent {
     private WebElement singInButton;
     @FindBy(xpath = "//*[@id='root']/section/header/div[1]/a/div")
     private WebElement homePageButton;
-    // @FindBy(xpath = "//*[@id=\"root\"]/section/header/div[3]/div[2]/span[1]/img")
     @FindBy(css = "[title='Розширений пошук']")
     private WebElement extendedSearchButton;
     @FindBy(how = How.CSS, using = "[class*='ant-dropdown-menu-item']")
-    // @FindAll(how = How.CSS, using= "[class*='ant-dropdown-menu-item']")
     private WebElement addClubButton;
     @FindBy(xpath = avatarSelector)
     private WebElement avatar;
-
     @FindBy(css = ".ant-dropdown-menu-title-content > a")
     private WebElement myProfileButton;
     @FindBy(xpath = "//li[2]/span/div")

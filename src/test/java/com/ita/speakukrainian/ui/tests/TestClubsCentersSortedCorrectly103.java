@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
+public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
 
 
     @Test
@@ -168,10 +168,9 @@ public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
                 .clickClubsPageHeader()
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
-                .getExtendedSearchComponent()
                 .clickcheckedToCenterButtonon()
                 .getcardCentr();
-        List<Item> cardsItem = new ArrayList<>();
+                        List<Item> cardsItem = new ArrayList<>();
         for (WebElement element : card) {
             cardsItem.add(new Item(driver, element));
         }
@@ -209,11 +208,10 @@ public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
                 .clickClubsPageHeader()
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
-                .getExtendedSearchComponent()
                 .clickcheckedToCenterButtonon()
                 .clickArrowUpButton()
                 .getcardCentr();
-        List<Item> cardsItem = new ArrayList<>();
+                List<Item> cardsItem = new ArrayList<>();
         for (WebElement element : card) {
             cardsItem.add(new Item(driver, element));
         }
@@ -250,7 +248,6 @@ public class TestClubsCentersSortedCorrectly extends SpeakUkrainianRunner {
                 .clickClubsPageHeader()
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
-                .getExtendedSearchComponent()
                 .clickcheckedToCenterButtonon()
                 .clickArrowDownButton()
                 .getcardCentr();
