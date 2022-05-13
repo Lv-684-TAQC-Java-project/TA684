@@ -6,42 +6,31 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
+
+
 
     @DataProvider(name = "data1500Symbols")
     public Object[][] dataProvider1500Symbols() {
+        int symbols=1500;
+        List<String> list=new ArrayList<String>();
+        for(int i=1; i<=symbols; i++){
+            list.add("a");
+        }
+        System.out.println(list.size());
+
         Object[][] data = new Object[][]{
-                {"лдлстєащтоащлптєдлаьтдлаєдрл5єщо6щощоаотдарощкорщаопщоалє" +
-                        "тєлдтєщлрртєщаьтєщрртєщзашщтшвьєщльаркшзщ45лз4щзщщозщ" +
-                        "окзщотзщпащізщрєіщорєзщірзщізщоізщнозщнезощзщнонфФокерзщозквп" +
-                        "ропіривжпіржшптжітпржіштржщтапщкещкщешрощор9рорщшкорщшщаптьпщлат" +
-                        "єдлатєдлаптєлрєдл5646457457длІВВАПРдрлощорщкшорщшкорщшкощершокщш" +
-                        "оерщкшоерщшкоерщшокщшреощкшорееищьщапщшркоещршокщшерощкшеорщшо" +
-                        "кешрщокщшоерщшкеорщшкоещшрощешорщшкеорщшокешщрощкеорщшкеорщшоке" +
-                        "ршокешщшкоерзкеорзкеоз59нш59095нщошреошщрешорешощрешорешощекшщер" +
-                        "шоешркшщоркешощкеррешщершщоершощрешреошощшкеорщкшощшорщалпощашо" +
-                        "рщшаощршокщшорщшовщшоищшщтдлояжопщшворзщворзщоерзщощшорзуорзуорз" +
-                        "оукзщорузщорущорзуозроузорзурооиадлоиавовщаорзщкеорзеуокрзоезрщоз" +
-                        "ещорзщокерзщозщеорзщрщоорорщозещзоекщозерщозрщзщозрещзощзврщорв" +
-                        "щозращощзорващоркзерщощкшощощрозкщерозкщоерзщокерзщокзерощзкщеорзщкое" +
-                        "рзщокерзщокзерозщкоерзщокерощзщкеорзщокерзщоазпщрозкщеоизщкеоотооз" +
-                        "щорзещуоизщозщтоезощтзкеозщтоезщкотзктоотокозщеккщезщкщзозтщко" +
-                        "зщтпооапщопащщоащоапщзщпзощзтпщозтщотпщощтпощозптщозптщопатщозще" +
-                        "орзщкоезщокотозщозщвозщозщзщоиозщуорузщокрзщокрзщоекрзщозкщероз" +
-                        "щоерзщкозрщокерощзкщеорзщкозщрокощзщкозщкозщізщкоізщоіезщо" +
-                        "ізщеорзщорезщорезщозещорзщокзеорзщкеорзщкоерзщокзеощрзщкоезрщокз" +
-                        "еощрзщкеорзщкеорзщокещозщкеозщкеорзщозккоокрозщзкщеозщкеозрщокер" +
-                        "зщозещкорзщоекрощзщеозщорзщоекрзщозщкеорзщокеозкеорзщкеозщозщко" +
-                        "езрщкорзокщезкзщорзщкорзщкозщерозкщерокзщеорзщкоерзщокзщероощзщк" +
-                        "еорзщототокзщоркрщеорзщозщокреощзкщерозщзщокерорзщекорзщокзеорзщк" +
-                        "еорзщкоерзщокзеощзщкеозщрокзеорзщкерзщокозщреозкще*)*??"},
+                {String.join("", list)},
         };
         return data;
     }
 
     @Test(dataProvider = "data1500Symbols")
     public void TestVerifiesTheErrorMessageWhenEnter1500Symbols(String testCaseValue) {
-        boolean isDisplayederrorMassage = new HomePage(driver)
+        boolean isDisplayedMassage = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickSingInButton()
@@ -61,46 +50,30 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(testCaseValue)
-                .isDisplayedExplainErrorAlotSymbols();
+                .isSuccessIconDisplayed();
 
-        Assert.assertFalse(isDisplayederrorMassage);
+        Assert.assertTrue(isDisplayedMassage);
 
     }
 
     @DataProvider(name = "dataLess1500Symbols")
     public Object[][] dataProviderLess1500Symbols() {
+        int symbols=1400;
+        List<String> list=new ArrayList<String>();
+        for(int i=1; i<=symbols; i++){
+            list.add("a");
+        }
+        System.out.println(list.size());
+
         Object[][] data = new Object[][]{
-                {"лдлстєащтоащлптєдлаьтдлаєдрл5єщо6щощоаотдарощкорщаопщоалє" +
-                        "тєлдтєщлрртєщаьтєщрртєщзашщтшвьєщльаркшзщ45лз4щзщщозщ" +
-                        "окзщотзщпащізщрєіщорєзщірзщізщоізщнозщнезощзщнонфФокерзщозквп" +
-                        "ропіривжпіржшптжітпржіштржщтапщкещкщешрощор9рорщшкорщшщаптьпщлат" +
-                        "єдлатєдлаптєлрєдл5646457457длІВВАПРдрлощорщкшорщшкорщшкощершокщш" +
-                        "оерщкшоерщшкоерщшокщшреощкшорееищьщапщшркоещршокщшерощкшеорщшо" +
-                        "кешрщокщшоерщшкеорщшкоещшрощешорщшкеорщшокешщрощкеорщшкеорщшоке" +
-                        "ршокешщшкоерзкеорзкеоз59нш59095нщошреошщрешорешощрешорешощекшщер" +
-                        "шоешркшщоркешощкеррешщершщоершощрешреошощшкеорщкшощшорщалпощашо" +
-                        "рщшаощршокщшорщшовщшоищшщтдлояжопщшворзщворзщоерзщощшорзуорзуорз" +
-                        "оукзщорузщорущорзуозроузорзурооиадлоиавовщаорзщкеорзеуокрзоезрщоз" +
-                        "ещорзщокерзщозщеорзщрщоорорщозещзоекщозерщозрщзщозрещзощзврщорв" +
-                        "щозращощзорващоркзерщощкшощощрозкщерозкщоерзщокерзщокзерощзкщеорзщкое" +
-                        "рзщокерзщокзерозщкоерзщокерощзщкеорзщокерзщоазпщрозкщеоизщкеоотооз" +
-                        "щорзещуоизщозщтоезощтзкеозщтоезщкотзктоотокозщеккщезщкщзозтщко" +
-                        "зщтпооапщопащщоащоапщзщпзощзтпщозтщотпщощтпощозптщозптщопатщозще" +
-                        "орзщкоезщокотозщозщвозщозщзщоиозщуорузщокрзщокрзщоекрзщозкщероз" +
-                        "щоерзщкозрщокерощзкщеорзщкозщрокощзщкозщкозщізщкоізщоіезщо" +
-                        "ізщеорзщорезщорезщозещорзщокзеорзщкеорзщкоерзщокзеощрзщкоезрщокз" +
-                        "еощрзщкеорзщкеорзщокещозщкеозщкеорзщозккоокрозщзкщеозщкеозрщокер" +
-                        "зщозещкорзщоекрощзщеозщорзщоекрзщозщкеорзщокеозкеорзщкеозщозщко" +
-                        "езрщкорзокщезкзщорзщкорзщкозщерозкщерокзщеорзщкоерзщокзщероощзщк" +
-                        "еорзщототокзщоркрщеорзщозщокреощзкщерозщзщокерорзщекорзщокзеорзщк" +
-                        "еорзщкоерзщокзеощзщкео"},
+                {String.join("", list)},
         };
         return data;
     }
 
     @Test(dataProvider = "dataLess1500Symbols")
     public void TestVerifiesTheErrorMessageWhenEnterLess1500Symbols(String testCaseValue) {
-        boolean isDisplayederrorMassage = new HomePage(driver)
+        boolean isDisplayedMassage = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickSingInButton()
@@ -120,47 +93,30 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(testCaseValue)
-                .isDisplayedExplainErrorAlotSymbols();
+                .isSuccessIconDisplayed();
 
-        Assert.assertFalse(isDisplayederrorMassage);
+        Assert.assertTrue(isDisplayedMassage);
 
     }
 
     @DataProvider(name = "data1501symbols")
     public Object[][] dataProvider1501symbols() {
+        int symbols=1501;
+
+        List<String> list=new ArrayList<String>();
+        for(int i=1; i<=symbols; i++){
+            list.add("a");
+        }
+        System.out.println(list.size());
+
         Object[][] data = new Object[][]{
-                {"лдлстєащтоащлптєдлаьтдлаєдрл5єщо6щощоаотдарощкорщаопщоалє" +
-                        "тєлдтєщлрртєщаьтєщрртєщзашщтшвьєщльаркшзщ45лз4щзщщозщ" +
-                        "окзщотзщпащізщрєіщорєзщірзщізщоізщнозщнезощзщнонфФокерзщозквп" +
-                        "ропіривжпіржшптжітпржіштржщтапщкещкщешрощор9рорщшкорщшщаптьпщлат" +
-                        "єдлатєдлаптєлрєдл5646457457длІВВАПРдрлощорщкшорщшкорщшкощершокщш" +
-                        "оерщкшоерщшкоерщшокщшреощкшорееищьщапщшркоещршокщшерощкшеорщшо" +
-                        "кешрщокщшоерщшкеорщшкоещшрощешорщшкеорщшокешщрощкеорщшкеорщшоке" +
-                        "ршокешщшкоерзкеорзкеоз59нш59095нщошреошщрешорешощрешорешощекшщер" +
-                        "шоешркшщоркешощкеррешщершщоершощрешреошощшкеорщкшощшорщалпощашо" +
-                        "рщшаощршокщшорщшовщшоищшщтдлояжопщшворзщворзщоерзщощшорзуорзуорз" +
-                        "оукзщорузщорущорзуозроузорзурооиадлоиавовщаорзщкеорзеуокрзоезрщоз" +
-                        "ещорзщокерзщозщеорзщрщоорорщозещзоекщозерщозрщзщозрещзощзврщорв" +
-                        "щозращощзорващоркзерщощкшощощрозкщерозкщоерзщокерзщокзерощзкщеорзщкое" +
-                        "рзщокерзщокзерозщкоерзщокерощзщкеорзщокерзщоазпщрозкщеоизщкеоотооз" +
-                        "щорзещуоизщозщтоезощтзкеозщтоезщкотзктоотокозщеккщезщкщзозтщко" +
-                        "зщтпооапщопащщоащоапщзщпзощзтпщозтщотпщощтпощозптщозптщопатщозще" +
-                        "орзщкоезщокотозщозщвозщозщзщоиозщуорузщокрзщокрзщоекрзщозкщероз" +
-                        "щоерзщкозрщокерощзкщеорзщкозщрокощзщкозщкозщізщкоізщоіезщо" +
-                        "ізщеорзщорезщорезщозещорзщокзеорзщкеорзщкоерзщокзеощрзщкоезрщокз" +
-                        "еощрзщкеорзщкеорзщокещозщкеозщкеорзщозккоокрозщзкщеозщкеозрщокер" +
-                        "зщозещкорзщоекрощзщеозщорзщоекрзщозщкеорзщокеозкеорзщкеозщозщко" +
-                        "езрщкорзокщезкзщорзщкорзщкозщерозкщерокзщеорзщкоерзщокзщероощзщк" +
-                        "еорзщототокзщоркрщеорзщозщокреощзкщерозщзщокерорзщекорзщокзеорзщк" +
-                        "еорзщкоерзщокзеощзщкеозщрокзеорзщкерзщокозщреозкще*)*??g", "Опис гуртка може містити від 40 до 1500 символів."},
-
-
+                {String.join("", list)},
         };
         return data;
     }
 
     @Test(dataProvider = "data1501symbols")
-    public void TestVerifiesTheErrorMessageWhenEnter1501Symbols(String testCaseValue, String expected) {
+    public void TestVerifiesTheErrorMessageWhenEnter1501Symbols(String testCaseValue) {
         String errorMassage = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
@@ -181,48 +137,58 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(testCaseValue)
-                .getTextExplainErrorAlotSymbols();
-        Assert.assertEquals(errorMassage, expected);
+                .TextWrongDescriptionDownAlert();
+        Assert.assertEquals(errorMassage,"Опис гуртка може містити від 40 до 1500 символів.");
+
+
+    }
+
+    @Test(dataProvider = "data1501symbols")
+    public void TestVerifiesTheErrorMessageWhenEnter1501Symbols2(String testCaseValue) {
+        Boolean IconErrorDisplayed = new HomePage(driver)
+                .header()
+                .clickUserProFileButton()
+                .clickSingInButton()
+                .sendKeysEmail(valueProvider.getAdminEmail())
+                .sendKeysPassword(valueProvider.getAdminPassword())
+                .clickLoginButton()
+                .header()
+                .clickUserProFileButton()
+                .clickMyProfileButton()
+                .clickAddButton()
+                .clickAddClubButton()
+                .fillInClubNameInput("Юність")
+                .clickOptionCheckboxes(0)
+                .fillInAgeFromInput("18")
+                .fillInAgeToInput("50")
+                .clickNextStepButton()
+                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
+                .clickNextStepButton()
+                .fillInBasicDescriptionInput(testCaseValue)
+                .issuccessIconErrorDisplayed();
+        Assert.assertTrue(IconErrorDisplayed);
 
 
     }
 
     @DataProvider(name = "dataMore1500symbols")
     public Object[][] dataProviderMore1500symbols() {
+        int symbols=1550;
+
+        List<String> list=new ArrayList<String>();
+        for(int i=1; i<=symbols; i++){
+            list.add("a");
+        }
+        System.out.println(list.size());
+
         Object[][] data = new Object[][]{
-                {"лдлстєащтоащлптєдлаьтдлаєдрл5єщо6щощоаотдарощкорщаопщоалє" +
-                        "тєлдтєщлрртєщаьтєщрртєщзашщтшвьєщльаркшзщ45лз4щзщщозщ" +
-                        "окзщотзщпащізщрєіщорєзщірзщізщоізщнозщнезощзщнонфФокерзщозквп" +
-                        "ропіривжпіржшптжітпржіштржщтапщкещкщешрощор9рорщшкорщшщаптьпщлат" +
-                        "єдлатєдлаптєлрєдл5646457457длІВВАПРдрлощорщкшорщшкорщшкощершокщш" +
-                        "оерщкшоерщшкоерщшокщшреощкшорееищьщапщшркоещршокщшерощкшеорщшо" +
-                        "кешрщокщшоерщшкеорщшкоещшрощешорщшкеорщшокешщрощкеорщшкеорщшоке" +
-                        "ршокешщшкоерзкеорзкеоз59нш59095нщошреошщрешорешощрешорешощекшщер" +
-                        "шоешркшщоркешощкеррешщершщоершощрешреошощшкеорщкшощшорщалпощашо" +
-                        "рщшаощршокщшорщшовщшоищшщтдлояжопщшворзщворзщоерзщощшорзуорзуорз" +
-                        "оукзщорузщорущорзуозроузорзурооиадлоиавовщаорзщкеорзеуокрзоезрщоз" +
-                        "ещорзщокерзщозщеорзщрщоорорщозещзоекщозерщозрщзщозрещзощзврщорв" +
-                        "щозращощзорващоркзерщощкшощощрозкщерозкщоерзщокерзщокзерощзкщеорзщкое" +
-                        "рзщокерзщокзерозщкоерзщокерощзщкеорзщокерзщоазпщрозкщеоизщкеоотооз" +
-                        "щорзещуоизщозщтоезощтзкеозщтоезщкотзктоотокозщеккщезщкщзозтщко" +
-                        "зщтпооапщопащщоащоапщзщпзощзтпщозтщотпщощтпощозптщозптщопатщозще" +
-                        "орзщкоезщокотозщозщвозщозщзщоиозщуорузщокрзщокрзщоекрзщозкщероз" +
-                        "щоерзщкозрщокерощзкщеорзщкозщрокощзщкозщкозщізщкоізщоіезщо" +
-                        "ізщеорзщорезщорезщозещорзщокзеорзщкеорзщкоерзщокзеощрзщкоезрщокз" +
-                        "еощрзщкеорзщкеорзщокещозщкеозщкеорзщозккоокрозщзкщеозщкеозрщокер" +
-                        "зщозещкорзщоекрощзщеозщорзщоекрзщозщкеорзщокеозкеорзщкеозщозщко" +
-                        "езрщкорзокщезкзщорзщкорзщкозщерозкщерокзщеорзщкоерзrteщокзщероощзщк" +
-                        "еорзщототокзщоркрщеорзщозщокреощзкщерозщзщокерорзщекорзщокзеорзщк" +
-                        "еорзщкоерзщокзеощзщкеозщрокзеорзщкерзщокозщреозкще*)*??ggrtertrer",
-                        "Опис гуртка може містити від 40 до 1500 символів."},
-
-
+                {String.join("", list)},
         };
         return data;
     }
 
-    @Test(dataProvider = "data1501symbols")
-    public void TestVerifiesTheErrorMessageWhenEnterMore1500Symbols(String testCaseValue, String expected) {
+    @Test(dataProvider = "dataMore1500symbols")
+    public void TestVerifiesTheErrorMessageWhenEnterMore1500Symbols(String testCaseValue) {
         String errorMassage = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
@@ -243,7 +209,33 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(testCaseValue)
-                .getTextExplainErrorAlotSymbols();
-        Assert.assertEquals(errorMassage, expected);
+                .TextWrongDescriptionDownAlert();
+        Assert.assertEquals(errorMassage,"Опис гуртка може містити від 40 до 1500 символів.");
+    }
+
+    @Test(dataProvider = "dataMore1500symbols")
+    public void TestVerifiesTheErrorMessageWhenEnterMore1500Symbols2(String testCaseValue) {
+        Boolean IconErrorDisplayed = new HomePage(driver)
+                .header()
+                .clickUserProFileButton()
+                .clickSingInButton()
+                .sendKeysEmail(valueProvider.getAdminEmail())
+                .sendKeysPassword(valueProvider.getAdminPassword())
+                .clickLoginButton()
+                .header()
+                .clickUserProFileButton()
+                .clickMyProfileButton()
+                .clickAddButton()
+                .clickAddClubButton()
+                .fillInClubNameInput("Юність")
+                .clickOptionCheckboxes(0)
+                .fillInAgeFromInput("18")
+                .fillInAgeToInput("50")
+                .clickNextStepButton()
+                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
+                .clickNextStepButton()
+                .fillInBasicDescriptionInput(testCaseValue)
+                .issuccessIconErrorDisplayed();
+        Assert.assertTrue(IconErrorDisplayed);
     }
 }

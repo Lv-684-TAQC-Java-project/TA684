@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.ui.pages;
 
+import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,8 +11,7 @@ import java.util.List;
 public class ExtendedSearchComponent {
     protected WebDriver driver;
 
-    @FindBy(css = "#basic_age input")
-    private WebElement ageInput;
+
     @FindBy(css = ".ant-layout-has-sider")
     private WebElement advancedSearch;
     @FindBy(xpath = "//*[@id='root']/section/section/main/section/section/main/div[2]/./div")
@@ -22,8 +22,7 @@ public class ExtendedSearchComponent {
     private WebElement arrowUpButton;
     @FindBy(css = ".anticon-arrow-down > svg")
     private WebElement arrowdownButton;
-    @FindBy(xpath = "//span[contains(.,'Центр')]")
-    private WebElement checkedToCenterButton;
+
 
 
     ExtendedSearchComponent(WebDriver driver) {
@@ -32,18 +31,6 @@ public class ExtendedSearchComponent {
 
     }
 
-    public WebElement getAgeInput() {
-        return ageInput;
-    }
-
-    public ClubsPage fillInAgeInput(int age) {
-        getAgeInput().sendKeys(Integer.toString(age));
-        return new ClubsPage(driver);
-    }
-
-    public String readAgeInput() {
-        return getAgeInput().getAttribute("value");
-    }
 
     /**
      * Check advanced search if is opened
@@ -62,20 +49,13 @@ public class ExtendedSearchComponent {
 
     public ExtendedSearchComponent clickArrowUpButton() {
         arrowUpButton.click();
-        new BasePage(driver).sleep(1000);
         return this;
     }
 
     public ExtendedSearchComponent clickArrowDownButton() {
         arrowdownButton.click();
-        new BasePage(driver).sleep(1000);
         return this;
     }
 
-    public ExtendedSearchComponent clickcheckedToCenterButtonon() {
-        checkedToCenterButton.click();
-        new BasePage(driver).sleep(1000);
-        return this;
-    }
-}
+ }
 

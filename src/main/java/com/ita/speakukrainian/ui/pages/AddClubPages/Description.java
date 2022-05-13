@@ -16,7 +16,11 @@ public class Description extends BasePage {
     @FindBy(xpath = "//*[@id=\"basic\"]/div[4]/div[2]/div[2]/div[1]")
     private WebElement wrongDescriptionAlert;
     @FindBy(xpath = "//form/div[4]/div[2]/div[2]/div")
-    private WebElement explainErrorAlotSymbols;
+    private WebElement wrongDescriptionDownAlert;
+    @FindBy(css = "#basic [class$='ant-form-item-feedback-icon-success']")
+    private WebElement successIcon;
+    @FindBy(css = "#basic [class$='ant-form-item-feedback-icon-error']")
+    private WebElement successIconError;
 
     public Description(WebDriver driver) {
         super(driver);
@@ -30,12 +34,20 @@ public class Description extends BasePage {
         return alerts;
     }
 
+    public WebElement getSuccessIcon() {
+        return successIcon;
+    }
+
     public String getWrongDescriptionAlert() {
         return wrongDescriptionAlert.getText();
+    }
+    public String TextWrongDescriptionDownAlert() {
+        return wrongDescriptionDownAlert.getText();
     }
 
     public Description fillInBasicDescriptionInput(String description) {
         getBasicDescriptionInput().sendKeys(description);
+        sleep(2000);
         return new Description(driver);
     }
 
@@ -43,13 +55,11 @@ public class Description extends BasePage {
         return getAlerts().stream().allMatch(el -> el.isDisplayed());
     }
 
-    public boolean isDisplayedExplainErrorAlotSymbols() {
-        return explainErrorAlotSymbols.isDisplayed();
+    public boolean isSuccessIconDisplayed() {
+        return getSuccessIcon().isDisplayed();
     }
 
-    public String getTextExplainErrorAlotSymbols() {
-        return explainErrorAlotSymbols.getText();
+    public boolean issuccessIconErrorDisplayed() {
+        return successIconError.isDisplayed();
     }
-
-
 }
