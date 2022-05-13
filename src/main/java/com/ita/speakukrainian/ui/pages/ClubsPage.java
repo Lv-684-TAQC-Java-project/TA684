@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.pages;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +14,10 @@ public class ClubsPage extends BasePage {
     private WebElement ageInputClubs;
     @FindBy(xpath = "//span[contains(.,'Центр')]")
     private WebElement checkedToCenterButton;
+    @FindBy(css = "[title='Розширений пошук']")
+    private WebElement extendedSearchButton;
+    @FindBy(xpath = "//*[@class = \"ant-layout-sider ant-layout-sider-dark club-list-sider\"]")
+    private WebElement extendSearchMenu;
 
 
     public ClubsPage(WebDriver driver) {
@@ -23,6 +28,14 @@ public class ClubsPage extends BasePage {
 
     public WebElement getAgeInput() {
         return ageInputClubs;
+    }
+
+    public WebElement getExtendSearchMenu(){
+        return extendSearchMenu;
+    }
+
+    public WebElement getExtendedSearchButton(){
+        return extendedSearchButton;
     }
 
     public ClubsPage fillInAgeInput(int age) {
@@ -47,6 +60,21 @@ public class ClubsPage extends BasePage {
         return headerMenuComponent;
     }
 
+    public boolean isExtendedSearchMenuDisplayed(){
+        extendedSearchButton.click();
+        return extendSearchMenu.isDisplayed();
+    }
+
+    public boolean isExtendedSearchMenuHidden(){
+        extendedSearchButton.click();
+        extendedSearchButton.click();
+        try {
+            extendSearchMenu.isDisplayed();
+        }catch (NoSuchElementException e){
+            return true;
+        }
+        return false;
+    }
 
 }
 
