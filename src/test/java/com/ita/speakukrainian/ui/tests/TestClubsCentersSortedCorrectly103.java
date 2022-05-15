@@ -168,7 +168,7 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
                 .clickClubsPageHeader()
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
-                .clickcheckedToCenterButtonon()
+                .clickCheckedToCenterButton()
                 .getcardCentr();
                         List<Item> cardsItem = new ArrayList<>();
         for (WebElement element : card) {
@@ -208,7 +208,7 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
                 .clickClubsPageHeader()
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
-                .clickcheckedToCenterButtonon()
+                .clickCheckedToCenterButton()
                 .clickArrowUpButton()
                 .getcardCentr();
                 List<Item> cardsItem = new ArrayList<>();
@@ -248,7 +248,7 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
                 .clickClubsPageHeader()
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
-                .clickcheckedToCenterButtonon()
+                .clickCheckedToCenterButton()
                 .clickArrowDownButton()
                 .getcardCentr();
         List<Item> cardsItem = new ArrayList<>();
