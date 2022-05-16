@@ -23,14 +23,25 @@ public class ClubsPage extends BasePage {
     private WebElement extendedSearchButton;
     @FindBy(xpath = "//*[@class = \"ant-layout-sider ant-layout-sider-dark club-list-sider\"]")
     private WebElement extendSearchMenu;
+    @FindBy(xpath ="//div[@id='basic_isCenter']/label[@class='ant-radio-wrapper ant-radio-wrapper-checked ant-radio-wrapper-in-form-item']/span[contains(text(),'Гурток')]")
+    private WebElement clubRadioButtonIsPushed;
     @FindBy(xpath = "//*[@id=\"basic_isCenter\"]/label[2]/span[1]/input")
     private WebElement centreRadioButton;
+
+    @FindBy(xpath ="//div[@id='basic_isCenter']/label[@class='ant-radio-wrapper ant-radio-wrapper-checked ant-radio-wrapper-in-form-item']/span[contains(text(),'Центр')]")
+    private WebElement centreRadioButtonIsPushed;
     @FindBy(xpath = "//*[@id=\"basic\"]/div[2]/div[2]/div/div/div/div")
     private WebElement cityPopUp;
     @FindBy(xpath = "//*[@id = \"basic_districtName\"]")
     private WebElement cityDistrictPopUp;
     @FindBy(xpath = "//*[@id=\"basic\"]/div[4]/div[2]/div/div/div/div/span[1]")
     private WebElement metroStationPopUp;
+    @FindBy(xpath = "//div[@id='root']/section/section/main/section/section/section/div/div[2]/label")
+    private WebElement sortMenuBarButton;
+    @FindBy( css=".content-center-list.false")
+    private WebElement listOfCenters;
+
+
 
     public ClubsPage(WebDriver driver) {
         super(driver);
@@ -58,6 +69,16 @@ public class ClubsPage extends BasePage {
         return checkedToCenterButton;
     }
 
+    public WebElement getClubRadioButtonIsPushed() {
+        return clubRadioButtonIsPushed;
+    }
+    public WebElement getCenterRadioButtonIsPushed() {
+        return centreRadioButtonIsPushed;
+    }
+
+    public WebElement getSortMenuBarButton(){
+        return sortMenuBarButton;
+    }
     public WebElement getCentreRadioButton() {
         return centreRadioButton;
     }
@@ -70,6 +91,10 @@ public class ClubsPage extends BasePage {
 
     public WebElement getExtendedSearchButton(){
         return extendedSearchButton;
+    }
+
+    public WebElement getListOfCenters(){
+        return listOfCenters;
     }
 
     public ClubsPage fillInAgeInput(int age) {
@@ -106,6 +131,7 @@ public class ClubsPage extends BasePage {
         getCentreRadioButton().click();
         return this;
     }
+
 
     public boolean checkAvailableAgeField(){
         try {
@@ -146,6 +172,12 @@ public class ClubsPage extends BasePage {
         }
         return false;
     }
+    public ClubsPage clickSortMenuBarButton() {
+        getSortMenuBarButton().click();
+        sleep(1000);
+        return new ClubsPage(driver);
+    }
+
 
 }
 
