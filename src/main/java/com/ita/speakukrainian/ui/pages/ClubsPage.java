@@ -120,6 +120,7 @@ public class ClubsPage extends BasePage {
         return headerMenuComponent;
     }
 
+    @Step("Check available online is hidden")
     public boolean checkAvailableOnline(){
         try {
             getAvailableOnline().isDisplayed();
@@ -129,13 +130,13 @@ public class ClubsPage extends BasePage {
         return true;
     }
 
-    @Step(" click center radio button in extended search menu")
+    @Step("Click center radio button in extended search menu")
     public ClubsPage clickCentreRadioButton(){
         getCentreRadioButton().click();
         return this;
     }
 
-
+    @Step("Check available online field is displayed")
     public boolean checkAvailableAgeField(){
         try {
             getAgeInput().isDisplayed();
@@ -145,26 +146,31 @@ public class ClubsPage extends BasePage {
         return true;
     }
 
+    @Step("Open city dropdown")
     public ExtendedSearchCityDropDown openCityDropDown() {
         getCityPopUP().click();
         return new ExtendedSearchCityDropDown(driver);
     }
 
+    @Step("Open city district dropdown")
     public ExtendedSearchCityDistrictDropDown openCityDistrictDropDown() {
         getCityDistrictPopUp().click();
         return new ExtendedSearchCityDistrictDropDown(driver);
     }
 
+    @Step("Open nearest metro station dropdown")
     public ExtendedSearchNearestMetroStationDropDown openNearestMetroStationDropDown() {
         getMetroStationPopUp().click();
         return new ExtendedSearchNearestMetroStationDropDown(driver);
     }
 
+    @Step("Check extended search menu is displayed")
     public boolean isExtendedSearchMenuDisplayed(){
         extendedSearchButton.click();
         return extendSearchMenu.isDisplayed();
     }
 
+    @Step("Check extended search menu is hidden")
     public boolean isExtendedSearchMenuHidden(){
         extendedSearchButton.click();
         extendedSearchButton.click();

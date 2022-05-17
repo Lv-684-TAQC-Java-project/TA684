@@ -2,6 +2,7 @@ package com.ita.speakukrainian.ui.dropdowns;
 
 import com.ita.speakukrainian.ui.pages.BasePage;
 import com.ita.speakukrainian.ui.pages.ClubsPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,7 @@ public class ExtendedSearchNearestMetroStationDropDown extends BasePage {
 
     public WebElement getArsenalMetroStation(){return arsenalMetroStation;}
 
+    @Step("Click nearest metro station dropdown in extended search menu")
     public ExtendedSearchNearestMetroStationDropDown clickArsenalMetroStation(){
         sleep(1000);
         getArsenalMetroStation().click();
