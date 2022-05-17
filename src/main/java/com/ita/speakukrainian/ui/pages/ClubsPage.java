@@ -1,9 +1,10 @@
 package com.ita.speakukrainian.ui.pages;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
-import com.ita.speakukrainian.ui.popup.ExtendedSearchCityDistrictPopUp;
-import com.ita.speakukrainian.ui.popup.ExtendedSearchCityPopUp;
-import com.ita.speakukrainian.ui.popup.ExtendedSearchNearestMetroStationPopUp;
+import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchCityDistrictDropDown;
+import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchCityDropDown;
+import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchNearestMetroStationDropDown;
+import io.qameta.allure.Step;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -127,6 +128,8 @@ public class ClubsPage extends BasePage {
         }
         return true;
     }
+
+    @Step(" click center radio button in extended search menu")
     public ClubsPage clickCentreRadioButton(){
         getCentreRadioButton().click();
         return this;
@@ -142,19 +145,19 @@ public class ClubsPage extends BasePage {
         return true;
     }
 
-    public ExtendedSearchCityPopUp clickCityPopUp() {
+    public ExtendedSearchCityDropDown openCityDropDown() {
         getCityPopUP().click();
-        return new ExtendedSearchCityPopUp(driver);
+        return new ExtendedSearchCityDropDown(driver);
     }
 
-    public ExtendedSearchCityDistrictPopUp clickCityDistrictPopUp() {
+    public ExtendedSearchCityDistrictDropDown openCityDistrictDropDown() {
         getCityDistrictPopUp().click();
-        return new ExtendedSearchCityDistrictPopUp(driver);
+        return new ExtendedSearchCityDistrictDropDown(driver);
     }
 
-    public ExtendedSearchNearestMetroStationPopUp clickNearestMetroStationPopUp() {
+    public ExtendedSearchNearestMetroStationDropDown openNearestMetroStationDropDown() {
         getMetroStationPopUp().click();
-        return new ExtendedSearchNearestMetroStationPopUp(driver);
+        return new ExtendedSearchNearestMetroStationDropDown(driver);
     }
 
     public boolean isExtendedSearchMenuDisplayed(){

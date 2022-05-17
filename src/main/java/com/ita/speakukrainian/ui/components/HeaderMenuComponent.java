@@ -110,7 +110,7 @@ public class HeaderMenuComponent extends BaseComponent {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(avatarSelector)));
         return avatar.getAttribute("src");
     }
-
+    @Step(" click extended search button ")
     public ClubsPage clickExtendedSearchButton() {
         getExtendedSearchButton().click();
         return new ClubsPage(driver);

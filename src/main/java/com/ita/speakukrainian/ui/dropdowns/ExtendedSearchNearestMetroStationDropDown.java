@@ -1,4 +1,4 @@
-package com.ita.speakukrainian.ui.popup;
+package com.ita.speakukrainian.ui.dropdowns;
 
 import com.ita.speakukrainian.ui.pages.BasePage;
 import com.ita.speakukrainian.ui.pages.ClubsPage;
@@ -6,21 +6,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ExtendedSearchNearestMetroStationPopUp extends BasePage {
+public class ExtendedSearchNearestMetroStationDropDown extends BasePage {
 
     private ClubsPage clubsPage;
 
     @FindBy(xpath = "//*[@title = \"Арсенальна\"]")
     private WebElement arsenalMetroStation;
 
-    public ExtendedSearchNearestMetroStationPopUp(WebDriver driver) {
+    public ExtendedSearchNearestMetroStationDropDown(WebDriver driver) {
         super(driver);
         clubsPage = new ClubsPage(driver);
     }
 
     public WebElement getArsenalMetroStation(){return arsenalMetroStation;}
 
-    public ExtendedSearchNearestMetroStationPopUp clickArsenalMetroStation(){
+    public ExtendedSearchNearestMetroStationDropDown clickArsenalMetroStation(){
         sleep(1000);
         getArsenalMetroStation().click();
         return this;
