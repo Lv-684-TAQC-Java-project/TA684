@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.ui.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,7 +41,7 @@ public class EditProfilePage extends BasePage {
         phoneField.sendKeys(delete);
         return this;
     }
-
+    @Step("set in LastName input value: {lastName}")
     public EditProfilePage sendKeysLastNameField(String lastName) {
         sleep(1000);
         lastNameField.click();
