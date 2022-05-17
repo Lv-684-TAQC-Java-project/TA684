@@ -21,7 +21,7 @@ public class ExtendedSearchNearestMetroStationDropDown extends BasePage {
 
     public WebElement getArsenalMetroStation(){return arsenalMetroStation;}
 
-    @Step("Click nearest metro station dropdown in extended search menu")
+    @Step("Click nearest metro station Arsenal")
     public ExtendedSearchNearestMetroStationDropDown clickArsenalMetroStation(){
         sleep(1000);
         getArsenalMetroStation().click();
