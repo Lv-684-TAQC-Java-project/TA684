@@ -2,6 +2,8 @@ package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -25,7 +27,9 @@ public class TestIncorrectLastName343 extends SpeakUkrainianRunner {
         return data;
     }
 
-    @Test(dataProvider = "data")
+    @Test(dataProvider = "data", description = "Not Valid Input LastName")
+    @Description("[allure] Not Valid Input LastName")
+    @Issue("TUA-343")
     public void testNotValidInputLastName(String testCaseData , String expected) {
         String error = new HomePage(driver)
                 .header()
