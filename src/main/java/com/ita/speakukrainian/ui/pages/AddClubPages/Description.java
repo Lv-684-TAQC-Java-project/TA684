@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.pages.AddClubPages;
 
 import com.ita.speakukrainian.ui.pages.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,6 +39,7 @@ public class Description extends BasePage {
         return successIcon;
     }
 
+    @Step("Get alert wrong description")
     public String getWrongDescriptionAlert() {
         return wrongDescriptionAlert.getText();
     }
@@ -45,6 +47,7 @@ public class Description extends BasePage {
         return wrongDescriptionDownAlert.getText();
     }
 
+    @Step("Fill basil description input")
     public Description fillInBasicDescriptionInput(String description) {
         getBasicDescriptionInput().sendKeys(description);
         sleep(2000);

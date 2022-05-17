@@ -21,7 +21,7 @@ public class ExtendedSearchCityDropDown extends BasePage {
 
     public WebElement getCityKiev(){return cityKiev;}
 
-    @Step("Click city dropdown in extended search menu")
+    @Step("Click city Kiev")
     public ExtendedSearchCityDropDown clickCityKiev(){
         sleep(1000);
         getCityKiev().click();
