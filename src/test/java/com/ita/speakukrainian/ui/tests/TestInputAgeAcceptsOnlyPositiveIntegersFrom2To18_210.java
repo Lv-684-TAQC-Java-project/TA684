@@ -6,6 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Optional;
+
 public class TestInputAgeAcceptsOnlyPositiveIntegersFrom2To18_210 extends SpeakUkrainianRunner {
 
     @DataProvider(name = "data")
@@ -28,7 +30,7 @@ public class TestInputAgeAcceptsOnlyPositiveIntegersFrom2To18_210 extends SpeakU
 
 
 
-        Assert.assertEquals(Integer.valueOf(actualAgeValue), expected);
+        Assert.assertEquals(Optional.of(Integer.valueOf(actualAgeValue)), expected);
     }
 
 }

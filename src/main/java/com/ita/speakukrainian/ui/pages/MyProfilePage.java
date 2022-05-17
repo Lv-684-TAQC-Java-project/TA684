@@ -3,6 +3,7 @@ package com.ita.speakukrainian.ui.pages;
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,6 +26,7 @@ public class MyProfilePage extends BaseObjectPage {
         headerMenu = new HeaderMenuComponent(driver);
     }
 
+    @Step("click Edit Profile")
     public EditProfilePage clickEditProfileButton() {
         editProfile.click();
         return new EditProfilePage(driver);
