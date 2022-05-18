@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.ui.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +28,7 @@ public class EditProfilePage extends BasePage {
         super(driver);
     }
 
+    @Step("Enter phone field")
     public EditProfilePage sendKeysPhoneField(String phoneNumber) {
         sleep(1000);
         phoneField.click();
@@ -34,13 +36,14 @@ public class EditProfilePage extends BasePage {
         return this;
     }
 
+    @Step("Clear phone field")
     public EditProfilePage clearPhoneField() {
         phoneField.click();
         String delete = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
         phoneField.sendKeys(delete);
         return this;
     }
-
+    @Step("set in LastName input value: {lastName}")
     public EditProfilePage sendKeysLastNameField(String lastName) {
         sleep(1000);
         lastNameField.click();
@@ -64,11 +67,13 @@ public class EditProfilePage extends BasePage {
         return saveChanges.isEnabled();
     }
 
+    @Step("Get error : Wrong number")
     public String getErrorWrongNumber() {
         sleep(2000);
         return wrongTelephoneFieldFormatAlert.getText();
     }
 
+    @Step("Get error : Enter any number")
     public String getEnterAnyNumberAlert() {
         sleep(2000);
         return pleasEnterAnyNumberAlert.getText();

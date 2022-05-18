@@ -1,27 +1,28 @@
-package com.ita.speakukrainian.ui.popup;
+package com.ita.speakukrainian.ui.dropdowns;
 
 import com.ita.speakukrainian.ui.pages.BasePage;
 import com.ita.speakukrainian.ui.pages.ClubsPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-public class ExtendedSearchCityDistrictPopUp extends BasePage {
+public class ExtendedSearchCityDistrictDropDown extends BasePage {
 
     private ClubsPage clubsPage;
 
     @FindBy(xpath = "//*[@title = \"Деснянський\"]")
     private WebElement cityDistrictDesnyanskiy;
 
-    public ExtendedSearchCityDistrictPopUp(WebDriver driver) {
+    public ExtendedSearchCityDistrictDropDown(WebDriver driver) {
         super(driver);
         clubsPage = new ClubsPage(driver);
     }
 
     public WebElement getCityDistrictDesnyanskiy(){return cityDistrictDesnyanskiy;}
 
-    public ExtendedSearchCityDistrictPopUp clickCityDistrictDesnyanskiy(){
+    @Step("Click city district Desnyanskiy")
+    public ExtendedSearchCityDistrictDropDown clickCityDistrictDesnyanskiy(){
         sleep(1000);
         getCityDistrictDesnyanskiy().click();
         return this;

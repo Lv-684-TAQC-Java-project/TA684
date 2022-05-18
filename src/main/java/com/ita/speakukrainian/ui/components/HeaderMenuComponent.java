@@ -8,6 +8,7 @@ import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
 import com.ita.speakukrainian.ui.popup.SingInPopup;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,6 +69,7 @@ public class HeaderMenuComponent extends BaseComponent {
         return addClubButton;
     }
 
+    @Step("open user dropdown-menu")
     public HeaderMenuComponent clickUserProFileButton() {
         userProFileButton.click();
         sleep(500);
@@ -86,6 +88,7 @@ public class HeaderMenuComponent extends BaseComponent {
         return singInButton;
     }
 
+    @Step("click SingIn")
     public SingInPopup clickSingInButton() {
         if (isDisplayedSingInButton()) {
             singInButton.click();
@@ -107,7 +110,7 @@ public class HeaderMenuComponent extends BaseComponent {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(avatarSelector)));
         return avatar.getAttribute("src");
     }
-
+    @Step(" click extended search button ")
     public ClubsPage clickExtendedSearchButton() {
         getExtendedSearchButton().click();
         return new ClubsPage(driver);
@@ -128,6 +131,7 @@ public class HeaderMenuComponent extends BaseComponent {
      *
      * @return MyProfilePage
      */
+    @Step("click MyProfile")
     public MyProfilePage clickMyProfileButton() {
         if (isDisplayedMyProfileButton()) {
             myProfileButton.click();

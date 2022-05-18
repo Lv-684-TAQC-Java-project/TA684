@@ -2,11 +2,13 @@ package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
+import io.qameta.allure.Issue;
+import jdk.jfr.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class TestDescriptionFieldInAddClub extends SpeakUkrainianRunner {
+public class TUA_176 extends SpeakUkrainianRunner {
 
     @DataProvider(name = "data")
     public Object[][] dataProvider() {
@@ -20,6 +22,8 @@ public class TestDescriptionFieldInAddClub extends SpeakUkrainianRunner {
 
 
     @Test(dataProvider = "data")
+    @Description("[allure] Not valid enter phone number ")
+    @Issue("TUA-224")
     public void testNotValidEnterPhoneNumber(String testCaseValue, String expected) {
         String errorMassage = new HomePage(driver)
                 .header()
