@@ -98,6 +98,7 @@ public class ClubsPage extends BasePage {
         return listOfCentres;
     }
 
+    @Step("Fill in age")
     public ClubsPage fillInAgeInput(int age) {
         getAgeInput().sendKeys(Integer.toString(age));
         return new ClubsPage(driver);
@@ -108,6 +109,7 @@ public class ClubsPage extends BasePage {
         return new ExtendedSearchComponent(driver);
     }
 
+    @Step("Read age")
     public String readAgeInput() {
         return getAgeInput().getAttribute("value");
     }

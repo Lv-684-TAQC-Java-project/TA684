@@ -2,6 +2,8 @@ package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,7 +19,9 @@ public class TestIncorrectDescriptionsAddClub178 extends SpeakUkrainianRunner {
     }
 
     @Test(dataProvider = "data")
-    public void verifyErrorMessageOnRussianLettersInDescription(String text) {
+    @Description("Verify Error Message On Russian And German Letters In Description")
+    @Issue("TUA-178")
+    public void verifyErrorMessageOnRussianAndGermanLettersInDescription(String text) {
         boolean isAlertDisplayed = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()

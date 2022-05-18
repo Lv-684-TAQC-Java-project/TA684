@@ -88,7 +88,7 @@ public class HeaderMenuComponent extends BaseComponent {
         return singInButton;
     }
 
-    @Step("click SingIn")
+    @Step("Click SingIn")
     public SingInPopup clickSingInButton() {
         if (isDisplayedSingInButton()) {
             singInButton.click();
@@ -110,7 +110,7 @@ public class HeaderMenuComponent extends BaseComponent {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(avatarSelector)));
         return avatar.getAttribute("src");
     }
-    @Step(" click extended search button ")
+    @Step("Click extended search")
     public ClubsPage clickExtendedSearchButton() {
         getExtendedSearchButton().click();
         return new ClubsPage(driver);
@@ -144,6 +144,7 @@ public class HeaderMenuComponent extends BaseComponent {
         return myProfileButton.isDisplayed();
     }
 
+    @Step("Click Add Club")
     public MainInformation clickAddClubButton() {
         getAddClubButton().click();
         return new MainInformation(driver);

@@ -47,7 +47,7 @@ public class Description extends BasePage {
         return wrongDescriptionDownAlert.getText();
     }
 
-    @Step("Fill basil description input")
+    @Step("Fill in basic description")
     public Description fillInBasicDescriptionInput(String description) {
         getBasicDescriptionInput().sendKeys(description);
         sleep(2000);
