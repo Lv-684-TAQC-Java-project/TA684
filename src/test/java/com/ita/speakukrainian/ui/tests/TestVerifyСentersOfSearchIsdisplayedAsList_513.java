@@ -14,14 +14,11 @@ public class TestVerifyСentersOfSearchIsdisplayedAsList_513 extends SpeakUkrain
         SoftAssert softAssert = new SoftAssert();
         headerMenuComponent.
                 clickExtendedSearchButton();
-        boolean ans1 = clubsPage.getClubRadioButtonIsPushed().isSelected();
-        softAssert.assertTrue(ans1, "Club radioButton was not pushed");
+        softAssert.assertTrue(clubsPage.IsClubButtonSelected(), "Club radioButton was not pushed");
                clubsPage.clickCentreRadioButton();
-               boolean ans2 = clubsPage.getCentreRadioButton().isSelected();
-        softAssert.assertTrue(ans2, "Centre radioButton was not pushed");
+        softAssert.assertTrue(clubsPage.IsCentreButtonSelected(), "Centre radioButton was not pushed");
                clubsPage.clickSortMenuBarButton();
-        boolean ans3 =clubsPage.getListOfCenters().isSelected();
-        softAssert.assertTrue(ans3, "Centers was not sorted as list");
+        softAssert.assertTrue(clubsPage.IsCentresSortedAsList(), "Centers was not sorted as list");
         softAssert.assertAll();
     }
 }

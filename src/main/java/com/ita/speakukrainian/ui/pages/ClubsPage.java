@@ -23,9 +23,8 @@ public class ClubsPage extends BasePage {
     private WebElement extendedSearchButton;
     @FindBy(xpath = "//*[@class = \"ant-layout-sider ant-layout-sider-dark club-list-sider\"]")
     private WebElement extendSearchMenu;
-    @FindBy(xpath="//*[@id=\"basic_isCenter\"]/label[1]/span[1]/span")
-           // (xpath ="//div[@id='basic_isCenter']/label[@class='ant-radio-wrapper ant-radio-wrapper-checked ant-radio-wrapper-in-form-item']/span[contains(text(),'Гурток')]")
-    private WebElement clubRadioButtonIsPushed;
+    @FindBy(xpath="//*[@id=\"basic_isCenter\"]/label[1]/span[1]/input")
+    private WebElement clubRadioButton;
     @FindBy(xpath = "//*[@id=\"basic_isCenter\"]/label[2]/span[1]/input")
     private WebElement centreRadioButton;
 
@@ -39,9 +38,8 @@ public class ClubsPage extends BasePage {
     private WebElement metroStationPopUp;
     @FindBy(xpath = "//div[@id='root']/section/section/main/section/section/section/div/div[2]/label")
     private WebElement sortMenuBarButton;
-    @FindBy (xpath = "//*[@id=\"root\"]/section/section/main/section/section/main/div[1]/div[2]/label[1]/span[1]/span")
-            //( css=".content-center-list.false")
-    private WebElement listOfCenters;
+    @FindBy ( css=".content-center-list.false")
+    private WebElement listOfCentres;
 
 
 
@@ -71,8 +69,8 @@ public class ClubsPage extends BasePage {
         return checkedToCenterButton;
     }
 
-    public WebElement getClubRadioButtonIsPushed() {
-        return clubRadioButtonIsPushed;
+    public WebElement getClubRadioButton() {
+        return clubRadioButton;
     }
     public WebElement getCenterRadioButtonIsPushed() {
         return centreRadioButtonIsPushed;
@@ -95,8 +93,8 @@ public class ClubsPage extends BasePage {
         return extendedSearchButton;
     }
 
-    public WebElement getListOfCenters(){
-        return listOfCenters;
+    public WebElement getListOfCentres(){
+        return listOfCentres;
     }
 
     public ClubsPage fillInAgeInput(int age) {
@@ -179,7 +177,20 @@ public class ClubsPage extends BasePage {
         sleep(1000);
         return new ClubsPage(driver);
     }
-
-
+    public boolean IsClubButtonSelected(){
+        return getClubRadioButton().isSelected();
+    }
+    public boolean IsCentreButtonSelected(){
+        return getCentreRadioButton().isSelected();
+    }
+    public boolean IsCentresSortedAsList(){
+        try{
+            getListOfCentres().isEnabled();
+        }
+        catch (NoSuchElementException e){
+            return false;
+        }
+        return true;
+    }
 }
 
