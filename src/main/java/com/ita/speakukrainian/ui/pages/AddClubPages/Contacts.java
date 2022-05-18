@@ -55,38 +55,43 @@ public class Contacts extends BasePage {
         return nextStepButton;
     }
 
+    @Step("Fill in contact facebook")
     public Contacts fillInContactFacebookInput(String contactFacebook) {
         getContactFacebookInput().sendKeys(contactFacebook);
         return new Contacts(driver);
     }
 
+    @Step("Fill in contact e-mail")
     public Contacts fillInContactMailInput(String contactMail) {
         getContactMailInput().sendKeys(contactMail);
         return new Contacts(driver);
     }
 
+    @Step("Fill in contact whatsApp")
     public Contacts fillInContactWhatsAppInput(String contactWhatsApp) {
         getContactWhatsAppInput().sendKeys(contactWhatsApp);
         return new Contacts(driver);
     }
 
+    @Step("Fill in contact")
     public Contacts fillInContactInput(String contact) {
         getContactContactInput().sendKeys(contact);
         return new Contacts(driver);
     }
 
+    @Step("Fill in contact skype")
     public Contacts fillInContactSkypeInput(String contactSkype) {
         getContactSkypeInput().sendKeys(contactSkype);
         return new Contacts(driver);
     }
 
-    @Step("Fill contact phone field")
+    @Step("Fill contact phone")
     public Contacts fillInContactPhoneInput(String contactPhone) {
         getContactPhoneInput().sendKeys(contactPhone);
         return new Contacts(driver);
     }
 
-    @Step("Click next step button")
+    @Step("Click next step")
     public Description clickNextStepButton() {
         getNextStepButton().click();
         return new Description(driver);

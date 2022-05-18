@@ -45,7 +45,7 @@ public class MainInformation extends BasePage {
         return nextStepButton;
     }
 
-    @Step("Fill club name field")
+    @Step("Fill in club name")
     public MainInformation fillInClubNameInput(String clubName) {
         getClubNameInput().sendKeys(clubName);
         return new MainInformation(driver);
@@ -57,19 +57,19 @@ public class MainInformation extends BasePage {
         return new MainInformation(driver);
     }
 
-    @Step("Fill age from field")
+    @Step("Fill in age from")
     public MainInformation fillInAgeFromInput(String age) {
         getAgeFromInput().sendKeys(age);
         return new MainInformation(driver);
     }
 
-    @Step("Fill age to field")
+    @Step("Fill in age to")
     public MainInformation fillInAgeToInput(String age) {
         getAgeToInput().sendKeys(age);
         return new MainInformation(driver);
     }
 
-    @Step("Click next step button")
+    @Step("Click next step")
     public Contacts clickNextStepButton() {
         getNextStepButton().click();
         return new Contacts(driver);
