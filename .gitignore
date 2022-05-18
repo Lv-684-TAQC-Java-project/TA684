@@ -44,4 +44,6 @@ target
 #project
 data.properties
 
-
+#allure
+.allure
+allure-results
