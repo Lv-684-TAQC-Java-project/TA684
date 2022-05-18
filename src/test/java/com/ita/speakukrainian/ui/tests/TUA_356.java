@@ -2,12 +2,14 @@ package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
+import io.qameta.allure.Issue;
+import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class TestValidatePhoneNumber extends SpeakUkrainianRunner {
+public class TUA_356 extends SpeakUkrainianRunner {
 
     @DataProvider(name = "data1")
     public Object[][] SmallestCombine() {
@@ -23,6 +25,8 @@ public class TestValidatePhoneNumber extends SpeakUkrainianRunner {
     }
 
     @Test(dataProvider = "data1")
+    @Description("[allure] Not valid enter phone number")
+    @Issue("TUA-356")
     public void testNotValidEnterPhoneNumber(String testCase1Value, String expected) {
         String error = new HomePage(driver)
                 .header()
@@ -43,6 +47,8 @@ public class TestValidatePhoneNumber extends SpeakUkrainianRunner {
     }
 
     @Test
+    @Description("[allure] Not valid enter phone number")
+    @Issue("TUA-356")
     public void testIsDisplayedSaveButton() {
         String error = new HomePage(driver)
                 .header()

@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.components;
 
 import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +24,7 @@ public class BaseComponent {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Sleep : {ms}" + " ms")
     public void sleep(long ms) {
         try {
             Thread.sleep(ms);

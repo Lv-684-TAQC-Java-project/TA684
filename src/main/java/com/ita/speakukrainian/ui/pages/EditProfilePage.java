@@ -28,6 +28,7 @@ public class EditProfilePage extends BasePage {
         super(driver);
     }
 
+    @Step("Enter phone field")
     public EditProfilePage sendKeysPhoneField(String phoneNumber) {
         sleep(1000);
         phoneField.click();
@@ -35,6 +36,7 @@ public class EditProfilePage extends BasePage {
         return this;
     }
 
+    @Step("Clear phone field")
     public EditProfilePage clearPhoneField() {
         phoneField.click();
         String delete = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
@@ -65,11 +67,13 @@ public class EditProfilePage extends BasePage {
         return saveChanges.isEnabled();
     }
 
+    @Step("Get error : Wrong number")
     public String getErrorWrongNumber() {
         sleep(2000);
         return wrongTelephoneFieldFormatAlert.getText();
     }
 
+    @Step("Get error : Enter any number")
     public String getEnterAnyNumberAlert() {
         sleep(2000);
         return pleasEnterAnyNumberAlert.getText();

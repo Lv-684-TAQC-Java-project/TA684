@@ -32,16 +32,18 @@ public class MyProfilePage extends BaseObjectPage {
         return new EditProfilePage(driver);
     }
 
+    @Step("Click add button ")
     public MyProfilePage clickAddButton() {
         addButton.click();
         return new MyProfilePage(driver);
     }
-
+    @Step("Click add center button")
     public AddCenterPopUp clickAddCenterButton() {
         addCenterButton.click();
         return new AddCenterPopUp(driver);
     }
 
+    @Step("Click add club button")
     public MainInformation clickAddClubButton() {
         addClubButton.click();
         return new MainInformation(driver);

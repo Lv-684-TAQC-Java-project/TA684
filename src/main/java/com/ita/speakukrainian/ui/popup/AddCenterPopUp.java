@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.popup;
 
 import com.ita.speakukrainian.ui.pages.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,7 @@ public class AddCenterPopUp extends BasePage {
         super(driver);
     }
 
+    @Step("Click next step button")
     public AddCenterPopUp clickNextStepButton() {
         scrollToElement(nextStepButton);
         sleep(2000);
@@ -30,7 +32,7 @@ public class AddCenterPopUp extends BasePage {
         checkbox.click();
         return new AddCenterPopUp(driver);
     }
-
+    @Step("Reading error massage")
     public String getError() {
         scrollToElement(incorrectCenterName);
         sleep(2000);
@@ -41,6 +43,7 @@ public class AddCenterPopUp extends BasePage {
      * Location
      * return LocationPopUp
      */
+    @Step("click button addLocation")
     public LocationPopUp clickAddLocation() {
         addLocation.click();
         return new LocationPopUp(driver);

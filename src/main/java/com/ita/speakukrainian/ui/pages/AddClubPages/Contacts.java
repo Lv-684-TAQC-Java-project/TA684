@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.pages.AddClubPages;
 
 import com.ita.speakukrainian.ui.pages.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -79,11 +80,13 @@ public class Contacts extends BasePage {
         return new Contacts(driver);
     }
 
+    @Step("Fill contact phone field")
     public Contacts fillInContactPhoneInput(String contactPhone) {
         getContactPhoneInput().sendKeys(contactPhone);
         return new Contacts(driver);
     }
 
+    @Step("Click next step button")
     public Description clickNextStepButton() {
         getNextStepButton().click();
         return new Description(driver);

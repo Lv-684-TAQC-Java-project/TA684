@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.pages.AddClubPages;
 
 import com.ita.speakukrainian.ui.pages.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,26 +45,31 @@ public class MainInformation extends BasePage {
         return nextStepButton;
     }
 
+    @Step("Fill club name field")
     public MainInformation fillInClubNameInput(String clubName) {
         getClubNameInput().sendKeys(clubName);
         return new MainInformation(driver);
     }
 
+    @Step("Click option checkboxes")
     public MainInformation clickOptionCheckboxes(int index) {
         getOptionCheckboxes().get(index).click();
         return new MainInformation(driver);
     }
 
+    @Step("Fill age from field")
     public MainInformation fillInAgeFromInput(String age) {
         getAgeFromInput().sendKeys(age);
         return new MainInformation(driver);
     }
 
+    @Step("Fill age to field")
     public MainInformation fillInAgeToInput(String age) {
         getAgeToInput().sendKeys(age);
         return new MainInformation(driver);
     }
 
+    @Step("Click next step button")
     public Contacts clickNextStepButton() {
         getNextStepButton().click();
         return new Contacts(driver);
