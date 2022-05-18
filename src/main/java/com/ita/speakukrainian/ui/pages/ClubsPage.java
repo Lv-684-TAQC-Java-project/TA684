@@ -23,7 +23,8 @@ public class ClubsPage extends BasePage {
     private WebElement extendedSearchButton;
     @FindBy(xpath = "//*[@class = \"ant-layout-sider ant-layout-sider-dark club-list-sider\"]")
     private WebElement extendSearchMenu;
-    @FindBy(xpath ="//div[@id='basic_isCenter']/label[@class='ant-radio-wrapper ant-radio-wrapper-checked ant-radio-wrapper-in-form-item']/span[contains(text(),'Гурток')]")
+    @FindBy(xpath="//*[@id=\"basic_isCenter\"]/label[1]/span[1]/span")
+           // (xpath ="//div[@id='basic_isCenter']/label[@class='ant-radio-wrapper ant-radio-wrapper-checked ant-radio-wrapper-in-form-item']/span[contains(text(),'Гурток')]")
     private WebElement clubRadioButtonIsPushed;
     @FindBy(xpath = "//*[@id=\"basic_isCenter\"]/label[2]/span[1]/input")
     private WebElement centreRadioButton;
@@ -38,7 +39,8 @@ public class ClubsPage extends BasePage {
     private WebElement metroStationPopUp;
     @FindBy(xpath = "//div[@id='root']/section/section/main/section/section/section/div/div[2]/label")
     private WebElement sortMenuBarButton;
-    @FindBy( css=".content-center-list.false")
+    @FindBy (xpath = "//*[@id=\"root\"]/section/section/main/section/section/main/div[1]/div[2]/label[1]/span[1]/span")
+            //( css=".content-center-list.false")
     private WebElement listOfCenters;
 
 
