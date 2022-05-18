@@ -37,7 +37,7 @@ public class MyProfilePage extends BaseObjectPage {
         addButton.click();
         return new MyProfilePage(driver);
     }
-
+    @Step("Click add center button")
     public AddCenterPopUp clickAddCenterButton() {
         addCenterButton.click();
         return new AddCenterPopUp(driver);
