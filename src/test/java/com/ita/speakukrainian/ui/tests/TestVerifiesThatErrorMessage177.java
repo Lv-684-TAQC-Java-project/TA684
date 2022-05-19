@@ -6,10 +6,7 @@ import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import com.ita.speakukrainian.utils.TestNGListener;
-
 import java.util.ArrayList;
 import java.util.List;
 

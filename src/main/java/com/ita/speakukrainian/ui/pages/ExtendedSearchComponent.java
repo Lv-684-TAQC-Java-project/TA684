@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.pages;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,8 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ExtendedSearchComponent {
-    protected WebDriver driver;
+public class ExtendedSearchComponent extends BasePage {
 
 
     @FindBy(css = ".ant-layout-has-sider")
@@ -24,9 +24,9 @@ public class ExtendedSearchComponent {
     private WebElement arrowdownButton;
 
 
-
     ExtendedSearchComponent(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+
         PageFactory.initElements(driver, this);
 
     }
@@ -35,18 +35,22 @@ public class ExtendedSearchComponent {
     /**
      * Check advanced search if is opened
      */
+    @Step("get i sDisplayed advanced Search ")
     public boolean isDisplayedadvancedSearch() {
+        saveScreenshot();
         return advancedSearch.isDisplayed();
     }
-
+    @Step("get card ")
     public List<WebElement> getcard() {
         return card;
     }
 
+    @Step("get carc centr ")
     public List<WebElement> getcardCentr() {
         return cardCentr;
     }
 
+    @Step("click Arrow Up Button ")
     public ExtendedSearchComponent clickArrowUpButton() {
         arrowUpButton.click();
         return this;
@@ -57,5 +61,5 @@ public class ExtendedSearchComponent {
         return this;
     }
 
- }
+}
 

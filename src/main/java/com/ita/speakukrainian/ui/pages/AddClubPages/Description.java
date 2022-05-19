@@ -5,13 +5,12 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.ITestContext;
-import org.testng.annotations.Listeners;
+
 
 import java.util.List;
+
 public class Description extends BasePage {
 
-    private ITestContext context;
     @FindBy(css = "#basic_description")
     private WebElement basicDescriptionInput;
     @FindBy(css = "[role='alert']")
@@ -45,6 +44,7 @@ public class Description extends BasePage {
     public String getWrongDescriptionAlert() {
         return wrongDescriptionAlert.getText();
     }
+
     @Step("Get text massage whan we have error")
     public String TextWrongDescriptionDownAlert() {
         saveScreenshot();

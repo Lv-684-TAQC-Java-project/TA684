@@ -32,4 +32,8 @@ public class BaseComponent {
             e.printStackTrace();
         }
     }
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
 }

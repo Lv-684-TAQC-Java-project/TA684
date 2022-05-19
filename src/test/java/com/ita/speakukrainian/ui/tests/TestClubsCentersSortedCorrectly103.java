@@ -3,6 +3,8 @@ package com.ita.speakukrainian.ui.tests;
 import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.Item;
+import io.qameta.allure.Issue;
+import jdk.jfr.Description;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -17,6 +19,8 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
 
 
     @Test
+    @Description("[allure]  Is Extended search Dropdow Opened")
+    @Issue("TUA-103")
     public void searchDropdownOpened() {
         boolean isSearchDropdownDisplayed = new HomePage(driver)
                 .header()
@@ -28,6 +32,8 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
     }
 
     @Test
+    @Description("[allure]  Is Extended AdvancedSearch If Is Opened")
+    @Issue("TUA-103")
     public void AdvancedSearchIfIsOpened() {
         boolean isSearchOpenedDisplayed = new HomePage(driver)
                 .header()
@@ -40,6 +46,8 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
     }
 
     @Test
+    @Description("[allure]  Is Extended Sorted Alp habetically Descending Order")
+    @Issue("TUA-103")
     public void SortedAlphabeticallyDescendingOrder() {
 
         List<WebElement> card = new HomePage(driver)
@@ -81,6 +89,8 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
 
 
     @Test
+    @Description("[allure]  Is Extended Sorted Alp habetically Click Button Up")
+    @Issue("TUA-103")
     public void SortedAlphabeticallClickButtonUp() {
         List<WebElement> card = new HomePage(driver)
                 .header()
@@ -120,6 +130,8 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
     }
 
     @Test
+    @Description("[allure]  Is Extended Sorted Alp habetically Click Button Douwn")
+    @Issue("TUA-103")
     public void SortedAlphabeticallClickButtonDown() {
         List<WebElement> card = new HomePage(driver)
                 .header()
@@ -161,6 +173,8 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
     }
 
     @Test
+    @Description("[allure]  Is Extended Sorted Alphabetically Descending Orde rClick Center")
+    @Issue("TUA-103")
     public void SortedAlphabeticallyDescendingOrderClickCenter() {
 
         List<WebElement> card = new HomePage(driver)
@@ -202,6 +216,8 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
 
 
     @Test
+    @Description("[allure]  Is Extended Sorted Alphabetically Click Button Up Click Cenret")
+    @Issue("TUA-103")
     public void SortedAlphabeticallClickButtonUpClickCenret() {
         List<WebElement> card = new HomePage(driver)
                 .header()
@@ -242,6 +258,8 @@ public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
     }
 
     @Test
+    @Description("[allure]  Is Extended Sorted Alphabetically Click Button Down Click Cenret")
+    @Issue("TUA-103")
     public void SortedAlphabeticallClickButtonDownClickCenter() {
         List<WebElement> card = new HomePage(driver)
                 .header()

@@ -23,9 +23,9 @@ import java.time.Duration;
 
 public class HeaderMenuComponent extends BaseComponent {
 
-        
+
     private final String avatarSelector = "//div[contains(@class,'user-profile')]//img";
-  
+
     @FindBy(xpath = "//div[@id='root']/section/header/div[3]/div[2]/span[2]")
     private WebElement userProFileButton;
     @FindBy(xpath = "//li[2]/span/div")
@@ -110,6 +110,7 @@ public class HeaderMenuComponent extends BaseComponent {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(avatarSelector)));
         return avatar.getAttribute("src");
     }
+
     @Step("Click extended search")
     public ClubsPage clickExtendedSearchButton() {
         getExtendedSearchButton().click();
@@ -170,6 +171,7 @@ public class HeaderMenuComponent extends BaseComponent {
     }
 
     public boolean isDisplayedSearchInputDropdown() {
+        saveScreenshot();
         return searchInputDropdown.isDisplayed();
     }
 
