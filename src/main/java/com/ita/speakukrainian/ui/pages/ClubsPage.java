@@ -188,12 +188,16 @@ public class ClubsPage extends BasePage {
         sleep(1000);
         return new ClubsPage(driver);
     }
+    @Step("Verify is Club radio-button selected")
     public boolean IsClubButtonSelected(){
         return getClubRadioButton().isSelected();
     }
+    @Step("Verify is Centre radio-button selected")
     public boolean IsCentreButtonSelected(){
+
         return getCentreRadioButton().isSelected();
     }
+    @Step("Verify is Centre As List radio-button selected")
     public boolean IsCentresSortedAsList(){
         try{
             getListOfCentres().isEnabled();
