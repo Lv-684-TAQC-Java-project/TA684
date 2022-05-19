@@ -5,11 +5,13 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.ITestContext;
+import org.testng.annotations.Listeners;
 
 import java.util.List;
-
 public class Description extends BasePage {
 
+    private ITestContext context;
     @FindBy(css = "#basic_description")
     private WebElement basicDescriptionInput;
     @FindBy(css = "[role='alert']")
@@ -43,7 +45,9 @@ public class Description extends BasePage {
     public String getWrongDescriptionAlert() {
         return wrongDescriptionAlert.getText();
     }
+    @Step("Get text massage whan we have error")
     public String TextWrongDescriptionDownAlert() {
+        saveScreenshot();
         return wrongDescriptionDownAlert.getText();
     }
 
@@ -58,11 +62,15 @@ public class Description extends BasePage {
         return getAlerts().stream().allMatch(el -> el.isDisplayed());
     }
 
+    @Step("Get isDisplayed() massage")
     public boolean isSuccessIconDisplayed() {
+        saveScreenshot();
         return getSuccessIcon().isDisplayed();
     }
 
+    @Step("Get isDisplayed() massage whan we have error")
     public boolean issuccessIconErrorDisplayed() {
+        saveScreenshot();
         return successIconError.isDisplayed();
     }
 }

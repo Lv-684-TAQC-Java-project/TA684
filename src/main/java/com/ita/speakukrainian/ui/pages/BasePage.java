@@ -1,5 +1,8 @@
 package com.ita.speakukrainian.ui.pages;
 
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -28,5 +31,9 @@ public class BasePage {
     protected void scrollToElement(WebElement el) {
         Actions action = new Actions(driver);
         action.moveToElement(el).perform();
+    }
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }
