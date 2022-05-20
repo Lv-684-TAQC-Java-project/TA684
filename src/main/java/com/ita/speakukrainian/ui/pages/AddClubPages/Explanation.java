@@ -45,7 +45,7 @@ public class Explanation extends BasePage {
         return wrongDescriptionAlert.getText();
     }
 
-    @Step("Get text massage whan we have error")
+    @Step("Get text massage when we have error")
     public String TextWrongDescriptionDownAlert() {
         saveScreenshot();
         return wrongDescriptionDownAlert.getText();
@@ -57,7 +57,7 @@ public class Explanation extends BasePage {
         sleep(2000);
         return new Explanation(driver);
     }
-
+    @Step("Show is alert displayed")
     public boolean isAlertDisplayed() {
         return getAlerts().stream().allMatch(el -> el.isDisplayed());
     }
@@ -74,7 +74,7 @@ public class Explanation extends BasePage {
         return successIconError.isDisplayed();
     }
 
-    @Step("Get isDisplayed() massage whan we have error")
+    @Step("Clear description field")
     public void clearDescriptionField() {
         getBasicDescriptionInput().clear();
     }
