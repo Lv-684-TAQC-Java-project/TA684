@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class Description1 extends BasePage {
+public class Explanation extends BasePage {
 
     @FindBy(css = "#basic_description")
     private WebElement basicDescriptionInput;
@@ -25,7 +25,7 @@ public class Description1 extends BasePage {
     @FindBy(xpath = "/html/body/div[6]/div/div[2]/div/div[2]/button/span")
     private WebElement closeMyProfile;
 
-    public Description1(WebDriver driver) {
+    public Explanation(WebDriver driver) {
         super(driver);
     }
 
@@ -54,10 +54,10 @@ public class Description1 extends BasePage {
     }
 
     @Step("Fill basil description input")
-    public Description1 fillInBasicDescriptionInput(String description) {
+    public Explanation fillInBasicDescriptionInput(String description) {
         getBasicDescriptionInput().sendKeys(description);
         sleep(2000);
-        return new Description1(driver);
+        return new Explanation(driver);
     }
 
     public void clickCloseMyProfile(){
@@ -74,5 +74,9 @@ public class Description1 extends BasePage {
 
     public boolean issuccessIconErrorDisplayed() {
         return successIconError.isDisplayed();
+    }
+
+    public void clearDescriptionField(){
+        getBasicDescriptionInput().clear();
     }
 }

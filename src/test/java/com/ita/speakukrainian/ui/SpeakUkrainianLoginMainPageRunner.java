@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.ui;
 
+import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.utils.ValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -8,7 +9,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
@@ -34,14 +34,33 @@ public class SpeakUkrainianLoginMainPageRunner {
         driver.get(valueProvider.getBaseURL());
 
 
-        HomePage errorMassage = new HomePage(driver)
+        Explanation homePage = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickSingInButton()
                 .sendKeysEmail(valueProvider.getAdminEmail())
                 .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton();
+                .clickLoginButton()
+                .header()
+                .clickUserProFileButton()
+                .clickMyProfileButton()
+                .clickAddButton()
+                .clickAddClubButton()
+                .fillInClubNameInput("Football")
+                .clickOptionCheckboxes(2)
+                .clickOptionCheckboxes(1)
+                .fillInAgeFromInput("2")
+                .fillInAgeToInput("18")
+                .clickNextStepButton()
+                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
+                .clickNextStepButton();
 
+    }
+
+    @AfterMethod
+    public void afterMethod(){
+        Explanation explanation = new Explanation(driver);
+        explanation.clearDescriptionField();
     }
 
     @AfterSuite

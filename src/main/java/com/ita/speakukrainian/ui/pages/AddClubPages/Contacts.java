@@ -92,8 +92,8 @@ public class Contacts extends BasePage {
     }
 
     @Step("Click next step")
-    public Description clickNextStepButton() {
+    public Explanation clickNextStepButton() {
         getNextStepButton().click();
-        return new Description(driver);
+        return new Explanation(driver);
     }
 }
