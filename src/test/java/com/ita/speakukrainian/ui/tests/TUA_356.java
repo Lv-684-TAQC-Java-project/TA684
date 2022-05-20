@@ -1,6 +1,8 @@
 package com.ita.speakukrainian.ui.tests;
 
+import com.ita.speakukrainian.ui.EditProfileRunner;
 import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.pages.EditProfilePage;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
@@ -9,7 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class TUA_356 extends SpeakUkrainianRunner {
+public class TUA_356 extends EditProfileRunner {
 
     @DataProvider(name = "data1")
     public Object[][] SmallestCombine() {
@@ -28,18 +30,7 @@ public class TUA_356 extends SpeakUkrainianRunner {
     @Description("[allure] Not valid enter phone number")
     @Issue("TUA-356")
     public void testNotValidEnterPhoneNumber(String testCase1Value, String expected) {
-        String error = new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .header()
-                .clickUserProFileButton()
-                .clickMyProfileButton()
-                .clickEditProfileButton()
-                .clearPhoneField()
+        String error = new EditProfilePage(driver)
                 .sendKeysPhoneField(testCase1Value)
                 .getErrorWrongNumber();
         SoftAssert softAssert = new SoftAssert();
@@ -50,18 +41,7 @@ public class TUA_356 extends SpeakUkrainianRunner {
     @Description("[allure] Not valid enter phone number")
     @Issue("TUA-356")
     public void testIsDisplayedSaveButton() {
-        String error = new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .header()
-                .clickUserProFileButton()
-                .clickMyProfileButton()
-                .clickEditProfileButton()
-                .clearPhoneField()
+        String error = new EditProfilePage(driver)
                 .getEnterAnyNumberAlert();
         Assert.assertEquals(error, "Будь ласка введіть Ваш номер телефону");
     }
