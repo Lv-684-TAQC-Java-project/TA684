@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class Description extends BasePage {
+public class Explanation extends BasePage {
 
     @FindBy(css = "#basic_description")
     private WebElement basicDescriptionInput;
@@ -24,7 +24,7 @@ public class Description extends BasePage {
     @FindBy(css = "#basic [class$='ant-form-item-feedback-icon-error']")
     private WebElement successIconError;
 
-    public Description(WebDriver driver) {
+    public Explanation(WebDriver driver) {
         super(driver);
     }
 
@@ -52,10 +52,10 @@ public class Description extends BasePage {
     }
 
     @Step("Fill in basic description")
-    public Description fillInBasicDescriptionInput(String description) {
+    public Explanation fillInBasicDescriptionInput(String description) {
         getBasicDescriptionInput().sendKeys(description);
         sleep(2000);
-        return new Description(driver);
+        return new Explanation(driver);
     }
 
     public boolean isAlertDisplayed() {
@@ -72,5 +72,10 @@ public class Description extends BasePage {
     public boolean issuccessIconErrorDisplayed() {
         saveScreenshot();
         return successIconError.isDisplayed();
+    }
+
+    @Step("Get isDisplayed() massage whan we have error")
+    public void clearDescriptionField() {
+        getBasicDescriptionInput().clear();
     }
 }
