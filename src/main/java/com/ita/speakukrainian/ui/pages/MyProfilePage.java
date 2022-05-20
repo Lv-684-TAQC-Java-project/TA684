@@ -15,7 +15,7 @@ public class MyProfilePage extends BaseObjectPage {
     private WebElement addCenterButton;
     @FindBy(xpath = "/html/body/div[5]/div/div/ul/li[1]/span/div")
     private WebElement addClubButton;
-    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/section/main/div[2]/div/div[1]/button")
+    @FindBy(xpath = "//*[@class=\"ant-btn ant-btn-text button\"]")
     private WebElement editProfile;
 
     private final HeaderMenuComponent headerMenu;
@@ -45,6 +45,7 @@ public class MyProfilePage extends BaseObjectPage {
 
     @Step("Click add club button")
     public MainInformation clickAddClubButton() {
+        sleep(2000);
         addClubButton.click();
         return new MainInformation(driver);
     }
