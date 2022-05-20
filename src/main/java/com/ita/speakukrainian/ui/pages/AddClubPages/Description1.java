@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class Description extends BasePage {
+public class Description1 extends BasePage {
 
     @FindBy(css = "#basic_description")
     private WebElement basicDescriptionInput;
@@ -22,8 +22,10 @@ public class Description extends BasePage {
     private WebElement successIcon;
     @FindBy(css = "#basic [class$='ant-form-item-feedback-icon-error']")
     private WebElement successIconError;
+    @FindBy(xpath = "/html/body/div[6]/div/div[2]/div/div[2]/button/span")
+    private WebElement closeMyProfile;
 
-    public Description(WebDriver driver) {
+    public Description1(WebDriver driver) {
         super(driver);
     }
 
@@ -39,6 +41,10 @@ public class Description extends BasePage {
         return successIcon;
     }
 
+    public WebElement getCloseMyProfile() {
+        return closeMyProfile;
+    }
+
     @Step("Get alert wrong description")
     public String getWrongDescriptionAlert() {
         return wrongDescriptionAlert.getText();
@@ -48,10 +54,14 @@ public class Description extends BasePage {
     }
 
     @Step("Fill basil description input")
-    public Description fillInBasicDescriptionInput(String description) {
+    public Description1 fillInBasicDescriptionInput(String description) {
         getBasicDescriptionInput().sendKeys(description);
         sleep(2000);
-        return new Description(driver);
+        return new Description1(driver);
+    }
+
+    public void clickCloseMyProfile(){
+         getCloseMyProfile().click();
     }
 
     public boolean isAlertDisplayed() {
