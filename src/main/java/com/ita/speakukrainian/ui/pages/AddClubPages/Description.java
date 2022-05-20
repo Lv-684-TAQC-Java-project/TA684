@@ -54,7 +54,7 @@ public class Description extends BasePage {
     @Step("Fill in basic description")
     public Description fillInBasicDescriptionInput(String description) {
         getBasicDescriptionInput().sendKeys(description);
-        sleep(2000);
+        sleep(200);
         return new Description(driver);
     }
 
