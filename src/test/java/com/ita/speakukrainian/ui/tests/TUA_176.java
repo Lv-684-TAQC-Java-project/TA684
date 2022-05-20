@@ -1,16 +1,14 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.SpeakUkrainianLoginMainPageRunner;
-import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.AddClubInMyProfileRunner;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
-import com.ita.speakukrainian.ui.pages.HomePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class TUA_176 extends SpeakUkrainianLoginMainPageRunner {
+public class TUA_176 extends AddClubInMyProfileRunner {
     @DataProvider(name = "data")
     public Object[][] dataProvider() {
         Object[][] data = new Object[][]{
