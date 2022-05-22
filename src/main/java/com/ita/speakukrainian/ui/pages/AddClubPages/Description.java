@@ -1,7 +1,9 @@
 package com.ita.speakukrainian.ui.pages.AddClubPages;
 
 import com.ita.speakukrainian.ui.pages.BasePage;
+import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import io.qameta.allure.Step;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,7 +56,7 @@ public class Description extends BasePage {
     @Step("Fill in basic description")
     public Description fillInBasicDescriptionInput(String description) {
         getBasicDescriptionInput().sendKeys(description);
-        sleep(200);
+        //sleep(200);
         return new Description(driver);
     }
 
@@ -72,5 +74,12 @@ public class Description extends BasePage {
     public boolean issuccessIconErrorDisplayed() {
         saveScreenshot();
         return successIconError.isDisplayed();
+    }
+
+    public Description clearfillInBasicDescriptionInput(){
+        getBasicDescriptionInput().click();
+        String delete = Keys.chord(Keys.CONTROL,"a") + Keys.DELETE;
+        getBasicDescriptionInput().sendKeys(delete);
+        return this;
     }
 }

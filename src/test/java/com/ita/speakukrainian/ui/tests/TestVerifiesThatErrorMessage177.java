@@ -1,19 +1,15 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.EditProfileRunner177Factory;
 import com.ita.speakukrainian.ui.pages.HomePage;
+import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import java.util.ArrayList;
-import java.util.List;
 
 
-
-public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
+public class TestVerifiesThatErrorMessage177 extends EditProfileRunner177Factory {
 
 
 
@@ -27,16 +23,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     @Description("[allure]  Is Extended Massage is displayed when add  1500 symbols")
     @Issue("TUA-177")
     public void TestVerifiesTheErrorMessageWhenEnter1500Symbols() {
-        boolean isDisplayedMassage = new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .header()
-                .clickUserProFileButton()
-                .clickMyProfileButton()
+        boolean isDisplayedMassage = new MyProfilePage(driver)
                 .clickAddButton()
                 .clickAddClubButton()
                 .fillInClubNameInput("Юність")

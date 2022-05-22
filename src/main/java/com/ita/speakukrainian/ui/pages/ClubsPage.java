@@ -5,6 +5,7 @@ import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchCityDistrictDropDown;
 import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchCityDropDown;
 import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchNearestMetroStationDropDown;
 import io.qameta.allure.Step;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -207,5 +208,6 @@ public class ClubsPage extends BasePage {
         }
         return true;
     }
+
 }
 
