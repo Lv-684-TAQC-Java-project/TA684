@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MainInformation extends BasePage {
 
-    @FindBy(css = "#basic_name")
+    @FindBy(id = "basic_name")
     private WebElement clubNameInput;
     @FindBy(css = "[type*='checkbox']")
     private List<WebElement> optionCheckboxes;

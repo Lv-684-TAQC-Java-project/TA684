@@ -1,9 +1,7 @@
 package com.ita.speakukrainian.ui;
 
 import com.ita.speakukrainian.ui.pages.AddClubPages.Description;
-import com.ita.speakukrainian.ui.pages.EditProfilePage;
 import com.ita.speakukrainian.ui.pages.HomePage;
-import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import com.ita.speakukrainian.utils.ValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +14,7 @@ import org.testng.annotations.BeforeSuite;
 import java.io.IOException;
 import java.time.Duration;
 
-public class EditProfileRunner177Factory {
+public class Runner177Factory {
         protected static WebDriver driver;
         protected static ValueProvider valueProvider;
 
@@ -35,7 +33,7 @@ public class EditProfileRunner177Factory {
             driver.get(valueProvider.getBaseURL());
 
 
-            MyProfilePage EditMyProfile = new HomePage(driver)
+            Description EditMyProfile = new HomePage(driver)
                     .header()
                     .clickUserProFileButton()
                     .clickSingInButton()
@@ -44,7 +42,16 @@ public class EditProfileRunner177Factory {
                     .clickLoginButton()
                     .header()
                     .clickUserProFileButton()
-                    .clickMyProfileButton();
+                    .clickMyProfileButton()
+                    .clickAddButton()
+                    .clickAddClubButton()
+                    .fillInClubNameInput("Юність")
+                    .clickOptionCheckboxes(0)
+                    .fillInAgeFromInput("18")
+                    .fillInAgeToInput("50")
+                    .clickNextStepButton()
+                    .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
+                    .clickNextStepButton();
 
         }
 

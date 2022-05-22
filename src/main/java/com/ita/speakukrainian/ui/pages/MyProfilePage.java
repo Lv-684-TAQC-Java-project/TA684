@@ -29,6 +29,7 @@ public class MyProfilePage extends BaseObjectPage {
     @Step("click Edit Profile")
     public EditProfilePage clickEditProfileButton() {
         editProfile.click();
+
         return new EditProfilePage(driver);
     }
 
