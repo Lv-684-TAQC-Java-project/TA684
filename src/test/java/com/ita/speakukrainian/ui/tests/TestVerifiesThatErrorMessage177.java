@@ -11,16 +11,13 @@ import org.testng.annotations.Test;
 
 public class TestVerifiesThatErrorMessage177 extends EditProfileRunner177Factory {
 
-
-
-    private Object ITestContext;
     private final String param;
     public TestVerifiesThatErrorMessage177(String param) {
         this.param = param;
     }
 
     @Test
-    @Description("[allure]  Is Extended Massage is displayed when add  1500 symbols")
+    @Description("[allure]  Is Extended Massage is displayed when add 1500 or less symbols")
     @Issue("TUA-177")
     public void TestVerifiesTheErrorMessageWhenEnter1500Symbols() {
         boolean isDisplayedMassage = new MyProfilePage(driver)
@@ -36,7 +33,6 @@ public class TestVerifiesThatErrorMessage177 extends EditProfileRunner177Factory
                 .fillInBasicDescriptionInput(param)
                 .isSuccessIconDisplayed();
         Assert.assertTrue(isDisplayedMassage);
-
     }
 
 //    @Test

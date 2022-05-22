@@ -77,7 +77,7 @@ public class Description extends BasePage {
     }
 
     public Description clearfillInBasicDescriptionInput(){
-        getBasicDescriptionInput().click();
+
         String delete = Keys.chord(Keys.CONTROL,"a") + Keys.DELETE;
         getBasicDescriptionInput().sendKeys(delete);
         return this;
