@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeSuite;
 import java.io.IOException;
 import java.time.Duration;
 
-public class AddClubInMyProfileRunner {
+public class AddClubInMyProfileExplanationStageRunner {
 
     protected static WebDriver driver;
     protected static ValueProvider valueProvider;
