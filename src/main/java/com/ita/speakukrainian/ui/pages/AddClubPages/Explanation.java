@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Explanation extends BasePage {
 
@@ -57,9 +58,14 @@ public class Explanation extends BasePage {
         sleep(2000);
         return new Explanation(driver);
     }
-    @Step("Show is alert displayed")
-    public boolean isAlertDisplayed() {
-        return getAlerts().stream().allMatch(el -> el.isDisplayed());
+
+    @Step("Are Error Messages Displayed")
+    public boolean areErrorMessagesDisplayed(List<String> expectedErrorMessages) {
+        return getAlerts()
+                .stream()
+                .map(webElement -> webElement.getText())
+                .collect(Collectors.toList())
+                .containsAll(expectedErrorMessages);
     }
 
     @Step("Get isDisplayed() massage")

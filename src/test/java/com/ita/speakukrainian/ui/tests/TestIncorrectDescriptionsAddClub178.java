@@ -1,19 +1,29 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
-import com.ita.speakukrainian.ui.pages.HomePage;
+import com.ita.speakukrainian.ui.RunnerForTUA_178;
+import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TestIncorrectDescriptionsAddClub178 extends SpeakUkrainianRunner {
+import java.util.Arrays;
+import java.util.List;
+
+public class TestIncorrectDescriptionsAddClub178 extends RunnerForTUA_178 {
+
+    List<String> expectedErrorMessagesRusLetter = Arrays.asList("Некоректний опис гуртка",
+            "Опис гуртка може містити від 40 до 1500 символів.", "Опис гуртка не може містити російські літери");
+
+    List<String> expectedErrorMessagesGerLetter = Arrays.asList("Некоректний опис гуртка",
+            "Опис гуртка може містити від 40 до 1500 символів.");
+
     @DataProvider(name = "data")
     public Object[][] dataProvider() {
         Object[][] data = new Object[][]{
-                {"ъ"},
-                {"öl"}
+                {"ъ", expectedErrorMessagesRusLetter},
+                {"öl", expectedErrorMessagesGerLetter}
         };
         return data;
     }
@@ -21,32 +31,11 @@ public class TestIncorrectDescriptionsAddClub178 extends SpeakUkrainianRunner {
     @Test(dataProvider = "data")
     @Description("Verify Error Message On Russian And German Letters In Description")
     @Issue("TUA-178")
-    public void verifyErrorMessageOnRussianAndGermanLettersInDescription(String text) {
-        boolean isAlertDisplayed = new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .header()
-                .clickUserProFileButton()
-                .clickAddClubButton()
-                .fillInClubNameInput("Football")
-                .clickOptionCheckboxes(2)
-                .fillInAgeFromInput("2")
-                .fillInAgeToInput("18")
-                .clickNextStepButton()
-                .fillInContactFacebookInput(valueProvider.getContactFacebook())
-                .fillInContactMailInput(valueProvider.getContactEmail())
-                .fillInContactWhatsAppInput(valueProvider.getContactWhatsUpp())
-                .fillInContactInput(valueProvider.getContactName())
-                .fillInContactSkypeInput(valueProvider.getContactSkype())
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
+    public void verifyErrorMessageOnRussianAndGermanLettersInDescription(String text, List<String> expectedErrorMessages) {
+        boolean areErrorMessageDisplayed = new Explanation(driver)
                 .fillInBasicDescriptionInput(text)
-                .isAlertDisplayed();
+                .areErrorMessagesDisplayed(expectedErrorMessages);
 
-        Assert.assertTrue(isAlertDisplayed);
+        Assert.assertTrue(areErrorMessageDisplayed);
     }
 }
