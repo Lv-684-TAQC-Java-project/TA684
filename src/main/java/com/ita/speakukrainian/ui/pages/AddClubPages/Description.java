@@ -3,12 +3,16 @@ package com.ita.speakukrainian.ui.pages.AddClubPages;
 import com.ita.speakukrainian.ui.pages.BasePage;
 import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
+import java.time.Duration;
 import java.util.List;
 
 public class Description extends BasePage {
@@ -47,8 +51,9 @@ public class Description extends BasePage {
         return wrongDescriptionAlert.getText();
     }
 
-    @Step("Get text massage whan we have error")
+    @Step("Get text massage when we have error")
     public String TextWrongDescriptionDownAlert() {
+        waitForElement(wrongDescriptionDownAlert);
         saveScreenshot();
         return wrongDescriptionDownAlert.getText();
     }
@@ -72,6 +77,7 @@ public class Description extends BasePage {
 
     @Step("Get isDisplayed() massage whan we have error")
     public boolean issuccessIconErrorDisplayed() {
+        waitForElement(successIconError);
         saveScreenshot();
         return successIconError.isDisplayed();
     }
@@ -82,4 +88,7 @@ public class Description extends BasePage {
         getBasicDescriptionInput().sendKeys(delete);
         return this;
     }
+    public void waitForElement(WebElement elem){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    wait.until(ExpectedConditions.visibilityOf(elem));}
 }
