@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.ui.pages.AddClubPages.Contacts;
+import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
 import io.qameta.allure.Description;
@@ -31,135 +32,68 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
                 .fillInAgeFromInput("2")
                 .fillInAgeToInput("18")
                 .clickNextStepButton();
-
     }
 
-    private String listString(int size){
+    private String listString(int size) {
         List<String> list = new ArrayList<String>();
         for (int i = 1; i <= size; i++) {
             list.add("a");
         }
-        System.out.println(list.size());
         return String.join("", list);
-
     }
 
-    @DataProvider(name = "data1500Symbols")
-    public Object[][] dataProvider1500Symbols() {
-        int symbols = 1500;
-        Object[][] data = new Object[][]{
-                {listString(symbols)},
-        };
-        return data;
-    }
-
-    @Test(dataProvider = "data1500Symbols")
-    @Description("[allure]  Is Extended Massage is displayed whan add  1500 symbols")
+    @Test
+    @Description("[allure]  Is Extended Massage is displayed when add  same symbols")
     @Issue("TUA-177")
-    public void TestVerifiesTheErrorMessageWhenEnter1500Symbols(String testCaseValue) {
-        boolean isDisplayedMassage =new Contacts(driver)
+    public void TestVerifiesTheErrorMessageWhenEnterSameSymbols() {
+        SoftAssert softAssert = new SoftAssert();
+        new Contacts(driver)
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
-                .fillInBasicDescriptionInput(testCaseValue)
+                .clickNextStepButton();
+
+        boolean isDisplayedMassageWrite1500Symbols = new Explanation(driver)
+                .fillInBasicDescriptionInput(listString(1500))
                 .isSuccessIconDisplayed();
+        new Explanation(driver)
+                .clearDescriptionField();
 
-        Assert.assertTrue(isDisplayedMassage);
-
-    }
-
-    @DataProvider(name = "dataLess1500Symbols")
-    public Object[][] dataProviderLess1500Symbols() {
-        int symbols = 1400;
-        Object[][] data = new Object[][]{
-                {listString(symbols)},
-        };
-        return data;
-    }
-
-    @Test(dataProvider = "dataLess1500Symbols")
-    @Description("[allure]  Is Extended Massage is displayed whan add less 1500 symbols")
-    @Issue("TUA-177")
-    public void TestVerifiesTheErrorMessageWhenEnterLess1500Symbols(String testCaseValue) {
-        boolean isDisplayedMassage =new Contacts(driver)
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
-                .fillInBasicDescriptionInput(testCaseValue)
+        boolean isDisplayedMassageWrite1400Symbol = new Explanation(driver)
+                .fillInBasicDescriptionInput(listString(1400))
                 .isSuccessIconDisplayed();
+        new Explanation(driver)
+                .clearDescriptionField();
 
-        Assert.assertTrue(isDisplayedMassage);
-
-    }
-
-    @DataProvider(name = "data1501symbols")
-    public Object[][] dataProvider1501symbols() {
-        int symbols = 1501;
-
-        Object[][] data = new Object[][]{
-                {listString(symbols)},
-        };
-        return data;
-    }
-
-    @Test(dataProvider = "data1501symbols")
-    @Description("[allure]  Is Extended errorMassage whan add more 1501 symbols")
-    @Issue("TUA-177")
-    public void TestVerifiesTheErrorMessageWhenEnter1501Symbols(String testCaseValue) {
-        String errorMassage = new Contacts(driver)
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
-                .fillInBasicDescriptionInput(testCaseValue)
+        String errorMassageWrite1501Symbols = new Explanation(driver)
+                .fillInBasicDescriptionInput(listString(1501))
                 .TextWrongDescriptionDownAlert();
-        Assert.assertEquals(errorMassage, "Опис гуртка може містити від 40 до 1500 символів.");
+        new Explanation(driver)
+                .clearDescriptionField();
 
-
-    }
-
-    @Test(dataProvider = "data1501symbols")
-    @Description("[allure]  Is Extended errorMassage is displayed whan add more 1501 symbols")
-    @Issue("TUA-177")
-    public void TestVerifiesTheErrorMessageWhenEnter1501Symbols2(String testCaseValue) {
-        Boolean IconErrorDisplayed =new Contacts(driver)
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
-                .fillInBasicDescriptionInput(testCaseValue)
+        boolean IconErrorDisplayedWrite1501Symbols = new Explanation(driver)
+                .fillInBasicDescriptionInput(listString(1501))
                 .issuccessIconErrorDisplayed();
-        Assert.assertTrue(IconErrorDisplayed);
+        new Explanation(driver)
+                .clearDescriptionField();
 
-
-    }
-
-    @DataProvider(name = "dataMore1500symbols")
-    public Object[][] dataProviderMore1500symbols() {
-        int symbols = 1550;
-
-        Object[][] data = new Object[][]{
-                {listString(symbols)},
-        };
-        return data;
-    }
-
-    @Test(dataProvider = "dataMore1500symbols")
-    @Description("[allure]  Is Extended errorMassage  whan add more 1500 symbols")
-    @Issue("TUA-177")
-    public void TestVerifiesTheErrorMessageWhenEnterMore1500Symbols(String testCaseValue) {
-        String errorMassage = new Contacts(driver)
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
-                .fillInBasicDescriptionInput(testCaseValue)
+        String errorMassageWrite1550Symbols = new Explanation(driver)
+                .fillInBasicDescriptionInput(listString(1550))
                 .TextWrongDescriptionDownAlert();
-        Assert.assertEquals(errorMassage, "Опис гуртка може містити від 40 до 1500 символів.");
-    }
+        softAssert.assertEquals(errorMassageWrite1550Symbols, "Опис гуртка може містити від 40 до 1500 символів.");
+        new Explanation(driver)
+                .clearDescriptionField();
 
-    @Test(dataProvider = "dataMore1500symbols")
-    @Description("[allure]  Is Extended errorMassage is displayed whan add more 1500 symbols")
-    @Issue("TUA-177")
-    public void TestVerifiesTheErrorMessageWhenEnterMore1500Symbols2(String testCaseValue) {
-        Boolean IconErrorDisplayed =new Contacts(driver)
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
-                .fillInBasicDescriptionInput(testCaseValue)
+        boolean IconErrorDisplayedWrite1550Symbols = new Explanation(driver)
+                .fillInBasicDescriptionInput(listString(1550))
                 .issuccessIconErrorDisplayed();
-        Assert.assertTrue(IconErrorDisplayed);
+
+
+        softAssert.assertTrue(isDisplayedMassageWrite1500Symbols, "is Displayed Massage Write 1500 Symbols");
+        softAssert.assertTrue(isDisplayedMassageWrite1400Symbol, "is Displayed Massage Write 1400 Symbol");
+        softAssert.assertEquals(errorMassageWrite1501Symbols, "Опис гуртка може містити від 40 до 1500 символів.", "error Massage Write 1501 Symbols");
+        softAssert.assertTrue(IconErrorDisplayedWrite1501Symbols, "Error Displayed Write 1501 Symbols");
+        softAssert.assertEquals(errorMassageWrite1550Symbols, "Опис гуртка може містити від 40 до 1500 символів.", "error Massage Write 1550 ymbols");
+        softAssert.assertTrue(IconErrorDisplayedWrite1550Symbols, "Icon Error Displayed Write 1550 Symbols");
+        softAssert.assertAll();
     }
 
     List<String> expectedErrorMessagesRusLetter = Arrays.asList("Некоректний опис гуртка",

@@ -45,7 +45,7 @@ public class MyProfilePage extends BaseObjectPage {
 
     @Step("Click add club button")
     public MainInformation clickAddClubButton() {
-        sleep(2000);
+        sleep(3000);
         addClubButton.click();
         return new MainInformation(driver);
     }
