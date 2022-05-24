@@ -1,12 +1,16 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
+import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
+import com.ita.speakukrainian.ui.pages.ClubsPage;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.Item;
+import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
+import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import jdk.jfr.Description;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -15,21 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TestClubsCentersSortedCorrectly103 extends BaseTestRunner {
-
-
-    @Test
-    @Description("[allure]  Is Extended search Dropdow Opened")
-    @Issue("TUA-103")
-    public void searchDropdownOpened() {
-        boolean isSearchDropdownDisplayed = new HomePage(driver)
-                .header()
-                .clickClubsPageHeader()
-                .getHeaderMenuComponent()
-                .clickSearchInput()
-                .isDisplayedSearchInputDropdown();
-        Assert.assertTrue(isSearchDropdownDisplayed);
-    }
+public class TestClubPage extends BaseTestRunner {
 
     @Test
     @Description("[allure]  Is Extended AdvancedSearch If Is Opened")
@@ -184,7 +174,7 @@ public class TestClubsCentersSortedCorrectly103 extends BaseTestRunner {
                 .clickExtendedSearchButton()
                 .clickCheckedToCenterButton()
                 .getcardCentr();
-                        List<Item> cardsItem = new ArrayList<>();
+        List<Item> cardsItem = new ArrayList<>();
         for (WebElement element : card) {
             cardsItem.add(new Item(driver, element));
         }
@@ -227,7 +217,7 @@ public class TestClubsCentersSortedCorrectly103 extends BaseTestRunner {
                 .clickCheckedToCenterButton()
                 .clickArrowUpButton()
                 .getcardCentr();
-                List<Item> cardsItem = new ArrayList<>();
+        List<Item> cardsItem = new ArrayList<>();
         for (WebElement element : card) {
             cardsItem.add(new Item(driver, element));
         }
@@ -300,4 +290,76 @@ public class TestClubsCentersSortedCorrectly103 extends BaseTestRunner {
         softAssert.assertAll();
 
     }
+
+    @DataProvider(name = "data")
+    public Object[][] dataProvider() {
+        Object[][] data = new Object[][]{
+                {1, 2},
+                {2, 2},
+                {18, 18},
+                {20, 18}
+        };
+        return data;
+    }
+
+    @Test(dataProvider = "data")
+    @Description("Verify Input Accepts Positive Integers From 2 To 18")
+    @Issue("TUA-210")
+    public void verifyInputAcceptsPositiveIntegersFrom2To18(int age, int expected) {
+        String actualAgeValue = new HomePage(driver)
+                .header()
+                .clickExtendedSearchButton()
+                .fillInAgeInput(age)
+                .readAgeInput();
+
+        int actual = Integer.parseInt(String.valueOf(actualAgeValue));
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    @jdk.jfr.Description("[allure]  Is Extended search menu is displayed")
+    @Issue("TUA-224")
+    public void testIsExtendedSearchMenuDisplayed(){
+        ClubsPage clubsPage = new ClubsPage(driver);
+        Assert.assertEquals(clubsPage.isExtendedSearchMenuDisplayed(),true);
+    }
+    @Test
+    @jdk.jfr.Description("[allure]  Is Extended search menu is hidden")
+    @Issue("TUA-224")
+    public void testIsExtendedSearchMenuHidden(){
+        ClubsPage clubsPage = new ClubsPage(driver);
+        Assert.assertEquals(clubsPage.isExtendedSearchMenuHidden(),true);
+    }
+
+    @Test
+    @Description("[allure]  Verify child age andAvailable online")
+    @Issue("TUA-510")
+    public void testVerifyChildAgeAndAvailableOnline() {
+        HeaderMenuComponent headerMenuComponent = new HeaderMenuComponent(driver);
+        ClubsPage clubsPage = new ClubsPage(driver);
+        headerMenuComponent.clickExtendedSearchButton().clickCentreRadioButton();
+        clubsPage.openCityDropDown().clickCityKiev();
+        clubsPage.openCityDistrictDropDown().clickCityDistrictDesnyanskiy();
+        clubsPage.openNearestMetroStationDropDown().clickArsenalMetroStation();
+        Assert.assertEquals(clubsPage.checkAvailableOnline(),false);
+        Assert.assertEquals(clubsPage.checkAvailableAgeField(),false);
+
+    }
+
+    @Test
+    public void testCheckButtonsIsUnavailable () {
+        HeaderMenuComponent headerMenuComponent = new HeaderMenuComponent(driver);
+        ClubsPage clubsPage = new ClubsPage(driver);
+        SoftAssert softAssert = new SoftAssert();
+        headerMenuComponent.
+                clickExtendedSearchButton();
+        softAssert.assertTrue(clubsPage.IsClubButtonSelected(), "Club radioButton was not pushed");
+        clubsPage.clickCentreRadioButton();
+        softAssert.assertTrue(clubsPage.IsCentreButtonSelected(), "Centre radioButton was not pushed");
+        clubsPage.clickSortMenuBarButton();
+        softAssert.assertTrue(clubsPage.IsCentresSortedAsList(), "Centers was not sorted as list");
+        softAssert.assertAll();
+    }
+
 }
