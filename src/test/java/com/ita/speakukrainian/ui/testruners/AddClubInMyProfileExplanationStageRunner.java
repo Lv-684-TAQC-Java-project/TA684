@@ -1,7 +1,6 @@
-package com.ita.speakukrainian.ui;
+package com.ita.speakukrainian.ui.testruners;
 
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
-import com.ita.speakukrainian.ui.pages.EditProfilePage;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.utils.ValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -15,7 +14,8 @@ import org.testng.annotations.BeforeSuite;
 import java.io.IOException;
 import java.time.Duration;
 
-public class EditProfileRunner {
+public class AddClubInMyProfileExplanationStageRunner {
+
     protected static WebDriver driver;
     protected static ValueProvider valueProvider;
 
@@ -34,7 +34,7 @@ public class EditProfileRunner {
         driver.get(valueProvider.getBaseURL());
 
 
-        EditProfilePage loginAndEnterInEditMyProfile = new HomePage(driver)
+        Explanation loginAndEnterInAddClubInMyProfile = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickSingInButton()
@@ -44,17 +44,23 @@ public class EditProfileRunner {
                 .header()
                 .clickUserProFileButton()
                 .clickMyProfileButton()
-                .clickEditProfileButton()
-                .clearPhoneField()
-                .clearLastNameField();
+                .clickAddButton()
+                .clickAddClubButton()
+                .fillInClubNameInput("Football")
+                .clickOptionCheckboxes(2)
+                .clickOptionCheckboxes(1)
+                .fillInAgeFromInput("2")
+                .fillInAgeToInput("18")
+                .clickNextStepButton()
+                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
+                .clickNextStepButton();
 
     }
 
     @AfterMethod
     public void afterMethod(){
-        EditProfilePage editProfilePage = new EditProfilePage(driver);
-        editProfilePage.clearPhoneField();
-        editProfilePage.clearLastNameField();
+        Explanation explanation = new Explanation(driver);
+        explanation.clearDescriptionField();
     }
 
     @AfterSuite
@@ -64,3 +70,4 @@ public class EditProfileRunner {
         }
     }
 }
+

@@ -1,6 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.popup.LocationPopUp;
 import org.testng.Assert;

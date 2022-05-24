@@ -1,6 +1,7 @@
-package com.ita.speakukrainian.ui;
+package com.ita.speakukrainian.ui.testruners;
 
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
+import com.ita.speakukrainian.ui.pages.EditProfilePage;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.utils.ValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -14,8 +15,7 @@ import org.testng.annotations.BeforeSuite;
 import java.io.IOException;
 import java.time.Duration;
 
-public class AddClubInMyProfileExplanationStageRunner {
-
+public class EditProfileRunner {
     protected static WebDriver driver;
     protected static ValueProvider valueProvider;
 
@@ -34,7 +34,7 @@ public class AddClubInMyProfileExplanationStageRunner {
         driver.get(valueProvider.getBaseURL());
 
 
-        Explanation loginAndEnterInAddClubInMyProfile = new HomePage(driver)
+        EditProfilePage loginAndEnterInEditMyProfile = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickSingInButton()
@@ -44,23 +44,17 @@ public class AddClubInMyProfileExplanationStageRunner {
                 .header()
                 .clickUserProFileButton()
                 .clickMyProfileButton()
-                .clickAddButton()
-                .clickAddClubButton()
-                .fillInClubNameInput("Football")
-                .clickOptionCheckboxes(2)
-                .clickOptionCheckboxes(1)
-                .fillInAgeFromInput("2")
-                .fillInAgeToInput("18")
-                .clickNextStepButton()
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton();
+                .clickEditProfileButton()
+                .clearPhoneField()
+                .clearLastNameField();
 
     }
 
     @AfterMethod
     public void afterMethod(){
-        Explanation explanation = new Explanation(driver);
-        explanation.clearDescriptionField();
+        EditProfilePage editProfilePage = new EditProfilePage(driver);
+        editProfilePage.clearPhoneField();
+        editProfilePage.clearLastNameField();
     }
 
     @AfterSuite
@@ -70,4 +64,3 @@ public class AddClubInMyProfileExplanationStageRunner {
         }
     }
 }
-

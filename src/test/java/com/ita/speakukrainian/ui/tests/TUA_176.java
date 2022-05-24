@@ -1,6 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.AddClubInMyProfileExplanationStageRunner;
+import com.ita.speakukrainian.ui.testruners.AddClubInMyProfileExplanationStageRunner;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;

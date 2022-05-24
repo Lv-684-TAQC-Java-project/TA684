@@ -1,6 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 
 import com.ita.speakukrainian.ui.pages.ClubsPage;

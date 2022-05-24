@@ -1,6 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
