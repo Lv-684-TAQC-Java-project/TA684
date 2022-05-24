@@ -1,9 +1,7 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
-import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
+import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.ClubsPage;
-import com.ita.speakukrainian.ui.pages.HomePage;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.testng.Assert;

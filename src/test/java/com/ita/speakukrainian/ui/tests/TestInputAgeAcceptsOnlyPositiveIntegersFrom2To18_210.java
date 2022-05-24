@@ -1,14 +1,12 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.Optional;
 
 public class TestInputAgeAcceptsOnlyPositiveIntegersFrom2To18_210 extends SpeakUkrainianRunner {
 

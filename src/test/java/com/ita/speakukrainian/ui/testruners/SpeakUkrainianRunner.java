@@ -1,4 +1,4 @@
-package com.ita.speakukrainian.ui;
+package com.ita.speakukrainian.ui.testruners;
 
 import com.ita.speakukrainian.utils.TestNGListener;
 import com.ita.speakukrainian.utils.ValueProvider;
