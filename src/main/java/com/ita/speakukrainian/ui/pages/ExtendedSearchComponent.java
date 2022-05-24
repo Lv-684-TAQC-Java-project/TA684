@@ -47,6 +47,7 @@ public class ExtendedSearchComponent extends BasePage {
 
     @Step("get carc centr ")
     public List<WebElement> getcardCentr() {
+        sleep(500);
         return cardCentr;
     }
 
