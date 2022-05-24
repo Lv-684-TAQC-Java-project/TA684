@@ -1,6 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -8,7 +8,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class TestIncorrectLastName343 extends SpeakUkrainianRunner {
+public class TestIncorrectLastName343 extends BaseTestRunner {
 
     @DataProvider(name = "data")
     public Object[][] dataProvider() {

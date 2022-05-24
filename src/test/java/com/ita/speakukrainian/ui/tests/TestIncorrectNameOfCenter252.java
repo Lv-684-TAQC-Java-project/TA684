@@ -1,11 +1,11 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestIncorrectNameOfCenter252 extends SpeakUkrainianRunner {
+public class TestIncorrectNameOfCenter252 extends BaseTestRunner {
 
 
     @Test

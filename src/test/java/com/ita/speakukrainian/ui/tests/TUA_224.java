@@ -1,13 +1,13 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
 import com.ita.speakukrainian.ui.pages.ClubsPage;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TUA_224 extends SpeakUkrainianRunner {
+public class TUA_224 extends BaseTestRunner {
     @Test
     @Description("[allure]  Is Extended search menu is displayed")
     @Issue("TUA-224")

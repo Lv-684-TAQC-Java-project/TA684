@@ -13,7 +13,7 @@ import java.time.Duration;
 
 
 @Listeners(TestNGListener.class)
-public class SpeakUkrainianRunner {
+public class BaseTestRunner {
 
     protected static WebDriver driver;
     protected static ValueProvider valueProvider;
@@ -25,26 +25,20 @@ public class SpeakUkrainianRunner {
         if (valueProvider == null) {
             valueProvider = new ValueProvider();
         }
-    }
-
-
-    @BeforeMethod
-    public void setUp(ITestContext context) {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        context.setAttribute("myDriver", driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get(valueProvider.getBaseURL());
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+    @BeforeMethod
+    public void beforeMethod(ITestContext context) {
+        context.setAttribute("myDriver", driver);
     }
-    @AfterSuite
+
+
+    @AfterSuite(alwaysRun = true)
     public void afterSuite() throws IOException {
         if (driver != null) {
             driver.quit();

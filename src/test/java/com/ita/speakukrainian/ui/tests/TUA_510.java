@@ -1,6 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 
 import com.ita.speakukrainian.ui.pages.ClubsPage;
@@ -10,7 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class TUA_510 extends SpeakUkrainianRunner {
+public class TUA_510 extends BaseTestRunner {
     @Test
     @Description("[allure]  Verify child age andAvailable online")
     @Issue("TUA-510")

@@ -1,6 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.Item;
 import io.qameta.allure.Issue;
@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TestClubsCentersSortedCorrectly103 extends SpeakUkrainianRunner {
+public class TestClubsCentersSortedCorrectly103 extends BaseTestRunner {
 
 
     @Test

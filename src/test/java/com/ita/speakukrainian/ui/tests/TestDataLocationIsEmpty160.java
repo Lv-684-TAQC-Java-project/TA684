@@ -1,12 +1,12 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.popup.LocationPopUp;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestDataLocationIsEmpty160 extends SpeakUkrainianRunner {
+public class TestDataLocationIsEmpty160 extends BaseTestRunner {
 
     @Test
     public void CheckButtonIsUnavailable() {

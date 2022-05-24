@@ -5,10 +5,14 @@ import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchCityDistrictDropDown;
 import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchCityDropDown;
 import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchNearestMetroStationDropDown;
 import io.qameta.allure.Step;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+
+import javax.swing.*;
 
 public class ClubsPage extends BasePage {
     private HeaderMenuComponent headerMenuComponent;
@@ -207,5 +211,17 @@ public class ClubsPage extends BasePage {
         }
         return true;
     }
-}
+
+    public ClubsPage clearAgeField() {
+        getAgeInput().sendKeys(Keys.BACK_SPACE);
+        return new ClubsPage(driver);
+    }
+
+    public ClubsPage doubleClickAgeField() {
+        Actions actions = new Actions(driver);
+        actions.doubleClick(getAgeInput()).perform();
+        return new ClubsPage(driver);
+    }
+
+  }
 
