@@ -1,4 +1,4 @@
-package com.ita.speakukrainian.ui;
+package com.ita.speakukrainian.ui.testruners;
 
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
 import com.ita.speakukrainian.ui.pages.HomePage;

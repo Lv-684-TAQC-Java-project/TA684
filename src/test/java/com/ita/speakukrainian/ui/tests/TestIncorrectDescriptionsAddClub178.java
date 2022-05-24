@@ -1,6 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.RunnerForTUA_178;
+import com.ita.speakukrainian.ui.testruners.RunnerForTUA_178;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;

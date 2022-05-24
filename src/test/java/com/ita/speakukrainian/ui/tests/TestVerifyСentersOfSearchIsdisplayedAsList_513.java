@@ -1,12 +1,12 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.testruners.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.ClubsPage;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class TestVerifyСentersOfSearchIsdisplayedAsList_513 extends SpeakUkrainianRunner {
+public class TestVerifyСentersOfSearchIsdisplayedAsList_513 extends BaseTestRunner {
     @Test
     public void testCheckButtonsIsUnavailable () {
         HeaderMenuComponent headerMenuComponent = new HeaderMenuComponent(driver);
