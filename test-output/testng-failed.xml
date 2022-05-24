@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="TUA-177_2(failed)">
+    <groups>
+      <run>
+        <include name="regression"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.ita.speakukrainian.ui.tests.TestVerifiesThatErrorMessage177_2">
+        <methods>
+          <include name="TestVerifiesTheErrorMessageWhenEnter1500Symbols"/>
+          <include name="tearDown2"/>
+          <include name="TestVerifiesTheErrorMessageWhenEnterLess1500Symbols"/>
+          <include name="TestVerifiesTheErrorMessageWhenEnter1501Symbols2"/>
+          <include name="setUp"/>
+          <include name="TestVerifiesTheErrorMessageWhenEnterMore1500Symbols"/>
+          <include name="TestVerifiesTheErrorMessageWhenEnterMore1500Symbols2"/>
+          <include name="TestVerifiesTheErrorMessageWhenEnter1501Symbols"/>
+          <include name="tearDown"/>
+          <include name="setUp22"/>
+        </methods>
+      </class> <!-- com.ita.speakukrainian.ui.tests.TestVerifiesThatErrorMessage177_2 -->
+    </classes>
+  </test> <!-- TUA-177_2(failed) -->
+</suite> <!-- Failed suite [Suite] -->

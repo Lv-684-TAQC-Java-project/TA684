@@ -1,6 +1,8 @@
 package com.ita.speakukrainian.ui.tests;
 
+import com.ita.speakukrainian.ui.AddClubInMyProfileExplanationStageRunner;
 import com.ita.speakukrainian.ui.SpeakUkrainianRunner;
+import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
@@ -12,22 +14,24 @@ import java.util.List;
 
 
 
-public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
+public class TestVerifiesThatErrorMessage177 extends AddClubInMyProfileExplanationStageRunner {
 
 
-    private Object ITestContext;
+    private String listString(int size){
+        List<String> list = new ArrayList<String>();
+        for (int i = 1; i <= size; i++) {
+            list.add("a");
+        }
+        System.out.println(list.size());
+        return String.join("", list);
+
+    }
 
     @DataProvider(name = "data1500Symbols")
     public Object[][] dataProvider1500Symbols() {
         int symbols = 1500;
-        List<String> list = new ArrayList<String>();
-        for (int i = 1; i <= symbols; i++) {
-            list.add("a");
-        }
-        System.out.println(list.size());
-
         Object[][] data = new Object[][]{
-                {String.join("", list)},
+                {listString(symbols)},
         };
         return data;
     }
@@ -36,25 +40,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     @Description("[allure]  Is Extended Massage is displayed whan add  1500 symbols")
     @Issue("TUA-177")
     public void TestVerifiesTheErrorMessageWhenEnter1500Symbols(String testCaseValue) {
-        boolean isDisplayedMassage = new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .header()
-                .clickUserProFileButton()
-                .clickMyProfileButton()
-                .clickAddButton()
-                .clickAddClubButton()
-                .fillInClubNameInput("Юність")
-                .clickOptionCheckboxes(0)
-                .fillInAgeFromInput("18")
-                .fillInAgeToInput("50")
-                .clickNextStepButton()
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
+        boolean isDisplayedMassage =new Explanation(driver)
                 .fillInBasicDescriptionInput(testCaseValue)
                 .isSuccessIconDisplayed();
 
@@ -65,14 +51,8 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     @DataProvider(name = "dataLess1500Symbols")
     public Object[][] dataProviderLess1500Symbols() {
         int symbols = 1400;
-        List<String> list = new ArrayList<String>();
-        for (int i = 1; i <= symbols; i++) {
-            list.add("a");
-        }
-        System.out.println(list.size());
-
         Object[][] data = new Object[][]{
-                {String.join("", list)},
+                {listString(symbols)},
         };
         return data;
     }
@@ -81,25 +61,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     @Description("[allure]  Is Extended Massage is displayed whan add less 1500 symbols")
     @Issue("TUA-177")
     public void TestVerifiesTheErrorMessageWhenEnterLess1500Symbols(String testCaseValue) {
-        boolean isDisplayedMassage = new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .header()
-                .clickUserProFileButton()
-                .clickMyProfileButton()
-                .clickAddButton()
-                .clickAddClubButton()
-                .fillInClubNameInput("Юність")
-                .clickOptionCheckboxes(0)
-                .fillInAgeFromInput("18")
-                .fillInAgeToInput("50")
-                .clickNextStepButton()
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
+        boolean isDisplayedMassage =new Explanation(driver)
                 .fillInBasicDescriptionInput(testCaseValue)
                 .isSuccessIconDisplayed();
 
@@ -111,14 +73,8 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     public Object[][] dataProvider1501symbols() {
         int symbols = 1501;
 
-        List<String> list = new ArrayList<String>();
-        for (int i = 1; i <= symbols; i++) {
-            list.add("a");
-        }
-        System.out.println(list.size());
-
         Object[][] data = new Object[][]{
-                {String.join("", list)},
+                {listString(symbols)},
         };
         return data;
     }
@@ -127,25 +83,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     @Description("[allure]  Is Extended errorMassage whan add more 1501 symbols")
     @Issue("TUA-177")
     public void TestVerifiesTheErrorMessageWhenEnter1501Symbols(String testCaseValue) {
-        String errorMassage = new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .header()
-                .clickUserProFileButton()
-                .clickMyProfileButton()
-                .clickAddButton()
-                .clickAddClubButton()
-                .fillInClubNameInput("Юність")
-                .clickOptionCheckboxes(0)
-                .fillInAgeFromInput("18")
-                .fillInAgeToInput("50")
-                .clickNextStepButton()
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
+        String errorMassage = new Explanation(driver)
                 .fillInBasicDescriptionInput(testCaseValue)
                 .TextWrongDescriptionDownAlert();
         Assert.assertEquals(errorMassage, "Опис гуртка може містити від 40 до 1500 символів.");
@@ -157,25 +95,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     @Description("[allure]  Is Extended errorMassage is displayed whan add more 1501 symbols")
     @Issue("TUA-177")
     public void TestVerifiesTheErrorMessageWhenEnter1501Symbols2(String testCaseValue) {
-        Boolean IconErrorDisplayed = new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .header()
-                .clickUserProFileButton()
-                .clickMyProfileButton()
-                .clickAddButton()
-                .clickAddClubButton()
-                .fillInClubNameInput("Юність")
-                .clickOptionCheckboxes(0)
-                .fillInAgeFromInput("18")
-                .fillInAgeToInput("50")
-                .clickNextStepButton()
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
+        Boolean IconErrorDisplayed =new Explanation(driver)
                 .fillInBasicDescriptionInput(testCaseValue)
                 .issuccessIconErrorDisplayed();
         Assert.assertTrue(IconErrorDisplayed);
@@ -187,14 +107,8 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     public Object[][] dataProviderMore1500symbols() {
         int symbols = 1550;
 
-        List<String> list = new ArrayList<String>();
-        for (int i = 1; i <= symbols; i++) {
-            list.add("a");
-        }
-        System.out.println(list.size());
-
         Object[][] data = new Object[][]{
-                {String.join("", list)},
+                {listString(symbols)},
         };
         return data;
     }
@@ -203,25 +117,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     @Description("[allure]  Is Extended errorMassage  whan add more 1500 symbols")
     @Issue("TUA-177")
     public void TestVerifiesTheErrorMessageWhenEnterMore1500Symbols(String testCaseValue) {
-        String errorMassage = new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .header()
-                .clickUserProFileButton()
-                .clickMyProfileButton()
-                .clickAddButton()
-                .clickAddClubButton()
-                .fillInClubNameInput("Юність")
-                .clickOptionCheckboxes(0)
-                .fillInAgeFromInput("18")
-                .fillInAgeToInput("50")
-                .clickNextStepButton()
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
+        String errorMassage = new Explanation(driver)
                 .fillInBasicDescriptionInput(testCaseValue)
                 .TextWrongDescriptionDownAlert();
         Assert.assertEquals(errorMassage, "Опис гуртка може містити від 40 до 1500 символів.");
@@ -231,25 +127,7 @@ public class TestVerifiesThatErrorMessage177 extends SpeakUkrainianRunner {
     @Description("[allure]  Is Extended errorMassage is displayed whan add more 1500 symbols")
     @Issue("TUA-177")
     public void TestVerifiesTheErrorMessageWhenEnterMore1500Symbols2(String testCaseValue) {
-        Boolean IconErrorDisplayed = new HomePage(driver)
-                .header()
-                .clickUserProFileButton()
-                .clickSingInButton()
-                .sendKeysEmail(valueProvider.getAdminEmail())
-                .sendKeysPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .header()
-                .clickUserProFileButton()
-                .clickMyProfileButton()
-                .clickAddButton()
-                .clickAddClubButton()
-                .fillInClubNameInput("Юність")
-                .clickOptionCheckboxes(0)
-                .fillInAgeFromInput("18")
-                .fillInAgeToInput("50")
-                .clickNextStepButton()
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
+        Boolean IconErrorDisplayed =new Explanation(driver)
                 .fillInBasicDescriptionInput(testCaseValue)
                 .issuccessIconErrorDisplayed();
         Assert.assertTrue(IconErrorDisplayed);
