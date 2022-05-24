@@ -48,3 +48,6 @@ data.properties
 .allure
 allure-results
 
+test-output
+
+
