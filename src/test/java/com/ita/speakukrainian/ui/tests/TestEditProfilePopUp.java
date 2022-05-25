@@ -1,15 +1,35 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.testruners.EditProfileRunner;
+import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.EditProfilePage;
+import com.ita.speakukrainian.ui.pages.HomePage;
+import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
-public class TUA_356 extends EditProfileRunner {
+public class TestEditProfilePopUp extends TestRuneWithAdmin {
+
+    @BeforeClass
+    public void beforeClassEditProfilePopUp() {
+        new HeaderMenuComponent(driver)
+                .clickUserProFileButton()
+                .clickMyProfileButton()
+                .clickEditProfileButton()
+                .clearPhoneField()
+                .clearLastNameField();
+    }
+
+    @BeforeMethod
+    public void beforeMethod(){
+        new EditProfilePage(driver)
+        .clearPhoneField().clearLastNameField();
+    }
+
+
+
 
     @DataProvider(name = "data1")
     public Object[][] SmallestCombine() {
@@ -42,5 +62,12 @@ public class TUA_356 extends EditProfileRunner {
         String error = new EditProfilePage(driver)
                 .getEnterAnyNumberAlert();
         Assert.assertEquals(error, "Будь ласка введіть Ваш номер телефону");
+    }
+
+    @AfterMethod
+    public void afterMethod(){
+        EditProfilePage editProfilePage = new EditProfilePage(driver);
+        editProfilePage.clearPhoneField();
+        editProfilePage.clearLastNameField();
     }
 }
