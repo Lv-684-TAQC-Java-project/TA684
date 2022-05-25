@@ -1,17 +1,14 @@
 package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
-import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
 import com.ita.speakukrainian.ui.popup.LocationPopUp;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
+import io.qameta.allure.Issue;
+import jdk.jfr.Description;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
 
 public class TestAddCenterPopUp extends TestRuneWithAdmin {
 
@@ -23,17 +20,18 @@ public class TestAddCenterPopUp extends TestRuneWithAdmin {
     }
 
     @Test
-    public void CheckButtonIsUnavailable160() {
+    @Description("Checking is button 'Додати' at page 'Додати локацію' unavailable")
+    @Issue("TUA-160")
+    public void CheckButtonIsUnavailable() {
         LocationPopUp locationPopUp = new HeaderMenuComponent(driver)
                 .clickAddCenterButton()
                 .clickAddLocation();
-        Assert.assertFalse(locationPopUp.isDesabledAddLocationsButton(), "Button is not disabled");
-//        locationPopUp.closeLocationPopUp();
-//        AddCenterPopUp closeAddCentre = new AddCenterPopUp(driver);
-//        closeAddCentre.closeAddCentrePopUp();
+        Assert.assertFalse(locationPopUp.isDisabledAddLocationsButton(), "Button is disabled");
     }
 
     @Test
+    @Description("Is visible error message, if the field 'Назва центру' is empty when we pushing on button 'Наступний крок'")
+    @Issue("TUA-252")
     public void CheckErrorMessage252() {
         String incorrectCenterName = new HeaderMenuComponent(driver)
                 .clickMyProfileButton()
@@ -42,13 +40,7 @@ public class TestAddCenterPopUp extends TestRuneWithAdmin {
                 .clickNextStepButton()
                 .getError();
         Assert.assertEquals(incorrectCenterName, "Некоректна назва центру");
-//        AddCenterPopUp closeAddCentre = new AddCenterPopUp(driver);
-//        closeAddCentre.closeAddCentrePopUp();
     }
 
-    @AfterMethod
-    public void afterMethod(){
-
-    }
 
 }

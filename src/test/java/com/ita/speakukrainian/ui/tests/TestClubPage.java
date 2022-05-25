@@ -20,9 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@EqualsAndHashCode(callSuper = false)
-@Data
-public class TestClubPage extends BaseTestRunner {
+public class   TestClubPage extends BaseTestRunner {
 
     @Test(priority = 1)
     @Description("[allure]  Is Extended AdvancedSearch If Is Opened")
@@ -333,7 +331,9 @@ public class TestClubPage extends BaseTestRunner {
 
     }
 
-    @Test(priority = 12)
+    @Test()
+    @Description("[allure] Checking, is 'Гурток' radio-button pushed and after choosing 'Центр' radio-button was ordering as blocks. Reorder centers as list")
+    @Issue("TUA-513")
     public void testCheckButtonsIsUnavailable () {
         HeaderMenuComponent headerMenuComponent = new HeaderMenuComponent(driver);
         ClubsPage clubsPage = new ClubsPage(driver);
