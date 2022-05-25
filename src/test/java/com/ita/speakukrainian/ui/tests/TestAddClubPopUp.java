@@ -8,6 +8,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -18,8 +19,8 @@ import java.util.List;
 
 public class TestAddClubPopUp extends TestRuneWithAdmin {
 
-    @BeforeClass
-    public void beforeClassClubPopUp() {
+    @BeforeMethod
+    public void beforeMethodClubPopUp() {
         new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
@@ -33,6 +34,7 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
                 .fillInAgeToInput("18")
                 .clickNextStepButton();
     }
+
 
     @DataProvider(name = "data173")
     public Object[][] dataProvider173() {

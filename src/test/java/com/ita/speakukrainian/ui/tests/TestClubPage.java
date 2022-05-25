@@ -20,9 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@EqualsAndHashCode(callSuper = false)
-@Data
-public class TestClubPage extends BaseTestRunner {
+public class   TestClubPage extends BaseTestRunner {
 
     @Test(priority = 1)
     @Description("[allure]  Is Extended AdvancedSearch If Is Opened")

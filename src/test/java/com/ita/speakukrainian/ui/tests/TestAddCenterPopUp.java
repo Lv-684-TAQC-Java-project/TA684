@@ -46,9 +46,5 @@ public class TestAddCenterPopUp extends TestRuneWithAdmin {
 //        closeAddCentre.closeAddCentrePopUp();
     }
 
-    @AfterMethod
-    public void afterMethod(){
-
-    }
 
 }
