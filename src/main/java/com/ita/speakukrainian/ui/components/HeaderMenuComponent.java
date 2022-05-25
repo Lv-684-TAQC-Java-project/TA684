@@ -122,6 +122,7 @@ public class HeaderMenuComponent extends BaseComponent {
      *
      * @return AddCenterPopUp
      */
+    @Step("Go to AddCenter")
     public AddCenterPopUp clickAddCenterButton() {
         addCenterButton.click();
         return new AddCenterPopUp(driver);
@@ -132,7 +133,7 @@ public class HeaderMenuComponent extends BaseComponent {
      *
      * @return MyProfilePage
      */
-    @Step("click MyProfile")
+    @Step("Go to MyProfile")
     public MyProfilePage clickMyProfileButton() {
         if (isDisplayedMyProfileButton()) {
             myProfileButton.click();

@@ -187,21 +187,21 @@ public class ClubsPage extends BasePage {
         }
         return false;
     }
+    @Step("Click button for sorting centers as list")
     public ClubsPage clickSortMenuBarButton() {
         getSortMenuBarButton().click();
         sleep(1000);
         return new ClubsPage(driver);
     }
-    @Step("Verify is Club radio-button selected")
+    @Step("Verify is 'Гурток' radio-button selected")
     public boolean IsClubButtonSelected(){
         return getClubRadioButton().isSelected();
     }
-    @Step("Verify is Centre radio-button selected")
+    @Step("Verify is 'Цент' radio-button selected")
     public boolean IsCentreButtonSelected(){
-
         return getCentreRadioButton().isSelected();
     }
-    @Step("Verify is Centre As List radio-button selected")
+    @Step("Verify is Centres was sorted as list")
     public boolean IsCentresSortedAsList(){
         try{
             getListOfCentres().isEnabled();
