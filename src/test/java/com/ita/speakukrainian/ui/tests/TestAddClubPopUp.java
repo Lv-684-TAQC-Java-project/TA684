@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
+import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Contacts;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
 import com.ita.speakukrainian.ui.pages.HomePage;
@@ -196,7 +197,7 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
     }
 
     @Test(dataProvider = "data")
-    @io.qameta.allure.Description("Verify Error Message On Russian And German Letters In Description")
+    @Description("Verify Error Message On Russian And German Letters In Description")
     @Issue("TUA-178")
     public void verifyErrorMessageOnRussianAndGermanLettersInDescription(String text, List<String> expectedErrorMessages) {
         boolean areErrorMessageDisplayed = new Contacts(driver)
@@ -213,28 +214,29 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
         Assert.assertTrue(areErrorMessageDisplayed);
     }
 
-    @DataProvider(name = "dataAnton")
-    public Object[][] dataProvider1() {
-        Object[][] data = new Object[][]{
-                {"qwertyuiopasdfghjklk", "Некоректний опис гуртка"},
-                {"q", "Некоректний опис гуртка"},
-                {"qwertyuiopasdfghjkljzxcvbnmkmnbvczlkjhg", "Некоректний опис гуртка"},
-        };
-        return data;
-    }
 
-
-    @Test(dataProvider = "dataAnton")
+    @Test()
     @Description("[allure] Not valid enter phone number ")
     @Issue("TUA-224")
-    public void testNotValidEnterPhoneNumber(String testCaseValue, String expected) {
-        String errorMassage = new Contacts(driver)
+    public void testNotValidEnterPhoneNumber() {
+       String expected = "Некоректний опис гуртка";
+        Explanation explanation = new Explanation(driver);
+        SoftAssert softAssert = new SoftAssert();
+        String errorMassage1 = new Contacts(driver)
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
-                .fillInBasicDescriptionInput(testCaseValue)
+                .fillInBasicDescriptionInput("qwertyuiopasdfghjklk")
                 .getWrongDescriptionAlert();
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(errorMassage, expected);
+
+        explanation.clearDescriptionField();
+        explanation.fillInBasicDescriptionInput("q");
+        String errorMassage2 = explanation.getWrongDescriptionAlert();
+        explanation.clearDescriptionField();
+        explanation.fillInBasicDescriptionInput("qwertyuiopasdfghjkljzxcvbnmkmnbvczlkjhg");
+        String errorMassage3 = explanation.getWrongDescriptionAlert();
+        softAssert.assertEquals(errorMassage1, expected);
+        softAssert.assertEquals(errorMassage2, expected);
+        softAssert.assertEquals(errorMassage3, expected);
         softAssert.assertAll();
     }
 }
