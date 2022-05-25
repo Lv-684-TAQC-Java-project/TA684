@@ -212,37 +212,29 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
         Assert.assertTrue(areErrorMessageDisplayed);
     }
 
-    @DataProvider(name = "dataAnton")
-    public Object[][] dataProvider1() {
-        Object[][] data = new Object[][]{
-                {"qwertyuiopasdfghjklk", "Некоректний опис гуртка"},
-                {"q", "Некоректний опис гуртка"},
-                {"qwertyuiopasdfghjkljzxcvbnmkmnbvczlkjhg", "Некоректний опис гуртка"},
-        };
-        return data;
-    }
 
-
-    @Test(dataProvider = "dataAnton")
+    @Test()
     @Description("[allure] Not valid enter phone number ")
     @Issue("TUA-224")
-    public void testNotValidEnterPhoneNumber(String testCaseValue, String expected) {
+    public void testNotValidEnterPhoneNumber() {
+       String expected = "Некоректний опис гуртка";
+        Explanation explanation = new Explanation(driver);
+        SoftAssert softAssert = new SoftAssert();
         String errorMassage1 = new Contacts(driver)
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput("qwertyuiopasdfghjklk")
                 .getWrongDescriptionAlert();
 
-
-        Explanation explanation = new Explanation(driver);
         explanation.clearDescriptionField();
         explanation.fillInBasicDescriptionInput("q");
         String errorMassage2 = explanation.getWrongDescriptionAlert();
-
-
-        SoftAssert softAssert = new SoftAssert();
+        explanation.clearDescriptionField();
+        explanation.fillInBasicDescriptionInput("qwertyuiopasdfghjkljzxcvbnmkmnbvczlkjhg");
+        String errorMassage3 = explanation.getWrongDescriptionAlert();
         softAssert.assertEquals(errorMassage1, expected);
+        softAssert.assertEquals(errorMassage2, expected);
+        softAssert.assertEquals(errorMassage3, expected);
         softAssert.assertAll();
-        driver.get(valueProvider.getBaseURL());
     }
 }
