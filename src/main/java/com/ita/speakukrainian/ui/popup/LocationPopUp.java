@@ -10,6 +10,8 @@ public class LocationPopUp extends BasePage {
     private WebElement addInLocationButton;
     @FindBy(id = "phone")
     private WebElement phonenumber;
+    @FindBy(css = "div.modal-add-club>button.ant-modal-close")
+    private WebElement  closeLocation;
 
     public LocationPopUp(WebDriver driver) {
         super(driver);
@@ -19,4 +21,8 @@ public class LocationPopUp extends BasePage {
         return addInLocationButton.isEnabled();
     }
 
+    public AddCenterPopUp closeLocationPopUp(){
+        closeLocation.click();
+        return new AddCenterPopUp(driver);
+    }
 }
