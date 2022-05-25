@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
+import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Contacts;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
 import com.ita.speakukrainian.ui.pages.HomePage;
@@ -194,7 +195,7 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
     }
 
     @Test(dataProvider = "data")
-    @io.qameta.allure.Description("Verify Error Message On Russian And German Letters In Description")
+    @Description("Verify Error Message On Russian And German Letters In Description")
     @Issue("TUA-178")
     public void verifyErrorMessageOnRussianAndGermanLettersInDescription(String text, List<String> expectedErrorMessages) {
         boolean areErrorMessageDisplayed = new Contacts(driver)
@@ -226,13 +227,22 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
     @Description("[allure] Not valid enter phone number ")
     @Issue("TUA-224")
     public void testNotValidEnterPhoneNumber(String testCaseValue, String expected) {
-        String errorMassage = new Contacts(driver)
+        String errorMassage1 = new Contacts(driver)
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
-                .fillInBasicDescriptionInput(testCaseValue)
+                .fillInBasicDescriptionInput("qwertyuiopasdfghjklk")
                 .getWrongDescriptionAlert();
+
+
+        Explanation explanation = new Explanation(driver);
+        explanation.clearDescriptionField();
+        explanation.fillInBasicDescriptionInput("q");
+        String errorMassage2 = explanation.getWrongDescriptionAlert();
+
+
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(errorMassage, expected);
+        softAssert.assertEquals(errorMassage1, expected);
         softAssert.assertAll();
+        driver.get(valueProvider.getBaseURL());
     }
 }
