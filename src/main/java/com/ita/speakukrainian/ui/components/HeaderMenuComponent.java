@@ -6,6 +6,7 @@ import com.ita.speakukrainian.ui.pages.ClubsPage;
 import com.ita.speakukrainian.ui.pages.ExtendedSearchComponent;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.MyProfilePage;
+import com.ita.speakukrainian.ui.pages.RegistrationPages.RegistrationPage;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
 import com.ita.speakukrainian.ui.popup.SingInPopup;
 import io.qameta.allure.Step;
@@ -30,6 +31,8 @@ public class HeaderMenuComponent extends BaseComponent {
     private WebElement userProFileButton;
     @FindBy(xpath = "//li[2]/span/div")
     private WebElement singInButton;
+    @FindBy(xpath = "//li[1]/span/div")
+    private WebElement registrationButton;
     @FindBy(xpath = "//*[@id='root']/section/header/div[1]/a/div")
     private WebElement homePageButton;
     @FindBy(css = "[title='Розширений пошук']")
@@ -173,6 +176,12 @@ public class HeaderMenuComponent extends BaseComponent {
     public boolean isDisplayedSearchInputDropdown() {
         saveScreenshot();
         return searchInputDropdown.isDisplayed();
+    }
+
+    @Step("Click Add Add New User")
+    public RegistrationPage clickRegistrationButton() {
+        registrationButton.click();
+        return new RegistrationPage(driver);
     }
 
 
