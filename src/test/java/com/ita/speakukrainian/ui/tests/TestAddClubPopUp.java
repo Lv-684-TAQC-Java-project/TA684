@@ -180,27 +180,21 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
         softAssert.assertTrue(IconErrorDisplayedWrite1550Symbols, "Icon Error Displayed Write 1550 Symbols");
         softAssert.assertAll();
     }
-
-    List<String> expectedErrorMessagesRusLetter = Arrays.asList("Некоректний опис гуртка",
-            "Опис гуртка може містити від 40 до 1500 символів.", "Опис гуртка не може містити російські літери");
-
-    List<String> expectedErrorMessagesGerLetter = Arrays.asList("Некоректний опис гуртка",
-            "Опис гуртка може містити від 40 до 1500 символів.");
-
-    @DataProvider(name = "data")
-    public Object[][] dataProvider() {
-        Object[][] data = new Object[][]{
-                {"ъ", expectedErrorMessagesRusLetter},
-                {"öl", expectedErrorMessagesGerLetter}
-        };
-        return data;
-    }
-
-    @Test(dataProvider = "data")
+//
+    @Test
     @Description("Verify Error Message On Russian And German Letters In Description")
     @Issue("TUA-178")
-    public void verifyErrorMessageOnRussianAndGermanLettersInDescription(String text, List<String> expectedErrorMessages) {
-        boolean areErrorMessageDisplayed = new Contacts(driver)
+    public void verifyErrorMessageOnRussianAndGermanLettersInDescription() {
+
+        List<String> expectedErrorMessagesRussianLetter = Arrays.asList("Некоректний опис гуртка",
+                "Опис гуртка може містити від 40 до 1500 символів.", "Опис гуртка не може містити російські літери");
+
+        List<String> expectedErrorMessagesGermanLetter = Arrays.asList("Некоректний опис гуртка",
+                "Опис гуртка може містити від 40 до 1500 символів.");
+
+        SoftAssert softAssert = new SoftAssert();
+
+        boolean areErrorMessagesForRussianDisplayed = new Contacts(driver)
                 .fillInContactFacebookInput(valueProvider.getContactFacebook())
                 .fillInContactMailInput(valueProvider.getContactEmail())
                 .fillInContactWhatsAppInput(valueProvider.getContactWhatsUpp())
@@ -208,10 +202,18 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
                 .fillInContactSkypeInput(valueProvider.getContactSkype())
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton()
-                .fillInBasicDescriptionInput(text)
-                .areErrorMessagesDisplayed(expectedErrorMessages);
+                .fillInBasicDescriptionInput("ъ")
+                .areErrorMessagesDisplayed(expectedErrorMessagesRussianLetter);
+                new Explanation(driver)
+                        .clearDescriptionField();
 
-        Assert.assertTrue(areErrorMessageDisplayed);
+        boolean areErrorMessagesGermanDisplayed = new Explanation(driver)
+                .fillInBasicDescriptionInput("öl")
+                .areErrorMessagesDisplayed(expectedErrorMessagesGermanLetter);
+
+        softAssert.assertTrue(areErrorMessagesForRussianDisplayed);
+        softAssert.assertTrue(areErrorMessagesGermanDisplayed);
+        softAssert.assertAll();
     }
 
 
