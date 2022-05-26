@@ -12,24 +12,13 @@ import org.testng.asserts.SoftAssert;
 
 public class TestEditProfilePopUp extends TestRuneWithAdmin {
 
-    @BeforeClass
+    @BeforeMethod
     public void beforeClassEditProfilePopUp() {
         new HeaderMenuComponent(driver)
                 .clickUserProFileButton()
                 .clickMyProfileButton()
-                .clickEditProfileButton()
-                .clearPhoneField()
-                .clearLastNameField();
+                .clickEditProfileButton();
     }
-
-    @BeforeMethod
-    public void beforeMethod(){
-        new EditProfilePage(driver)
-        .clearPhoneField().clearLastNameField();
-    }
-
-
-
 
     @DataProvider(name = "data1")
     public Object[][] SmallestCombine() {
@@ -44,30 +33,35 @@ public class TestEditProfilePopUp extends TestRuneWithAdmin {
         return data;
     }
 
-    @Test(dataProvider = "data1")
+    @Test(dataProvider = "data1",priority = 1)
     @Description("[allure] Not valid enter phone number")
     @Issue("TUA-356")
     public void testNotValidEnterPhoneNumber(String testCase1Value, String expected) {
         String error = new EditProfilePage(driver)
+                .clearPhoneField()
                 .sendKeysPhoneField(testCase1Value)
                 .getErrorWrongNumber();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(error, expected);
     }
 
-    @Test
+    @Test(priority = 2)
     @Description("[allure] Not valid enter phone number")
     @Issue("TUA-356")
     public void testIsDisplayedSaveButton() {
         String error = new EditProfilePage(driver)
+                .clearPhoneField()
                 .getEnterAnyNumberAlert();
         Assert.assertEquals(error, "Будь ласка введіть Ваш номер телефону");
     }
 
-    @AfterMethod
-    public void afterMethod(){
-        EditProfilePage editProfilePage = new EditProfilePage(driver);
-        editProfilePage.clearPhoneField();
-        editProfilePage.clearLastNameField();
+    @Test(priority = 2)
+    @Description("Verify that error messages are shown while leaving empty any field in the 'Змінити пароль' pop-up")
+    @Issue("TUA-359")
+    public void testLeavingEmptyFieldChangeButton() {
+        String error = new EditProfilePage(driver)
+                .clearPhoneField()
+                .getEnterAnyNumberAlert();
+        Assert.assertEquals(error, "Будь ласка введіть Ваш номер телефону");
     }
 }
