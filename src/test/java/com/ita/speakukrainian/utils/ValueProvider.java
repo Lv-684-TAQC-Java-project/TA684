@@ -53,11 +53,11 @@ public class ValueProvider {
     }
 
     public String getRegistrationLastName() {
-        return properties.getProperty("Вайтович");
+        return properties.getProperty("Світлана");
     }
 
     public String getRegistrationFirstName() {
-        return properties.getProperty("Світлана");
+        return properties.getProperty("Вайтович");
     }
 
     public String getRegistrationPhone() {

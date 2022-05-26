@@ -2,6 +2,7 @@ package com.ita.speakukrainian.ui.pages;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import io.qameta.allure.Step;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,17 @@ public class HomePage extends BasePage {
 
     @Step("Get isDisplayed()  registration page ")
     public boolean isRegistrationPageDisplayed() {
-        //sleep(1000);
-        return registrationPage.isDisplayed();
-    }}
+        sleep(500);
+        try{
+            if( registrationPage.isDisplayed()){
+                System.out.println("registrationPage.isDisplayed()");
+                return true;
+            }
+        }catch (NoSuchElementException e){
+            System.out.println("registrationPage.isNotDisplayed()");
+            return false;
+    }
+        System.out.println("boolean isRegistrationPageDisplayed()");
+        return false;
+    }
+}

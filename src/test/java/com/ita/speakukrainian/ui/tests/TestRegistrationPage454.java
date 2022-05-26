@@ -4,7 +4,6 @@ import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.RegistrationPages.MessageErrorRegistrationUser;
 import com.ita.speakukrainian.ui.pages.RegistrationPages.RegistrationPage;
 import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
-import com.ita.speakukrainian.utils.ValueProvider;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
@@ -13,18 +12,18 @@ import org.testng.asserts.SoftAssert;
 import java.io.IOException;
 
 public class TestRegistrationPage454 extends BaseTestRunner {
-    private ValueProvider valueProvider;
+   // private ValueProvider valueProvider;
 
     @Test
     @Description("[allure]  Is Extended AdvancedSearch If Is Opened")
     @Issue("TUA-103")
     public void enteredDataOnRegistrationPage() throws IOException {
-        if (valueProvider == null) {
-            valueProvider = new ValueProvider();
-        }
+//        if (valueProvider == null) {
+//            valueProvider = new ValueProvider();
+//        }
         SoftAssert softAssert = new SoftAssert();
 
-        new HomePage(driver)
+        var registrationUser = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickRegistrationButton();
@@ -75,11 +74,35 @@ public class TestRegistrationPage454 extends BaseTestRunner {
                 .isRegistrationPageDisplayed();
         softAssert.assertFalse(DisplayedRegistrationPage);
 
+        boolean DisplayedRegistrationPage2 = new HomePage(driver)
+                .header()
+                .clickUserProFileButton()
+                .clickRegistrationButton()
+                .getHomePageinRegistrationPage()
+                .isRegistrationPageDisplayed();
+        softAssert.assertTrue(DisplayedRegistrationPage2);
 
-//        new HomePage(driver)
-//                .header()
-//                .clickUserProFileButton()
-//                .clickRegistrationButton();
+        String ValuelastName = registrationUser.getFieldValuePage().getLastNameValue();
+        System.out.println(ValuelastName);
+        System.out.println(valueProvider.getRegistrationLastName());
+        softAssert.assertEquals(ValuelastName, valueProvider.getRegistrationLastName());
+
+        String ValueFirstName = registrationUser.getFieldValuePage().getFirstNameValue();
+        softAssert.assertEquals(ValueFirstName, valueProvider.getRegistrationFirstName());
+
+        String ValuePhone = registrationUser.getFieldValuePage().getPhoneValue();
+        softAssert.assertEquals(ValuePhone, valueProvider.getRegistrationPhone());
+
+        String ValueEmail = registrationUser.getFieldValuePage().getEmailValue();
+        softAssert.assertEquals(ValueEmail, valueProvider.getRegistrationEmail());
+
+        String ValuePassword = registrationUser.getFieldValuePage().getPasswordValue();
+        softAssert.assertEquals(ValuePassword, valueProvider.getRegistrationPassword());
+
+        String ValueConfirm = registrationUser.getFieldValuePage().getConfirmValue();
+        softAssert.assertEquals(ValueConfirm, valueProvider.getRegistrationConfirm());
+
+
         softAssert.assertAll();
 
 

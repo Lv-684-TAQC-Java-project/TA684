@@ -9,19 +9,20 @@ import org.openqa.selenium.support.FindBy;
 
 public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//input[@id='lastName']")
-    private WebElement enterLastName;
+    protected WebElement enterLastName;
     @FindBy(xpath = "//input[@id='firstName']")
-    private WebElement enterFirstName;
+    protected WebElement enterFirstName;
     @FindBy(xpath= "//input[@id='phone']")
-    private WebElement enterPhone;
+    protected WebElement enterPhone;
     @FindBy(xpath = "//input[@id='email']")
-    private  WebElement enterEmail;
+    protected  WebElement enterEmail;
     @FindBy(xpath = "//input[@id='password']")
-    private  WebElement enterPassword;
+    protected  WebElement enterPassword;
     @FindBy(xpath = "//input[@id='confirm']")
-    private  WebElement enterConfirm;
+    protected  WebElement enterConfirm;
     @FindBy(xpath = "//button/span/span")
-    private WebElement closeIconRegistration;
+    protected WebElement closeIconRegistration;
+
 
 
 
@@ -100,4 +101,14 @@ public class RegistrationPage extends BasePage {
     public MessageErrorRegistrationUser getMessageErrorRegistrationUser() {
         return new MessageErrorRegistrationUser(driver);
     }
+    public FieldValuePage getFieldValuePage() {
+        return new FieldValuePage(driver);
+    }
+
+
+    @Step("Fill in RegistrationPage lastName")
+    public HomePage getHomePageinRegistrationPage() {
+        return new HomePage(driver);
+    }
+
 }
