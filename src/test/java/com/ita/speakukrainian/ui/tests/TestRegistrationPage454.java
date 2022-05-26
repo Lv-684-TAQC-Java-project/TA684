@@ -12,15 +12,13 @@ import org.testng.asserts.SoftAssert;
 import java.io.IOException;
 
 public class TestRegistrationPage454 extends BaseTestRunner {
-   // private ValueProvider valueProvider;
 
     @Test
-    @Description("[allure]  Is Extended AdvancedSearch If Is Opened")
-    @Issue("TUA-103")
+    @Description("[allure]  Is Extended Registration New User")
+    @Issue("TUA-454")
     public void enteredDataOnRegistrationPage() throws IOException {
-//        if (valueProvider == null) {
-//            valueProvider = new ValueProvider();
-//        }
+
+        String lastName, firstName, phone, email, password, confirm;
         SoftAssert softAssert = new SoftAssert();
 
         var registrationUser = new HomePage(driver)
@@ -29,42 +27,42 @@ public class TestRegistrationPage454 extends BaseTestRunner {
                 .clickRegistrationButton();
         boolean isDisplayedCorrectLastName = new MessageErrorRegistrationUser(driver)
                 .clickRegistrationLastName()
-                .registrationLastName("Світлана")
+                .registrationLastName(lastName = "Світлана")
                 .getMessageErrorRegistrationUser()
                 .isCorrectFilledLastNameDisplayed();
         softAssert.assertTrue(isDisplayedCorrectLastName);
 
         boolean isDisplayedCorrectFirstName = new MessageErrorRegistrationUser(driver)
                 .clickRegistrationFirstName()
-                .registrationFirstName("Вайтович")
+                .registrationFirstName(firstName = "Вайтович")
                 .getMessageErrorRegistrationUser()
                 .isCorrectFilledFirstNameDisplayed();
         softAssert.assertTrue(isDisplayedCorrectFirstName);
 
         boolean isDisplayedCorrectPhone = new MessageErrorRegistrationUser(driver)
                 .clickRegistrationPhone()
-                .registrationPhone("0671234567")
+                .registrationPhone(phone = "0671234567")
                 .getMessageErrorRegistrationUser()
                 .isCorrectFilledPhoneDisplayed();
         softAssert.assertTrue(isDisplayedCorrectPhone);
 
         boolean isDisplayedCorrectEmail = new MessageErrorRegistrationUser(driver)
                 .clickRegistrationEmail()
-                .registrationEmail("svitlanawhite@gmail.com")
+                .registrationEmail(email = "svitlanawhite@gmail.com")
                 .getMessageErrorRegistrationUser()
                 .isCorrectFilledEmailDisplayed();
         softAssert.assertTrue(isDisplayedCorrectEmail);
 
         boolean isDisplayedCorrectPassword = new MessageErrorRegistrationUser(driver)
                 .clickRegistrationPassword()
-                .registrationPassword("12345678wW@")
+                .registrationPassword(password = "12345678wW@")
                 .getMessageErrorRegistrationUser()
                 .isCorrectFilledPasswordDisplayed();
         softAssert.assertTrue(isDisplayedCorrectPassword);
 
         boolean isDisplayedCorrectConfirm = new MessageErrorRegistrationUser(driver)
                 .clickRegistrationConfirm()
-                .registrationConfirm("12345678wW@")
+                .registrationConfirm(confirm = "12345678wW@")
                 .getMessageErrorRegistrationUser()
                 .isCorrectFilledConfirmDisplayed();
         softAssert.assertTrue(isDisplayedCorrectConfirm);
@@ -82,25 +80,25 @@ public class TestRegistrationPage454 extends BaseTestRunner {
                 .isRegistrationPageDisplayed();
         softAssert.assertTrue(DisplayedRegistrationPage2);
 
-        String ValuelastName = registrationUser.getFieldValuePage().getLastNameValue();
-        System.out.println(ValuelastName);
+        String ValueLastName = registrationUser.getFieldValuePage().getLastNameValue();
+        System.out.println(ValueLastName);
         System.out.println(valueProvider.getRegistrationLastName());
-        softAssert.assertEquals(ValuelastName, valueProvider.getRegistrationLastName());
+        softAssert.assertEquals(ValueLastName, lastName);
 
         String ValueFirstName = registrationUser.getFieldValuePage().getFirstNameValue();
-        softAssert.assertEquals(ValueFirstName, valueProvider.getRegistrationFirstName());
+        softAssert.assertEquals(ValueFirstName, firstName);
 
         String ValuePhone = registrationUser.getFieldValuePage().getPhoneValue();
-        softAssert.assertEquals(ValuePhone, valueProvider.getRegistrationPhone());
+        softAssert.assertEquals(ValuePhone, phone);
 
         String ValueEmail = registrationUser.getFieldValuePage().getEmailValue();
-        softAssert.assertEquals(ValueEmail, valueProvider.getRegistrationEmail());
+        softAssert.assertEquals(ValueEmail, email);
 
         String ValuePassword = registrationUser.getFieldValuePage().getPasswordValue();
-        softAssert.assertEquals(ValuePassword, valueProvider.getRegistrationPassword());
+        softAssert.assertEquals(ValuePassword, password);
 
         String ValueConfirm = registrationUser.getFieldValuePage().getConfirmValue();
-        softAssert.assertEquals(ValueConfirm, valueProvider.getRegistrationConfirm());
+        softAssert.assertEquals(ValueConfirm, confirm);
 
 
         softAssert.assertAll();

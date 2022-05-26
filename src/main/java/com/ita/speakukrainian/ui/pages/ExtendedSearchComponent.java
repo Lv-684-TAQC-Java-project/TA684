@@ -42,12 +42,13 @@ public class ExtendedSearchComponent extends BasePage {
     }
     @Step("get card ")
     public List<WebElement> getcard() {
+        sleep(1000);
         return card;
     }
 
     @Step("get carc centr ")
     public List<WebElement> getcardCentr() {
-        sleep(500);
+        sleep(1000);
         return cardCentr;
     }
 
