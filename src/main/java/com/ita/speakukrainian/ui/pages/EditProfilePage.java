@@ -23,6 +23,22 @@ public class EditProfilePage extends BasePage {
     private WebElement firstNameField;
     @FindBy(id = "edit_email")
     private WebElement emailField;
+    @FindBy(xpath = "//*[@name=\"checkbox\"]")
+    private WebElement changePasswordCheckbox;
+    @FindBy(xpath = "//*[@id=\"edit\"]/div[2]/div[9]/div[3]/div/div[2]/div")
+    private WebElement confirmYourPasswordAlert;
+    @FindBy(xpath = "//*[@id=\"edit\"]/div[2]/div[9]/div[2]/div/div[2]/div[1]")
+    private WebElement newPasswordAlert;
+    @FindBy(xpath = "//*[@id=\"edit\"]/div[2]/div[9]/div[1]/div/div[2]/div")
+    private WebElement currentPasswordAlert;
+    @FindBy(xpath = "//*[@id=\"edit_currentPassword\"]")
+    private WebElement currentPasswordField;
+    @FindBy(xpath = "//*[@id=\"edit_password\"]")
+    private WebElement newPasswordField;
+    @FindBy(xpath = "//*[@id=\"edit_confirmPassword\"]")
+    private WebElement confirmYourPasswordField;
+    @FindBy(xpath = "//*[@class=\"ant-btn ant-btn-default submit-button\"]")
+    private WebElement submitButton;
 
     public EditProfilePage(WebDriver driver) {
         super(driver);
@@ -33,6 +49,13 @@ public class EditProfilePage extends BasePage {
         sleep(1000);
         phoneField.click();
         phoneField.sendKeys(phoneNumber);
+        return this;
+    }
+
+    @Step("Click change password checkbox")
+    public EditProfilePage clickChangePasswordCheckbox() {
+        sleep(1000);
+        changePasswordCheckbox.click();
         return this;
     }
 
@@ -51,13 +74,45 @@ public class EditProfilePage extends BasePage {
         return this;
     }
 
+    @Step("Click submit button")
+    public EditProfilePage clickSubmitButton(){
+        submitButton.click();
+        return this;
+    }
+
+
+    @Step("fill current password field")
+    public EditProfilePage sendKeysCurrentPasswordField(String currentPassword){
+        sleep(1000);
+        currentPasswordField.click();
+        currentPasswordField.sendKeys(currentPassword);
+        return this;
+    }
+
+    @Step("fill new password field")
+    public EditProfilePage sendKeysNewPasswordField(String newPassword){
+        sleep(1000);
+        newPasswordField.click();
+        newPasswordField.sendKeys(newPassword);
+        return this;
+    }
+
+    @Step("fill confirm password field")
+    public EditProfilePage sendKeysConfirmPasswordField(String confirmPassword){
+        sleep(1000);
+        confirmYourPasswordField.click();
+        confirmYourPasswordField.sendKeys(confirmPassword);
+        return this;
+    }
+
+    @Step("clear last name field")
     public EditProfilePage clearLastNameField(){
         lastNameField.click();
         String delete = Keys.chord(Keys.CONTROL,"a") + Keys.DELETE;
         lastNameField.sendKeys(delete);
         return this;
     }
-
+    @Step("Get error : Wrong last name")
     public String getErrorWrongLastName(){
         sleep(2000);
         return wrongLastNameFieldFormatAlert.getText();
@@ -78,4 +133,23 @@ public class EditProfilePage extends BasePage {
         sleep(2000);
         return pleasEnterAnyNumberAlert.getText();
     }
+
+    @Step("Get error : Confirm your password")
+    public String getConfirmYourPasswordAlert(){
+        sleep(1000);
+        return confirmYourPasswordAlert.getText();
+    }
+
+    @Step("Get error : Pleas enter new password")
+    public String getNewPasswordAlert(){
+        sleep(1000);
+        return newPasswordAlert.getText();
+    }
+
+    @Step("Get error : Pleas enter old password")
+    public String getCurrentPasswordAlert(){
+        sleep(1000);
+        return currentPasswordAlert.getText();
+    }
+
 }

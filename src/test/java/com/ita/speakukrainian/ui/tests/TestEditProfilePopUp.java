@@ -6,6 +6,7 @@ import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
+import jdk.jfr.Name;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -55,13 +56,41 @@ public class TestEditProfilePopUp extends TestRuneWithAdmin {
         Assert.assertEquals(error, "Будь ласка введіть Ваш номер телефону");
     }
 
-    @Test(priority = 2)
+
+
+    @Test(priority = 3)
     @Description("Verify that error messages are shown while leaving empty any field in the 'Змінити пароль' pop-up")
     @Issue("TUA-359")
-    public void testLeavingEmptyFieldChangeButton() {
+    public void testConfirmYourPasswordField() {
         String error = new EditProfilePage(driver)
-                .clearPhoneField()
-                .getEnterAnyNumberAlert();
-        Assert.assertEquals(error, "Будь ласка введіть Ваш номер телефону");
+                .clickChangePasswordCheckbox()
+                .sendKeysCurrentPasswordField("123456")
+                .sendKeysNewPasswordField("123456Qq@")
+                .clickSubmitButton()
+                .getConfirmYourPasswordAlert();
+        Assert.assertEquals(error, "Будь ласка, підтвердіть пароль");
     }
+
+    @Test(priority = 4)
+    @Description("Verify that error messages are shown while leaving empty any field in the 'Змінити пароль' pop-up")
+    @Issue("TUA-359")
+    public void testNewPasswordField() {
+        String error = new EditProfilePage(driver)
+                .clickChangePasswordCheckbox()
+                .clickSubmitButton()
+                .getNewPasswordAlert();
+        Assert.assertEquals(error, "Будь ласка, введіть новий пароль");
+    }
+
+    @Test(priority = 5)
+    @Description("Verify that error messages are shown while leaving empty any field in the 'Змінити пароль' pop-up")
+    @Issue("TUA-359")
+    public void testCurrentPasswordField() {
+        String error = new EditProfilePage(driver)
+                .clickChangePasswordCheckbox()
+                .clickSubmitButton()
+                .getCurrentPasswordAlert();
+        Assert.assertEquals(error, "Введіть старий пароль");
+    }
+
 }
