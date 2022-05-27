@@ -61,36 +61,21 @@ public class TestEditProfilePopUp extends TestRuneWithAdmin {
     @Test(priority = 3)
     @Description("Verify that error messages are shown while leaving empty any field in the 'Змінити пароль' pop-up")
     @Issue("TUA-359")
-    public void testConfirmYourPasswordField() {
-        String error = new EditProfilePage(driver)
-                .clickChangePasswordCheckbox()
-                .sendKeysCurrentPasswordField("123456")
-                .sendKeysNewPasswordField("123456Qq@")
-                .clickSubmitButton()
+    public void testVerifyPasswordField() {
+        EditProfilePage editProfilePage = new EditProfilePage(driver).clickChangePasswordCheckbox().clickSubmitButton();
+
+        String error1 = editProfilePage
                 .getConfirmYourPasswordAlert();
-        Assert.assertEquals(error, "Будь ласка, підтвердіть пароль");
-    }
+        Assert.assertEquals(error1, "Будь ласка, підтвердіть пароль");
 
-    @Test(priority = 4)
-    @Description("Verify that error messages are shown while leaving empty any field in the 'Змінити пароль' pop-up")
-    @Issue("TUA-359")
-    public void testNewPasswordField() {
-        String error = new EditProfilePage(driver)
-                .clickChangePasswordCheckbox()
-                .clickSubmitButton()
+        String error2 = editProfilePage
                 .getNewPasswordAlert();
-        Assert.assertEquals(error, "Будь ласка, введіть новий пароль");
+        Assert.assertEquals(error2, "Будь ласка, введіть новий пароль");
+
+        String error3 =  editProfilePage
+                .getCurrentPasswordAlert();
+        Assert.assertEquals(error3, "Введіть старий пароль");
     }
 
-    @Test(priority = 5)
-    @Description("Verify that error messages are shown while leaving empty any field in the 'Змінити пароль' pop-up")
-    @Issue("TUA-359")
-    public void testCurrentPasswordField() {
-        String error = new EditProfilePage(driver)
-                .clickChangePasswordCheckbox()
-                .clickSubmitButton()
-                .getCurrentPasswordAlert();
-        Assert.assertEquals(error, "Введіть старий пароль");
-    }
 
 }

@@ -3,6 +3,7 @@ package com.ita.speakukrainian.ui.tests;
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Contacts;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
+import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
 import io.qameta.allure.Description;
@@ -185,21 +186,28 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
     @Description("[allure] Not valid enter phone number ")
     @Issue("TUA-224")
     public void testNotValidEnterPhoneNumber() {
-       String expected = "Некоректний опис гуртка";
-        Explanation explanation = new Explanation(driver);
-        SoftAssert softAssert = new SoftAssert();
-        String errorMassage1 = new Contacts(driver)
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
-                .clickNextStepButton()
+        String expected = "Некоректний опис гуртка";
+
+        Explanation explanation = new Contacts(driver).fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
+                .clickNextStepButton();
+
+        String errorMassage1 = explanation
                 .fillInBasicDescriptionInput("qwertyuiopasdfghjklk")
                 .getWrongDescriptionAlert();
 
         explanation.clearDescriptionField();
-        explanation.fillInBasicDescriptionInput("q");
-        String errorMassage2 = explanation.getWrongDescriptionAlert();
+
+        String errorMassage2 = explanation
+                .fillInBasicDescriptionInput("q")
+                .getWrongDescriptionAlert();
+
         explanation.clearDescriptionField();
-        explanation.fillInBasicDescriptionInput("qwertyuiopasdfghjkljzxcvbnmkmnbvczlkjhg");
-        String errorMassage3 = explanation.getWrongDescriptionAlert();
+
+        String errorMassage3 = explanation
+                .fillInBasicDescriptionInput("qwertyuiopasdfghjkljzxcvbnmkmnbvczlkjhg")
+                .getWrongDescriptionAlert();
+
+        SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(errorMassage1, expected);
         softAssert.assertEquals(errorMassage2, expected);
         softAssert.assertEquals(errorMassage3, expected);
