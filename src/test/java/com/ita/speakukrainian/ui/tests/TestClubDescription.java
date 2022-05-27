@@ -27,9 +27,14 @@ public class TestClubDescription extends TestRuneWithAdmin {
         final int checkboxDancingСhoreography = 2;
         final String ageFrom = "2";
         final String ageTo = "18";
+        final String contactFaceboo = "Facebook";
+        final String contactEmail = "mail@mail.com";
+        final String contactWhatsUpp = "WhatsUpp";
+        final String contactName = "Name";
+        final String contactSkype = "Skype";
+        final String contactPhoneNumber = "0675775031";
         final String russianCharacter = "ъ";
         final String germanCharacter = "öl";
-
 
         List<String> expectedErrorMessagesRussianLetter = Arrays.asList("Некоректний опис гуртка",
                 "Опис гуртка може містити від 40 до 1500 символів.", "Опис гуртка не може містити російські літери");
@@ -38,6 +43,7 @@ public class TestClubDescription extends TestRuneWithAdmin {
                 "Опис гуртка може містити від 40 до 1500 символів.");
 
         SoftAssert softAssert = new SoftAssert();
+        Explanation explanation = new Explanation(driver);
 
         boolean areErrorMessagesForRussianDisplayed = new HomePage(driver)
                 .header()
@@ -48,19 +54,19 @@ public class TestClubDescription extends TestRuneWithAdmin {
                 .fillInAgeFromInput(ageFrom)
                 .fillInAgeToInput(ageTo)
                 .clickNextStepButton()
-                .fillInContactFacebookInput(valueProvider.getContactFacebook())
-                .fillInContactMailInput(valueProvider.getContactEmail())
-                .fillInContactWhatsAppInput(valueProvider.getContactWhatsUpp())
-                .fillInContactInput(valueProvider.getContactName())
-                .fillInContactSkypeInput(valueProvider.getContactSkype())
-                .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
+                .fillInContactFacebookInput(contactFaceboo)
+                .fillInContactMailInput( contactEmail)
+                .fillInContactWhatsAppInput(contactWhatsUpp)
+                .fillInContactInput(contactName)
+                .fillInContactSkypeInput(contactSkype)
+                .fillInContactPhoneInput(contactPhoneNumber)
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(russianCharacter)
                 .areErrorMessagesDisplayed(expectedErrorMessagesRussianLetter);
-        new Explanation(driver)
+        explanation
                 .clearDescriptionField();
 
-        boolean areErrorMessagesGermanDisplayed = new Explanation(driver)
+        boolean areErrorMessagesGermanDisplayed = explanation
                 .fillInBasicDescriptionInput(germanCharacter)
                 .areErrorMessagesDisplayed(expectedErrorMessagesGermanLetter);
 
