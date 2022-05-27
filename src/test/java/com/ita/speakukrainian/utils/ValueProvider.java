@@ -32,26 +32,6 @@ public class ValueProvider {
         return properties.getProperty("baseURL");
     }
 
-    public String getContactFacebook() {
-        return properties.getProperty("contactFacebook");
-    }
-
-    public String getContactEmail() {
-        return properties.getProperty("contactEmail");
-    }
-
-    public String getContactWhatsUpp() {
-        return properties.getProperty("contactWhatsUpp");
-    }
-
-    public String getContactName() {
-        return properties.getProperty("contactName");
-    }
-
-    public String getContactSkype() {
-        return properties.getProperty("contactSkype");
-    }
-
     public String getRegistrationLastName() {
         return properties.getProperty("Світлана");
     }
