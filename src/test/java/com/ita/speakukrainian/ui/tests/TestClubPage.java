@@ -301,22 +301,15 @@ public class   TestClubPage extends BaseTestRunner {
     }
 
     @Test(priority = 9)
-    @Description("[allure]  Is Extended search menu is displayed")
+    @Description("[allure]  Is Extended search menu is displayed and hidden after re-click")
     @Issue("TUA-224")
     public void testIsExtendedSearchMenuDisplayed() {
         ClubsPage clubsPage = new ClubsPage(driver);
-        Assert.assertEquals(clubsPage.isExtendedSearchMenuDisplayed(), true);
+        Assert.assertTrue(clubsPage.isExtendedSearchMenuDisplayed());
+        Assert.assertTrue(clubsPage.isExtendedSearchMenuHidden());
     }
 
     @Test(priority = 10)
-    @Description("[allure]  Is Extended search menu is hidden")
-    @Issue("TUA-224")
-    public void testIsExtendedSearchMenuHidden() {
-        ClubsPage clubsPage = new ClubsPage(driver);
-        Assert.assertEquals(clubsPage.isExtendedSearchMenuHidden(), true);
-    }
-
-    @Test(priority = 11)
     @Description("[allure]  Verify child age andAvailable online")
     @Issue("TUA-510")
     public void testVerifyChildAgeAndAvailableOnline() {
