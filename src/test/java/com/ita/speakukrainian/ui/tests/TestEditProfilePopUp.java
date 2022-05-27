@@ -2,11 +2,9 @@ package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.EditProfilePage;
-import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
+import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import jdk.jfr.Description;
-import jdk.jfr.Name;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -21,42 +19,30 @@ public class TestEditProfilePopUp extends TestRuneWithAdmin {
                 .clickEditProfileButton();
     }
 
-    @DataProvider(name = "data1")
-    public Object[][] SmallestCombine() {
-        Object[][] data = new Object[][]{
-                {"06895", "Телефон не відповідає вказаному формату"},
-                {"065987458", "Телефон не відповідає вказаному формату"},
-                {"06593859632586", "Телефон не відповідає вказаному формату"},
-                {"06598521475", "Телефон не відповідає вказаному формату"},
-                {"jngeoлщшогнеп", "Телефон не відповідає вказаному формату"},
-                {"!@#$%^&*(_+.:", "Телефон не відповідає вказаному формату"}
-        };
-        return data;
-    }
-
-    @Test(dataProvider = "data1",priority = 1)
+    @Test(priority = 1)
     @Description("[allure] Not valid enter phone number")
     @Issue("TUA-356")
-    public void testNotValidEnterPhoneNumber(String testCase1Value, String expected) {
-        String error = new EditProfilePage(driver)
-                .clearPhoneField()
-                .sendKeysPhoneField(testCase1Value)
-                .getErrorWrongNumber();
+    public void testNotValidEnterPhoneNumber() {
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(error, expected);
-    }
+        String[] testValue = new String[]{"06895","065987458","06593859632586","06598521475","jngeoлщшогнеп","!@#$%^&*(_+.:"};
+        String expected = "Телефон не відповідає вказаному формату";
+        String expected2 = "Будь ласка введіть Ваш номер телефону";
+        String error ;
+        EditProfilePage editProfilePage = new EditProfilePage(driver).clearPhoneField();
 
-    @Test(priority = 2)
-    @Description("[allure] Not valid enter phone number")
-    @Issue("TUA-356")
-    public void testIsDisplayedSaveButton() {
-        String error = new EditProfilePage(driver)
+        for ( int i = 0 ; i< testValue.length;i++) {
+            error = editProfilePage
+                    .clearPhoneField()
+                    .sendKeysPhoneField(testValue[i])
+                    .getErrorWrongNumber();
+            softAssert.assertEquals(error, expected);
+        }
+
+        error = editProfilePage
                 .clearPhoneField()
                 .getEnterAnyNumberAlert();
-        Assert.assertEquals(error, "Будь ласка введіть Ваш номер телефону");
+        Assert.assertEquals(error, expected2);
     }
-
-
 
     @Test(priority = 3)
     @Description("Verify that error messages are shown while leaving empty any field in the 'Змінити пароль' pop-up")
@@ -76,6 +62,4 @@ public class TestEditProfilePopUp extends TestRuneWithAdmin {
                 .getCurrentPasswordAlert();
         Assert.assertEquals(error3, "Введіть старий пароль");
     }
-
-
 }
