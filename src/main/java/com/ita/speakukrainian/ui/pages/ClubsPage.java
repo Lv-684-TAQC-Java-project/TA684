@@ -179,7 +179,6 @@ public class ClubsPage extends BasePage {
     @Step("Check extended search menu is hidden")
     public boolean isExtendedSearchMenuHidden(){
         extendedSearchButton.click();
-        extendedSearchButton.click();
         try {
             extendSearchMenu.isDisplayed();
         }catch (NoSuchElementException e){
