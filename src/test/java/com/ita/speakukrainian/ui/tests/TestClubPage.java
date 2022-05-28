@@ -7,269 +7,142 @@ import com.ita.speakukrainian.ui.pages.Item;
 import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
-public class   TestClubPage extends BaseTestRunner {
+public class TestClubPage extends BaseTestRunner {
+
+    private List<String> sorted(List<String> list) {
+        List<String> listsorted = new ArrayList<>(list);
+        listsorted.sort(String.CASE_INSENSITIVE_ORDER);
+        return listsorted;
+    }
+
+    private List<String> sortedrevers(List<String> list) {
+        List<String> listsortedrevers = new ArrayList<>(list);
+        listsortedrevers.sort(Collections.reverseOrder(String.CASE_INSENSITIVE_ORDER));
+        return listsortedrevers;
+    }
+
+    private List<String> cardsItem(List<WebElement> list) {
+        List<String> cardsItemOne = new ArrayList<>();
+        for (WebElement element : list) {
+            cardsItemOne.add(new Item(driver, element).getName());
+        }
+        return cardsItemOne;
+    }
 
     @Test(priority = 1)
-    @Description("[allure]  Is Extended AdvancedSearch If Is Opened")
+    @Description("[allure]  Is Extended AdvancedSearch If Is Opened And Sorted")
     @Issue("TUA-103")
-    public void AdvancedSearchIfIsOpened() {
-        boolean isSearchOpenedDisplayed = new HomePage(driver)
+    public void AdvancedSearchIfIsOpenedAndSorted() {
+        SoftAssert softAssert = new SoftAssert();
+        var isSearchOpened = new HomePage(driver)
                 .header()
                 .clickClubsPageHeader()
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
-                .getExtendedSearchComponent()
+                .getExtendedSearchComponent();
+        var isSearchOpenedDisplayed = isSearchOpened
                 .isDisplayedadvancedSearch();
         Assert.assertTrue(isSearchOpenedDisplayed);
-    }
+        System.out.println("1-----------------------------------------");
 
-    @Test(priority = 2)
-    @Description("[allure]  Is Extended Sorted Alp habetically Descending Order")
-    @Issue("TUA-103")
-    public void SortedAlphabeticallyDescendingOrder() {
 
-        List<WebElement> card = new HomePage(driver)
-                .header()
-                .clickClubsPageHeader()
-                .getHeaderMenuComponent()
-                .clickExtendedSearchButton()
-                .getExtendedSearchComponent()
+        List<WebElement> cardOne = isSearchOpened
                 .getcard();
-        List<String> cardsItem = new ArrayList<>();
-        for (WebElement element : card) {
-            cardsItem.add(new Item(driver, element).getName());
-        }
-
-        List<String> sortedList = cardsItem.stream().sorted().collect(Collectors.toList());
-        int count = 0;
-        int cardsItemlenght = cardsItem.size();
-        SoftAssert softAssert = new SoftAssert();
-        for (String item : cardsItem) {
-            for (String sri : sortedList) {
-                if (item.equals(sri)) {
-                    count++;
-
-                }
+        for (int i1 = 0; i1 < cardsItem(cardOne).size(); i1++) {
+            if (cardsItem(cardOne).get(i1).equals(sorted(cardsItem(cardOne)).get(i1))) {
+               // System.out.println(cardsItem(cardOne).get(i1) + " = " + sorted(cardsItem(cardOne)).get(i1));
+                Assert.assertEquals(cardsItem(cardOne).get(i1), sorted(cardsItem(cardOne)).get(i1));
+            } else {
+                System.out.println(cardsItem(cardOne).get(i1) + " != " + sorted(cardsItem(cardOne)).get(i1));
+                Assert.assertNotEquals(cardsItem(cardOne).get(i1), sorted(cardsItem(cardOne)).get(i1));
             }
         }
-        softAssert.assertEquals(count, cardsItemlenght);
-        for (String e : sortedList) {
-            softAssert.assertTrue(cardsItem.contains(e));
-        }
+        System.out.println("2-----------------------------------------");
 
-       // softAssert.assertFalse(cardsItem.equals(sortedList));
-        softAssert.assertAll();
-
-    }
-
-
-    @Test(priority = 3)
-    @Description("[allure]  Is Extended Sorted Alp habetically Click Button Up")
-    @Issue("TUA-103")
-    public void SortedAlphabeticallClickButtonUp() {
-        List<WebElement> card = new HomePage(driver)
-                .header()
-                .clickClubsPageHeader()
-                .getHeaderMenuComponent()
-                .clickExtendedSearchButton()
-                .getExtendedSearchComponent()
+        List<WebElement> cardArrowUp = isSearchOpened
                 .clickArrowUpButton()
                 .getcard();
-        List<String> cardsItem = new ArrayList<>();
-        for (WebElement element : card) {
-            cardsItem.add(new Item(driver, element).getName());
-        }
+        for (int i2 = 0; i2 < cardsItem(cardArrowUp).size(); i2++) {
+            if (cardsItem(cardArrowUp).get(i2).equals(sortedrevers(cardsItem(cardArrowUp)).get(i2))) {
+               // System.out.println(cardsItem(cardArrowUp).get(i2) + " = " + sortedrevers(cardsItem(cardArrowUp)).get(i2));
+                Assert.assertEquals(cardsItem(cardArrowUp).get(i2), sortedrevers(cardsItem(cardArrowUp)).get(i2));
+            } else {
+                System.out.println(cardsItem(cardArrowUp).get(i2) + " != " + sortedrevers(cardsItem(cardArrowUp)).get(i2));
+                Assert.assertNotEquals(cardsItem(cardArrowUp).get(i2), sortedrevers(cardsItem(cardArrowUp)).get(i2));
 
-        List<String> sortedListrevers = cardsItem.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
-        int count = 0;
-        int cardsItemlenght = cardsItem.size();
-        SoftAssert softAssert = new SoftAssert();
-        for (String item : cardsItem) {
-            for (String sri : sortedListrevers) {
-                if (item.equals(sri)) {
-                    count++;
-                }
             }
         }
-        softAssert.assertEquals(count, cardsItemlenght);
-        for (String e : sortedListrevers) {
-            Assert.assertTrue(cardsItem.contains(e));
-        }
+        System.out.println("3-----------------------------------------");
 
-       // softAssert.assertTrue(cardsItem.equals(sortedListrevers));
-        softAssert.assertAll();
 
-    }
-
-    @Test(priority = 4)
-    @Description("[allure]  Is Extended Sorted Alp habetically Click Button Douwn")
-    @Issue("TUA-103")
-    public void SortedAlphabeticallClickButtonDown() {
-        List<WebElement> card = new HomePage(driver)
-                .header()
-                .clickClubsPageHeader()
-                .getHeaderMenuComponent()
-                .clickExtendedSearchButton()
-                .getExtendedSearchComponent()
+        List<WebElement> cardArrowDown = isSearchOpened
                 .clickArrowDownButton()
                 .getcard();
-        List<String> cardsItem = new ArrayList<>();
-        for (WebElement element : card) {
-            cardsItem.add(new Item(driver, element).getName());
-        }
+        for (int i3 = 0; i3 < cardsItem(cardArrowDown).size(); i3++) {
+            if(cardsItem(cardArrowDown).get(i3).equals(sorted(cardsItem(cardArrowDown)).get(i3))){
+          //  System.out.println(cardsItem(cardArrowDown).get(i3) + " = " + sorted(cardsItem(cardArrowDown)).get(i3));
+            Assert.assertEquals(cardsItem(cardArrowDown).get(i3), sorted(cardsItem(cardArrowDown)).get(i3));
 
-        List<String> sortedList = cardsItem.stream().sorted().collect(Collectors.toList());
-        int count = 0;
-        int cardsItemlenght = cardsItem.size();
-        SoftAssert softAssert = new SoftAssert();
-        for (String item : cardsItem) {
-            for (String sri : sortedList) {
-                if (item.equals(sri)) {
-                    count++;
-                    System.out.println(item + " = " + sri);
-                }
+        }else{
+                System.out.println(cardsItem(cardArrowDown).get(i3) + " != " + sorted(cardsItem(cardArrowDown)).get(i3));
+                Assert.assertNotEquals(cardsItem(cardArrowDown).get(i3), sorted(cardsItem(cardArrowDown)).get(i3));
             }
         }
-        softAssert.assertEquals(count, cardsItemlenght);
-        for (String e : sortedList) {
-            System.out.println(cardsItem.contains(e));
-            Assert.assertTrue(cardsItem.contains(e));
-        }
+        System.out.println("4-----------------------------------------");
 
-      //  softAssert.assertFalse(cardsItem.equals(sortedList));
-        softAssert.assertAll();
 
-    }
-
-    @Test(priority = 5)
-    @Description("[allure]  Is Extended Sorted Alphabetically Descending Orde rClick Center")
-    @Issue("TUA-103")
-    public void SortedAlphabeticallyDescendingOrderClickCenter() {
-
-        List<WebElement> card = new HomePage(driver)
-                .header()
-                .clickClubsPageHeader()
-                .getHeaderMenuComponent()
-                .clickExtendedSearchButton()
+        List<WebElement> cardCentr = new ClubsPage(driver)
                 .clickCheckedToCenterButton()
                 .getcardCentr();
-        List<String> cardsItem = new ArrayList<>();
-        for (WebElement element : card) {
-            cardsItem.add(new Item(driver, element).getName());
-        }
-
-        List<String> sortedList = cardsItem.stream().sorted().collect(Collectors.toList());
-        int count = 0;
-        int cardsItemlenght = cardsItem.size();
-        SoftAssert softAssert = new SoftAssert();
-        for (String item : cardsItem) {
-            for (String sri : sortedList) {
-                if (item.equals(sri)) {
-                    count++;
-
-                }
+        for (int i4 = 0; i4 < cardsItem(cardCentr).size(); i4++) {
+            if (cardsItem(cardCentr).get(i4).equals(sorted(cardsItem(cardCentr)).get(i4))) {
+                System.out.println(cardsItem(cardCentr).get(i4) + " = " + sorted(cardsItem(cardCentr)).get(i4));
+                Assert.assertEquals(cardsItem(cardCentr).get(i4), sorted(cardsItem(cardCentr)).get(i4));
+            } else {
+                System.out.println(cardsItem(cardCentr).get(i4) + " != " + sorted(cardsItem(cardCentr)).get(i4));
+                Assert.assertNotEquals(cardsItem(cardCentr).get(i4), sorted(cardsItem(cardCentr)).get(i4));
             }
         }
-        softAssert.assertEquals(count, cardsItemlenght);
-        for (String e : sortedList) {
-            softAssert.assertTrue(cardsItem.contains(e));
-        }
+        System.out.println("5-----------------------------------------");
 
-      //  softAssert.assertFalse(cardsItem.equals(sortedList));
-        softAssert.assertAll();
-
-    }
-
-
-    @Test(priority = 6)
-    @Description("[allure]  Is Extended Sorted Alphabetically Click Button Up Click Cenret")
-    @Issue("TUA-103")
-    public void SortedAlphabeticallClickButtonUpClickCenret() {
-        List<WebElement> card = new HomePage(driver)
-                .header()
-                .clickClubsPageHeader()
-                .getHeaderMenuComponent()
-                .clickExtendedSearchButton()
-                .clickCheckedToCenterButton()
+        List<WebElement> cardUpButtonCentr = isSearchOpened
                 .clickArrowUpButton()
                 .getcardCentr();
-        List<String> cardsItem = new ArrayList<>();
-        for (WebElement element : card) {
-            cardsItem.add(new Item(driver, element).getName());
-        }
-
-        List<String> sortedListrevers = cardsItem.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
-        int count = 0;
-        int cardsItemlenght = cardsItem.size();
-        SoftAssert softAssert = new SoftAssert();
-        for (String item : cardsItem) {
-            for (String sri : sortedListrevers) {
-                if (item.equals(sri)) {
-                    count++;
-                    System.out.println(item + " = " + sri);
-                }
+        for (int i5 = 0; i5 < cardsItem(cardUpButtonCentr).size(); i5++) {
+            if (cardsItem(cardUpButtonCentr).get(i5).equals(sortedrevers(cardsItem(cardUpButtonCentr)).get(i5))) {
+                System.out.println(cardsItem(cardUpButtonCentr).get(i5) + " = " + sortedrevers(cardsItem(cardUpButtonCentr)).get(i5));
+                Assert.assertEquals(cardsItem(cardUpButtonCentr).get(i5), sortedrevers(cardsItem(cardUpButtonCentr)).get(i5));
+            } else {
+                System.out.println(cardsItem(cardUpButtonCentr).get(i5) + " != " + sortedrevers(cardsItem(cardUpButtonCentr)).get(i5));
+                Assert.assertNotEquals(cardsItem(cardUpButtonCentr).get(i5), sortedrevers(cardsItem(cardUpButtonCentr)).get(i5));
             }
         }
-        softAssert.assertEquals(count, cardsItemlenght);
-        for (String e : sortedListrevers) {
-            Assert.assertTrue(cardsItem.contains(e));
-        }
+        System.out.println("6-----------------------------------------");
 
-      //  softAssert.assertFalse(cardsItem.equals(sortedListrevers));
-        softAssert.assertAll();
 
-    }
-
-    @Test(priority = 7)
-    @Description("[allure]  Is Extended Sorted Alphabetically Click Button Down Click Cenret")
-    @Issue("TUA-103")
-    public void SortedAlphabeticallClickButtonDownClickCenter() {
-        List<WebElement> card = new HomePage(driver)
-                .header()
-                .clickClubsPageHeader()
-                .getHeaderMenuComponent()
-                .clickExtendedSearchButton()
-                .clickCheckedToCenterButton()
+        List<WebElement> cardDownButtonCenter = isSearchOpened
                 .clickArrowDownButton()
                 .getcardCentr();
-        List<String> cardsItem = new ArrayList<>();
-        for (WebElement element : card) {
-            cardsItem.add(new Item(driver, element).getName());
-        }
-
-        List<String> sortedList = cardsItem.stream().sorted().collect(Collectors.toList());
-
-        int count = 0;
-        int cardsItemlenght = cardsItem.size();
-        SoftAssert softAssert = new SoftAssert();
-        for (String item : cardsItem) {
-            for (String sri : sortedList) {
-                if (item.equals(sri)) {
-                    count++;
-                    System.out.println(item + " = " + sri);
-                }
+        for (int i6 = 0; i6 < cardsItem(cardDownButtonCenter).size(); i6++) {
+            if (cardsItem(cardDownButtonCenter).get(i6).equals(sorted(cardsItem(cardDownButtonCenter)).get(i6))) {
+                System.out.println(cardsItem(cardDownButtonCenter).get(i6) + " = " + sorted(cardsItem(cardDownButtonCenter)).get(i6));
+                Assert.assertEquals(cardsItem(cardDownButtonCenter).get(i6), sorted(cardsItem(cardDownButtonCenter)).get(i6));
+            } else {
+                System.out.println(cardsItem(cardDownButtonCenter).get(i6) + " != " + sorted(cardsItem(cardDownButtonCenter)).get(i6));
+                Assert.assertNotEquals(cardsItem(cardDownButtonCenter).get(i6), sorted(cardsItem(cardDownButtonCenter)).get(i6));
             }
         }
-        softAssert.assertEquals(count, cardsItemlenght);
-        for (String e : sortedList) {
-            System.out.println(cardsItem.contains(e));
-            Assert.assertTrue(cardsItem.contains(e));
-        }
-
-     //   softAssert.assertFalse(cardsItem.equals(sortedList));
         softAssert.assertAll();
 
     }

@@ -10,13 +10,7 @@
             </class>
             <class name="com.ita.speakukrainian.ui.tests.TestClubPage">
                 <methods>
-                    <include name="AdvancedSearchIfIsOpened"/>
-                    <include name="SortedAlphabeticallyDescendingOrder"/>
-                    <include name="SortedAlphabeticallClickButtonUp"/>
-                    <include name="SortedAlphabeticallClickButtonDown"/>
-                    <include name="SortedAlphabeticallyDescendingOrderClickCenter"/>
-                    <include name="SortedAlphabeticallClickButtonUpClickCenret"/>
-                    <include name="SortedAlphabeticallClickButtonDownClickCenter"/>
+                    <include name="AdvancedSearchIfIsOpenedAndSorted"/>
                 </methods>
             </class>
             <class name="com.ita.speakukrainian.ui.tests.TestRegistrationPage454">

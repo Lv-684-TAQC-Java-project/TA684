@@ -1,22 +1,18 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Contacts;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
-import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TestAddClubPopUp extends TestRuneWithAdmin {
@@ -133,43 +129,37 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
     @Issue("TUA-177")
     public void TestVerifiesTheErrorMessageWhenEnterSameSymbols() {
         SoftAssert softAssert = new SoftAssert();
-        new Contacts(driver)
+        var explanationLotSymbols = new Contacts(driver)
                 .fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton();
 
-        boolean isDisplayedMassageWrite1500Symbols = new Explanation(driver)
+        boolean isDisplayedMassageWrite1500Symbols = explanationLotSymbols
                 .fillInBasicDescriptionInput(listString(1500))
                 .isSuccessIconDisplayed();
-        new Explanation(driver)
+        explanationLotSymbols
                 .clearDescriptionField();
 
-        boolean isDisplayedMassageWrite1400Symbol = new Explanation(driver)
+        boolean isDisplayedMassageWrite1400Symbol = explanationLotSymbols
                 .fillInBasicDescriptionInput(listString(1400))
                 .isSuccessIconDisplayed();
-        new Explanation(driver)
+        explanationLotSymbols
                 .clearDescriptionField();
 
-        String errorMassageWrite1501Symbols = new Explanation(driver)
+        String errorMassageWrite1501Symbols = explanationLotSymbols
                 .fillInBasicDescriptionInput(listString(1501))
                 .TextWrongDescriptionDownAlert();
-        new Explanation(driver)
-                .clearDescriptionField();
 
-        boolean IconErrorDisplayedWrite1501Symbols = new Explanation(driver)
-                .fillInBasicDescriptionInput(listString(1501))
+        boolean IconErrorDisplayedWrite1501Symbols = explanationLotSymbols
                 .issuccessIconErrorDisplayed();
-        new Explanation(driver)
+        explanationLotSymbols
                 .clearDescriptionField();
 
-        String errorMassageWrite1550Symbols = new Explanation(driver)
+        String errorMassageWrite1550Symbols = explanationLotSymbols
                 .fillInBasicDescriptionInput(listString(1550))
                 .TextWrongDescriptionDownAlert();
         softAssert.assertEquals(errorMassageWrite1550Symbols, "Опис гуртка може містити від 40 до 1500 символів.");
-        new Explanation(driver)
-                .clearDescriptionField();
 
-        boolean IconErrorDisplayedWrite1550Symbols = new Explanation(driver)
-                .fillInBasicDescriptionInput(listString(1550))
+        boolean IconErrorDisplayedWrite1550Symbols = explanationLotSymbols
                 .issuccessIconErrorDisplayed();
 
 

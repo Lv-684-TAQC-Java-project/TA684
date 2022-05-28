@@ -32,28 +32,6 @@ public class ValueProvider {
         return properties.getProperty("baseURL");
     }
 
-    public String getRegistrationLastName() {
-        return properties.getProperty("Світлана");
-    }
 
-    public String getRegistrationFirstName() {
-        return properties.getProperty("Вайтович");
-    }
-
-    public String getRegistrationPhone() {
-        return properties.getProperty("0671234567");
-    }
-
-    public String getRegistrationEmail() {
-        return properties.getProperty("svitlanawhite@gmail.com");
-    }
-
-    public String getRegistrationPassword() {
-        return properties.getProperty("12345678wW@");
-    }
-
-    public String getRegistrationConfirm() {
-        return properties.getProperty("12345678wW@");
-    }
 
 }
