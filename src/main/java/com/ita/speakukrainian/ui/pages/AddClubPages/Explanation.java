@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.pages.AddClubPages;
 
 import com.ita.speakukrainian.ui.pages.BasePage;
+import com.ita.speakukrainian.ui.pages.HomePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +25,9 @@ public class Explanation extends BasePage {
     private WebElement successIcon;
     @FindBy(css = "#basic [class$='ant-form-item-feedback-icon-error']")
     private WebElement successIconError;
+
+    @FindBy(xpath = "//*[@id='basic']/div[5]/button[2]")
+    private WebElement toComplete;
 
     public Explanation(WebDriver driver) {
         super(driver);
@@ -83,5 +87,10 @@ public class Explanation extends BasePage {
     @Step("Clear description field")
     public void clearDescriptionField() {
         getBasicDescriptionInput().clear();
+    }
+    @Step("Click button 'Завершити' to complete registration of new club")
+    public HomePage toCompleteClubsRegistration(){
+        toComplete.click();
+        return new HomePage(driver);
     }
 }

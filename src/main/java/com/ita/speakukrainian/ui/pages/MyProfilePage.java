@@ -18,6 +18,12 @@ public class MyProfilePage extends BaseObjectPage {
     @FindBy(xpath = "//*[@class=\"ant-btn ant-btn-text button\"]")
     private WebElement editProfile;
 
+    @FindBy(xpath = "//div[contains(text(), 'Малявки')]")
+    private WebElement cardMaliavky;
+
+    @FindBy(xpath = "//section[@class='ant-layout user-clubs']/div/div[2]/div/div/button")
+    private WebElement detailsMaliavky;
+
     private final HeaderMenuComponent headerMenu;
 
     public MyProfilePage(WebDriver driver) {
@@ -48,6 +54,15 @@ public class MyProfilePage extends BaseObjectPage {
         sleep(3000);
         addClubButton.click();
         return new MainInformation(driver);
+    }
+
+    public boolean isCardMaliavkyPresent(){
+       return cardMaliavky.isEnabled();
+    }
+    @Step("Do to Myliavky club page")
+    public MyliavkyClubPage clickDetailsButton(){
+        detailsMaliavky.click();
+        return new MyliavkyClubPage(driver);
     }
 }
 

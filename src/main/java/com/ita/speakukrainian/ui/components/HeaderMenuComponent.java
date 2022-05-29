@@ -36,6 +36,9 @@ public class HeaderMenuComponent extends BaseComponent {
     private WebElement extendedSearchButton;
     @FindBy(how = How.CSS, using = "[class*='ant-dropdown-menu-item']")
     private WebElement addClubButton;
+
+    @FindBy(xpath = "//*[@id='root']/section/header/div[3]/button")
+    private WebElement addClubButtonOnHeader;
     @FindBy(xpath = avatarSelector)
     private WebElement avatar;
     @FindBy(css = ".ant-dropdown-menu-title-content > a")
@@ -127,7 +130,11 @@ public class HeaderMenuComponent extends BaseComponent {
         addCenterButton.click();
         return new AddCenterPopUp(driver);
     }
-
+    @Step("Go to AddClubPopUp")
+    public MainInformation clickAddClubButtonOnHeader() {
+        addClubButtonOnHeader.click();
+        return new MainInformation(driver);
+    }
     /**
      * MyProfile
      *
