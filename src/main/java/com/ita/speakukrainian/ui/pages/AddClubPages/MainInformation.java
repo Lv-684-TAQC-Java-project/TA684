@@ -57,6 +57,7 @@ public class MainInformation extends BasePage {
         return new MainInformation(driver);
     }
 
+
     @Step("Fill in age from")
     public MainInformation fillInAgeFromInput(String age) {
         getAgeFromInput().sendKeys(age);
