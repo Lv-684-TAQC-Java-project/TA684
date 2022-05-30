@@ -1,26 +1,20 @@
 package com.ita.speakukrainian.ui.tests;
 
-import com.ita.speakukrainian.ui.pages.AddClubPages.Contacts;
 import com.ita.speakukrainian.ui.pages.AddClubPages.Explanation;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class TestClubDescription extends TestRuneWithAdmin {
 
-
     @Test
-    @Description("Verify Error Message On Russian And German Letters In Description")
+    @Description("[allure] Verify that error message appears when user enters letters" +
+                 " in Russian or German languages into the field")
     @Issue("TUA-178")
     public void verifyErrorMessageOnRussianAndGermanLettersInDescription() {
         final String clubName = "Football";
@@ -33,19 +27,16 @@ public class TestClubDescription extends TestRuneWithAdmin {
         final String contactName = "Name";
         final String contactSkype = "Skype";
         final String contactPhoneNumber = "0675775031";
-        final String russianCharacter = "ъ";
-        final String germanCharacter = "öl";
+        final String russianCharacter = "Жэк Мэр Нэп Пэр СэрЖэк Мэр Нэп Пэр СэрЖэк Мэр Нэп Пэр Сэр";
+        final String germanCharacter = "Pax-Gebäude Pax-Gebäude Pax-Gebäude Pax-Gebäude Pax-Gebäude";
 
-        List<String> expectedErrorMessagesRussianLetter = Arrays.asList("Некоректний опис гуртка",
-                "Опис гуртка може містити від 40 до 1500 символів.", "Опис гуртка не може містити російські літери");
-
-        List<String> expectedErrorMessagesGermanLetter = Arrays.asList("Некоректний опис гуртка",
-                "Опис гуртка може містити від 40 до 1500 символів.");
+        final String expectedErrorMessageRussianLetter = "Опис гуртка не може містити російські літери";
+        final String expectedErrorMessageGermanLetter = "Некоректний опис гуртка";
 
         SoftAssert softAssert = new SoftAssert();
         Explanation explanation = new Explanation(driver);
 
-        boolean areErrorMessagesForRussianDisplayed = new HomePage(driver)
+        String isErrorMessageForRussianDisplayed = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickAddClubButton()
@@ -62,16 +53,16 @@ public class TestClubDescription extends TestRuneWithAdmin {
                 .fillInContactPhoneInput(contactPhoneNumber)
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(russianCharacter)
-                .areErrorMessagesDisplayed(expectedErrorMessagesRussianLetter);
+                .isErrorMessageDisplayed();
         explanation
                 .clearDescriptionField();
 
-        boolean areErrorMessagesGermanDisplayed = explanation
+        String isErrorMessageGermanDisplayed = explanation
                 .fillInBasicDescriptionInput(germanCharacter)
-                .areErrorMessagesDisplayed(expectedErrorMessagesGermanLetter);
+                .isErrorMessageDisplayed();
 
-        softAssert.assertTrue(areErrorMessagesForRussianDisplayed);
-        softAssert.assertTrue(areErrorMessagesGermanDisplayed);
+        softAssert.assertEquals(isErrorMessageForRussianDisplayed,expectedErrorMessageRussianLetter);
+        softAssert.assertEquals(isErrorMessageGermanDisplayed,expectedErrorMessageGermanLetter);
         softAssert.assertAll();
     }
 
