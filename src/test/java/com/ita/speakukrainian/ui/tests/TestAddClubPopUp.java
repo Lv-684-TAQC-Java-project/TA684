@@ -174,7 +174,7 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
 
     @Test()
     @Description("[allure] Not valid enter phone number ")
-    @Issue("TUA-224")
+    @Issue("TUA-176")
     public void testNotValidEnterPhoneNumber() {
         String expected = "Некоректний опис гуртка";
         SoftAssert softAssert = new SoftAssert();
