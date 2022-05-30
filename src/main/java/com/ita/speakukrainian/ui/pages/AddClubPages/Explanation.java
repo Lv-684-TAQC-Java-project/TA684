@@ -16,7 +16,7 @@ public class Explanation extends BasePage {
     @FindBy(css = "#basic_description")
     private WebElement basicDescriptionInput;
     @FindBy(css = "[role='alert']")
-    private List<WebElement> alerts;
+    private WebElement alerts;
     @FindBy(xpath = "//*[@id=\"basic\"]/div[4]/div[2]/div[2]/div[1]")
     private WebElement wrongDescriptionAlert;
     @FindBy(xpath = "//form/div[4]/div[2]/div[2]/div")
@@ -35,10 +35,6 @@ public class Explanation extends BasePage {
 
     public WebElement getBasicDescriptionInput() {
         return basicDescriptionInput;
-    }
-
-    public List<WebElement> getAlerts() {
-        return alerts;
     }
 
     public WebElement getSuccessIcon() {
@@ -63,13 +59,9 @@ public class Explanation extends BasePage {
         return new Explanation(driver);
     }
 
-    @Step("Are Error Messages Displayed")
-    public boolean areErrorMessagesDisplayed(List<String> expectedErrorMessages) {
-        return getAlerts()
-                .stream()
-                .map(webElement -> webElement.getText())
-                .collect(Collectors.toList())
-                .containsAll(expectedErrorMessages);
+    @Step("IS Error Messages Displayed")
+    public String isErrorMessageDisplayed() {
+        return alerts.getText();
     }
 
     @Step("Get isDisplayed() massage")
