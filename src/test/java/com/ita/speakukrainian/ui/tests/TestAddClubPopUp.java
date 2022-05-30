@@ -187,30 +187,21 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
     @Issue("TUA-224")
     public void testNotValidEnterPhoneNumber() {
         String expected = "Некоректний опис гуртка";
+        SoftAssert softAssert = new SoftAssert();
 
         Explanation explanation = new Contacts(driver).fillInContactPhoneInput(valueProvider.getContactPhoneNumber())
                 .clickNextStepButton();
 
-        String errorMassage1 = explanation
-                .fillInBasicDescriptionInput("qwertyuiopasdfghjklk")
-                .getWrongDescriptionAlert();
+        String[] dataArray = new String[]{"qwertyuiopasdfghjklk","q","qwertyuiopasdfghjkljzxcvbnmkmnbvczlkjhg"};
 
-        explanation.clearDescriptionField();
+        for (int i = 0 ; i < dataArray.length; i++) {
+            String errorMassage = explanation
+                    .fillInBasicDescriptionInput(dataArray[i])
+                    .getWrongDescriptionAlert();
+            softAssert.assertEquals(errorMassage,expected);
+            explanation.clearDescriptionField();
+        }
 
-        String errorMassage2 = explanation
-                .fillInBasicDescriptionInput("q")
-                .getWrongDescriptionAlert();
-
-        explanation.clearDescriptionField();
-
-        String errorMassage3 = explanation
-                .fillInBasicDescriptionInput("qwertyuiopasdfghjkljzxcvbnmkmnbvczlkjhg")
-                .getWrongDescriptionAlert();
-
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(errorMassage1, expected);
-        softAssert.assertEquals(errorMassage2, expected);
-        softAssert.assertEquals(errorMassage3, expected);
         softAssert.assertAll();
     }
 }

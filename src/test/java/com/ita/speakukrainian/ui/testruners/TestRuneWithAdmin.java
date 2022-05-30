@@ -24,11 +24,4 @@ public class TestRuneWithAdmin extends BaseTestRunner{
                 .clickLoginButton();
     }
 
-    @AfterClass
-    public void afterClass() {
-        driver.manage().deleteAllCookies();
-        WebStorage webStorage = (WebStorage) driver;
-        webStorage.getLocalStorage().clear();
-        webStorage.getSessionStorage().clear();
-    }
 }
