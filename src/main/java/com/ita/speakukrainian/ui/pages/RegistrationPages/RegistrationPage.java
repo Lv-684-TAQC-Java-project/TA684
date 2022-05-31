@@ -97,10 +97,11 @@ public class RegistrationPage extends BasePage {
         closeIconRegistration.click();
         return new HomePage(driver);
     }
-
+    @Step("go to class MessageErrorRegistrationUser")
     public MessageErrorRegistrationUser getMessageErrorRegistrationUser() {
         return new MessageErrorRegistrationUser(driver);
     }
+    @Step("go to class FieldValuePage")
     public FieldValuePage getFieldValuePage() {
         return new FieldValuePage(driver);
     }

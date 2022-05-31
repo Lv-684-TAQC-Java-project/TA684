@@ -12,26 +12,24 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class TestClubPage extends BaseTestRunner {
 
     private List<String> sorted(List<String> list) {
         List<String> listsorted = new ArrayList<>(list);
-        listsorted.sort(String.CASE_INSENSITIVE_ORDER);
+        listsorted.stream().sorted(String.CASE_INSENSITIVE_ORDER).collect(Collectors.toList());
         return listsorted;
     }
 
     private List<String> sortedrevers(List<String> list) {
         List<String> listsortedrevers = new ArrayList<>(list);
-        listsortedrevers.sort(Collections.reverseOrder(String.CASE_INSENSITIVE_ORDER));
+        listsortedrevers.sort(String.CASE_INSENSITIVE_ORDER.thenComparing(CharSequence::compare).reversed());
         return listsortedrevers;
     }
-
     private List<String> cardsItem(List<WebElement> list) {
         List<String> cardsItemOne = new ArrayList<>();
         for (WebElement element : list) {
@@ -40,7 +38,7 @@ public class TestClubPage extends BaseTestRunner {
         return cardsItemOne;
     }
 
-    @Test(priority = 1)
+    @Test()
     @Description("[allure]  Is Extended AdvancedSearch If Is Opened And Sorted")
     @Issue("TUA-103")
     public void AdvancedSearchIfIsOpenedAndSorted() {
@@ -53,98 +51,59 @@ public class TestClubPage extends BaseTestRunner {
                 .getExtendedSearchComponent();
         var isSearchOpenedDisplayed = isSearchOpened
                 .isDisplayedadvancedSearch();
-        Assert.assertTrue(isSearchOpenedDisplayed);
-        System.out.println("1-----------------------------------------");
-
-
-        List<WebElement> cardOne = isSearchOpened
-                .getcard();
-        for (int i1 = 0; i1 < cardsItem(cardOne).size(); i1++) {
-            if (cardsItem(cardOne).get(i1).equals(sorted(cardsItem(cardOne)).get(i1))) {
-               // System.out.println(cardsItem(cardOne).get(i1) + " = " + sorted(cardsItem(cardOne)).get(i1));
-                Assert.assertEquals(cardsItem(cardOne).get(i1), sorted(cardsItem(cardOne)).get(i1));
-            } else {
-                System.out.println(cardsItem(cardOne).get(i1) + " != " + sorted(cardsItem(cardOne)).get(i1));
-                Assert.assertNotEquals(cardsItem(cardOne).get(i1), sorted(cardsItem(cardOne)).get(i1));
+        softAssert.assertTrue(isSearchOpenedDisplayed);
+        for (int i = 1; i <= 6; i++) {
+            System.out.println(i + "-----------------------------------------");
+            List<WebElement> card;
+            switch (i) {
+                case 1:
+                    card = isSearchOpened
+                            .getcard();
+                    break;
+                case 2:
+                    card = isSearchOpened
+                            .clickArrowUpButton()
+                            .getcard();
+                    break;
+                case 3:
+                    card = isSearchOpened
+                            .clickArrowDownButton()
+                            .getcard();
+                    break;
+                case 4:
+                    card = isSearchOpened
+                            .getClubsPage()
+                            .clickCheckedToCenterButton()
+                            .clickSortedAlphabeticallyButton()
+                            .getcardCentr();
+                    break;
+                case 5:
+                    card = isSearchOpened
+                            .clickArrowUpButton()
+                            .getcardCentr();
+                    break;
+                case 6:
+                    card = isSearchOpened
+                            .clickArrowDownButton()
+                            .getcardCentr();
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + i);
             }
-        }
-        System.out.println("2-----------------------------------------");
 
-        List<WebElement> cardArrowUp = isSearchOpened
-                .clickArrowUpButton()
-                .getcard();
-        for (int i2 = 0; i2 < cardsItem(cardArrowUp).size(); i2++) {
-            if (cardsItem(cardArrowUp).get(i2).equals(sortedrevers(cardsItem(cardArrowUp)).get(i2))) {
-               // System.out.println(cardsItem(cardArrowUp).get(i2) + " = " + sortedrevers(cardsItem(cardArrowUp)).get(i2));
-                Assert.assertEquals(cardsItem(cardArrowUp).get(i2), sortedrevers(cardsItem(cardArrowUp)).get(i2));
-            } else {
-                System.out.println(cardsItem(cardArrowUp).get(i2) + " != " + sortedrevers(cardsItem(cardArrowUp)).get(i2));
-                Assert.assertNotEquals(cardsItem(cardArrowUp).get(i2), sortedrevers(cardsItem(cardArrowUp)).get(i2));
 
+            for (int j = 0; j < cardsItem(card).size(); j++) {
+                if ((i == 1) || (i == 3) || (i == 4) || (i == 6)) {
+                    softAssert.assertEquals(cardsItem(card).get(j), sorted(cardsItem(card)).get(j), "the item=" + cardsItem(card).get(j) + " does not match the value of the sorted list=" + sorted(cardsItem(card)).get(j));
+
+                } else {
+                    softAssert.assertEquals(cardsItem(card).get(j), sortedrevers(cardsItem(card)).get(j), "the item=" + cardsItem(card).get(j) + " does not match the value of the sorted list=" + sortedrevers(cardsItem(card)).get(j));
+
+                }
             }
+            softAssert.assertAll();
+
         }
-        System.out.println("3-----------------------------------------");
-
-
-        List<WebElement> cardArrowDown = isSearchOpened
-                .clickArrowDownButton()
-                .getcard();
-        for (int i3 = 0; i3 < cardsItem(cardArrowDown).size(); i3++) {
-            if(cardsItem(cardArrowDown).get(i3).equals(sorted(cardsItem(cardArrowDown)).get(i3))){
-          //  System.out.println(cardsItem(cardArrowDown).get(i3) + " = " + sorted(cardsItem(cardArrowDown)).get(i3));
-            Assert.assertEquals(cardsItem(cardArrowDown).get(i3), sorted(cardsItem(cardArrowDown)).get(i3));
-
-        }else{
-                System.out.println(cardsItem(cardArrowDown).get(i3) + " != " + sorted(cardsItem(cardArrowDown)).get(i3));
-                Assert.assertNotEquals(cardsItem(cardArrowDown).get(i3), sorted(cardsItem(cardArrowDown)).get(i3));
-            }
-        }
-        System.out.println("4-----------------------------------------");
-
-
-        List<WebElement> cardCentr = new ClubsPage(driver)
-                .clickCheckedToCenterButton()
-                .getcardCentr();
-        for (int i4 = 0; i4 < cardsItem(cardCentr).size(); i4++) {
-            if (cardsItem(cardCentr).get(i4).equals(sorted(cardsItem(cardCentr)).get(i4))) {
-                System.out.println(cardsItem(cardCentr).get(i4) + " = " + sorted(cardsItem(cardCentr)).get(i4));
-                Assert.assertEquals(cardsItem(cardCentr).get(i4), sorted(cardsItem(cardCentr)).get(i4));
-            } else {
-                System.out.println(cardsItem(cardCentr).get(i4) + " != " + sorted(cardsItem(cardCentr)).get(i4));
-                Assert.assertNotEquals(cardsItem(cardCentr).get(i4), sorted(cardsItem(cardCentr)).get(i4));
-            }
-        }
-        System.out.println("5-----------------------------------------");
-
-        List<WebElement> cardUpButtonCentr = isSearchOpened
-                .clickArrowUpButton()
-                .getcardCentr();
-        for (int i5 = 0; i5 < cardsItem(cardUpButtonCentr).size(); i5++) {
-            if (cardsItem(cardUpButtonCentr).get(i5).equals(sortedrevers(cardsItem(cardUpButtonCentr)).get(i5))) {
-                System.out.println(cardsItem(cardUpButtonCentr).get(i5) + " = " + sortedrevers(cardsItem(cardUpButtonCentr)).get(i5));
-                Assert.assertEquals(cardsItem(cardUpButtonCentr).get(i5), sortedrevers(cardsItem(cardUpButtonCentr)).get(i5));
-            } else {
-                System.out.println(cardsItem(cardUpButtonCentr).get(i5) + " != " + sortedrevers(cardsItem(cardUpButtonCentr)).get(i5));
-                Assert.assertNotEquals(cardsItem(cardUpButtonCentr).get(i5), sortedrevers(cardsItem(cardUpButtonCentr)).get(i5));
-            }
-        }
-        System.out.println("6-----------------------------------------");
-
-
-        List<WebElement> cardDownButtonCenter = isSearchOpened
-                .clickArrowDownButton()
-                .getcardCentr();
-        for (int i6 = 0; i6 < cardsItem(cardDownButtonCenter).size(); i6++) {
-            if (cardsItem(cardDownButtonCenter).get(i6).equals(sorted(cardsItem(cardDownButtonCenter)).get(i6))) {
-                System.out.println(cardsItem(cardDownButtonCenter).get(i6) + " = " + sorted(cardsItem(cardDownButtonCenter)).get(i6));
-                Assert.assertEquals(cardsItem(cardDownButtonCenter).get(i6), sorted(cardsItem(cardDownButtonCenter)).get(i6));
-            } else {
-                System.out.println(cardsItem(cardDownButtonCenter).get(i6) + " != " + sorted(cardsItem(cardDownButtonCenter)).get(i6));
-                Assert.assertNotEquals(cardsItem(cardDownButtonCenter).get(i6), sorted(cardsItem(cardDownButtonCenter)).get(i6));
-            }
-        }
-        softAssert.assertAll();
-
     }
 
     @DataProvider(name = "data")
@@ -158,7 +117,7 @@ public class TestClubPage extends BaseTestRunner {
         return data;
     }
 
-    @Test(dataProvider = "data", priority = 8)
+    @Test(dataProvider = "data")
     @Description("Verify Input Accepts Positive Integers From 2 To 18")
     @Issue("TUA-210")
     public void verifyInputAcceptsPositiveIntegersFrom2To18(int age, int expected) {
@@ -173,7 +132,7 @@ public class TestClubPage extends BaseTestRunner {
         Assert.assertEquals(actual, expected);
     }
 
-    @Test(priority = 9)
+    @Test()
     @Description("[allure]  Is Extended search menu is displayed and hidden after re-click")
     @Issue("TUA-224")
     public void testIsExtendedSearchMenuDisplayed() {
@@ -182,7 +141,7 @@ public class TestClubPage extends BaseTestRunner {
         Assert.assertTrue(clubsPage.isExtendedSearchMenuHidden());
     }
 
-    @Test(priority = 10)
+    @Test()
     @Description("[allure]  Verify child age andAvailable online")
     @Issue("TUA-510")
     public void testVerifyChildAgeAndAvailableOnline() {

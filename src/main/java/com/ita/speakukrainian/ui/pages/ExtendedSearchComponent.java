@@ -1,6 +1,5 @@
 package com.ita.speakukrainian.ui.pages;
 
-import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +21,8 @@ public class ExtendedSearchComponent extends BasePage {
     private WebElement arrowUpButton;
     @FindBy(css = ".anticon-arrow-down > svg")
     private WebElement arrowdownButton;
+    @FindBy(xpath = "//span[contains(.,'за алфавітом')]")
+    private WebElement sortedAlphabeticallyButton;
 
 
     ExtendedSearchComponent(WebDriver driver) {
@@ -46,7 +47,7 @@ public class ExtendedSearchComponent extends BasePage {
         return card;
     }
 
-    @Step("get carc centr ")
+    @Step("get card centr ")
     public List<WebElement> getcardCentr() {
         sleep(1000);
         return cardCentr;
@@ -57,11 +58,22 @@ public class ExtendedSearchComponent extends BasePage {
         arrowUpButton.click();
         return this;
     }
-
+    @Step("click Arrow Down Button ")
     public ExtendedSearchComponent clickArrowDownButton() {
         arrowdownButton.click();
         return this;
     }
+    @Step("go to class Club Page")
+    public ClubsPage getClubsPage() {
+        arrowdownButton.click();
+        return new ClubsPage(driver);
+    }
+    @Step("click Sorted Alphabetically Button ")
+    public ExtendedSearchComponent clickSortedAlphabeticallyButton() {
+        sortedAlphabeticallyButton.click();
+        return this;
+    }
+
 
 }
 

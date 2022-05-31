@@ -3,9 +3,9 @@
 <suite name="Test Suite">
     <test verbose="2" preserve-order="true" name="TA684">
         <classes>
-            <class name="com.ita.speakukrainian.ui.tests.TestAddClubPopUp">
+            <class name="com.ita.speakukrainian.ui.tests.TestRegistrationPage454">
                 <methods>
-                    <include name="TestVerifiesTheErrorMessageWhenEnterSameSymbols"/>
+                    <include name="enteredDataOnRegistrationPage"/>
                 </methods>
             </class>
             <class name="com.ita.speakukrainian.ui.tests.TestClubPage">
@@ -13,9 +13,9 @@
                     <include name="AdvancedSearchIfIsOpenedAndSorted"/>
                 </methods>
             </class>
-            <class name="com.ita.speakukrainian.ui.tests.TestRegistrationPage454">
+            <class name="com.ita.speakukrainian.ui.tests.TestAddClubPopUp">
                 <methods>
-                    <include name="enteredDataOnRegistrationPage"/>
+                    <include name="TestVerifiesTheErrorMessageWhenEnterSameSymbols"/>
                 </methods>
             </class>
         </classes>
