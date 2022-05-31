@@ -7,8 +7,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import java.util.Arrays;
-import java.util.List;
 
 public class TestClubDescription extends TestRuneWithAdmin {
 
@@ -53,13 +51,13 @@ public class TestClubDescription extends TestRuneWithAdmin {
                 .fillInContactPhoneInput(contactPhoneNumber)
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(russianCharacter)
-                .isErrorMessageDisplayed();
+                .actualErrorMessageDisplayed();
         explanation
                 .clearDescriptionField();
 
         String isErrorMessageGermanDisplayed = explanation
                 .fillInBasicDescriptionInput(germanCharacter)
-                .isErrorMessageDisplayed();
+                .actualErrorMessageDisplayed();
 
         softAssert.assertEquals(isErrorMessageForRussianDisplayed,expectedErrorMessageRussianLetter);
         softAssert.assertEquals(isErrorMessageGermanDisplayed,expectedErrorMessageGermanLetter);
