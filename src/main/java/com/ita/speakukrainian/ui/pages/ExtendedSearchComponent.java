@@ -1,12 +1,16 @@
 package com.ita.speakukrainian.ui.pages;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ExtendedSearchComponent extends BasePage {
 
@@ -23,9 +27,15 @@ public class ExtendedSearchComponent extends BasePage {
     private WebElement arrowdownButton;
     @FindBy(xpath = "//span[contains(.,'за алфавітом')]")
     private WebElement sortedAlphabeticallyButton;
+    @FindBy(css = "[type='search'][id*=select]")
+    private WebElement mainSearchInput;
+    @FindBy(css = "[class='clubs-not-found']")
+    private WebElement clubsNotFoundMessage;
+    @FindBy(css = "[data-icon='search']")
+    private WebElement dataIconSearch;
 
 
-    ExtendedSearchComponent(WebDriver driver) {
+    public ExtendedSearchComponent(WebDriver driver) {
         super(driver);
 
         PageFactory.initElements(driver, this);
@@ -73,6 +83,63 @@ public class ExtendedSearchComponent extends BasePage {
         sortedAlphabeticallyButton.click();
         return this;
     }
+    @Step("click on main search field")
+    public ExtendedSearchComponent clickMainSearchField() {
+        mainSearchInput.click();
+        return new ExtendedSearchComponent(driver);
+    }
+    @Step("fill in main search field ")
+    public ExtendedSearchComponent fillInMainSearchField(String text) {
+        mainSearchInput.sendKeys(text);
+        sleep(2000);
+        return new ExtendedSearchComponent(driver);
+    }
+    @Step("copy text")
+    public ExtendedSearchComponent copyText(String text) {
+        StringSelection stringSelection = new StringSelection(text);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+        return new ExtendedSearchComponent(driver);
+
+    }
+    @Step("paste text")
+    public ExtendedSearchComponent controlPlusV() {
+        mainSearchInput.sendKeys(Keys.CONTROL + "v");
+        return new ExtendedSearchComponent(driver);
+    }
+    @Step("getting result of search")
+    public List<String> resultOfSearch() {
+        sleep(2000);
+            return card.stream().map(el -> el.getText()).collect(Collectors.toList());
+
+    }
+
+    @Step("clear main search field")
+    public ExtendedSearchComponent clearMainSearchField() {
+        mainSearchInput.sendKeys(Keys.CONTROL + "a");
+        mainSearchInput.sendKeys(Keys.DELETE);
+        return new ExtendedSearchComponent(driver);
+    }
+    @Step("read number of characters in main search field")
+    public int readMainSearchField() {
+        return mainSearchInput.getAttribute("value").length();
+    }
+    @Step("verify is clubs not found message displayed")
+    public boolean isClubsNotFoundMessageDisplayed() {
+        return clubsNotFoundMessage.isDisplayed();
+    }
+    @Step("verify cards has text")
+    public boolean verifyCardsHasText(String expectedText) {
+        return card.stream().map(el -> el.getText()).allMatch(el -> el.contains(expectedText));
+
+    }
+    @Step("click data icon search")
+    public ExtendedSearchComponent clickDataIconSearch() {
+        sleep(12000);
+        dataIconSearch.click();
+        return new ExtendedSearchComponent(driver);
+    }
+
 
 
 }
