@@ -12,7 +12,7 @@ public class TestClubDescription extends TestRuneWithAdmin {
 
     @Test
     @Description("[allure] Verify that error message appears when user enters letters" +
-                 " in Russian or German languages into the field")
+            " in Russian or German languages into the field")
     @Issue("TUA-178")
     public void verifyErrorMessageOnRussianAndGermanLettersInDescription() {
         final String clubName = "Football";
@@ -28,13 +28,13 @@ public class TestClubDescription extends TestRuneWithAdmin {
         final String russianCharacter = "Жэк Мэр Нэп Пэр СэрЖэк Мэр Нэп Пэр СэрЖэк Мэр Нэп Пэр Сэр";
         final String germanCharacter = "Pax-Gebäude Pax-Gebäude Pax-Gebäude Pax-Gebäude Pax-Gebäude";
 
-        final String expectedErrorMessageRussianLetter = "Опис гуртка не може містити російські літери";
-        final String expectedErrorMessageGermanLetter = "Некоректний опис гуртка";
+        final String expectedErrorMessageRussianText = "Опис гуртка не може містити російські літери";
+        final String expectedErrorMessageGermanText = "Некоректний опис гуртка";
 
         SoftAssert softAssert = new SoftAssert();
         Explanation explanation = new Explanation(driver);
 
-        String isErrorMessageForRussianDisplayed = new HomePage(driver)
+        String actualErrorMessageRussianText = new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
                 .clickAddClubButton()
@@ -44,23 +44,24 @@ public class TestClubDescription extends TestRuneWithAdmin {
                 .fillInAgeToInput(ageTo)
                 .clickNextStepButton()
                 .fillInContactFacebookInput(contactFaceboo)
-                .fillInContactMailInput( contactEmail)
+                .fillInContactMailInput(contactEmail)
                 .fillInContactWhatsAppInput(contactWhatsUpp)
                 .fillInContactInput(contactName)
                 .fillInContactSkypeInput(contactSkype)
                 .fillInContactPhoneInput(contactPhoneNumber)
                 .clickNextStepButton()
                 .fillInBasicDescriptionInput(russianCharacter)
-                .actualErrorMessageDisplayed();
+                .getActualErrorMessage();
+
         explanation
                 .clearDescriptionField();
 
-        String isErrorMessageGermanDisplayed = explanation
+        String actualErrorMessageGermanText = explanation
                 .fillInBasicDescriptionInput(germanCharacter)
-                .actualErrorMessageDisplayed();
+                .getActualErrorMessage();
 
-        softAssert.assertEquals(isErrorMessageForRussianDisplayed,expectedErrorMessageRussianLetter);
-        softAssert.assertEquals(isErrorMessageGermanDisplayed,expectedErrorMessageGermanLetter);
+        softAssert.assertEquals(actualErrorMessageRussianText, expectedErrorMessageRussianText);
+        softAssert.assertEquals(actualErrorMessageGermanText, expectedErrorMessageGermanText);
         softAssert.assertAll();
     }
 
