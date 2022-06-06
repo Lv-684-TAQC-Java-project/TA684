@@ -69,7 +69,7 @@ public class TestForSavingNewOnAddClubPopUp extends BaseTestRunner {
     @Test
     public void GetClubFromBase(){
         ClubsService clubServise = new ClubsService();
-        List<ClubsEntity> club = clubServise.getClub();
+        List<ClubsEntity> club = clubServise.getByName("Малявки");
         ClubsEntity maliavky = club.get(0);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(maliavky.getAge_from(), 4);

@@ -35,4 +35,21 @@ public class ClubsDAO {
         ManagerDao.getInstance().closeStatement(statement);
         return  ClubsEntity.getClubs(rows);
     }
+    public ClubsEntity selectById(Long id) {
+        Statement statement = ManagerDao.getInstance().getStatement();
+        List<List<String>> rows = null;
+        try {
+            ResultSet resultSet = statement.executeQuery(String.format(ClubsEntity.SELECT_BY_ID, id));
+            rows = ManagerDao.getInstance().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        ManagerDao.getInstance().closeStatement(statement);
+        List<ClubsEntity> clubs = ClubsEntity.getClubs(rows);
+        if (clubs.size() == 0 ){
+            return null;
+        }
+        return  ClubsEntity.getClubs(rows).get(0);
+    }
 }

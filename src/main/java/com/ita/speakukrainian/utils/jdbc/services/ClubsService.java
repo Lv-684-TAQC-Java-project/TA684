@@ -19,4 +19,8 @@ public class ClubsService {
 
         return clubsDAO.selectByName(name);
     }
+    public ClubsEntity getById(Long id) {
+
+        return clubsDAO.selectById(id);
+    }
 }

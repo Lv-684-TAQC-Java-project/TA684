@@ -9,7 +9,8 @@ import java.util.List;
 @Data
 
 public class ClubsEntity {
-    public static final String SELECT_BY_NAME= "SELECT * FROM clubs WHERE name = '%S'";
+    public static final String SELECT_BY_NAME = "SELECT * FROM clubs WHERE name = '%s'";
+    public static final String SELECT_BY_ID = "SELECT * FROM clubs WHERE id = %d";
     public static final String SELECT_ALL = "SELECT * FROM clubs ORDER BY id";
 
 
@@ -22,8 +23,8 @@ public class ClubsEntity {
     private String description;
     private long feedback_count;
     private long id;
-    private boolean is_approved;
-   // private boolean is_online;
+    private Boolean is_approved;
+    private Boolean is_online;
     private String name;
     private double rating;
     private String url_background;
@@ -33,26 +34,25 @@ public class ClubsEntity {
     private long work_time;
 
 
-
     public ClubsEntity() {
-        this.age_from=0;
-        this.age_to=0;
-        this.center_external_id=0L;
-        this.center_id=0L;
+        this.age_from = 0;
+        this.age_to = 0;
+        this.center_external_id = 0L;
+        this.center_id = 0L;
         this.club_external_id = 0L;
-        this.contacts=null;
-        this.description=null;
-        this.feedback_count=0L;
+        this.contacts = null;
+        this.description = null;
+        this.feedback_count = 0L;
         this.id = 0L;
         this.name = null;
-        this.is_approved=true;
-        //this.is_online=true;
+        this.is_approved = null;
+        this.is_online = null;
         this.rating = 0D;
         this.url_background = null;
-        this.url_logo=null;
-        this.url_web=null;
-        this.user_id=0L;
-        this.work_time=0L;
+        this.url_logo = null;
+        this.url_web = null;
+        this.user_id = 0L;
+        this.work_time = 0L;
     }
 
     public static ClubsEntity getClub(List<String> row) {
@@ -64,14 +64,21 @@ public class ClubsEntity {
         //club.setClub_external_id(Long.parseLong(row.get(4)));
         club.setContacts(row.get(5));
         club.setDescription(row.get(6));
-       // club.setFeedback_count(Long.parseLong(row.get(7)));
+        // club.setFeedback_count(Long.parseLong(row.get(7)));
+        if (row.get(7) != null) {
+            club.setIs_approved(row.get(7) == "t" ? true : false);
+        }
+        if (row.get(8) != null) {
+            club.setIs_online(row.get(8) == "t" ? true : false);
+        }
+        club.setFeedback_count(Long.parseLong(row.get(7)));
         club.setName(row.get(9));
         club.setRating(Double.parseDouble(row.get(10)));
         club.setUrl_background(row.get(11));
         club.setUrl_logo(row.get(12));
         club.setUrl_web(row.get(13));
-       // club.setUser_id(Long.parseLong(row.get(14)));
-       // club.setWork_time(Long.parseLong(row.get(15)));
+        // club.setUser_id(Long.parseLong(row.get(14)));
+        // club.setWork_time(Long.parseLong(row.get(15)));
         return club;
     }
 
