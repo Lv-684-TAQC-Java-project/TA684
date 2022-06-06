@@ -173,7 +173,7 @@ public class TestAddClubPopUp extends TestRuneWithAdmin {
     }
 
     @Test()
-    @Description("[allure] Not valid enter phone number ")
+    @Description("[allure] Not valid enter description ")
     @Issue("TUA-176")
     public void testNotValidEnterPhoneNumber() {
         String expected = "Некоректний опис гуртка";
