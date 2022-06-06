@@ -12,7 +12,7 @@ public class Explanation extends BasePage {
     @FindBy(css = "#basic_description")
     private WebElement basicDescriptionInput;
     @FindBy(css = "[role='alert']")
-    private WebElement alerts;
+    private WebElement alert;
     @FindBy(xpath = "//*[@id=\"basic\"]/div[4]/div[2]/div[2]/div[1]")
     private WebElement wrongDescriptionAlert;
     @FindBy(xpath = "//form/div[4]/div[2]/div[2]/div")
@@ -55,9 +55,9 @@ public class Explanation extends BasePage {
         return new Explanation(driver);
     }
 
-    @Step("IS Error Messages Displayed")
-    public String actualErrorMessageDisplayed() {
-        return alerts.getText();
+    @Step("Get actual error message")
+    public String getActualErrorMessage() {
+        return alert.getText();
     }
 
     @Step("Get isDisplayed() massage")
