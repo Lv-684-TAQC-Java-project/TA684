@@ -4,12 +4,15 @@ import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import com.ita.speakukrainian.ui.pages.MyliavkyClubPage;
 import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
-import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
+import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
+import com.ita.speakukrainian.utils.jdbc.services.ClubsService;;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import java.util.List;
 
 public class TestForSavingNewOnAddClubPopUp extends BaseTestRunner {
     String ClubNameMaliavky="Малявки";
@@ -22,7 +25,7 @@ public class TestForSavingNewOnAddClubPopUp extends BaseTestRunner {
             "У 2005р. відбулась перша виставка робіт учасників Студії у Львівському обласному палаці мистецтв.";
 
     @BeforeMethod
-    public void beforeClass() {
+    public void beforeMethod() {
         new HomePage(driver)
                 .header()
                 .clickUserProFileButton()
@@ -33,7 +36,7 @@ public class TestForSavingNewOnAddClubPopUp extends BaseTestRunner {
     }
 
     @Test
-    @Description("Checking is new club was added and is all it's parameters was created correct.")
+    @Description("Checking if a new club was added and if all it's parameters was created correct")
     @Issue("TUA-506")
     public void SavingNewInAddClubPopUp() {
         SoftAssert softAssert = new SoftAssert();
@@ -62,5 +65,18 @@ public class TestForSavingNewOnAddClubPopUp extends BaseTestRunner {
         softAssert.assertTrue(myliavky.isCorrectPhone(), "Phone number was specified incorrectly");
         softAssert.assertAll();
     }
+
+    @Test
+    public void GetClubFromBase(){
+        ClubsService clubServise = new ClubsService();
+        List<ClubsEntity> club = clubServise.getClub();
+        ClubsEntity maliavky = club.get(0);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(maliavky.getAge_from(), 4);
+        softAssert.assertEquals(maliavky.getAge_to(), 6);
+        softAssert.assertEquals(maliavky.getName(), "Малявки");
+        softAssert.assertEquals(maliavky.getDescription(), descriptionOfMaliavky);
+    }
+
+
 }
-//додати скроли, перевырити алюр, додати степи
