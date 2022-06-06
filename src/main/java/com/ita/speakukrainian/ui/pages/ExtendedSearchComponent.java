@@ -27,6 +27,8 @@ public class ExtendedSearchComponent extends BasePage {
     private WebElement arrowdownButton;
     @FindBy(xpath = "//span[contains(.,'за алфавітом')]")
     private WebElement sortedAlphabeticallyButton;
+    @FindBy(xpath = "//*[text()=\"за рейтингом\"]")
+    private WebElement sortedRatingButton;
     @FindBy(css = "[type='search'][id*=select]")
     private WebElement mainSearchInput;
     @FindBy(css = "[class='clubs-not-found']")
@@ -81,6 +83,11 @@ public class ExtendedSearchComponent extends BasePage {
     @Step("click Sorted Alphabetically Button ")
     public ExtendedSearchComponent clickSortedAlphabeticallyButton() {
         sortedAlphabeticallyButton.click();
+        return this;
+    }
+    @Step("click Sorted rating Button ")
+    public ExtendedSearchComponent clickSortedRatingButton() {
+        sortedRatingButton.click();
         return this;
     }
     @Step("click on main search field")

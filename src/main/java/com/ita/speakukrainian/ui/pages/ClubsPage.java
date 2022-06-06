@@ -32,7 +32,6 @@ public class ClubsPage extends BasePage {
     private WebElement clubRadioButton;
     @FindBy(xpath = "//*[@id=\"basic_isCenter\"]/label[2]/span[1]/input")
     private WebElement centreRadioButton;
-
     @FindBy(xpath ="//div[@id='basic_isCenter']/label[@class='ant-radio-wrapper ant-radio-wrapper-checked ant-radio-wrapper-in-form-item']/span[contains(text(),'Центр')]")
     private WebElement centreRadioButtonIsPushed;
     @FindBy(xpath = "//*[@id=\"basic\"]/div[2]/div[2]/div/div/div/div")
@@ -45,6 +44,12 @@ public class ClubsPage extends BasePage {
     private WebElement sortMenuBarButton;
     @FindBy ( css=".content-center-list.false")
     private WebElement listOfCentres;
+    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/section/section/section/div[2]/div[1]/div")
+    private WebElement firstCard;
+    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/section/section/section/div[2]/div[2]/div")
+    private WebElement secondCard;
+    @FindBy(xpath = "//*[@class=\"ant-pagination-item ant-pagination-item-8 ant-pagination-item-active\"]")
+    private WebElement lastPage;
 
 
 
@@ -210,16 +215,26 @@ public class ClubsPage extends BasePage {
         }
         return true;
     }
-
+    @Step("clear age field")
     public ClubsPage clearAgeField() {
         getAgeInput().sendKeys(Keys.BACK_SPACE);
         return new ClubsPage(driver);
     }
-
+    @Step("double click age field")
     public ClubsPage doubleClickAgeField() {
         Actions actions = new Actions(driver);
         actions.doubleClick(getAgeInput()).perform();
         return new ClubsPage(driver);
+    }
+    @Step("this method get name 2 first card from first and last page")
+    public String[] verifyFirstAndLastCard(){
+        String[] nameArr = new String[4];
+        nameArr[0] = firstCard.getTagName();
+        nameArr[1] = firstCard.getTagName();
+        lastPage.click();
+        nameArr[2] = firstCard.getTagName();
+        nameArr[3] = firstCard.getTagName();
+        return nameArr;
     }
 
   }

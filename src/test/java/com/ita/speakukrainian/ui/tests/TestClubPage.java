@@ -2,6 +2,7 @@ package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.ClubsPage;
+import com.ita.speakukrainian.ui.pages.ExtendedSearchComponent;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.Item;
 import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
@@ -171,6 +172,21 @@ public class TestClubPage extends BaseTestRunner {
         clubsPage.clickSortMenuBarButton();
         softAssert.assertTrue(clubsPage.IsCentresSortedAsList(), "Centers was not sorted as list");
         softAssert.assertAll();
+    }
+
+    @Test()
+    @Description("[allure] Verify that the user can sort the search results by rating after clicking on the 'Центр' radio button")
+    @Issue("TUA-449")
+    public void testCheckSorterInDataBase () {
+        HeaderMenuComponent headerMenuComponent = new HeaderMenuComponent(driver);
+        ClubsPage clubsPage = new ClubsPage(driver);
+        ExtendedSearchComponent extendedSearchComponent = new ExtendedSearchComponent(driver);
+        SoftAssert softAssert = new SoftAssert();
+        headerMenuComponent.clickExtendedSearchButton().clickCentreRadioButton();
+        extendedSearchComponent.clickSortedRatingButton();
+
+
+
     }
 
 }
