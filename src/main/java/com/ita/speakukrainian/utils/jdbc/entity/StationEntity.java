@@ -16,6 +16,14 @@ public class StationEntity {
     private long cityId;
     private long districtId;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public StationEntity() {
         this.id = 0L;
         this.name = null;

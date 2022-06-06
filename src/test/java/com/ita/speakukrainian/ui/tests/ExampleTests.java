@@ -1,6 +1,8 @@
 package com.ita.speakukrainian.ui.tests;
 
+import com.ita.speakukrainian.utils.jdbc.entity.CenterEntity;
 import com.ita.speakukrainian.utils.jdbc.entity.StationEntity;
+import com.ita.speakukrainian.utils.jdbc.services.CenterServise;
 import com.ita.speakukrainian.utils.jdbc.services.StationServise;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -66,4 +68,16 @@ public class ExampleTests {
         softAssert.assertEquals(second.getDistrictId(), 0, "second bad CityId()");
         softAssert.assertAll();
     }
+
+    @Test
+    public void testCenters() {
+        CenterServise centerServise = new CenterServise();
+        List<CenterEntity> centers = centerServise.getAllCenters();
+        CenterEntity first = centers.get(0);
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(first.getDescriptions(), "Комп'ютерна грамотність, графіка, айдентика");
+        softAssert.assertAll();
+    }
+
 }
