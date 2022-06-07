@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.utils.jdbc.entity.StationEntity;
+import com.ita.speakukrainian.utils.jdbc.services.ClubsService;
 import com.ita.speakukrainian.utils.jdbc.services.StationServise;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -66,4 +67,5 @@ public class ExampleTests {
         softAssert.assertEquals(second.getDistrictId(), 0, "second bad CityId()");
         softAssert.assertAll();
     }
+
 }
