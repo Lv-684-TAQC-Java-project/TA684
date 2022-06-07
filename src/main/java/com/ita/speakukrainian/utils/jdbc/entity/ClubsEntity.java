@@ -60,25 +60,36 @@ public class ClubsEntity {
         club.setId(Long.parseLong(row.get(0)));
         club.setAge_from(Integer.parseInt(row.get(1)));
         club.setAge_to(Integer.parseInt(row.get(2)));
-        //club.setCenter_external_id(Long.parseLong(row.get(4)));
-        //club.setClub_external_id(Long.parseLong(row.get(4)));
+        if ((row.get(3)) !=null){
+        club.setCenter_external_id(Long.parseLong(row.get(3)));}
+        if ((row.get(4)) !=null){
+        club.setClub_external_id(Long.parseLong(row.get(4)));}
         club.setContacts(row.get(5));
         club.setDescription(row.get(6));
-        // club.setFeedback_count(Long.parseLong(row.get(7)));
         if (row.get(7) != null) {
             club.setIs_approved(row.get(7) == "t" ? true : false);
         }
         if (row.get(8) != null) {
             club.setIs_online(row.get(8) == "t" ? true : false);
         }
-        club.setFeedback_count(Long.parseLong(row.get(7)));
         club.setName(row.get(9));
         club.setRating(Double.parseDouble(row.get(10)));
         club.setUrl_background(row.get(11));
         club.setUrl_logo(row.get(12));
         club.setUrl_web(row.get(13));
-        // club.setUser_id(Long.parseLong(row.get(14)));
-        // club.setWork_time(Long.parseLong(row.get(15)));
+        if ((row.get(14)) != null) {
+            club.setWork_time(Long.parseLong(row.get(14)));
+        }
+        if ((row.get(15)) != null) {
+            club.setCenter_id(Long.parseLong(row.get(15)));
+        }
+        if ((row.get(16)) != null) {
+            club.setUser_id(Long.parseLong(row.get(16)));
+        }
+
+        if ((row.get(17)) != null) {
+            club.setFeedback_count(Long.parseLong(row.get(17)));
+        }
         return club;
     }
 
