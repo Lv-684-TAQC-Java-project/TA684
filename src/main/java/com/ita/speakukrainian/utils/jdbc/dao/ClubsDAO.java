@@ -53,11 +53,11 @@ public class ClubsDAO {
         return  ClubsEntity.getClubs(rows).get(0);
     }
 
-    public List<ClubsEntity> selectByIDAndCenterId(long id, long center_id) {
+    public List<ClubsEntity> selectByUserID(long userId) {
         Statement statement = ManagerDao.getInstance().getStatement();
         List<List<String>> rows = null;
         try {
-            ResultSet resultSet = statement.executeQuery(String.format(ClubsEntity.SELECT_BY_ID_CENTER_ID, id, center_id));
+            ResultSet resultSet = statement.executeQuery(String.format(ClubsEntity.SELECT_BY_USER_ID, userId));
             rows = ManagerDao.getInstance().parseResultSet(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();

@@ -11,13 +11,13 @@ public class ClubsEntity {
     public static final String SELECT_BY_NAME = "SELECT * FROM clubs WHERE name = '%s'";
     public static final String SELECT_BY_ID = "SELECT * FROM clubs WHERE id = %d";
     public static final String SELECT_ALL = "SELECT * FROM clubs ORDER BY id";
-    public static final String SELECT_BY_ID_CENTER_ID = "SELECT * FROM clubs WHERE id = %d AND center_id IS NOT NULL";
+    public static final String SELECT_BY_USER_ID = "SELECT * FROM clubs WHERE user_id = %d";
 
 
     private int ageFrom;
     private int ageTo;
     private long centerExternalId;
-    private long centerId;
+    private Long centerId;
     private long clubExternalId;
     private String contacts;
     private String description;
@@ -39,7 +39,7 @@ public class ClubsEntity {
         this.ageFrom = 0;
         this.ageTo = 0;
         this.centerExternalId = 0L;
-        this.centerId = 0L;
+        this.centerId = null;
         this.clubExternalId = 0L;
         this.contacts = null;
         this.description = null;
