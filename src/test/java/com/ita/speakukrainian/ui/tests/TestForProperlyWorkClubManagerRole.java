@@ -3,6 +3,7 @@ package com.ita.speakukrainian.ui.tests;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import com.ita.speakukrainian.ui.pages.MyliavkyClubPage;
+import com.ita.speakukrainian.ui.popup.RedactClubMaliavkyPopUp;
 import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
 import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
 import com.ita.speakukrainian.utils.jdbc.services.ClubsService;;
@@ -77,6 +78,22 @@ public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
         softAssert.assertEquals(maliavky.getName(), "Малявки");
         softAssert.assertEquals(maliavky.getDescription(), descriptionOfMaliavky);
     }
+    @Test
+    @Description("Checking if a changers was saved and if all it's parameters was created correct")
+    @Issue("TUA-508")
+    public void RewriteClubData(){
 
+        new HomePage(driver)
+         .header()
+                .clickUserProFileButton()
+                .clickMyProfileButton();
 
+        new MyProfilePage(driver)
+                .clickMoreActionMenu()
+                .clickRedactClub();
+        ClubsService clubServise = new ClubsService();
+        List<ClubsEntity> club = clubServise.getByName("Малявки");
+        ClubsEntity maliavky = club.get(0);
+        System.out.println(maliavky);
+    }
 }
