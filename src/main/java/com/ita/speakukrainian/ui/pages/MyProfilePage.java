@@ -3,6 +3,7 @@ package com.ita.speakukrainian.ui.pages;
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
+import com.ita.speakukrainian.ui.popup.RedactClubMaliavkyPopUp;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,6 +24,12 @@ public class MyProfilePage extends BaseObjectPage {
 
     @FindBy(xpath = "//section[@class='ant-layout user-clubs']/div/div[2]/div/div/button")
     private WebElement detailsMaliavky;
+
+    @FindBy(xpath = "//section[@class='ant-layout user-clubs']/div/div[2]/div/div/div[1]/div[2]/div")
+    private WebElement moreActionMenu;
+
+    @FindBy(css =".ant-dropdown-menu-title-content > div > div" )
+    private WebElement redactClub;
 
     private final HeaderMenuComponent headerMenu;
 
@@ -63,6 +70,17 @@ public class MyProfilePage extends BaseObjectPage {
     public MyliavkyClubPage clickDetailsButton(){
         detailsMaliavky.click();
         return new MyliavkyClubPage(driver);
+    }
+
+    @Step("Choose menu to Myliavky club page")
+    public MyProfilePage clickMoreActionMenu(){
+        moreActionMenu.click();
+        return new MyProfilePage(driver);
+    }
+
+    public RedactClubMaliavkyPopUp clickRedactClub(){
+        redactClub.click();
+        return new RedactClubMaliavkyPopUp(driver);
     }
 }
 

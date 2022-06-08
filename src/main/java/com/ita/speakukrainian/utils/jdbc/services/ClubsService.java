@@ -5,6 +5,7 @@ import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClubsService {
     private final ClubsDAO clubsDAO;
@@ -22,5 +23,8 @@ public class ClubsService {
     public ClubsEntity getById(Long id) {
 
         return clubsDAO.selectById(id);
+    }
+    public List<ClubsEntity> getByUserIDAndCenterNotNull(long id) {
+        return clubsDAO.selectByUserID(id).stream().filter(club->club.getCenterId()!=null).collect(Collectors.toList());
     }
 }
