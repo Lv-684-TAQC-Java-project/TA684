@@ -14,7 +14,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-public class TestForSavingNewOnAddClubPopUp extends BaseTestRunner {
+public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
     String ClubNameMaliavky="Малявки";
     int numbOfCheckBox = 3; //"Студії раннього розвитку"
     String age1InMaliavky = "2";
