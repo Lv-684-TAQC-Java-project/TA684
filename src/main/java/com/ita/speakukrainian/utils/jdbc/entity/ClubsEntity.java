@@ -2,6 +2,7 @@ package com.ita.speakukrainian.utils.jdbc.entity;
 
 import lombok.Data;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,9 @@ public class ClubsEntity {
     public static final String SELECT_BY_NAME = "SELECT * FROM clubs WHERE name = '%s'";
     public static final String SELECT_BY_ID = "SELECT * FROM clubs WHERE id = %d";
     public static final String SELECT_ALL = "SELECT * FROM clubs ORDER BY id";
+    public static final String SELECT_ALL_NAME= "SELECT name FROM clubs ORDER BY id";
     public static final String SELECT_BY_USER_ID = "SELECT * FROM clubs WHERE user_id = %d";
+    public static final String SELECT_NAME_USER_WHERE_LIKE = "SELECT name FROM clubs WHERE name like 'Anda_usia%'";
 
 
     private int ageFrom;
@@ -54,6 +57,12 @@ public class ClubsEntity {
         this.urlWeb = null;
         this.userId = 0L;
         this.workTime = 0L;
+    }
+    public static ClubsEntity getIdName(List<String> row) {
+        ClubsEntity club = new ClubsEntity();
+       // club.setId(Long.parseLong(row.get(0)));
+        club.setName(row.get(0));
+        return club;
     }
 
     public static ClubsEntity getClub(List<String> row) {
@@ -101,4 +110,13 @@ public class ClubsEntity {
         }
         return clubs;
     }
+
+    public static List<ClubsEntity> getIdNames(List<List<String>> rows) {
+        List<ClubsEntity> clubs = new ArrayList<>();
+        for (List<String> row : rows) {
+            clubs.add(getIdName(row));
+        }
+        return clubs;
+    }
+
 }

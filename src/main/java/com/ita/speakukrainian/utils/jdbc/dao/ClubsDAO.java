@@ -21,6 +21,47 @@ public class ClubsDAO {
         ManagerDao.getInstance().closeStatement(statement);
         return  ClubsEntity.getClubs(rows);
     }
+//    public List<ClubsEntity> selectAllNames() {
+//        Statement statement = ManagerDao.get().getStatement();
+//        List<List<String>> rows = null;
+//
+//        try {
+//            ResultSet resultSet = statement.executeQuery(ClubsEntity.SELECT_NAME);
+//            rows = ManagerDao.get().parseResultSet(resultSet);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        ManagerDao.get().closeStatement(statement);
+//        return ClubsEntity.getClubsName(rows);
+//    }
+    public List<ClubsEntity> selectAllNameClubs() {
+        Statement statement = ManagerDao.getInstance().getStatement();
+        List<List<String>> rows = null;
+        try {
+            ResultSet resultSet = statement.executeQuery(ClubsEntity.SELECT_ALL_NAME);
+            rows = ManagerDao.getInstance().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        ManagerDao.getInstance().closeStatement(statement);
+         return ClubsEntity.getClubs(rows);
+       // return  ClubsEntity.getIdNames(rows);
+    }
+    public List<ClubsEntity> selectAllNameClubsUseLike() {
+        Statement statement = ManagerDao.getInstance().getStatement();
+        List<List<String>> rows = null;
+        try {
+            ResultSet resultSet = statement.executeQuery(ClubsEntity.SELECT_NAME_USER_WHERE_LIKE);
+            rows = ManagerDao.getInstance().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        ManagerDao.getInstance().closeStatement(statement);
+       // return ClubsEntity.getClubs(rows);
+        return  ClubsEntity.getIdNames(rows);
+    }
 
     public List<ClubsEntity> selectByName(String name) {
         Statement statement = ManagerDao.getInstance().getStatement();

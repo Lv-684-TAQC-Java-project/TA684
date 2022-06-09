@@ -73,8 +73,8 @@ public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
         List<ClubsEntity> club = clubServise.getByName("Малявки");
         ClubsEntity maliavky = club.get(0);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(maliavky.getAge_from(), 4);
-        softAssert.assertEquals(maliavky.getAge_to(), 6);
+        softAssert.assertEquals(maliavky.getAgeFrom(), 4);
+        softAssert.assertEquals(maliavky.getAgeTo(), 6);
         softAssert.assertEquals(maliavky.getName(), "Малявки");
         softAssert.assertEquals(maliavky.getDescription(), descriptionOfMaliavky);
     }
