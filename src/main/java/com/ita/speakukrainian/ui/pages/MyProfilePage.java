@@ -74,6 +74,7 @@ public class MyProfilePage extends BaseObjectPage {
 
     @Step("Choose menu to Myliavky club page")
     public MyProfilePage clickMoreActionMenu(){
+        scrollToElement(moreActionMenu);
         moreActionMenu.click();
         return new MyProfilePage(driver);
     }

@@ -18,6 +18,12 @@ public class MainInformation extends BasePage {
     private WebElement ageFromInput;
     @FindBy(css = "#basic_ageTo")
     private WebElement ageToInput;
+
+    @FindBy(css="#basic_centerId")
+    private WebElement selectCentre;
+
+    @FindBy(xpath="//div[2]/div/div/div/div[4]/div")
+    private WebElement academyOfSmartKids;
     @FindBy(css = "[class*='add-club-content-next']")
     private WebElement nextStepButton;
 
@@ -70,10 +76,20 @@ public class MainInformation extends BasePage {
         return new MainInformation(driver);
     }
 
+    @Step("Choose in center")
+    public MainInformation selectCentre() {
+        selectCentre.click();
+        scrollToElement(academyOfSmartKids);
+        academyOfSmartKids.click();
+        return new MainInformation(driver);
+    }
+
     @Step("Click next step")
     public Contacts clickNextStepButton() {
         getNextStepButton().click();
         return new Contacts(driver);
     }
+
+
 
 }

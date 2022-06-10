@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.ui.tests;
 
+import com.ita.speakukrainian.ui.pages.BasePage;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import com.ita.speakukrainian.ui.pages.MyliavkyClubPage;
@@ -9,6 +10,7 @@ import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
 import com.ita.speakukrainian.utils.jdbc.services.ClubsService;;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -16,14 +18,18 @@ import org.testng.asserts.SoftAssert;
 import java.util.List;
 
 public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
-    String ClubNameMaliavky="Малявки";
+    String clubNameMaliavky="Малявки";
+    String rename = "Буцики";
     int numbOfCheckBox = 3; //"Студії раннього розвитку"
-    String age1InMaliavky = "2";
-    String age2InMaliavky = "4";
+    String age1InMaliavky = "4";
+    String age2InMaliavky = "6";
     String phoneOfMaliavky = "0934444444";
+    String newPhone = "0935797009";
+    Long centerId =264L;
     String descriptionOfMaliavky = "Відділення образотворчого та декоративного мистецтва відкрите з моменту заснування Студії.\n" +
             "\n" +
             "У 2005р. відбулась перша виставка робіт учасників Студії у Львівському обласному палаці мистецтв.";
+    String newDescription ="Відділення образотворчого та декоративного мистецтва відкрите з моменту заснування Студії у 2005р.";
 
     @BeforeMethod
     public void beforeMethod() {
@@ -45,10 +51,11 @@ public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
         new HomePage(driver)
                 .header()
                 .clickAddClubButtonOnHeader()
-                .fillInClubNameInput(ClubNameMaliavky)
+                .fillInClubNameInput(clubNameMaliavky)
                 .clickOptionCheckboxes(numbOfCheckBox)
                  .fillInAgeFromInput(age1InMaliavky)
                  .fillInAgeToInput(age2InMaliavky)
+                .selectCentre()
                 .clickNextStepButton()
                 .fillInContactPhoneInput(phoneOfMaliavky)
                 .clickNextStepButton()
@@ -70,30 +77,48 @@ public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
     @Test
     public void GetClubFromBase(){
         ClubsService clubServise = new ClubsService();
-        List<ClubsEntity> club = clubServise.getByName("Малявки");
+        List<ClubsEntity> club = clubServise.getByName(clubNameMaliavky);
         ClubsEntity maliavky = club.get(0);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(maliavky.getAge_from(), 4);
-        softAssert.assertEquals(maliavky.getAge_to(), 6);
-        softAssert.assertEquals(maliavky.getName(), "Малявки");
+        softAssert.assertEquals(maliavky.getAgeFrom(), age1InMaliavky);
+        softAssert.assertEquals(maliavky.getAgeTo(), age2InMaliavky);
+        softAssert.assertEquals(maliavky.getName(), clubNameMaliavky);
         softAssert.assertEquals(maliavky.getDescription(), descriptionOfMaliavky);
+        softAssert.assertAll();
     }
     @Test
     @Description("Checking if a changers was saved and if all it's parameters was created correct")
     @Issue("TUA-508")
     public void RewriteClubData(){
-
+        SoftAssert softAssert = new SoftAssert();
+        ClubsService clubServise = new ClubsService();
         new HomePage(driver)
          .header()
                 .clickUserProFileButton()
                 .clickMyProfileButton();
-
+         List<ClubsEntity> clubIdCenterId = clubServise.getByUserIDAndCenterNotNull(centerId);
+        softAssert.assertTrue(!clubIdCenterId.isEmpty(), "No such clubs in base");
+        new BasePage(driver).saveText(clubIdCenterId);
         new MyProfilePage(driver)
                 .clickMoreActionMenu()
                 .clickRedactClub();
-        ClubsService clubServise = new ClubsService();
-        List<ClubsEntity> club = clubServise.getByName("Малявки");
-        ClubsEntity maliavky = club.get(0);
-        System.out.println(maliavky);
+        List<ClubsEntity> clubName = clubServise.getByName(clubNameMaliavky);
+        softAssert.assertTrue(!clubName.isEmpty(), "No such club in base");
+        new BasePage(driver).saveText(clubName);
+        new RedactClubMaliavkyPopUp(driver)
+                .changeClubNameField(rename)
+                .chooseDevelopmentCheckBox()
+                .clickAgeFromChangeDown()
+                .clickAgeToChangeDown()
+                .saveAgeChanges()
+                .chooseNewCenter()
+                .saveMainWindowChangers()
+                .addressAndContacts()
+                .changePhoneWindow(newPhone)
+                 .saveContactWindowChangers()
+                .clubDescription()
+                .makeNewDescription(newDescription)
+                .saveChanges();
+        softAssert.assertAll();
     }
 }
