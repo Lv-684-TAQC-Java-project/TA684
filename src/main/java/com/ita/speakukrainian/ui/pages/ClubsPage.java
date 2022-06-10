@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import javax.swing.*;
+import java.util.List;
 
 public class ClubsPage extends BasePage {
     private HeaderMenuComponent headerMenuComponent;
@@ -45,6 +45,19 @@ public class ClubsPage extends BasePage {
     private WebElement sortMenuBarButton;
     @FindBy ( css=".content-center-list.false")
     private WebElement listOfCentres;
+    @FindBy(xpath = "//div[contains(@class,'content-clubs-list content-clubs-block')]/div")
+    private List<WebElement> clubsCard;
+    @FindBy(xpath = "//div[contains(@class,'content-center-list content-center-block')]/div")
+    private List<WebElement> centersCard;
+    @FindBy(xpath = "//section[@class='ant-layout ant-layout-has-sider club-list']")
+    private WebElement extendedSearchPage;
+    @FindBy(xpath = "//span[text()='за алфавітом']")
+    private WebElement sortAlphabeticallyButton;
+    @FindBy(xpath = "//*[@id='basic']/div[2]/div[2]/div/div/div/span[2]")
+    private WebElement clearButton;
+    @FindBy(xpath = "//span[@class='anticon anticon-arrow-up control-sort-arrow']")
+    private WebElement arrowUpButton;
+
 
 
 
@@ -100,6 +113,11 @@ public class ClubsPage extends BasePage {
 
     public WebElement getListOfCentres(){
         return listOfCentres;
+    }
+
+    public List<WebElement> getCentersCard() {
+        sleep(1000);
+        return centersCard;
     }
 
     @Step("Fill in age")
@@ -210,17 +228,41 @@ public class ClubsPage extends BasePage {
         }
         return true;
     }
-
+    @Step("Clear age field")
     public ClubsPage clearAgeField() {
         getAgeInput().sendKeys(Keys.BACK_SPACE);
         return new ClubsPage(driver);
     }
-
+    @Step("Double click on age field ")
     public ClubsPage doubleClickAgeField() {
         Actions actions = new Actions(driver);
         actions.doubleClick(getAgeInput()).perform();
         return new ClubsPage(driver);
     }
+    @Step("Verify is extended search page displayed")
+    public boolean isExtendedSearchPageDisplayed() {
+       return extendedSearchPage.isDisplayed();
+
+    }
+    @Step("Click sort alphabetically button")
+    public ClubsPage clickSortAlphabeticallyButton() {
+        sleep(2000);
+        sortAlphabeticallyButton.click();
+        return new ClubsPage(driver);
+    }
+    @Step("Click center button")
+    public ClubsPage clickClearButton() {
+        sleep(2000);
+        clearButton.click();
+        return new ClubsPage(driver);
+    }
+    @Step("Click arrow up button")
+    public ClubsPage clickArrowUpButton() {
+        sleep(2000);
+        arrowUpButton.click();
+        return new ClubsPage(driver);
+    }
+
 
   }
 

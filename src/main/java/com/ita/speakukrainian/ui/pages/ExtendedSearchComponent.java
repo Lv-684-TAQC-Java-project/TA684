@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ExtendedSearchComponent extends BasePage {
 
@@ -35,6 +34,10 @@ public class ExtendedSearchComponent extends BasePage {
     private WebElement clubsNotFoundMessage;
     @FindBy(css = "[data-icon='search']")
     private WebElement dataIconSearch;
+    @FindBy(xpath = "//div[contains(@class,'content-clubs-list content-clubs-block')]/div")
+    private List<WebElement> clubsCard;
+    @FindBy(xpath = "//div[contains(@class,'content-center-list content-center-block')]/div")
+    private WebElement centerItems;
 
 
     public ExtendedSearchComponent(WebDriver driver) {
@@ -114,12 +117,6 @@ public class ExtendedSearchComponent extends BasePage {
         mainSearchInput.sendKeys(Keys.CONTROL + "v");
         return new ExtendedSearchComponent(driver);
     }
-    @Step("getting result of search")
-    public List<String> resultOfSearch() {
-        sleep(2000);
-            return card.stream().map(el -> el.getText()).collect(Collectors.toList());
-
-    }
 
     @Step("clear main search field")
     public ExtendedSearchComponent clearMainSearchField() {
@@ -137,7 +134,7 @@ public class ExtendedSearchComponent extends BasePage {
     }
     @Step("verify cards has text")
     public boolean verifyCardsHasText(String expectedText) {
-        return card.stream().map(el -> el.getText()).allMatch(el -> el.contains(expectedText));
+        return clubsCard.stream().map(el -> el.getText()).allMatch(el -> el.contains(expectedText));
 
     }
     @Step("click data icon search")
