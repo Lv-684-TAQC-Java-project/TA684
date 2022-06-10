@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ExtendedSearchComponent extends BasePage {
 
@@ -34,7 +33,7 @@ public class ExtendedSearchComponent extends BasePage {
     @FindBy(css = "[data-icon='search']")
     private WebElement dataIconSearch;
     @FindBy(xpath = "//div[contains(@class,'content-clubs-list content-clubs-block')]/div")
-    private List<WebElement> clubItems;
+    private List<WebElement> clubsCard;
     @FindBy(xpath = "//div[contains(@class,'content-center-list content-center-block')]/div")
     private WebElement centerItems;
 
@@ -128,7 +127,7 @@ public class ExtendedSearchComponent extends BasePage {
     }
     @Step("verify cards has text")
     public boolean verifyCardsHasText(String expectedText) {
-        return clubItems.stream().map(el -> el.getText()).allMatch(el -> el.contains(expectedText));
+        return clubsCard.stream().map(el -> el.getText()).allMatch(el -> el.contains(expectedText));
 
     }
     @Step("click data icon search")

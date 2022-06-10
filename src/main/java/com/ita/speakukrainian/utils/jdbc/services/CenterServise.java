@@ -13,5 +13,14 @@ public class CenterServise {
 
     public List<CenterEntity> getAllCenters() {
         return centersDAO.selectAll();
+
+    }
+
+    public List<CenterEntity> getIdNamesAsc() {
+        return centersDAO.selectIdNameAsc();
+    }
+
+    public List<CenterEntity> getIdNamesDesc() {
+        return centersDAO.selectIdNameDesc();
     }
 }
