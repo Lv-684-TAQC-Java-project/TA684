@@ -16,6 +16,8 @@ public class ExtendedSearchComponent extends BasePage {
 
     @FindBy(css = ".ant-layout-has-sider")
     private WebElement advancedSearch;
+    @FindBy(xpath = "//*[@id='root']/section/section/main/section/section/main/div/./div")
+    private List<WebElement> cardFirst;
     @FindBy(xpath = "//*[@id='root']/section/section/main/section/section/main/div[2]/./div")
     private List<WebElement> card;
     @FindBy(xpath = "//*[@id='root']/section/section/main/section/section/section/div[2]/./div")
@@ -53,6 +55,11 @@ public class ExtendedSearchComponent extends BasePage {
     public boolean isDisplayedadvancedSearch() {
         saveScreenshot();
         return advancedSearch.isDisplayed();
+    }
+    @Step("get cardFirst ")
+    public List<WebElement> getcardFirst() {
+        sleep(1000);
+        return cardFirst;
     }
     @Step("get card ")
     public List<WebElement> getcard() {
