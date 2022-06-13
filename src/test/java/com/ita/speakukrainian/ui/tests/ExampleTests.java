@@ -79,23 +79,6 @@ public class ExampleTests {
         SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertEquals(first.getDescriptions(), "Комп'ютерна грамотність, графіка, айдентика");
-
-    @Test
-    public void afterSuite() {
-        StationServise stationServise = new StationServise();
-        List<StationEntity> stations = stationServise.getALLStations();
-        StationEntity first = stations.get(0);
-        StationEntity second = stations.get(1);
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(first.getId(), 1L);
-        softAssert.assertEquals(first.getName(), "Академмістечко", "bad name");
-        softAssert.assertEquals(first.getCityId(), 1, "bad CityId()");
-        softAssert.assertEquals(first.getDistrictId(), 2, "bad CityId()");
-        softAssert.assertEquals(second.getId(), 2, "second bad id");
-        softAssert.assertEquals(second.getName(), "Арсенальна", "second bad name");
-        softAssert.assertEquals(second.getCityId(), 1, "second bad CityId()");
-        softAssert.assertEquals(second.getDistrictId(), 0, "second bad CityId()");
-        softAssert.assertAll();
     }
 
 }
