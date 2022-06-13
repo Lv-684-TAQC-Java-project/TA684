@@ -193,54 +193,54 @@ public class TestClubPage extends BaseTestRunner {
 
         softAssert.assertTrue(isExtendedSearchPageDisplayed);
 
-        List<WebElement> centersCardAsc = extendedSearchOpened
+        List<WebElement> centersCardAscFromUi = extendedSearchOpened
                 .clickCentreRadioButton()
                 .clickClearButton()
                 .clickSortAlphabeticallyButton()
                 .getCentersCard();
 
-        List<String> listCenterCards = cardsItem(centersCardAsc);
+        List<String> centerNamesFromUiAsc = cardsItem(centersCardAscFromUi);
 
-        List<String> sortedListCenterCardsAsc = sorted(listCenterCards);
+        List<String> sortedCenterNamesFromUiAsc = sorted(centerNamesFromUiAsc);
 
-        for (int i = 0; i < listCenterCards.size(); i++) {
-            System.out.println(listCenterCards.get(i));
-            System.out.println(sortedListCenterCardsAsc.get(i));
-            softAssert.assertEquals(listCenterCards.get(i), sortedListCenterCardsAsc.get(i));
+        for (int i = 0; i < centerNamesFromUiAsc.size(); i++) {
+            System.out.println(centerNamesFromUiAsc.get(i));
+            System.out.println(sortedCenterNamesFromUiAsc.get(i));
+            softAssert.assertEquals(centerNamesFromUiAsc.get(i), sortedCenterNamesFromUiAsc.get(i));
             System.out.println("--------------------------------------------------------------");
         }
         CenterServise centerServise = new CenterServise();
 
-        List<CenterEntity> centers = centerServise.getIdNamesAsc();
+        List<CenterEntity> sortedCenterNamesFromDbAsc = centerServise.getIdNamesAsc();
 
-        for (int i = 0; i < listCenterCards.size(); i++) {
-            System.out.println(listCenterCards.get(i));
-            System.out.println(centers.get(i).getName());
-            softAssert.assertEquals(listCenterCards.get(i), centers.get(i).getName());
+        for (int i = 0; i < centerNamesFromUiAsc.size(); i++) {
+            System.out.println(centerNamesFromUiAsc.get(i));
+            System.out.println(sortedCenterNamesFromDbAsc.get(i).getName());
+            softAssert.assertEquals(centerNamesFromUiAsc.get(i), sortedCenterNamesFromDbAsc.get(i).getName());
             System.out.println("--------------------------------------------------------------");
         }
 
-        List<WebElement> centerCardsRevers = clubsPage.
+        List<WebElement> centersCardDescFromUi = clubsPage.
                 clickArrowUpButton()
                 .getCentersCard();
 
-        List<String> listCenterCardsRevers = cardsItem(centerCardsRevers);
+        List<String> centerNamesFromUiDesc = cardsItem(centersCardDescFromUi);
 
-        List<String> sortedListCenterCardsDesc = sortedrevers(listCenterCardsRevers);
+        List<String> sortedCenterNamesFromUiDesc = sortedrevers(centerNamesFromUiDesc);
 
-        for (int i = 0; i < listCenterCardsRevers.size(); i++) {
-            System.out.println(listCenterCardsRevers.get(i));
-            System.out.println(sortedListCenterCardsDesc.get(i));
-            softAssert.assertEquals(listCenterCardsRevers.get(i), sortedListCenterCardsDesc.get(i));
+        for (int i = 0; i < centerNamesFromUiDesc.size(); i++) {
+            System.out.println(centerNamesFromUiDesc.get(i));
+            System.out.println(sortedCenterNamesFromUiDesc.get(i));
+            softAssert.assertEquals(centerNamesFromUiDesc.get(i), sortedCenterNamesFromUiDesc.get(i));
             System.out.println("--------------------------------------------------------------");
         }
 
-        List<CenterEntity> centersRevers = centerServise.getIdNamesDesc();
+        List<CenterEntity> sortedCenterNamesFromDbDesc = centerServise.getIdNamesDesc();
 
-        for (int i = 0; i < listCenterCardsRevers.size(); i++) {
-            System.out.println(listCenterCardsRevers.get(i));
-            System.out.println(centersRevers.get(i).getName());
-            softAssert.assertEquals(listCenterCardsRevers.get(i), centersRevers.get(i).getName());
+        for (int i = 0; i < centerNamesFromUiDesc.size(); i++) {
+            System.out.println(centerNamesFromUiDesc.get(i));
+            System.out.println(sortedCenterNamesFromDbDesc.get(i).getName());
+            softAssert.assertEquals(centerNamesFromUiDesc.get(i), sortedCenterNamesFromDbDesc.get(i).getName());
             System.out.println("--------------------------------------------------------------");
         }
 
