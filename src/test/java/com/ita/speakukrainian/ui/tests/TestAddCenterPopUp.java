@@ -4,8 +4,9 @@ import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.popup.LocationPopUp;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
+import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import jdk.jfr.Description;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

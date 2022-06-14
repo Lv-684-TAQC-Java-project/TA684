@@ -12,6 +12,10 @@ public class CenterEntity {
     public static final String SELECT_ALL = "SELECT * FROM centers ORDER BY id";
     public static final String SELECT_ID_NAME_RATING_DESC = "SELECT id, name, rating FROM centers ORDER BY rating desc";
     public static final String SELECT_ID_NAME_RATING_ASC = "SELECT id, name, rating FROM centers ORDER BY rating asc";
+    public static final String SELECT_NAME_ID_ASC = "SELECT id,name FROM centers ORDER BY name ASC";
+    public static final String SELECT_NAME_ID_DESC = "SELECT id,name FROM centers ORDER BY name DESC";
+
+
     private long Id;
     private long centerExternalId;
     private String contact;
@@ -57,6 +61,24 @@ public class CenterEntity {
         if(row.get(2) != null) {
             center.setRating(Double.parseDouble(row.get(2)));
         }
+
+    public static CenterEntity getIdNameAsc(List<String> row) {
+        CenterEntity center = new CenterEntity();
+        center.setId(Long.parseLong(row.get(0)));
+        if(row.get(1) != null) {
+            center.setName(row.get(1));
+        }
+
+        return center;
+
+    }
+
+    public static CenterEntity getIdNameDesc(List<String> row) {
+        CenterEntity center = new CenterEntity();
+        center.setId(Long.parseLong(row.get(0)));
+        if(row.get(1) != null) {
+            center.setName(row.get(1));
+        }
         return center;
 
     }
@@ -69,6 +91,7 @@ public class CenterEntity {
         return centers;
     }
 
+
     public static List<CenterEntity> getCentersIdNameRating(List<List<String>> rows) {
         List<CenterEntity> centers = new ArrayList<>();
         for (List<String> row : rows) {
@@ -76,4 +99,20 @@ public class CenterEntity {
         }
         return centers;
     }
+
+    public static List<CenterEntity> getIdNamesAsc(List<List<String>> rows) {
+        List<CenterEntity> centers = new ArrayList<>();
+        for (List<String> row : rows) {
+            centers.add(getIdNameAsc(row));
+        }
+        return centers;
+    }
+public static List<CenterEntity> getIdNamesDesc(List<List<String>> rows) {
+        List<CenterEntity> centers = new ArrayList<>();
+        for (List<String> row : rows) {
+            centers.add(getIdNameDesc(row));
+        }
+        return centers;
+    }
+
 }
