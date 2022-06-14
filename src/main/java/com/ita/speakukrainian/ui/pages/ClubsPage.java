@@ -32,7 +32,6 @@ public class ClubsPage extends BasePage {
     private WebElement clubRadioButton;
     @FindBy(xpath = "//*[@id=\"basic_isCenter\"]/label[2]/span[1]/input")
     private WebElement centreRadioButton;
-
     @FindBy(xpath ="//div[@id='basic_isCenter']/label[@class='ant-radio-wrapper ant-radio-wrapper-checked ant-radio-wrapper-in-form-item']/span[contains(text(),'Центр')]")
     private WebElement centreRadioButtonIsPushed;
     @FindBy(xpath = "//*[@id=\"basic\"]/div[2]/div[2]/div/div/div/div")
@@ -57,8 +56,6 @@ public class ClubsPage extends BasePage {
     private WebElement clearButton;
     @FindBy(xpath = "//span[@class='anticon anticon-arrow-up control-sort-arrow']")
     private WebElement arrowUpButton;
-
-
 
 
     public ClubsPage(WebDriver driver) {
@@ -228,11 +225,13 @@ public class ClubsPage extends BasePage {
         }
         return true;
     }
+
     @Step("Clear age field")
     public ClubsPage clearAgeField() {
         getAgeInput().sendKeys(Keys.BACK_SPACE);
         return new ClubsPage(driver);
     }
+
     @Step("Double click on age field ")
     public ClubsPage doubleClickAgeField() {
         Actions actions = new Actions(driver);
@@ -261,6 +260,13 @@ public class ClubsPage extends BasePage {
         sleep(2000);
         arrowUpButton.click();
         return new ClubsPage(driver);
+    }
+
+
+    @Step("Click next page button")
+    public  ClubsPage clickNextPageButton(){
+         nextPage.click();
+         return this;
     }
 
 

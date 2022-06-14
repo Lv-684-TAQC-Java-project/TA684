@@ -2,6 +2,7 @@ package com.ita.speakukrainian.ui.tests;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.ClubsPage;
+import com.ita.speakukrainian.ui.pages.ExtendedSearchComponent;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.Item;
 import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
@@ -14,6 +15,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -178,6 +180,43 @@ public class TestClubPage extends BaseTestRunner {
     }
 
     @Test()
+    @Description("[allure] Verify that the user can sort the search results by rating after clicking on the 'Центр' radio button")
+    @Issue("TUA-449")
+    public void testCheckSorterInDataBase () {
+        HeaderMenuComponent headerMenuComponent = new HeaderMenuComponent(driver);
+        ClubsPage clubsPage = new ClubsPage(driver);
+        ExtendedSearchComponent extendedSearchComponent = new ExtendedSearchComponent(driver);
+        SoftAssert softAssert = new SoftAssert();
+        CenterServise centerServise = new CenterServise();
+        List<CenterEntity> tableByAcs = centerServise.getIdNameRatingByAscCenters();
+        List<CenterEntity> tableByDecs = centerServise.getIdNameRatingByDescCenters();
+
+        headerMenuComponent.clickExtendedSearchButton();
+        extendedSearchComponent.clickClearDefaultCity();
+
+        List<WebElement> card;
+                 card = clubsPage.clickCheckedToCenterButton()
+                         .clickSortedRatingButton()
+                         .getcardCentr();
+        List<String> cards = cardsItem(card);
+
+        for (int i = 0 ; i < cards.size();i++){
+           softAssert.assertEquals(cards.get(i),tableByAcs.get(i).getName());
+        }
+
+        extendedSearchComponent.clickArrowUpButton();
+        card = clubsPage.clickCheckedToCenterButton()
+                .clickSortedRatingButton()
+                .getcardCentr();
+         cards = cardsItem(card);
+
+        for (int i = 0 ; i < cards.size();i++){
+            softAssert.assertEquals(cards.get(i),tableByDecs.get(i).getName());
+        }
+    softAssert.assertAll();
+    }
+
+
     @Description("Verify that the user can sort the search results alphabetically after clicking on the 'Центр' radio button")
     @Issue("TUA-440")
     public void verifySearchResultsAlphabeticallyAfterClickingOnCenterRadioButton() {
@@ -246,4 +285,5 @@ public class TestClubPage extends BaseTestRunner {
 
         softAssert.assertAll();
     }
+
 }
