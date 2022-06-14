@@ -23,4 +23,12 @@ public class CenterServise {
     public List<CenterEntity> getIdNamesDesc() {
         return centersDAO.selectIdNameDesc();
     }
+
+    public List<CenterEntity> getIdNameRatingByAscCenters() {
+        return centersDAO.selectIdNameRatingByAsc();
+    }
+
+    public List<CenterEntity> getIdNameRatingByDescCenters() {
+        return centersDAO.selectIdNameRatingByDesc();
+    }
 }
