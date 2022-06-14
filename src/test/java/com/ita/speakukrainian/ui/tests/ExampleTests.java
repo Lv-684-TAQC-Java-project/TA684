@@ -79,6 +79,7 @@ public class ExampleTests {
         SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertEquals(first.getDescriptions(), "Комп'ютерна грамотність, графіка, айдентика");
+
     }
 
 }

@@ -18,6 +18,7 @@ public class Item extends BaseComponent {
     }
 
     public String getName() {
+        sleep(1000);
         return name.getText();
     }
 
