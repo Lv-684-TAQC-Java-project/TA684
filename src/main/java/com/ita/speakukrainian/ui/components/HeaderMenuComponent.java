@@ -1,35 +1,27 @@
 package com.ita.speakukrainian.ui.components;
 
+import com.ita.speakukrainian.ui.pages.*;
 import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
-import com.ita.speakukrainian.ui.pages.BasePage;
-import com.ita.speakukrainian.ui.pages.ClubsPage;
-import com.ita.speakukrainian.ui.pages.ExtendedSearchComponent;
-import com.ita.speakukrainian.ui.pages.HomePage;
-import com.ita.speakukrainian.ui.pages.MyProfilePage;
+import com.ita.speakukrainian.ui.pages.ChallengesPages.ChallengesPage;
 import com.ita.speakukrainian.ui.pages.RegistrationPages.RegistrationPage;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
 import com.ita.speakukrainian.ui.popup.SingInPopup;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.time.Duration;
 
 public class HeaderMenuComponent extends BaseComponent {
 
-
+    Actions action;
     private final String avatarSelector = "//div[contains(@class,'user-profile')]//img";
 
     @FindBy(xpath = "//div[@id='root']/section/header/div[3]/div[2]/span[2]")
@@ -44,7 +36,6 @@ public class HeaderMenuComponent extends BaseComponent {
     private WebElement extendedSearchButton;
     @FindBy(how = How.CSS, using = "[class*='ant-dropdown-menu-item']")
     private WebElement addClubButton;
-
     @FindBy(xpath = "//*[@id='root']/section/header/div[3]/button")
     private WebElement addClubButtonOnHeader;
     @FindBy(xpath = avatarSelector)
@@ -59,10 +50,16 @@ public class HeaderMenuComponent extends BaseComponent {
     private WebElement searchInput;
     @FindBy(xpath = "//div[4]/div/div")
     private WebElement searchInputDropdown;
+    @FindBy(xpath ="//span[contains(.,'Адміністрування')]" )
+    private WebElement administrationButtonInDropdown;
+    @FindBy(xpath = "//a[contains(text(),'Челенджі')]")
+    private  WebElement challengeInAdministrationButton;
 
 
     public HeaderMenuComponent(WebDriver driver) {
+
         super(driver);
+        action=new Actions(driver);
     }
 
     /**
@@ -195,6 +192,17 @@ public class HeaderMenuComponent extends BaseComponent {
     public RegistrationPage clickRegistrationButton() {
         registrationButton.click();
         return new RegistrationPage(driver);
+    }
+    @Step("Click Add Add New User")
+    public HeaderMenuComponent clickAdministrationButtonInDropdown() {
+        action.moveToElement(administrationButtonInDropdown).build().perform();
+        sleep(1000);
+        return this;
+    }
+    @Step("Click Add Add New User")
+    public ChallengesPage clickChallengeInAdministrationButton() {
+        challengeInAdministrationButton.click();
+        return new ChallengesPage(driver);
     }
 
 }
