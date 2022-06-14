@@ -40,6 +40,12 @@ public class ExtendedSearchComponent extends BasePage {
     private List<WebElement> clubItems;
     @FindBy(xpath = "//div[contains(@class,'content-center-list content-center-block')]/div")
     private WebElement centerItems;
+
+    @FindBy(xpath = "//*[@id='basic']/div[2]/div[2]/div/div/div/span[2]")
+    private WebElement clearDefaultCityButton;
+    @FindBy(xpath = "//*[text()='за рейтингом']")
+    private WebElement sortedRatingButton;
+
     @FindBy(xpath = "//*[@class=\"ant-select-clear\"]")
     private WebElement clearDefaultCity;
 
@@ -159,7 +165,18 @@ public class ExtendedSearchComponent extends BasePage {
         return this;
     }
 
+    @Step("click clear default city button")
+    public ExtendedSearchComponent clickClearDefaultCityButton() {
+        sleep(1000);
+        clearDefaultCityButton.click();
+        return this;
+    }
 
-
+    @Step("Click sort rating button")
+    public ExtendedSearchComponent clickSortedRatingButton() {
+        sleep(1000);
+        sortedRatingButton.click();
+        return this;
+    }
 }
 

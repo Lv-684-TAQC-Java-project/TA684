@@ -14,6 +14,8 @@ public class CenterEntity {
     public static final String SELECT_ID_NAME_RATING_ASC = "SELECT id, name, rating FROM centers ORDER BY rating asc";
     public static final String SELECT_NAME_ID_ASC = "SELECT id,name FROM centers ORDER BY name ASC";
     public static final String SELECT_NAME_ID_DESC = "SELECT id,name FROM centers ORDER BY name DESC";
+    public static final String SELECT_ID_NAME_RATING_DESC = "SELECT id, name, rating FROM centers ORDER BY rating desc";
+    public static final String SELECT_ID_NAME_RATING_ASC = "SELECT id, name, rating FROM centers ORDER BY rating asc";
 
 
     private long Id;
@@ -32,7 +34,7 @@ public class CenterEntity {
     public static CenterEntity getCenter(List<String> row) {
         CenterEntity center = new CenterEntity();
         center.setId(Long.parseLong(row.get(0)));
-        if(row.get(1) != null) {
+        if (row.get(1) != null) {
             center.setCenterExternalId(Long.parseLong(row.get(1)));
         }
         center.setContact(row.get(2));
@@ -41,13 +43,13 @@ public class CenterEntity {
         center.setUrlBackgroundPicture(row.get(5));
         center.setUrlLogo(row.get(6));
         center.setUrlWeb(row.get(7));
-        if(row.get(8) != null) {
+        if (row.get(8) != null) {
             center.setUserId(Long.parseLong(row.get(8)));
         }
-        if(row.get(9) != null) {
+        if (row.get(9) != null) {
             center.setClubCount(Long.parseLong(row.get(9)));
         }
-        if(row.get(10) != null) {
+        if (row.get(10) != null) {
             center.setRating(Double.parseDouble(row.get(10)));
         }
         return center;
@@ -65,7 +67,7 @@ public class CenterEntity {
     public static CenterEntity getIdNameAsc(List<String> row) {
         CenterEntity center = new CenterEntity();
         center.setId(Long.parseLong(row.get(0)));
-        if(row.get(1) != null) {
+        if (row.get(1) != null) {
             center.setName(row.get(1));
         }
 
@@ -76,7 +78,7 @@ public class CenterEntity {
     public static CenterEntity getIdNameDesc(List<String> row) {
         CenterEntity center = new CenterEntity();
         center.setId(Long.parseLong(row.get(0)));
-        if(row.get(1) != null) {
+        if (row.get(1) != null) {
             center.setName(row.get(1));
         }
         return center;
@@ -107,12 +109,33 @@ public class CenterEntity {
         }
         return centers;
     }
-public static List<CenterEntity> getIdNamesDesc(List<List<String>> rows) {
+
+    public static List<CenterEntity> getIdNamesDesc(List<List<String>> rows) {
         List<CenterEntity> centers = new ArrayList<>();
         for (List<String> row : rows) {
             centers.add(getIdNameDesc(row));
         }
         return centers;
     }
+
+    public static CenterEntity getCenterIdNameRating(List<String> row) {
+        CenterEntity center = new CenterEntity();
+        center.setId(Long.parseLong(row.get(0)));
+        center.setName(row.get(1));
+        if (row.get(2) != null) {
+            center.setRating(Double.parseDouble(row.get(2)));
+        }
+        return center;
+    }
+
+    public static List<CenterEntity> getCentersIdNameRating(List<List<String>> rows) {
+        List<CenterEntity> centers = new ArrayList<>();
+        for (List<String> row : rows) {
+            centers.add(getCenterIdNameRating(row));
+        }
+        return centers;
+    }
+
+
 
 }
