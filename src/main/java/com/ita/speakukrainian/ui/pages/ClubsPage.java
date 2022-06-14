@@ -48,8 +48,8 @@ public class ClubsPage extends BasePage {
     private WebElement firstCard;
     @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/section/section/section/div[2]/div[2]/div")
     private WebElement secondCard;
-    @FindBy(xpath = "//*[@class=\"ant-pagination-item ant-pagination-item-8 ant-pagination-item-active\"]")
-    private WebElement lastPage;
+    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/section/section/section/ul/li[9]/button")
+    private WebElement nextPage;
 
 
 
@@ -226,16 +226,13 @@ public class ClubsPage extends BasePage {
         actions.doubleClick(getAgeInput()).perform();
         return new ClubsPage(driver);
     }
-    @Step("this method get name 2 first card from first and last page")
-    public String[] verifyFirstAndLastCard(){
-        String[] nameArr = new String[4];
-        nameArr[0] = firstCard.getTagName();
-        nameArr[1] = firstCard.getTagName();
-        lastPage.click();
-        nameArr[2] = firstCard.getTagName();
-        nameArr[3] = firstCard.getTagName();
-        return nameArr;
+
+    @Step("Click next page button")
+    public  ClubsPage clickNextPageButton(){
+         nextPage.click();
+         return this;
     }
+
 
   }
 
