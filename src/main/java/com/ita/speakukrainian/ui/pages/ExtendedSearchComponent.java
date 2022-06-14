@@ -28,6 +28,8 @@ public class ExtendedSearchComponent extends BasePage {
     private WebElement arrowdownButton;
     @FindBy(xpath = "//span[contains(.,'за алфавітом')]")
     private WebElement sortedAlphabeticallyButton;
+    @FindBy(xpath = "//*[text()=\"за рейтингом\"]")
+    private WebElement sortedRatingButton;
     @FindBy(css = "[type='search'][id*=select]")
     private WebElement mainSearchInput;
     @FindBy(css = "[class='clubs-not-found']")
@@ -35,13 +37,18 @@ public class ExtendedSearchComponent extends BasePage {
     @FindBy(css = "[data-icon='search']")
     private WebElement dataIconSearch;
     @FindBy(xpath = "//div[contains(@class,'content-clubs-list content-clubs-block')]/div")
-    private List<WebElement> clubsCard;
+    private List<WebElement> clubItems;
     @FindBy(xpath = "//div[contains(@class,'content-center-list content-center-block')]/div")
     private WebElement centerItems;
+
     @FindBy(xpath = "//*[@id='basic']/div[2]/div[2]/div/div/div/span[2]")
     private WebElement clearDefaultCityButton;
     @FindBy(xpath = "//*[text()='за рейтингом']")
     private WebElement sortedRatingButton;
+
+    @FindBy(xpath = "//*[@class=\"ant-select-clear\"]")
+    private WebElement clearDefaultCity;
+
 
     public ExtendedSearchComponent(WebDriver driver) {
         super(driver);
@@ -96,6 +103,12 @@ public class ExtendedSearchComponent extends BasePage {
         sortedAlphabeticallyButton.click();
         return this;
     }
+    @Step("click Sorted rating Button ")
+    public ExtendedSearchComponent clickSortedRatingButton() {
+        sleep(1000);
+        sortedRatingButton.click();
+        return this;
+    }
     @Step("click on main search field")
     public ExtendedSearchComponent clickMainSearchField() {
         mainSearchInput.click();
@@ -137,7 +150,7 @@ public class ExtendedSearchComponent extends BasePage {
     }
     @Step("verify cards has text")
     public boolean verifyCardsHasText(String expectedText) {
-        return clubsCard.stream().map(el -> el.getText()).allMatch(el -> el.contains(expectedText));
+    return clubsCard.stream().map(el -> el.getText()).allMatch(el -> el.contains(expectedText));
 
     }
     @Step("click data icon search")
@@ -145,6 +158,11 @@ public class ExtendedSearchComponent extends BasePage {
         sleep(12000);
         dataIconSearch.click();
         return new ExtendedSearchComponent(driver);
+    }
+    @Step("click default city")
+    public ExtendedSearchComponent clickClearDefaultCity(){
+        clearDefaultCity.click();
+        return this;
     }
 
     @Step("click clear default city button")

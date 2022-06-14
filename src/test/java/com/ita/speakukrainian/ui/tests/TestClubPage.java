@@ -16,6 +16,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +40,14 @@ public class TestClubPage extends BaseTestRunner {
         List<String> cardsItemOne = new ArrayList<>();
         for (WebElement element : list) {
             cardsItemOne.add(new Item(driver, element).getName());
+        }
+        return cardsItemOne;
+    }
+
+    private List<String> cardsName(List<WebElement> list) {
+        List<String> cardsItemOne = new ArrayList<>();
+        for (WebElement element : list) {
+            cardsItemOne.add(new Item(driver, element).getName().trim());
         }
         return cardsItemOne;
     }
@@ -179,6 +188,43 @@ public class TestClubPage extends BaseTestRunner {
     }
 
     @Test()
+    @Description("[allure] Verify that the user can sort the search results by rating after clicking on the 'Центр' radio button")
+    @Issue("TUA-449")
+    public void testCheckSorterInDataBase () {
+        HeaderMenuComponent headerMenuComponent = new HeaderMenuComponent(driver);
+        ClubsPage clubsPage = new ClubsPage(driver);
+        ExtendedSearchComponent extendedSearchComponent = new ExtendedSearchComponent(driver);
+        SoftAssert softAssert = new SoftAssert();
+        CenterServise centerServise = new CenterServise();
+        List<CenterEntity> tableByAcs = centerServise.getIdNameRatingByAscCenters();
+        List<CenterEntity> tableByDecs = centerServise.getIdNameRatingByDescCenters();
+
+        headerMenuComponent.clickExtendedSearchButton();
+        extendedSearchComponent.clickClearDefaultCity();
+
+        List<WebElement> card;
+                 card = clubsPage.clickCheckedToCenterButton()
+                         .clickSortedRatingButton()
+                         .getcardCentr();
+        List<String> cards = cardsItem(card);
+
+        for (int i = 0 ; i < cards.size();i++){
+           softAssert.assertEquals(cards.get(i),tableByAcs.get(i).getName());
+        }
+
+        extendedSearchComponent.clickArrowUpButton();
+        card = clubsPage.clickCheckedToCenterButton()
+                .clickSortedRatingButton()
+                .getcardCentr();
+         cards = cardsItem(card);
+
+        for (int i = 0 ; i < cards.size();i++){
+            softAssert.assertEquals(cards.get(i),tableByDecs.get(i).getName());
+        }
+    softAssert.assertAll();
+    }
+
+
     @Description("Verify that the user can sort the search results alphabetically after clicking on the 'Центр' radio button")
     @Issue("TUA-440")
     public void verifySearchResultsAlphabeticallyAfterClickingOnCenterRadioButton() {
@@ -248,7 +294,93 @@ public class TestClubPage extends BaseTestRunner {
         softAssert.assertAll();
     }
 
+
+   
+
+
     @Test()
+    @Description("Verify that the user can sort the search results alphabetically after clicking on the 'Центр' radio button")
+    @Issue("TUA-440")
+    public void verifySearchResultsAlphabeticallyAfterClickingOnCenterRadioButton1() {
+        ClubsPage clubsPage = new ClubsPage(driver);
+        SoftAssert softAssert = new SoftAssert();
+
+        ClubsPage extendedSearchOpened = new HomePage(driver)
+                .header()
+                .clickExtendedSearchButton();
+
+        boolean isExtendedSearchPageDisplayed = extendedSearchOpened
+                .isExtendedSearchPageDisplayed();
+
+        softAssert.assertTrue(isExtendedSearchPageDisplayed);
+
+        List<WebElement> centersCardAscFromUi = extendedSearchOpened
+                .clickCentreRadioButton()
+                .clickClearButton()
+                .clickSortAlphabeticallyButton()
+                .getCentersCard();
+
+        List<String> centerNamesFromUiAsc = cardsName(centersCardAscFromUi);
+
+        List<String> sortedCenterNamesFromUiAsc = sorted(centerNamesFromUiAsc);
+
+        softAssert.assertEquals(centerNamesFromUiAsc, sortedCenterNamesFromUiAsc);
+
+        for (int i = 0; i < centerNamesFromUiAsc.size(); i++) {
+            System.out.println(centerNamesFromUiAsc.get(i));
+            System.out.println(sortedCenterNamesFromUiAsc.get(i));
+//            softAssert.assertEquals(centerNamesFromUiAsc.get(i), sortedCenterNamesFromUiAsc.get(i));
+            System.out.println("--------------------------------------------------------------");
+        }
+        CenterServise centerServise = new CenterServise();
+
+        List<CenterEntity> sortedCenterNamesFromDbAsc = centerServise.getIdNamesAsc();
+
+        List<String> expectedSortedCenterNamesFromDbAsc = sortedCenterNamesFromDbAsc.
+                stream().map(el -> el.getName().trim()).toList().subList(0, centerNamesFromUiAsc.size());
+
+
+        for (int i = 0; i < centerNamesFromUiAsc.size(); i++) {
+            System.out.println(centerNamesFromUiAsc.get(i));
+            System.out.println(expectedSortedCenterNamesFromDbAsc.get(i));
+//            softAssert.assertEquals(centerNamesFromUiAsc.get(i), sortedCenterNamesFromDbAsc.get(i).getName());
+            System.out.println("--------------------------------------------------------------");
+        }
+
+        List<WebElement> centersCardDescFromUi = clubsPage.
+                clickArrowUpButton()
+                .getCentersCard();
+
+        List<String> centerNamesFromUiDesc = cardsItem(centersCardDescFromUi);
+
+        List<String> sortedCenterNamesFromUiDesc = sortedrevers(centerNamesFromUiDesc);
+
+        softAssert.assertEquals(centerNamesFromUiDesc, sortedCenterNamesFromUiDesc);
+
+        for (int i = 0; i < centerNamesFromUiDesc.size(); i++) {
+            System.out.println(centerNamesFromUiDesc.get(i));
+            System.out.println(sortedCenterNamesFromUiDesc.get(i));
+//            softAssert.assertEquals(centerNamesFromUiDesc.get(i), sortedCenterNamesFromUiDesc.get(i));
+            System.out.println("--------------------------------------------------------------");
+        }
+
+        List<CenterEntity> sortedCenterNamesFromDbDesc = centerServise.getIdNamesDesc();
+
+        List<String> expectedSortedCenterNamesFromDbDesc = sortedCenterNamesFromDbDesc.stream().map(el -> el.getName()
+                .trim()).collect(Collectors.toList()).subList(0, centerNamesFromUiDesc.size());
+
+        softAssert.assertEquals(centerNamesFromUiDesc, expectedSortedCenterNamesFromDbDesc);
+
+        for (int i = 0; i < centerNamesFromUiDesc.size(); i++) {
+            System.out.println(centerNamesFromUiDesc.get(i));
+            System.out.println(expectedSortedCenterNamesFromDbDesc.get(i));
+            //        softAssert.assertEquals(centerNamesFromUiDesc.get(i), sortedCenterNamesFromDbDesc.get(i).getName());
+            System.out.println("--------------------------------------------------------------");
+        }
+
+        softAssert.assertAll();
+    }
+ @Test()
     @Description("[allure] Verify that the user can sort the search results by rating after clicking on the 'Центр' radio button")
     @Issue("TUA-449")
     public void testCheckSorterInDataBase () {
@@ -282,7 +414,4 @@ public class TestClubPage extends BaseTestRunner {
         for (int i = 0 ; i < cards.size();i++){
             softAssert.assertEquals(cards.get(i),tableByDecs.get(i).getName());
         }
-        softAssert.assertAll();
-    }
-
 }

@@ -10,10 +10,13 @@ import java.util.List;
 @NoArgsConstructor
 public class CenterEntity {
     public static final String SELECT_ALL = "SELECT * FROM centers ORDER BY id";
+    public static final String SELECT_ID_NAME_RATING_DESC = "SELECT id, name, rating FROM centers ORDER BY rating desc";
+    public static final String SELECT_ID_NAME_RATING_ASC = "SELECT id, name, rating FROM centers ORDER BY rating asc";
     public static final String SELECT_NAME_ID_ASC = "SELECT id,name FROM centers ORDER BY name ASC";
     public static final String SELECT_NAME_ID_DESC = "SELECT id,name FROM centers ORDER BY name DESC";
     public static final String SELECT_ID_NAME_RATING_DESC = "SELECT id, name, rating FROM centers ORDER BY rating desc";
     public static final String SELECT_ID_NAME_RATING_ASC = "SELECT id, name, rating FROM centers ORDER BY rating asc";
+
 
     private long Id;
     private long centerExternalId;
@@ -53,6 +56,14 @@ public class CenterEntity {
 
     }
 
+    public static CenterEntity getCenterIdNameRating(List<String> row) {
+        CenterEntity center = new CenterEntity();
+        center.setId(Long.parseLong(row.get(0)));
+        center.setName(row.get(1));
+        if(row.get(2) != null) {
+            center.setRating(Double.parseDouble(row.get(2)));
+        }
+
     public static CenterEntity getIdNameAsc(List<String> row) {
         CenterEntity center = new CenterEntity();
         center.setId(Long.parseLong(row.get(0)));
@@ -70,7 +81,6 @@ public class CenterEntity {
         if (row.get(1) != null) {
             center.setName(row.get(1));
         }
-
         return center;
 
     }
@@ -79,6 +89,15 @@ public class CenterEntity {
         List<CenterEntity> centers = new ArrayList<>();
         for (List<String> row : rows) {
             centers.add(getCenter(row));
+        }
+        return centers;
+    }
+
+
+    public static List<CenterEntity> getCentersIdNameRating(List<List<String>> rows) {
+        List<CenterEntity> centers = new ArrayList<>();
+        for (List<String> row : rows) {
+            centers.add(getCenterIdNameRating(row));
         }
         return centers;
     }
