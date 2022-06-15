@@ -36,7 +36,7 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
     public void cantCreateDueIncorrectDataInHeader(){
         AddTaskPage addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
-        addTaskPage.dateFieldIsEmpty();
+        softAssert.assertTrue(addTaskPage.AllFieldIsEmpty());
         softAssert.assertAll();
 
     }

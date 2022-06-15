@@ -18,7 +18,7 @@ public class AddTaskPage extends BaseObjectPage {
     @FindBy(xpath = "//*[@class=\"ant-upload-list-picture-card-container\"]")
     private WebElement firstPhoto;
     @FindBy(xpath = "//*[@class=\"ant-select-selection-placeholder\"]")
-    private WebElement challengeField;
+    private WebElement challengePopUp;
 
     public AddTaskPage(WebDriver driver) {
         super(driver);
@@ -26,7 +26,67 @@ public class AddTaskPage extends BaseObjectPage {
 
     public boolean dateFieldIsEmpty() {
         boolean isEmpty;
-        if (nameField.getAttribute("value").equals(null)) {
+        if (dateField.getAttribute("value") == null) {
+            isEmpty = true;
+        } else {
+            isEmpty = false;
+        }
+        return isEmpty;
+    }
+
+    public boolean nameFieldIsEmpty() {
+        boolean isEmpty;
+        if (nameField.getAttribute("value").equals("")) {
+            isEmpty = true;
+        } else {
+            isEmpty = false;
+        }
+        return isEmpty;
+    }
+
+    public boolean descriptionFieldIsEmpty() {
+        boolean isEmpty;
+        if (descriptionField.getAttribute("value") == null) {
+            isEmpty = true;
+        } else {
+            isEmpty = false;
+        }
+        return isEmpty;
+    }
+
+    public boolean titleFieldIsEmpty() {
+        boolean isEmpty;
+        if (titleField.getAttribute("value") == null) {
+            isEmpty = true;
+        } else {
+            isEmpty = false;
+        }
+        return isEmpty;
+    }
+
+    public boolean challengePopUPIsEmpty() {
+        boolean isEmpty;
+        if (challengePopUp.getAttribute("value") == null) {
+            isEmpty = true;
+        } else {
+            isEmpty = false;
+        }
+        return isEmpty;
+    }
+
+    public boolean challengePopUpIsNotSelected() {
+        boolean isEmpty;
+        if (challengePopUp.getAttribute("value") == null) {
+            isEmpty = true;
+        } else {
+            isEmpty = false;
+        }
+        return isEmpty;
+    }
+
+    public boolean AllFieldIsEmpty() {
+        boolean isEmpty;
+        if (dateFieldIsEmpty()&&nameFieldIsEmpty()&&descriptionFieldIsEmpty()&&challengePopUPIsEmpty()&&titleFieldIsEmpty()) {
             isEmpty = true;
         } else {
             isEmpty = false;
