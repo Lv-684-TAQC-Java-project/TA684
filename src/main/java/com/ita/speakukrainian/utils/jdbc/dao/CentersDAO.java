@@ -50,32 +50,30 @@ public class CentersDAO {
 
     }
 
-    public List<CenterEntity> selectIdNameRatingByAsc() {
+    public List<CenterEntity> selectIdNameAsc() {
         Statement statement = ManagerDao.getInstance().getStatement();
         List<List<String>> rows = null;
         try {
-            ResultSet resultSet = statement.executeQuery(CenterEntity.SELECT_ID_NAME_RATING_ASC);
-
+            ResultSet resultSet = statement.executeQuery(CenterEntity.SELECT_NAME_ID_ASC);
             rows = ManagerDao.getInstance().parseResultSet(resultSet);
         }catch (SQLException e) {
             e.printStackTrace();
         }
         ManagerDao.getInstance().closeStatement(statement);
-
-        return CenterEntity.getCentersIdNameRating(rows);
+        return CenterEntity.getIdNamesAsc(rows);
     }
 
-    public List<CenterEntity> selectIdNameRatingByDesc() {
+    public List<CenterEntity> selectIdNameDesc() {
         Statement statement = ManagerDao.getInstance().getStatement();
         List<List<String>> rows = null;
         try {
-            ResultSet resultSet = statement.executeQuery(CenterEntity.SELECT_ID_NAME_RATING_DESC);
-
+            ResultSet resultSet = statement.executeQuery(CenterEntity.SELECT_NAME_ID_DESC);
             rows = ManagerDao.getInstance().parseResultSet(resultSet);
         }catch (SQLException e) {
             e.printStackTrace();
         }
         ManagerDao.getInstance().closeStatement(statement);
-        return CenterEntity.getCentersIdNameRating(rows);
+        return CenterEntity.getIdNamesDesc(rows);
     }
+
 }

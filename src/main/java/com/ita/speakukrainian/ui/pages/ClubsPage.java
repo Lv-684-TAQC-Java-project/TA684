@@ -44,8 +44,6 @@ public class ClubsPage extends BasePage {
     private WebElement sortMenuBarButton;
     @FindBy ( css=".content-center-list.false")
     private WebElement listOfCentres;
-    @FindBy(xpath = "//div[contains(@class,'content-clubs-list content-clubs-block')]/div")
-    private List<WebElement> clubsCard;
     @FindBy(xpath = "//div[contains(@class,'content-center-list content-center-block')]/div")
     private List<WebElement> centersCard;
     @FindBy(xpath = "//section[@class='ant-layout ant-layout-has-sider club-list']")
@@ -56,6 +54,8 @@ public class ClubsPage extends BasePage {
     private WebElement clearButton;
     @FindBy(xpath = "//span[@class='anticon anticon-arrow-up control-sort-arrow']")
     private WebElement arrowUpButton;
+    @FindBy(xpath = "//*[text()='за рейтингом']")
+    private WebElement sortedRatingButton;
 
 
     public ClubsPage(WebDriver driver) {
@@ -262,13 +262,12 @@ public class ClubsPage extends BasePage {
         return new ClubsPage(driver);
     }
 
-
-    @Step("Click next page button")
-    public  ClubsPage clickNextPageButton(){
-         nextPage.click();
-         return this;
+    @Step("click Sorted rating Button ")
+    public ClubsPage clickSortedRatingButton() {
+        sleep(1000);
+        sortedRatingButton.click();
+        return this;
     }
-
 
   }
 
