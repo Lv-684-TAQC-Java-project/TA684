@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.popup;
 
 import com.ita.speakukrainian.ui.pages.BaseObjectPage;
+import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -94,9 +95,9 @@ public class RedactClubMaliavkyPopUp extends BaseObjectPage {
         return new RedactClubMaliavkyPopUp(driver);
     }
 
-    public RedactClubMaliavkyPopUp saveChanges(){
+    public MyProfilePage saveChanges(){
         saveChanges.click();
-        return new RedactClubMaliavkyPopUp(driver);
+        return new MyProfilePage(driver);
     }
 
     public RedactClubMaliavkyPopUp addressAndContacts(){

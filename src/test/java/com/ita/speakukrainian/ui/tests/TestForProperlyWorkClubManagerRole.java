@@ -119,6 +119,10 @@ public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
                 .clubDescription()
                 .makeNewDescription(newDescription)
                 .saveChanges();
+       new MyProfilePage(driver)
+                .clickDetailsButton();
         softAssert.assertAll();
+
     }
+
 }
