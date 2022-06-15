@@ -15,10 +15,6 @@ public class CenterServise {
         return centersDAO.selectAll();
     }
 
-    public List<CenterEntity> getIdNameRatingByDescCenters() {
-        return centersDAO.selectIdNameRatingByDesc();
-    }
-
     public List<String> getNameCenters(List<CenterEntity> list) {
         List<String> nameList = new ArrayList<>();
         for (int i = 0 ; i < list.size(); i++ ){
@@ -33,12 +29,6 @@ public class CenterServise {
                 ratingList.add(list.get(i).getRating());
         }
         return ratingList;
-    }
-
-    public List<CenterEntity> getIdNameRatingByAscCenters() {
-        return centersDAO.selectIdNameRatingByAsc();
-    }
-
     }
 
     public List<CenterEntity> getIdNamesAsc() {
