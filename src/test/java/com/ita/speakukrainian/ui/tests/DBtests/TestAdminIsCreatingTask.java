@@ -37,6 +37,12 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         AddTaskPage addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(addTaskPage.AllFieldIsEmpty());
+        addTaskPage.fillDateField("2022-11-11");
+        addTaskPage.fillNameField("Українська-_-English=@#+123");
+        addTaskPage.fillDescriptionField("дуже круте завдання для дітей від 8 років :-) and its not all for more information call on 141242353465474123");
+        addTaskPage.clickSelectChallenge().clickDniproChallenge();
+        addTaskPage.clickSave();
+
         softAssert.assertAll();
 
     }
