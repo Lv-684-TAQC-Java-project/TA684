@@ -11,6 +11,7 @@ public class ChallengesPage extends BasePage {
     @FindBy(xpath = "//section/main/div/button/a")
     private WebElement  addChallengesButton;
 
+
     public ChallengesPage(WebDriver driver) {
         super(driver);
 }
@@ -20,5 +21,4 @@ public class ChallengesPage extends BasePage {
         addChallengesButton.click();
         return new AddChallengePage(driver);
     }
-
 }

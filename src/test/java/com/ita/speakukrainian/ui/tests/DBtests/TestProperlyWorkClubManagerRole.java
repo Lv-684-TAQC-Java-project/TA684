@@ -1,9 +1,8 @@
-package com.ita.speakukrainian.ui.tests;
+package com.ita.speakukrainian.ui.tests.DBtests;
 
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.MyProfilePage;
 import com.ita.speakukrainian.ui.pages.MyliavkyClubPage;
-import com.ita.speakukrainian.ui.popup.RedactClubMaliavkyPopUp;
 import com.ita.speakukrainian.ui.testruners.BaseTestRunner;
 import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
 import com.ita.speakukrainian.utils.jdbc.services.ClubsService;;
@@ -15,7 +14,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
+public class TestProperlyWorkClubManagerRole extends BaseTestRunner {
     String ClubNameMaliavky="Малявки";
     int numbOfCheckBox = 3; //"Студії раннього розвитку"
     String age1InMaliavky = "2";

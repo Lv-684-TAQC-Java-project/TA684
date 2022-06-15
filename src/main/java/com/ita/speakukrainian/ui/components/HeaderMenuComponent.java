@@ -4,6 +4,7 @@ import com.ita.speakukrainian.ui.pages.*;
 import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
 import com.ita.speakukrainian.ui.pages.ChallengesPages.ChallengesPage;
 import com.ita.speakukrainian.ui.pages.RegistrationPages.RegistrationPage;
+import com.ita.speakukrainian.ui.pages.Tasks.TaskPage;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
 import com.ita.speakukrainian.ui.popup.SingInPopup;
 import io.qameta.allure.Step;
@@ -54,6 +55,9 @@ public class HeaderMenuComponent extends BaseComponent {
     private WebElement administrationButtonInDropdown;
     @FindBy(xpath = "//a[contains(text(),'Челенджі')]")
     private  WebElement challengeInAdministrationButton;
+
+    @FindBy(xpath="//a[contains(text(),'Завдання')]")
+    private WebElement taskButton;
 
 
     public HeaderMenuComponent(WebDriver driver) {
@@ -203,6 +207,12 @@ public class HeaderMenuComponent extends BaseComponent {
     public ChallengesPage clickChallengeInAdministrationButton() {
         challengeInAdministrationButton.click();
         return new ChallengesPage(driver);
+    }
+
+    @Step("Click task button")
+    public TaskPage clickTaskButton() {
+        taskButton.click();
+        return new TaskPage(driver);
     }
 
 }
