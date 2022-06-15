@@ -341,6 +341,22 @@ public class TestClubPage extends BaseTestRunner {
         softAssert.assertAll();
     }
 
+
+    //card = clubsPage.clickCheckedToCenterButton()
+    //                .clickSortedRatingButton()
+    //                .getcardCentr();
+    //        List<String> cards = cardsItem(card);
+
+
+    private List<String> cards (){
+        ClubsPage clubsPage = new ClubsPage(driver);
+        List<WebElement> card = clubsPage.clickCheckedToCenterButton()
+                .clickSortedRatingButton()
+                .getcardCentr();
+        List<String> cards = cardsItem(card);
+        return cards;
+    }
+
     @Test()
     @Description("[allure] Verify that the user can sort the search results by rating after clicking on the 'Центр' radio button")
     @Issue("TUA-449")
@@ -356,24 +372,20 @@ public class TestClubPage extends BaseTestRunner {
         headerMenuComponent.clickExtendedSearchButton();
         extendedSearchComponent.clickClearDefaultCityButton();
 
-        List<WebElement> card;
-        card = clubsPage.clickCheckedToCenterButton()
-                .clickSortedRatingButton()
-                .getcardCentr();
-        List<String> cards = cardsItem(card);
+        List<String> cards;
+        cards = cards();
 
         for (int i = 0; i < cards.size(); i++) {
             softAssert.assertEquals(cards.get(i), tableByAcs.get(i).getName());
         }
 
         extendedSearchComponent.clickArrowUpButton();
-        card = clubsPage.clickCheckedToCenterButton()
-                .clickSortedRatingButton()
-                .getcardCentr();
-        cards = cardsItem(card);
+        cards = cards();
 
         for (int i = 0; i < cards.size(); i++) {
             softAssert.assertEquals(cards.get(i), tableByDecs.get(i).getName());
         }
+        softAssert.assertAll();
     }
+
 }

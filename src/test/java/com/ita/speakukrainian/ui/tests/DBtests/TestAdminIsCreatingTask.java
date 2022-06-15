@@ -27,4 +27,12 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
     public void CanWeaddedImage(){
 
     }
+
+    @Test()
+    @Description("Verify that admin can't create a task with invalid data in 'Заголовок' field on 'Додайте завдання' page")
+    @Issue("TUA-524")
+    public void cantCreateDueIncorrectDataInHeader(){
+
+
+    }
 }
