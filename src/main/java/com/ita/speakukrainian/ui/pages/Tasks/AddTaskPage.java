@@ -40,7 +40,7 @@ public class AddTaskPage extends BaseObjectPage {
      private WebElement inputImage;
     String formatName = "jpg";
     String pathName ="D:\\Projects\\TA684\\src\\test\\resources\\fotoScreen.jpg";
-    @FindBy(xpath = "//*[@class=//*[@class=\"ant-select-selection-placeholder\"]]")
+    @FindBy(xpath = "//*[@class=\"ant-select-selection-placeholder\"]")
     private WebElement challengeDropDownForVerifyEmptyField;
     @FindBy(xpath = "//*[@id=\"challengeId\"]")
     private WebElement challengeDropDownForClick;
@@ -48,6 +48,8 @@ public class AddTaskPage extends BaseObjectPage {
     private WebElement saveChanges;
     @FindBy(xpath = "//*[@class=\"ant-message-custom-content ant-message-warning\"]")
     private WebElement errorMassage;
+    @FindBy(xpath = "//*[@class=\"ant-upload-list-picture-card-container\"]")
+    private WebElement firstPhotoContainer;
 
     public AddTaskPage(WebDriver driver) {
         super(driver);
@@ -56,8 +58,7 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("verify that date field is empty")
     public boolean dateFieldIsEmpty() {
         boolean isEmpty;
-        if (dateField.getAttribute("value") == null) {
-
+        if (dateField.getAttribute("value").equals("")) {
             isEmpty = true;
         } else {
             isEmpty = false;
@@ -120,6 +121,17 @@ public class AddTaskPage extends BaseObjectPage {
         return isEmpty;
     }
 
+    @Step("verify that photo was added")
+    public boolean isPhotoAdded() {
+        boolean isPhotoAdded;
+        if (firstPhotoContainer.isEnabled()){
+            isPhotoAdded = true;
+        }else{
+            isPhotoAdded = false;
+        }
+        return isPhotoAdded;
+    }
+
     @Step("fill date field present date")
     public AddTaskPage fillDateField(){
         DateProvider dateProvider = new DateProvider();
@@ -162,13 +174,14 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("click save changes")
     public AddTaskPage clickSave() {
         saveChanges.click();
-        sleep(10000);
+        sleep(1000);
         return this;
     }
     @Step("Add image")
-    public void addImage() {
+    public AddTaskPage addImage() {
         inputImage.sendKeys("D:\\GITSOFTSERVE\\NEW COURSE\\TA684\\src\\test\\resources\\foto.jpg");
         sleep(3000);
+        return this;
     }
     @Step ("Verify that image was added")
     public boolean checkIsImageAdded(){
