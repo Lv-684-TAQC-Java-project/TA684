@@ -19,6 +19,10 @@ public class AddTaskPage extends BaseObjectPage {
     private WebElement nameField;
     @FindBy(xpath = "//*[@id=\"root\"]//div[4]/div[2]/div/div/div/div/div[2]/div[1]")
     private WebElement titleField;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/div/form/div[4]/div[2]/div/div/div/div/div[2]/div[1]/p")
+    private WebElement headerField;
+
     @FindBy(xpath = "//*[@id=\"root\"]//div[5]/div[2]/div/div/div/div/div[2]/div[1]")
     private WebElement descriptionField;
     @FindBy(xpath = "//*[@id=\"startDate\"]")
@@ -57,6 +61,16 @@ public class AddTaskPage extends BaseObjectPage {
         return isEmpty;
     }
 
+    @Step("verify that header field is empty")
+    public boolean headerFieldIsEmpty() {
+        boolean isEmpty;
+        if (headerField.getText() == null) {
+            isEmpty = true;
+        } else {
+            isEmpty = false;
+        }
+        return isEmpty;
+    }
     @Step("verify that name field is empty")
     public boolean nameFieldIsEmpty() {
         boolean isEmpty;
@@ -71,7 +85,20 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("verify that description field is empty")
     public boolean descriptionFieldIsEmpty() {
         boolean isEmpty;
+        System.out.println(descriptionField.getText());
         if (descriptionField.getAttribute("value") == null) {
+            isEmpty = true;
+        } else {
+            isEmpty = false;
+        }
+        return isEmpty;
+    }
+
+    @Step("verify that description field is empty")
+    public boolean descriptionFieldIsEmpty1() {
+        boolean isEmpty;
+        System.out.println(descriptionField.getText());
+        if (descriptionField.getText() == null) {
             isEmpty = true;
         } else {
             isEmpty = false;
@@ -124,6 +151,13 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("fill title field")
     public AddTaskPage fillTitleField(String title){
         titleField.sendKeys(title);
+        return this;
+    }
+
+    @Step("fill header field")
+    public AddTaskPage fillHeaderField(String header){
+        headerField.sendKeys(header);
+        sleep(3000);
         return this;
     }
 
