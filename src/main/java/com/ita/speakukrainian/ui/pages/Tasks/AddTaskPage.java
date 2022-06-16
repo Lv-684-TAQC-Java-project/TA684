@@ -31,7 +31,7 @@ public class AddTaskPage extends BaseObjectPage {
     private WebElement firstPhoto;
     @FindBy(xpath = "//*[@class=\"ant-select-selection-placeholder\"]")
     private WebElement challengeField;
-    @FindBy(xpath="//*[@id='root']/section/section/main/div/form/div[2]/div[2]/div/div/span/div/div[1]")
+    @FindBy(xpath="//*[@id=\"root\"]/section/section/main/div/form/div[2]/div[2]/div/div/span/div/div[1]/div/div/span/a/img")
     private WebElement image;
     @FindBy(id="picture")
      private WebElement inputImage;
@@ -43,6 +43,9 @@ public class AddTaskPage extends BaseObjectPage {
     private WebElement saveChanges;
     @FindBy(xpath = "//*[@class=\"ant-message-custom-content ant-message-warning\"]")
     private WebElement errorMassage;
+
+    String resource="src";
+    String imageResource = "src/test/resources/img2.png";
 
 
     public AddTaskPage(WebDriver driver) {
@@ -87,17 +90,6 @@ public class AddTaskPage extends BaseObjectPage {
         boolean isEmpty;
 
         if (descriptionField.getAttribute("value") == null) {
-            isEmpty = true;
-        } else {
-            isEmpty = false;
-        }
-        return isEmpty;
-    }
-
-    @Step("verify that description field is empty")
-    public boolean descriptionFieldIsEmpty1() {
-        boolean isEmpty;
-        if (descriptionField.getAttribute("value").equals("")) {
             isEmpty = true;
         } else {
             isEmpty = false;
@@ -216,15 +208,14 @@ public class AddTaskPage extends BaseObjectPage {
 
     @Step("Take the image")
     public String takeSRCImageFromSite() {
-        WebElement image = driver.findElement(By.xpath("//*[@id=\"root\"]/section/section/main/div/form/div[2]/div[2]/div/div/span/div/div[1]/div/div/span/a/img"));
-        String s = image.getAttribute("src");
+        String s = image.getAttribute(resource);
         String dataForCompare = s.replace("data:image/png;base64,", "");
         return dataForCompare;
     }
 
     @Step("Get data of initial image")
     public String getImageData(){
-        File inputFile = new File("src/test/resources/img2.png");
+        File inputFile = new File(imageResource);
 
         byte[] fileContent = new byte[0];
         try {
@@ -237,8 +228,5 @@ public class AddTaskPage extends BaseObjectPage {
                 .encodeToString(fileContent);
         return encodedString;
     }
-//    BufferedImage img1 = ImageIO.read(new File("D:\\Projects\\TA684\\src\\test\\resources\\foto.jpg"));
-//    Base64.getEncoder().encodeToString()
-//        img1.toString();
 
 }
