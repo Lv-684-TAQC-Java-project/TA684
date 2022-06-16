@@ -38,12 +38,12 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         var addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
        // softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(), "Fields are not empty");
+        softAssert.assertTrue(addTaskPage.dateFieldIsEmpty(), "Date was not added");
         addTaskPage.fillDateField();
-
         softAssert.assertFalse(addTaskPage.dateFieldIsEmpty(), "Date was not added");
 
-        addTaskPage.addImage(valueProvider.getSunFlower());
 
+        addTaskPage.addImage(valueProvider.getSunFlower());
         softAssert.assertTrue(addTaskPage.checkIsImageAdded(), "Image was not added");
         softAssert.assertEquals(addTaskPage.takeSRCImageFromSite(), addTaskPage.getImageData(), "Image was not the same");
 
@@ -51,9 +51,9 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         addTaskPage.fillHeaderField(header);
         softAssert.assertFalse(addTaskPage.headerFieldIsEmpty(), "Header was not added");
 
-        softAssert.assertTrue(addTaskPage.descriptionFieldIsEmpty(), "Description was not empty");
+        softAssert.assertTrue(addTaskPage.descriptionFieldIsEmpty1(), "Description was not empty");
         addTaskPage.fillDescriptionField(description);
-        softAssert.assertFalse(addTaskPage.descriptionFieldIsEmpty(), "Description was not added");
+        softAssert.assertFalse(addTaskPage.descriptionFieldIsEmpty1(), "Description was not added");
 
         softAssert.assertAll();
     }
