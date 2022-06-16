@@ -1,12 +1,16 @@
 package com.ita.speakukrainian.ui.pages.ChallengesPages;
 
 import io.qameta.allure.Step;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +26,10 @@ public class AddChallengePage extends ChallengesPage{
     private WebElement depictionChallenge;
     @FindBy(xpath = "//div[@id='root']/section/section/main/div/form/div[4]/div[2]/div/div/div/div/div[2]/div/p")
     private List<WebElement> listDepictionChallenge;
+    @FindBy(xpath="//div[@id='root']/section/section/main/div/form/div[5]/div[2]/div/div/span/div/div[1]/div/div")
+    private WebElement image;
+    @FindBy(id="picture")
+    private WebElement inputImage;
 
 
 
@@ -87,12 +95,41 @@ public class AddChallengePage extends ChallengesPage{
         }
         return list;
     }
+    @Step ("Verify that image was added")
+    public boolean checkIsImageAdded(){
+        if (!image.isEnabled()) {
+            return false;
+        }
+        else return true;
+    }
+    @Step("Take the image")
+    public String takeSRCImageFromSite() {
+        WebElement image = driver.findElement(By.xpath("//*[@id=\"root\"]/section/section/main/div/form/div[5]/div[2]/div/div/span/div/div[1]/div/div/span/a/img"));
+        String s = image.getAttribute("src");
+        String dataForCompare = s.replace("data:image/png;base64,", "");
+        return dataForCompare;
+    }
 
+    @Step("Get data of initial image")
+    public String getImageData(){
+        File inputFile = new File("src/test/resources/img2.png");
 
-//    From Oleh Vasylyshyn to Everyone 11:15 AM
-//    WebElement uploadElement = driver.findElement(By.id("uploadfile_0"));
-//
-//    // enter the file path onto the file-selection input field
-//        uploadElement.sendKeys("C:\\newhtml.html");
+        byte[] fileContent = new byte[0];
+        try {
+            fileContent = FileUtils.readFileToByteArray(inputFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String encodedString = Base64
+                .getEncoder()
+                .encodeToString(fileContent);
+        return encodedString;
+    }
+    @Step("Add image")
+    public void addImage(File img) {
+        inputImage.sendKeys(img.getAbsolutePath());
+        sleep(3000);
+    }
+
 
 }
