@@ -184,7 +184,8 @@ public class AddTaskPage extends BaseObjectPage {
     public String takeSRCImageFromSite() {
         WebElement image = driver.findElement(By.xpath("//*[@id=\"root\"]/section/section/main/div/form/div[2]/div[2]/div/div/span/div/div[1]/div/div/span/a/img"));
         String s = image.getAttribute("src");
-        return s;
+        String dataForCompare = s.replace("data:image/png;base64,", "");
+        return dataForCompare;
     }
 
     @Step("Get data of initial image")
