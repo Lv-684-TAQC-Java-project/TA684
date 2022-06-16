@@ -2,6 +2,8 @@ package com.ita.speakukrainian.ui.pages.Tasks;
 
 import com.ita.speakukrainian.ui.dropdowns.AddTaskPageDropDown;
 import com.ita.speakukrainian.ui.pages.BaseObjectPage;
+import com.ita.speakukrainian.utils.DateProvider;
+import com.thoughtworks.qdox.model.expression.Add;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Point;
@@ -9,7 +11,7 @@ import org.openqa.selenium.Rectangle;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.stringtemplate.v4.ST;
+
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -38,10 +40,14 @@ public class AddTaskPage extends BaseObjectPage {
      private WebElement inputImage;
     String formatName = "jpg";
     String pathName ="D:\\Projects\\TA684\\src\\test\\resources\\fotoScreen.jpg";
+    @FindBy(xpath = "//*[@class=//*[@class=\"ant-select-selection-placeholder\"]]")
+    private WebElement challengeDropDownForVerifyEmptyField;
     @FindBy(xpath = "//*[@id=\"challengeId\"]")
-    private WebElement challengeDropDown;
+    private WebElement challengeDropDownForClick;
     @FindBy(xpath ="//*[text()=\"Зберегти\"]")
     private WebElement saveChanges;
+    @FindBy(xpath = "//*[@class=\"ant-message-custom-content ant-message-warning\"]")
+    private WebElement errorMassage;
 
     public AddTaskPage(WebDriver driver) {
         super(driver);
@@ -95,7 +101,7 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("verify that challenge popup is not selected ")
     public boolean challengeDropDownIsNotSelected() {
         boolean isEmpty;
-        if (challengeDropDown.getAttribute("value") == null) {
+        if (challengeDropDownForVerifyEmptyField.getAttribute("value") == null) {
             isEmpty = true;
         } else {
             isEmpty = false;
@@ -114,25 +120,41 @@ public class AddTaskPage extends BaseObjectPage {
         return isEmpty;
     }
 
-    @Step("fill date field")
-    public void fillDateField(String date){
+    @Step("fill date field present date")
+    public AddTaskPage fillDateField(){
+        DateProvider dateProvider = new DateProvider();
         dateField.click();
-        dateField.sendKeys(date);
+        dateField.sendKeys(dateProvider.date());
+        return this;
+    }
+
+    @Step("fill title field")
+    public AddTaskPage fillTitleField(String title){
+        titleField.sendKeys(title);
+        return this;
+    }
+
+    @Step("clear title field")
+    public AddTaskPage clearTitleField(){
+        titleField.clear();
+        return this;
     }
 
     @Step("fill name field")
-    public void fillNameField(String name){
+    public AddTaskPage fillNameField(String name){
         nameField.sendKeys(name);
+        return this;
     }
 
     @Step("fill description field")
-    public void fillDescriptionField(String description){
+    public AddTaskPage fillDescriptionField(String description){
         descriptionField.sendKeys(description);
+        return this;
     }
 
     @Step("click challenge dropdown")
     public AddTaskPageDropDown clickSelectChallenge() {
-        challengeDropDown.click();
+        challengeDropDownForClick.click();
         AddTaskPageDropDown addTaskPageDropDown = new AddTaskPageDropDown(driver);
         return new AddTaskPageDropDown(driver);
     }
@@ -145,7 +167,7 @@ public class AddTaskPage extends BaseObjectPage {
     }
     @Step("Add image")
     public void addImage() {
-        inputImage.sendKeys("D:\\Projects\\TA684\\src\\test\\resources\\foto.jpg");
+        inputImage.sendKeys("D:\\GITSOFTSERVE\\NEW COURSE\\TA684\\src\\test\\resources\\foto.jpg");
         sleep(3000);
     }
     @Step ("Verify that image was added")
@@ -155,6 +177,15 @@ public class AddTaskPage extends BaseObjectPage {
         }
         else return false;
     }
+
+    @Step ("Verify that image was added")
+    public boolean errorMassageIsDisplayed(){
+        if (errorMassage.isDisplayed()) {
+            return true;
+        }
+        else return false;
+    }
+
     @Step("Take the image")
     public void takeSnapShot() throws Exception{
 //        WebElement image = driver.findElement(By.xpath("//*[@id=\"root\"]/section/section/main/div/form/div[2]/div[2]/div/div/span/div/div[1]/div/div"));
