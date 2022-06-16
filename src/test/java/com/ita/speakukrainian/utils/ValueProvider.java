@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -32,6 +33,9 @@ public class ValueProvider {
         return properties.getProperty("baseURL");
     }
 
+    public File getSunFlower() {
+        return new File("src/test/resources/img2.png");
+    }
 
 
 }

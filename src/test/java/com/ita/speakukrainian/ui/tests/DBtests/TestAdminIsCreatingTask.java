@@ -7,12 +7,16 @@ import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
+
+  String date = "2022-06-30";
+
     @BeforeMethod
     @Override
     public void beforeMethod(ITestContext context) {
@@ -31,11 +35,11 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
     public void CreatingTackWithInvalidNameData() throws Exception {
         var addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(addTaskPage.dateFieldIsEmpty(), "Fields is not empty");
-        addTaskPage.addImage();
+       // softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(), "Fields are not empty");
+        addTaskPage.fillDateField();
+        addTaskPage.addImage(valueProvider.getSunFlower());
         softAssert.assertTrue(addTaskPage.checkIsImageAdded(), "Image was not added");
-            addTaskPage.takeSnapShot();
-            softAssert.assertTrue(addTaskPage.compareImages(), "Image was not the same");
+        softAssert.assertEquals(addTaskPage.takeSRCImageFromSite(), addTaskPage.getImageData(), "Image was not the same");
         softAssert.assertAll();
     }
 
@@ -48,7 +52,7 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(addTaskPage.AllFieldIsEmpty());
         addTaskPage.fillDateField();
-        addTaskPage.addImage();
+        addTaskPage.addImage(valueProvider.getSunFlower());
         addTaskPage.fillNameField("Українська-_-English=@#+123");
         addTaskPage.fillDescriptionField("дуже круте завдання для дітей від 8 років :-) and its not all for more information call on 141242353465474123");
         addTaskPage.clickSelectChallenge().clickDniproChallenge();
