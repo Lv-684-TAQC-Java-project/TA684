@@ -20,11 +20,10 @@ public class AddTaskPage extends BaseObjectPage {
     @FindBy(xpath = "//*[@id=\"root\"]//div[4]/div[2]/div/div/div/div/div[2]/div[1]")
     private WebElement titleField;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/div/form/div[4]/div[2]/div/div/div/div/div[2]/div[1]/p")
+    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/div/form/div[4]/div[2]/div/div/div/div/div[2]/div[1]")
     private WebElement headerField;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/div/form/div[5]/div[2]/div/div/div/div/div[2]/div[1]/p")
-            //"//*[@id=\"root\"]//div[5]/div[2]/div/div/div/div/div[2]/div[1]")
+    @FindBy(xpath ="//*[@id=\"root\"]//div[5]/div[2]/div/div/div/div/div[2]/div[1]")
     private WebElement descriptionField;
     @FindBy(xpath = "//*[@id=\"startDate\"]")
     private WebElement dateField;
@@ -65,7 +64,7 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("verify that header field is empty")
     public boolean headerFieldIsEmpty() {
         boolean isEmpty;
-        if (headerField.getText().equals("")) {
+        if (headerField.getAttribute("value")==null) {
             isEmpty = true;
         } else {
             isEmpty = false;
@@ -98,7 +97,7 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("verify that description field is empty")
     public boolean descriptionFieldIsEmpty1() {
         boolean isEmpty;
-        if (descriptionField.getText().equals("")) {
+        if (descriptionField.getAttribute("value").equals("")) {
             isEmpty = true;
         } else {
             isEmpty = false;
@@ -120,7 +119,7 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("verify that challenge popup is not selected ")
     public boolean challengeDropDownIsNotSelected() {
         boolean isEmpty;
-        if (challengeDropDownForVerifyEmptyField.getAttribute("value") == null) {
+        if (challengeDropDownForVerifyEmptyField.getAttribute("value").equals("")) {
             isEmpty = true;
         } else {
             isEmpty = false;

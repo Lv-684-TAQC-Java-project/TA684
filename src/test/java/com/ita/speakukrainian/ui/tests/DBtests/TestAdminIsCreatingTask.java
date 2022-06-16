@@ -51,9 +51,12 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         addTaskPage.fillHeaderField(header);
         softAssert.assertFalse(addTaskPage.headerFieldIsEmpty(), "Header was not added");
 
-        softAssert.assertTrue(addTaskPage.descriptionFieldIsEmpty1(), "Description was not empty");
+        softAssert.assertTrue(addTaskPage.descriptionFieldIsEmpty(), "Description was not empty");
         addTaskPage.fillDescriptionField(description);
-        softAssert.assertFalse(addTaskPage.descriptionFieldIsEmpty1(), "Description was not added");
+        softAssert.assertFalse(addTaskPage.descriptionFieldIsEmpty(), "Description was not added");
+
+        //softAssert.assertTrue(addTaskPage.challengeDropDownIsNotSelected(), "Challenge was not empty");
+
 
         softAssert.assertAll();
     }
