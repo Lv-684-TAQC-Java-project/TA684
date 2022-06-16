@@ -39,7 +39,7 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(), "Fields are not empty");
         //addTaskPage.chooseDateField();
         //addTaskPage.chooseDate();
-        addTaskPage.addImage();
+        addTaskPage.addImage(valueProvider.getSunFlower());
         softAssert.assertTrue(addTaskPage.checkIsImageAdded(), "Image was not added");
         //softAssert.assertEquals(addTaskPage.takeSnapShot(), data, "Image was not the same");
         softAssert.assertAll();

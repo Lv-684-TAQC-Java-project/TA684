@@ -9,7 +9,6 @@ import org.openqa.selenium.Rectangle;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.stringtemplate.v4.ST;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -153,8 +152,8 @@ public class AddTaskPage extends BaseObjectPage {
         return this;
     }
     @Step("Add image")
-    public void addImage() {
-        inputImage.sendKeys("D:\\Projects\\TA684\\src\\test\\resources\\foto.jpg");
+    public void addImage(File img) {
+        inputImage.sendKeys(img.getAbsolutePath());
         sleep(3000);
     }
     @Step ("Verify that image was added")
