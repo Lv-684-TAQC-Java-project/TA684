@@ -7,12 +7,17 @@ import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
+
+//    @FindBy(css=".ant-picker-cell-end:nth-child(5) > .ant-picker-cell-inner")
+//    private WebElement dateFromCalendar30_06;
+
     @BeforeMethod
     @Override
     public void beforeMethod(ITestContext context) {
@@ -31,11 +36,12 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
     public void CreatingTackWithInvalidNameData() throws Exception {
         var addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(addTaskPage.dateFieldIsEmpty(), "Fields is not empty");
+        softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(), "Fields are not empty");
+        //addTaskPage.chooseDateField();
+        //addTaskPage.chooseDate();
         addTaskPage.addImage();
         softAssert.assertTrue(addTaskPage.checkIsImageAdded(), "Image was not added");
-            addTaskPage.takeSnapShot();
-            softAssert.assertTrue(addTaskPage.compareImages(), "Image was not the same");
+        //softAssert.assertEquals(addTaskPage.takeSnapShot(), data, "Image was not the same");
         softAssert.assertAll();
     }
 

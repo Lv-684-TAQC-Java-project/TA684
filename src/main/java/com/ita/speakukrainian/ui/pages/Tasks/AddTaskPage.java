@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Base64;
 
 public class AddTaskPage extends BaseObjectPage {
 
@@ -42,6 +43,7 @@ public class AddTaskPage extends BaseObjectPage {
     private WebElement challengeDropDown;
     @FindBy(xpath ="//*[text()=\"Зберегти\"]")
     private WebElement saveChanges;
+
 
     public AddTaskPage(WebDriver driver) {
         super(driver);
@@ -120,6 +122,13 @@ public class AddTaskPage extends BaseObjectPage {
         dateField.sendKeys(date);
     }
 
+    @Step("Choose the date")
+    public AddTaskPage chooseDateField(){
+        dateField.click();
+        return new AddTaskPage(driver);
+    }
+
+
     @Step("fill name field")
     public void fillNameField(String name){
         nameField.sendKeys(name);
@@ -156,7 +165,7 @@ public class AddTaskPage extends BaseObjectPage {
         else return false;
     }
     @Step("Take the image")
-    public void takeSnapShot() throws Exception{
+    public String takeSnapShot() throws Exception{
 //        WebElement image = driver.findElement(By.xpath("//*[@id=\"root\"]/section/section/main/div/form/div[2]/div[2]/div/div/span/div/div[1]/div/div"));
 //        WrapsDriver wrapsDriver = (WrapsDriver) image;
 //        File screenshot = ((TakesScreenshot) wrapsDriver.getWrappedDriver()).getScreenshotAs(OutputType.FILE);
@@ -169,11 +178,15 @@ public class AddTaskPage extends BaseObjectPage {
 //        FileUtils.copyFile(screenshot, file);
         WebElement image = driver.findElement(By.xpath("//*[@id=\"root\"]/section/section/main/div/form/div[2]/div[2]/div/div/span/div/div[1]/div/div/span/a/img"));
         String s = image.getAttribute("src");
-        System.out.println(s);
-        URL url = new URL(s);
-        System.out.println(url);
-        BufferedImage bufImgOne = ImageIO.read(url);
-        ImageIO.write(bufImgOne, formatName, new File(pathName));
+        BufferedImage img1 = ImageIO.read(new File("D:\\Projects\\TA684\\src\\test\\resources\\foto.jpg"));
+        //Base64.getEncoder().encodeToString()
+        img1.toString();
+        return s;
+//        System.out.println(s);
+//        URL url = new URL(s);
+//        System.out.println(url);
+//        BufferedImage bufImgOne = ImageIO.read(url);
+//        ImageIO.write(bufImgOne, formatName, new File(pathName));
     }
     @Step("Comparing images")
     public boolean compareImages() throws IOException {
