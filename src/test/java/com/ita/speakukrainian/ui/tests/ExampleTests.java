@@ -3,12 +3,14 @@ package com.ita.speakukrainian.ui.tests;
 import com.ita.speakukrainian.utils.jdbc.entity.CenterEntity;
 import com.ita.speakukrainian.utils.jdbc.entity.StationEntity;
 import com.ita.speakukrainian.utils.jdbc.services.CenterServise;
-import com.ita.speakukrainian.utils.jdbc.entity.StationEntity;
-import com.ita.speakukrainian.utils.jdbc.services.ClubsService;
 import com.ita.speakukrainian.utils.jdbc.services.StationServise;
+import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 public class ExampleTests {
@@ -80,6 +82,45 @@ public class ExampleTests {
 
         softAssert.assertEquals(first.getDescriptions(), "Комп'ютерна грамотність, графіка, айдентика");
 
+    }
+
+    @Test
+    public void testIMG() {
+
+        File inputFile = new File("src/test/resources/img2.png");
+
+        byte[] fileContent = new byte[0];
+        try {
+            fileContent = FileUtils.readFileToByteArray(inputFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String encodedString = Base64
+                .getEncoder()
+                .encodeToString(fileContent);
+//        BufferedImage img1;
+//        try {
+//            img1 = ImageIO.read(new File("C:\\data\\github\\TA684\\src\\test\\resources\\foto.jpg"));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        ByteArrayOutputStream os = new ByteArrayOutputStream();
+//        try {
+//            ImageIO.write(img1, "png", os);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        String base64 = Base64.getEncoder().encodeToString(os.toByteArray());
+//        try
+//        {
+//            ImageIO.write(img, formatName, os);
+//            return Base64.getEncoder().encodeToString(os.toByteArray());
+//        }
+//        catch (final IOException ioe)
+//        {
+//            throw new UncheckedIOException(ioe);
+//        }
+        String s;
     }
 
 }
