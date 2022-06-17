@@ -10,8 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Base64;
 
 public class AddTaskPage extends BaseObjectPage {
 
@@ -43,9 +41,8 @@ public class AddTaskPage extends BaseObjectPage {
     private WebElement saveChanges;
     @FindBy(xpath = "//*[@class=\"ant-message-custom-content ant-message-warning\"]")
     private WebElement errorMassage;
-
-    String resource="src";
-    String imageResource = "src/test/resources/img2.png";
+    @FindBy(xpath = "//*[@class=\"ant-upload-list-picture-card-container\"]")
+    private WebElement firstPhotoContainer;
 
 
     public AddTaskPage(WebDriver driver) {
@@ -56,7 +53,6 @@ public class AddTaskPage extends BaseObjectPage {
     public boolean dateFieldIsEmpty() {
         boolean isEmpty;
         if (dateField.getAttribute("value").equals("")) {
-
             isEmpty = true;
         } else {
             isEmpty = false;
@@ -129,6 +125,17 @@ public class AddTaskPage extends BaseObjectPage {
         return isEmpty;
     }
 
+    @Step("verify that photo was added")
+    public boolean isPhotoAdded() {
+        boolean isPhotoAdded;
+        if (firstPhotoContainer.isEnabled()){
+            isPhotoAdded = true;
+        }else{
+            isPhotoAdded = false;
+        }
+        return isPhotoAdded;
+    }
+
     @Step("fill date field present date")
     public AddTaskPage fillDateField(){
         DateProvider dateProvider = new DateProvider();
@@ -157,7 +164,6 @@ public class AddTaskPage extends BaseObjectPage {
         return this;
     }
 
-
     @Step("fill name field")
     public AddTaskPage fillNameField(String name){
         nameField.sendKeys(name);
@@ -181,7 +187,7 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("click save changes")
     public AddTaskPage clickSave() {
         saveChanges.click();
-        sleep(10000);
+        sleep(1000);
         return this;
     }
     @Step("Add image")
@@ -206,26 +212,10 @@ public class AddTaskPage extends BaseObjectPage {
     }
 
     @Step("Take the image")
-    public String takeSRCImageFromSite() {
-        String s = image.getAttribute(resource);
+    public String getUploadedImageBase64() {
+        String s = image.getAttribute("src");
         String dataForCompare = s.replace("data:image/png;base64,", "");
         return dataForCompare;
-    }
-
-    @Step("Get data of initial image")
-    public String getImageData(){
-        File inputFile = new File(imageResource);
-
-        byte[] fileContent = new byte[0];
-        try {
-            fileContent = FileUtils.readFileToByteArray(inputFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        String encodedString = Base64
-                .getEncoder()
-                .encodeToString(fileContent);
-        return encodedString;
     }
 
 }
