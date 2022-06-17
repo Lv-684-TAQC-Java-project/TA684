@@ -166,11 +166,7 @@ public class AddTaskPage extends BaseObjectPage {
 
     @Step ("Verify that image was added")
     public boolean errorMassageIsDisplayed(){
-        if (errorMassage.isDisplayed()) {
-            return true;
-        }else {
-            return false;
-        }
+            return errorMassage.isDisplayed();
     }
 
     @Step("Take the image")
@@ -178,6 +174,11 @@ public class AddTaskPage extends BaseObjectPage {
         String s = image.getAttribute("src");
         String dataForCompare = s.replace("data:image/png;base64,", "");
         return dataForCompare;
+    }
+
+    @Step ("Verify that image was added")
+    public String errorMassage(){
+        return errorMassage.getText();
     }
 
 }
