@@ -35,7 +35,7 @@ public class AddTaskPage extends BaseObjectPage {
     private WebElement image;
     @FindBy(id="picture")
      private WebElement inputImage;
-    @FindBy(xpath = "//*[@class=//*[@class=\"ant-select-selection-placeholder\"]]")
+    @FindBy(xpath = "//*[@class=\"ant-select-selection-placeholder\"]")
     private WebElement challengeDropDownForVerifyEmptyField;
     @FindBy(xpath = "//*[@id=\"challengeId\"]")
     private WebElement challengeDropDownForClick;
@@ -109,7 +109,7 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("verify that challenge popup is not selected ")
     public boolean challengeDropDownIsNotSelected() {
         boolean isEmpty;
-        if (challengeDropDownForVerifyEmptyField.getAttribute("value").equals("")) {
+        if (challengeDropDownForVerifyEmptyField.getAttribute("value") == null) {
             isEmpty = true;
         } else {
             isEmpty = false;
