@@ -74,6 +74,14 @@ public class AdminCanCreateAChallegne527 extends TestRuneWithAdmin {
         String GetListDepiction = String.join("\n", depictionChallenge);
         softAssert.assertEquals(GetListDepiction, expected);
 
+        //softAssert.assertFalse(addChallengePage.checkIsImageAdded());
+
+        addChallengePage.addImage(valueProvider.getSunFlower());
+
+        softAssert.assertTrue(addChallengePage.checkIsImageAdded(), "Image was not added");
+
+        softAssert.assertEquals(addChallengePage.takeSRCImageFromSite(), addChallengePage.getImageData());
+
 
         softAssert.assertAll();
 
