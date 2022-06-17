@@ -45,8 +45,7 @@ public class AddTaskPage extends BaseObjectPage {
     private WebElement errorMassage;
     @FindBy(xpath = "//*[@class=\"ant-upload-list-picture-card-container\"]")
     private WebElement firstPhotoContainer;
-    String resource="src";
-    String imageResource = "src/test/resources/img2.png";
+
 
     public AddTaskPage(WebDriver driver) {
         super(driver);
@@ -216,26 +215,10 @@ public class AddTaskPage extends BaseObjectPage {
     }
 
     @Step("Take the image")
-    public String takeSRCImageFromSite() {
-        String s = image.getAttribute(resource);
+    public String getUploadedImageBase64() {
+        String s = image.getAttribute("src");
         String dataForCompare = s.replace("data:image/png;base64,", "");
         return dataForCompare;
-    }
-
-    @Step("Get data of initial image")
-    public String getImageData(){
-        File inputFile = new File(imageResource);
-
-        byte[] fileContent = new byte[0];
-        try {
-            fileContent = FileUtils.readFileToByteArray(inputFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        String encodedString = Base64
-                .getEncoder()
-                .encodeToString(fileContent);
-        return encodedString;
     }
 
 }
