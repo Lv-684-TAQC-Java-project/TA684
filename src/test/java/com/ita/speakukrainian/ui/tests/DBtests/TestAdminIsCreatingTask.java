@@ -94,8 +94,8 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(),"verify all field is empty");
         addTaskPage.fillDateField().addImage(valueProvider.getSunFlower());
         softAssert.assertTrue(addTaskPage.isPhotoAdded());
-        addTaskPage.fillNameField("Українська-_-English=@#+123");
-        addTaskPage.fillDescriptionField("дуже круте завдання для дітей від 8 років :-) and its not all for more information call on 141242353465474123");
+        addTaskPage.fillNameField(header);
+        addTaskPage.fillDescriptionField(description);
         addTaskPage.clickSelectChallenge().clickDniproChallenge();
         addTaskPage.clickSave();
         softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed(),"is error massage displayed");
