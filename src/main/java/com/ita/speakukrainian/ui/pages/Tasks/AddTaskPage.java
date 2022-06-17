@@ -85,13 +85,7 @@ public class AddTaskPage extends BaseObjectPage {
 
     @Step("verify that all field is empty")
     public boolean AllFieldIsEmpty() {
-        boolean isEmpty;
-        if (dateFieldIsEmpty()&&nameFieldIsEmpty()&&descriptionFieldIsEmpty()&& challengeDropDownIsNotSelected()&&titleFieldIsEmpty()) {
-            isEmpty = true;
-        } else {
-            isEmpty = false;
-        }
-        return isEmpty;
+        return dateFieldIsEmpty()&&nameFieldIsEmpty()&&descriptionFieldIsEmpty()&& challengeDropDownIsNotSelected()&&titleFieldIsEmpty();
     }
 
     @Step("verify that photo was added")
