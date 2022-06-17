@@ -92,7 +92,7 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         SoftAssert softAssert = new SoftAssert();
         TasksServise tasksServise = new TasksServise();
         List<TasksEntity> tasksTable = tasksServise.getAllTasks();
-        String [] array = new String[]{"ъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ð"};
+        String [] array = new String[]{"ъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ð"};
         softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(),"verify all field is empty");
         addTaskPage.fillDateField().addImage(valueProvider.getSunFlower());
         softAssert.assertTrue(addTaskPage.isPhotoAdded());
@@ -108,7 +108,7 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         addTaskPage.clearTitleField().fillTitleField("dsfsdfsdgdfghdfggjhdghjksghfgdfgdfgdfgg").clickSave();
         softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed(),"is error massage displayed");
         boolean tasksIsNotAdded = true;
-        array = new String[]{"ъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ð","Українська-_-English=@#+123"};
+        array = new String[]{"ъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ð","Українська-_-English=@#+123"};
         for (int i = 0 ; i < tasksTable.size() && tasksIsNotAdded;i++) {
             for (int j = 0; j < array.length; j++) {
                 if (tasksTable.get(i).equals(array[j])) {
