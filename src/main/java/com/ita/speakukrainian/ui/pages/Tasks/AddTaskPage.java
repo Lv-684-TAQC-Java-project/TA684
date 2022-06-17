@@ -44,6 +44,9 @@ public class AddTaskPage extends BaseObjectPage {
     @FindBy(xpath = "//*[@class=\"ant-upload-list-picture-card-container\"]")
     private WebElement firstPhotoContainer;
 
+    @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/div/form/div[6]/div[2]/div/div/div/div/span[2]")
+    private WebElement chosenDniproChallenge;
+
 
     public AddTaskPage(WebDriver driver) {
         super(driver);
@@ -56,7 +59,7 @@ public class AddTaskPage extends BaseObjectPage {
 
     @Step("verify that header field is empty")
     public boolean headerFieldIsEmpty() {
-        return headerField.getAttribute("value")==null;
+        return headerField.getText().equals("");
     }
     @Step("verify that name field is empty")
     public boolean nameFieldIsEmpty() {
@@ -93,11 +96,19 @@ public class AddTaskPage extends BaseObjectPage {
         return firstPhotoContainer.isEnabled();
     }
 
+    @Step("verify that challenge was added")
+    public boolean isChallengeAdded() {
+        sleep(3000);
+        return chosenDniproChallenge.getText().equals("Дніпро");
+    }
+
+
     @Step("fill date field present date")
     public AddTaskPage fillDateField(){
         DateProvider dateProvider = new DateProvider();
         dateField.click();
-        dateField.sendKeys(dateProvider.date());
+        dateField.sendKeys("2022-06-30");
+        //dateField.sendKeys(dateProvider.date());
         dateField.sendKeys(Keys.ENTER);
         return this;
     }
@@ -124,13 +135,14 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("fill name field")
     public AddTaskPage fillNameField(String name){
         nameField.sendKeys(name);
+        sleep(3000);
         return this;
     }
 
     @Step("fill description field")
     public AddTaskPage fillDescriptionField(String description){
         descriptionField.sendKeys(description);
-        sleep(3000);
+        sleep(5000);
         return this;
     }
 
@@ -169,11 +181,15 @@ public class AddTaskPage extends BaseObjectPage {
         }
     }
 
+    @Step ("Verify that image was appeared")
+    public String errorMassageIsAppearing(){
+        return errorMassage.getText();
+    }
+
     @Step("Take the image")
     public String getUploadedImageBase64() {
         String s = image.getAttribute("src");
         String dataForCompare = s.replace("data:image/png;base64,", "");
         return dataForCompare;
     }
-
 }

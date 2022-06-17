@@ -20,10 +20,13 @@ import java.util.Base64;
 import java.util.List;
 
 public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
+
+    private final String name = "ъэы; ผม, Ÿ, ð";
     private final String header = "Українська-_-English=@#+123";
-   private final String description = "дуже круте завдання для дітей від 8 років :-) and its not all for more information call on 141242353465474123";
-
-
+    private final String headerFilling = "Завдання на кмітливість та розвиток of attention for kids 6-9 years old!";
+    private final String description = "Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!";
+    private final String [] dataForNameField = new String[]{"", "ъэы; ผม, Ÿ, ð", "Good", "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm"};
+   private final String [] ErrorsForNameField = new String[]{"name must not be blank", "name Can't contain foreign language symbols except english", "name must contain a minimum of 5 and a maximum of 50 letters", "name must contain a minimum of 5 and a maximum of 50 letters" };
     @BeforeMethod
     @Override
     public void beforeMethod(ITestContext context) {
@@ -59,8 +62,8 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         var addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
 
-       // softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(), "Fields are not empty");
-        softAssert.assertTrue(addTaskPage.dateFieldIsEmpty(), "Date was not added");
+        softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(), "Fields are not empty");
+
         addTaskPage.fillDateField();
         softAssert.assertFalse(addTaskPage.dateFieldIsEmpty(), "Date was not added");
 
@@ -69,19 +72,24 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
 
         softAssert.assertEquals(addTaskPage.getUploadedImageBase64(), getImageDataBase64(valueProvider.getSunFlower()), "Image was not the same");
 
-        softAssert.assertTrue(addTaskPage.headerFieldIsEmpty(), "Header was not empty");
-        addTaskPage.fillHeaderField(header);
+        addTaskPage.fillHeaderField(headerFilling);
         softAssert.assertFalse(addTaskPage.headerFieldIsEmpty(), "Header was not added");
 
-        softAssert.assertTrue(addTaskPage.isDescriptionFieldEmpty(), "Description was not empty");
         addTaskPage.fillDescriptionField(description);
         softAssert.assertFalse(addTaskPage.isDescriptionFieldEmpty(), "Description was not added");
 
-        softAssert.assertTrue(addTaskPage.challengeDropDownIsNotSelected(), "Challenge was not empty");
         addTaskPage.clickSelectChallenge().clickDniproChallenge();
-        softAssert.assertFalse(addTaskPage.challengeDropDownIsNotSelected(), "Challenge was empty");
+        softAssert.assertFalse(addTaskPage.isChallengeAdded(), "Challenge was not chosen");
 
-        softAssert.assertAll();
+        for (int i = 0 ; i < dataForNameField.length; i++) {
+            addTaskPage.clearTitleField().fillTitleField(dataForNameField[i]).clickSave();
+            for (String a:
+                 ErrorsForNameField) {
+                softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),a, "error massage is not the same");
+            }
+        }
+
+
     }
 
 

@@ -68,8 +68,8 @@ public class TestProperlyWorkClubManagerRole extends BaseTestRunner {
 
     @Test
     public void GetClubFromBase(){
-        ClubsService clubServise = new ClubsService();
-        List<ClubsEntity> club = clubServise.getByName("Малявки");
+        ClubsService clubService = new ClubsService();
+        List<ClubsEntity> club = clubService.getByName("Малявки");
         ClubsEntity maliavky = club.get(0);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(maliavky.getAgeFrom(), 4);
@@ -90,8 +90,8 @@ public class TestProperlyWorkClubManagerRole extends BaseTestRunner {
         new MyProfilePage(driver)
                 .clickMoreActionMenu()
                 .clickRedactClub();
-        ClubsService clubServise = new ClubsService();
-        List<ClubsEntity> club = clubServise.getByName("Малявки");
+        ClubsService clubService = new ClubsService();
+        List<ClubsEntity> club = clubService.getByName("Малявки");
         ClubsEntity maliavky = club.get(0);
         System.out.println(maliavky);
     }
