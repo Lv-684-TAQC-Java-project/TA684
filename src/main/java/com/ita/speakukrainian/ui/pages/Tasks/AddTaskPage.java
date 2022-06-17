@@ -3,15 +3,22 @@ package com.ita.speakukrainian.ui.pages.Tasks;
 import com.ita.speakukrainian.ui.dropdowns.AddTaskPageDropDown;
 import com.ita.speakukrainian.ui.pages.BaseObjectPage;
 import com.ita.speakukrainian.utils.DateProvider;
+import com.thoughtworks.qdox.model.expression.Add;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
+import java.net.URL;
 
 public class AddTaskPage extends BaseObjectPage {
 
@@ -35,7 +42,9 @@ public class AddTaskPage extends BaseObjectPage {
     private WebElement image;
     @FindBy(id="picture")
      private WebElement inputImage;
-    @FindBy(xpath = "//*[@class=//*[@class=\"ant-select-selection-placeholder\"]]")
+    String formatName = "jpg";
+    String pathName ="D:\\Projects\\TA684\\src\\test\\resources\\fotoScreen.jpg";
+    @FindBy(xpath = "//*[@class=\"ant-select-selection-placeholder\"]")
     private WebElement challengeDropDownForVerifyEmptyField;
     @FindBy(xpath = "//*[@id=\"challengeId\"]")
     private WebElement challengeDropDownForClick;
@@ -44,8 +53,13 @@ public class AddTaskPage extends BaseObjectPage {
     @FindBy(xpath = "//*[@class=\"ant-message-custom-content ant-message-warning\"]")
     private WebElement errorMassage;
 
+
     String resource="src";
     String imageResource = "src/test/resources/img2.png";
+
+
+    @FindBy(xpath = "//*[@class=\"ant-upload-list-picture-card-container\"]")
+    private WebElement firstPhotoContainer;
 
 
     public AddTaskPage(WebDriver driver) {
@@ -56,7 +70,6 @@ public class AddTaskPage extends BaseObjectPage {
     public boolean dateFieldIsEmpty() {
         boolean isEmpty;
         if (dateField.getAttribute("value").equals("")) {
-
             isEmpty = true;
         } else {
             isEmpty = false;
@@ -130,12 +143,22 @@ public class AddTaskPage extends BaseObjectPage {
         return isEmpty;
     }
 
+    @Step("verify that photo was added")
+    public boolean isPhotoAdded() {
+        boolean isPhotoAdded;
+        if (firstPhotoContainer.isEnabled()){
+            isPhotoAdded = true;
+        }else{
+            isPhotoAdded = false;
+        }
+        return isPhotoAdded;
+    }
+
     @Step("fill date field present date")
     public AddTaskPage fillDateField(){
         DateProvider dateProvider = new DateProvider();
         dateField.click();
         dateField.sendKeys(dateProvider.date());
-        dateField.sendKeys(Keys.ENTER);
         return this;
     }
 
@@ -157,7 +180,6 @@ public class AddTaskPage extends BaseObjectPage {
         titleField.clear();
         return this;
     }
-
 
     @Step("fill name field")
     public AddTaskPage fillNameField(String name){
@@ -182,13 +204,14 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("click save changes")
     public AddTaskPage clickSave() {
         saveChanges.click();
-        sleep(10000);
+        sleep(1000);
         return this;
     }
     @Step("Add image")
-    public void addImage(File img) {
-        inputImage.sendKeys(img.getAbsolutePath());
+    public AddTaskPage addImage() {
+        inputImage.sendKeys("D:\\GITSOFTSERVE\\NEW COURSE\\TA684\\src\\test\\resources\\foto.jpg");
         sleep(3000);
+        return this;
     }
     @Step ("Verify that image was added")
     public boolean checkIsImageAdded(){
@@ -207,6 +230,7 @@ public class AddTaskPage extends BaseObjectPage {
     }
 
     @Step("Take the image")
+
     public String takeSRCImageFromSite() {
         String s = image.getAttribute(resource);
         String dataForCompare = s.replace("data:image/png;base64,", "");
@@ -228,5 +252,4 @@ public class AddTaskPage extends BaseObjectPage {
                 .encodeToString(fileContent);
         return encodedString;
     }
-
 }
