@@ -78,8 +78,6 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         softAssert.assertFalse(addTaskPage.isDescriptionFieldEmpty(), "Description was not added");
 
         //softAssert.assertTrue(addTaskPage.challengeDropDownIsNotSelected(), "Challenge was not empty");
-
-
         softAssert.assertAll();
     }
 
