@@ -66,13 +66,7 @@ public class AddTaskPage extends BaseObjectPage {
 
     @Step("verify that header field is empty")
     public boolean headerFieldIsEmpty() {
-        boolean isEmpty;
-        if (headerField.getAttribute("value")==null) {
-            isEmpty = true;
-        } else {
-            isEmpty = false;
-        }
-        return isEmpty;
+        return headerField.getText().equals("");
     }
     @Step("verify that name field is empty")
     public boolean nameFieldIsEmpty() {
@@ -95,6 +89,11 @@ public class AddTaskPage extends BaseObjectPage {
             isEmpty = false;
         }
         return isEmpty;
+    }
+
+    @Step("verify that description field is empty")
+    public boolean isDescriptionFieldEmpty() {
+        return descriptionField.getText().equals("");
     }
 
     @Step("verify that title field is empty")

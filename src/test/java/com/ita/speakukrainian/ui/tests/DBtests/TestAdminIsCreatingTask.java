@@ -16,7 +16,7 @@ import org.testng.asserts.SoftAssert;
 
 public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
 
-    String header = "Українська-_-English=@#+123";
+    String header = "Українська-_-English=@#+123"+"\n"+ "Fроль45";
     String description = "дуже круте завдання для дітей від 8 років :-) and its not all for more information call on 141242353465474123";
 
     @BeforeMethod
@@ -51,9 +51,9 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         addTaskPage.fillHeaderField(header);
         softAssert.assertFalse(addTaskPage.headerFieldIsEmpty(), "Header was not added");
 
-        softAssert.assertTrue(addTaskPage.descriptionFieldIsEmpty(), "Description was not empty");
+        softAssert.assertTrue(addTaskPage.isDescriptionFieldEmpty(), "Description was not empty");
         addTaskPage.fillDescriptionField(description);
-        softAssert.assertFalse(addTaskPage.descriptionFieldIsEmpty(), "Description was not added");
+        softAssert.assertFalse(addTaskPage.isDescriptionFieldEmpty(), "Description was not added");
 
         //softAssert.assertTrue(addTaskPage.challengeDropDownIsNotSelected(), "Challenge was not empty");
 
