@@ -107,7 +107,6 @@ public class AddTaskPage extends BaseObjectPage {
     public AddTaskPage fillDateField(){
         DateProvider dateProvider = new DateProvider();
         dateField.click();
-       // dateField.sendKeys("2022-06-30");
         dateField.sendKeys(dateProvider.date());
         dateField.sendKeys(Keys.ENTER);
         return this;

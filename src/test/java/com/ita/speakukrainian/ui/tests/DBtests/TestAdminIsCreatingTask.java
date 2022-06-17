@@ -98,7 +98,6 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         }
     }
 
-
     @Test()
     @Description("Verify that admin can't create a task with invalid data in 'Заголовок' field on 'Додайте завдання' page")
     @Issue("TUA-524")
