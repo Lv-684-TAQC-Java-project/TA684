@@ -53,68 +53,32 @@ public class AddTaskPage extends BaseObjectPage {
 
     @Step("verify that date field is empty")
     public boolean dateFieldIsEmpty() {
-        boolean isEmpty;
-        if (dateField.getAttribute("value").equals("")) {
-            isEmpty = true;
-        } else {
-            isEmpty = false;
-        }
-        return isEmpty;
+        return dateField.getAttribute("value").equals("");
     }
 
     @Step("verify that header field is empty")
     public boolean headerFieldIsEmpty() {
-        boolean isEmpty;
-        if (headerField.getAttribute("value")==null) {
-            isEmpty = true;
-        } else {
-            isEmpty = false;
-        }
-        return isEmpty;
+        return headerField.getAttribute("value")==null;
     }
     @Step("verify that name field is empty")
     public boolean nameFieldIsEmpty() {
         boolean isEmpty;
-        if (nameField.getAttribute("value").equals("")) {
-            isEmpty = true;
-        } else {
-            isEmpty = false;
-        }
-        return isEmpty;
+        return nameField.getAttribute("value").equals("");
     }
 
     @Step("verify that description field is empty")
     public boolean descriptionFieldIsEmpty() {
-        boolean isEmpty;
-
-        if (descriptionField.getAttribute("value") == null) {
-            isEmpty = true;
-        } else {
-            isEmpty = false;
-        }
-        return isEmpty;
+        return descriptionField.getAttribute("value") == null;
     }
 
     @Step("verify that title field is empty")
     public boolean titleFieldIsEmpty() {
-        boolean isEmpty;
-        if (titleField.getAttribute("value") == null) {
-            isEmpty = true;
-        } else {
-            isEmpty = false;
-        }
-        return isEmpty;
+        return titleField.getAttribute("value") == null;
     }
 
     @Step("verify that challenge popup is not selected ")
     public boolean challengeDropDownIsNotSelected() {
-        boolean isEmpty;
-        if (challengeDropDownForVerifyEmptyField.getAttribute("value") == null) {
-            isEmpty = true;
-        } else {
-            isEmpty = false;
-        }
-        return isEmpty;
+        return challengeDropDownForVerifyEmptyField.getAttribute("value") == null;
     }
 
     @Step("verify that all field is empty")
@@ -130,13 +94,7 @@ public class AddTaskPage extends BaseObjectPage {
 
     @Step("verify that photo was added")
     public boolean isPhotoAdded() {
-        boolean isPhotoAdded;
-        if (firstPhotoContainer.isEnabled()){
-            isPhotoAdded = true;
-        }else{
-            isPhotoAdded = false;
-        }
-        return isPhotoAdded;
+        return firstPhotoContainer.isEnabled();
     }
 
     @Step("fill date field present date")
@@ -210,8 +168,9 @@ public class AddTaskPage extends BaseObjectPage {
     public boolean errorMassageIsDisplayed(){
         if (errorMassage.isDisplayed()) {
             return true;
+        }else {
+            return false;
         }
-        else return false;
     }
 
     @Step("Take the image")
