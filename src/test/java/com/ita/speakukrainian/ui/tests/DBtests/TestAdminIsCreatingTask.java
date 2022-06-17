@@ -16,17 +16,25 @@ import org.testng.asserts.SoftAssert;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
 public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
-
-    private final String name = "ъэы; ผม, Ÿ, ð";
     private final String header = "Українська-_-English=@#+123";
     private final String headerFilling = "Завдання на кмітливість та розвиток of attention for kids 6-9 years old!";
     private final String description = "Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!";
     private final String [] dataForNameField = new String[]{"", "ъэы; ผม, Ÿ, ð", "Good", "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm"};
    private final String [] ErrorsForNameField = new String[]{"name must not be blank", "name Can't contain foreign language symbols except english", "name must contain a minimum of 5 and a maximum of 50 letters", "name must contain a minimum of 5 and a maximum of 50 letters" };
+
+    private String listString(int size){
+        List<String> list = new ArrayList<String>();
+        for (int i = 1; i <= size; i++) {
+            list.add("a");
+        }
+        return String.join("", list);
+    }
+
     @BeforeMethod
     @Override
     public void beforeMethod(ITestContext context) {
@@ -88,8 +96,6 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
                 softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),a, "error massage is not the same");
             }
         }
-
-
     }
 
 
@@ -101,23 +107,23 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         SoftAssert softAssert = new SoftAssert();
         TasksServise tasksServise = new TasksServise();
         List<TasksEntity> tasksTable = tasksServise.getAllTasks();
-        String [] array = new String[]{"ъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ð"};
+        String textForTitle = "ъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ð";
         softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(),"verify all field is empty");
         addTaskPage.fillDateField().addImage(valueProvider.getSunFlower());
         softAssert.assertTrue(addTaskPage.isPhotoAdded());
-        addTaskPage.fillNameField(header);
-        addTaskPage.fillDescriptionField(description);
+        addTaskPage.fillNameField(header).fillDescriptionField(description);
         addTaskPage.clickSelectChallenge().clickDniproChallenge();
         addTaskPage.clickSave();
-        softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed(),"is error massage displayed");
-        for (int i = 0 ; i < array.length; i++) {
-            addTaskPage.clearTitleField().fillTitleField(array[i]).clickSave();
-        }
+        softAssert.assertEquals(addTaskPage.errorMassage(),"Поле 'Заголовок' не може бути пустим");
+        addTaskPage.clearTitleField().fillTitleField(textForTitle).clickSave();
+        softAssert.assertEquals(addTaskPage.errorMassage(),"Поле 'Заголовок' може містити тільки українські та англійські літери, цифри та спеціальні символи");
         softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed(),"is error massage displayed");
         addTaskPage.clearTitleField().fillTitleField("dsfsdfsdgdfghdfggjhdghjksghfgdfgdfgdfgg").clickSave();
-        softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed(),"is error massage displayed");
+        softAssert.assertEquals(addTaskPage.errorMassage(),"Поле 'Заголовок' може містити мінімум 40 максимум 3000 символів");
+        addTaskPage.clearTitleField().fillTitleField(listString(3001));
+        softAssert.assertEquals(addTaskPage.errorMassage(),"Поле 'Заголовок' може містити мінімум 40 максимум 3000 символів");
         boolean tasksIsNotAdded = true;
-        array = new String[]{"ъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ð","Українська-_-English=@#+123"};
+        String [] array = new String[]{textForTitle,header};
         for (int i = 0 ; i < tasksTable.size() && tasksIsNotAdded;i++) {
             for (int j = 0; j < array.length; j++) {
                 if (tasksTable.get(i).equals(array[j])) {
@@ -130,3 +136,4 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
 
     }
 }
+
