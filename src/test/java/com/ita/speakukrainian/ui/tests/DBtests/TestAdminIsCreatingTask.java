@@ -3,22 +3,28 @@ package com.ita.speakukrainian.ui.tests.DBtests;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.Tasks.AddTaskPage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
+import com.ita.speakukrainian.utils.jdbc.entity.TasksEntity;
+import com.ita.speakukrainian.utils.jdbc.services.TasksServise;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
 
-    String header = "Українська-_-English=@#+123";
-    String description = "дуже круте завдання для дітей від 8 років :-) and its not all for more information call on 141242353465474123";
+   private final String header = "Українська-_-English=@#+123";
+   private final String description = "дуже круте завдання для дітей від 8 років :-) and its not all for more information call on 141242353465474123";
 
+
+public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
     @BeforeMethod
     @Override
     public void beforeMethod(ITestContext context) {
@@ -37,11 +43,17 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
     public void CreatingTackWithInvalidNameData() {
         var addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertTrue(addTaskPage.dateFieldIsEmpty(), "Fields is not empty");
+        addTaskPage.addImage();
+        softAssert.assertTrue(addTaskPage.checkIsImageAdded(), "Image was not added");
+            addTaskPage.takeSnapShot();
+            softAssert.assertTrue(addTaskPage.compareImages(), "Image was not the same");
+
        // softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(), "Fields are not empty");
         softAssert.assertTrue(addTaskPage.dateFieldIsEmpty(), "Date was not added");
         addTaskPage.fillDateField();
         softAssert.assertFalse(addTaskPage.dateFieldIsEmpty(), "Date was not added");
-
 
         addTaskPage.addImage(valueProvider.getSunFlower());
         softAssert.assertTrue(addTaskPage.checkIsImageAdded(), "Image was not added");
@@ -65,20 +77,33 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
     public void cantCreateDueIncorrectDataInHeader(){
         AddTaskPage addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(addTaskPage.AllFieldIsEmpty());
-        addTaskPage.fillDateField();
-        addTaskPage.addImage(valueProvider.getSunFlower());
+        TasksServise tasksServise = new TasksServise();
+        List<TasksEntity> tasksTable = tasksServise.getAllTasks();
+        String [] array = new String[]{"ъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ð"};
+        softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(),"verify all field is empty");
+        addTaskPage.fillDateField().addImage();
+        softAssert.assertTrue(addTaskPage.isPhotoAdded());
         addTaskPage.fillNameField("Українська-_-English=@#+123");
         addTaskPage.fillDescriptionField("дуже круте завдання для дітей від 8 років :-) and its not all for more information call on 141242353465474123");
         addTaskPage.clickSelectChallenge().clickDniproChallenge();
         addTaskPage.clickSave();
-        softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed());
-        addTaskPage.fillTitleField("ъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ð");
-        addTaskPage.clickSave();
-        softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed());
-        addTaskPage.clearTitleField();
-        addTaskPage.fillTitleField("dsfsdfsdgdfghdfggjhdghjksghfgdfgdfgdfgg");
-        addTaskPage.clickSave();
+        softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed(),"is error massage displayed");
+        for (int i = 0 ; i < array.length; i++) {
+            addTaskPage.clearTitleField().fillTitleField(array[i]).clickSave();
+        }
+        softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed(),"is error massage displayed");
+        addTaskPage.clearTitleField().fillTitleField("dsfsdfsdgdfghdfggjhdghjksghfgdfgdfgdfgg").clickSave();
+        softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed(),"is error massage displayed");
+        boolean tasksIsNotAdded = true;
+        array = new String[]{"ъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ðъэы", "ผม", "Ÿ", "ð","Українська-_-English=@#+123"};
+        for (int i = 0 ; i < tasksTable.size() && tasksIsNotAdded;i++) {
+            for (int j = 0; j < array.length; j++) {
+                if (tasksTable.get(i).equals(array[j])) {
+                    tasksIsNotAdded = false;
+                }
+            }
+        }
+        softAssert.assertTrue(tasksIsNotAdded);
         softAssert.assertAll();
 
     }
