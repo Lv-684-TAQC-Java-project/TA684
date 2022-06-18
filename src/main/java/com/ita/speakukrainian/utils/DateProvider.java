@@ -12,4 +12,10 @@ public class DateProvider {
         return  date;
     }
 
+    public String dateFuture(){
+        LocalDate localDate = LocalDate.now();
+        LocalDate localDateFuture = localDate.plusDays(2);
+        return   localDateFuture.toString() ;
+    }
+
 }

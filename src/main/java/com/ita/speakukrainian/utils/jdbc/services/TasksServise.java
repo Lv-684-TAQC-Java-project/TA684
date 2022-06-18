@@ -10,11 +10,16 @@ import java.util.List;
 
 public class TasksServise {
     private final TasksDAO tasksDao;
+
     public TasksServise() {
         tasksDao = new TasksDAO();
     }
 
     public List<TasksEntity> getAllTasks() {
         return tasksDao.selectAll();
+    }
+
+    public List<TasksEntity> getAllTasksWhereName(String name) {
+        return tasksDao.selectAllWhereName(name);
     }
 }

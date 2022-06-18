@@ -25,4 +25,11 @@ public class AddTaskPageDropDown extends BasePage {
         return this;
     }
 
+    public String TextChallenge() {
+        sleep(500);
+       return dniproChallenge.getText();
+    }
+
+
+
 }

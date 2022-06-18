@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 public class TasksEntity {
     public static final String SELECT_ALL = "SELECT * FROM tasks ORDER BY id";
+    public static final String SELECT_ALL_WHERE_NAME = "SELECT * FROM tasks WHERE name = '%s'";
 
     private String description;
     private long id;
@@ -20,6 +20,19 @@ public class TasksEntity {
     private String picture;
     private String date;
 
+    public TasksEntity(){
+        this.id=0L;
+        this.name=null;
+        this.challengeId=0L;
+        this.headerText=null;
+        this.picture=null;
+        this.date=null;
+        this.description=null;
+
+    }
+
+
+
     public static TasksEntity getTask(List<String> row){
         TasksEntity tasks = new TasksEntity();
         tasks.setId(Long.parseLong(row.get(0)));
@@ -27,8 +40,8 @@ public class TasksEntity {
         tasks.setName(row.get(2));
         tasks.setPicture(row.get(3));
         tasks.setDate(row.get(4));
-//        tasks.setChallengeId(Long.parseLong(row.get(5)));
-        tasks.setDescription(row.get(6));
+        tasks.setChallengeId(Long.parseLong(row.get(5)));
+        tasks.setHeaderText(row.get(6));
         return tasks;
     }
     public static List<TasksEntity> getTasks(List<List<String>> rows) {
