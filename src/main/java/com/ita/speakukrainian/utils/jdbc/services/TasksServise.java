@@ -1,11 +1,8 @@
 package com.ita.speakukrainian.utils.jdbc.services;
 
-import com.ita.speakukrainian.utils.jdbc.dao.CentersDAO;
 import com.ita.speakukrainian.utils.jdbc.dao.TasksDAO;
-import com.ita.speakukrainian.utils.jdbc.entity.CenterEntity;
 import com.ita.speakukrainian.utils.jdbc.entity.TasksEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TasksServise {
@@ -19,7 +16,13 @@ public class TasksServise {
         return tasksDao.selectAll();
     }
 
+    public List<TasksEntity> getDescription(String s) {
+
+        return tasksDao.selectDescription(s);
+
+
     public List<TasksEntity> getAllTasksWhereName(String name) {
         return tasksDao.selectAllWhereName(name);
+
     }
 }

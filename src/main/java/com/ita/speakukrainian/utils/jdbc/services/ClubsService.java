@@ -40,4 +40,6 @@ public class ClubsService {
 
         return clubsDAO.selectAllNameClubsUseLike();
     }
+
+
 }
