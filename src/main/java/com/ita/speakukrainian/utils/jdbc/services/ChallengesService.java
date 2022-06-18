@@ -18,4 +18,8 @@ public class ChallengesService {
 
         return challengesDAO.selectByNamePictureSortNumberTitle(getsortnumber,getsortnumberint);
     }
+    public List<ChallengesEntity> getMameWhereId(long getsortnumberint) {
+
+        return challengesDAO.selectByNameWhereId(getsortnumberint);
+    }
 }

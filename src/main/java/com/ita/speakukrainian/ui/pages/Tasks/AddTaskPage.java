@@ -61,9 +61,18 @@ public class AddTaskPage extends BaseObjectPage {
     public boolean headerFieldIsEmpty() {
         return headerField.getText().equals("");
     }
+    @Step("That header field text")
+    public String TextHeaderField() {
+        return headerField.getText();
+    }
     @Step("verify that name field is empty")
     public boolean nameFieldIsEmpty() {
         return nameField.getAttribute("value").equals("");
+    }
+
+    @Step("verify that name field value")
+    public String nameFieldValue() {
+        return nameField.getAttribute("value");
     }
 
     @Step("verify that description field is empty")
@@ -74,6 +83,10 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("verify that description field is empty")
     public boolean isDescriptionFieldEmpty() {
         return descriptionField.getText().equals("");
+    }
+    @Step("get that description text")
+    public String TextDescriptionField() {
+        return descriptionField.getText();
     }
 
     @Step("verify that title field is empty")
@@ -108,6 +121,15 @@ public class AddTaskPage extends BaseObjectPage {
         DateProvider dateProvider = new DateProvider();
         dateField.click();
         dateField.sendKeys(dateProvider.date());
+        dateField.sendKeys(Keys.ENTER);
+        return this;
+    }
+
+    @Step("fill date field present date")
+    public AddTaskPage fillDateFieldFuture(){
+        DateProvider dateProvider = new DateProvider();
+        dateField.click();
+        dateField.sendKeys(dateProvider.dateFuture());
         dateField.sendKeys(Keys.ENTER);
         return this;
     }
@@ -155,7 +177,7 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("click save changes")
     public AddTaskPage clickSave() {
         saveChanges.click();
-        sleep(1000);
+        sleep(2000);
         return this;
     }
     @Step("Add image")
@@ -192,4 +214,11 @@ public class AddTaskPage extends BaseObjectPage {
         return errorMassage.getText();
     }
 
+    @Step ("get AddTaskPageDropDown")
+    public AddTaskPageDropDown getAddTaskPageDropDown(){
+        return new AddTaskPageDropDown(driver);
+    }
+
 }
+
+

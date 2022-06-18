@@ -22,6 +22,7 @@ public class TasksDAO {
         return TasksEntity.getTasks(rows);
     }
 
+
     public List<TasksEntity> selectDescription(String s) {
         Statement statement = ManagerDao.getInstance().getStatement();
         List<List<String>> rows = null;
@@ -35,6 +36,18 @@ public class TasksDAO {
         ManagerDao.getInstance().closeStatement(statement);
 
         return  TasksEntity.getDescriptions(rows);
+
+    public List<TasksEntity> selectAllWhereName(String name){
+        Statement statement = ManagerDao.getInstance().getStatement();
+        List<List<String>> rows = null;
+        try {
+            ResultSet resultSet = statement.executeQuery(String.format(TasksEntity.SELECT_ALL_WHERE_NAME,name));
+            rows = ManagerDao.getInstance().parseResultSet(resultSet);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.getInstance().closeStatement(statement);
+        return TasksEntity.getTasks(rows);
     }
 
 

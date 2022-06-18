@@ -7,6 +7,7 @@ import java.util.List;
 
 public class TasksServise {
     private final TasksDAO tasksDao;
+
     public TasksServise() {
         tasksDao = new TasksDAO();
     }
@@ -14,8 +15,14 @@ public class TasksServise {
     public List<TasksEntity> getAllTasks() {
         return tasksDao.selectAll();
     }
+
     public List<TasksEntity> getDescription(String s) {
 
         return tasksDao.selectDescription(s);
+
+
+    public List<TasksEntity> getAllTasksWhereName(String name) {
+        return tasksDao.selectAllWhereName(name);
+
     }
 }

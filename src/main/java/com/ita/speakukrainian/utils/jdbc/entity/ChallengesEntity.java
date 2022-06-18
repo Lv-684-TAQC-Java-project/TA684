@@ -9,6 +9,8 @@ import java.util.List;
 public class ChallengesEntity {
 
     public static final String SELECT_ALL = "SELECT * FROM challenges WHERE sort_number = '%s%d'";
+    public static final String SELECT_NAME_WHERE_ID = "SELECT name FROM challenges WHERE id = '%d'";
+
 
     private Long id;
     private String name;
@@ -39,7 +41,11 @@ public class ChallengesEntity {
         challengesEntity.setPicture(row.get(4));
         challengesEntity.setSortNumber(row.get(6));
         challengesEntity.setTitle(row.get(7));
-
+        return challengesEntity;
+    }
+    public static ChallengesEntity getChallengeName(List<String> row) {
+        ChallengesEntity challengesEntity = new ChallengesEntity();
+        challengesEntity.setName(row.get(0));
         return challengesEntity;
     }
 
@@ -47,6 +53,13 @@ public class ChallengesEntity {
         List<ChallengesEntity> challenges = new ArrayList<>();
         for (List<String> row : rows) {
             challenges.add(getChallenge(row));
+        }
+        return challenges;
+    }
+    public static List<ChallengesEntity> getChallengesBYName(List<List<String>> rows) {
+        List<ChallengesEntity> challenges = new ArrayList<>();
+        for (List<String> row : rows) {
+            challenges.add(getChallengeName(row));
         }
         return challenges;
     }
