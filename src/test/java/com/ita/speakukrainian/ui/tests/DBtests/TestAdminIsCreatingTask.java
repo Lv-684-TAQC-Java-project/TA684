@@ -3,7 +3,9 @@ package com.ita.speakukrainian.ui.tests.DBtests;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.Tasks.AddTaskPage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
+import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
 import com.ita.speakukrainian.utils.jdbc.entity.TasksEntity;
+import com.ita.speakukrainian.utils.jdbc.services.ClubsService;
 import com.ita.speakukrainian.utils.jdbc.services.TasksServise;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
@@ -88,8 +90,9 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
                 softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),a, "error massage is not the same");
             }
         }
-
-
+        TasksServise tasksServise = new TasksServise();
+        List<TasksEntity> task = tasksServise.getDescription("Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!");
+        softAssert.assertTrue(task.isEmpty(), "Invalid Task was added");
     }
 
 

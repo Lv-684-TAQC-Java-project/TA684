@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.utils.jdbc.dao;
 
+import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
 import com.ita.speakukrainian.utils.jdbc.entity.TasksEntity;
 
 import java.sql.ResultSet;
@@ -19,6 +20,21 @@ public class TasksDAO {
         }
         ManagerDao.getInstance().closeStatement(statement);
         return TasksEntity.getTasks(rows);
+    }
+
+    public List<TasksEntity> selectDescription(String s) {
+        Statement statement = ManagerDao.getInstance().getStatement();
+        List<List<String>> rows = null;
+        try {
+            ResultSet resultSet = statement.executeQuery(String.format(TasksEntity.SELECT_BY_DESCRIPTION, s));
+            rows = ManagerDao.getInstance().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        ManagerDao.getInstance().closeStatement(statement);
+
+        return  TasksEntity.getDescriptions(rows);
     }
 
 

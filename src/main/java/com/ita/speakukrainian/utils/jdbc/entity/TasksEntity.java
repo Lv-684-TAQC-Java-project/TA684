@@ -1,9 +1,13 @@
 package com.ita.speakukrainian.utils.jdbc.entity;
 
 
+import com.ita.speakukrainian.utils.jdbc.dao.ManagerDao;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class TasksEntity {
     public static final String SELECT_ALL = "SELECT * FROM tasks ORDER BY id";
+    public static final String SELECT_BY_DESCRIPTION = "SELECT description FROM tasks";
 
     private String description;
     private long id;
@@ -38,4 +43,17 @@ public class TasksEntity {
         }
         return tasks;
     }
+    public static TasksEntity getDescription(List<String> row) {
+        TasksEntity task = new TasksEntity();
+        task.setDescription(row.get(0));
+        return task;
+    }
+    public static List<TasksEntity> getDescriptions(List<List<String>> rows) {
+        List<TasksEntity> tasks = new ArrayList<>();
+        for (List<String> row : rows) {
+            tasks.add(getDescription(row));
+        }
+        return tasks;
+    }
+
 }
