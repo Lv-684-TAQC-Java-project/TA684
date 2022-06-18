@@ -40,6 +40,12 @@ public class BasePage {
     public void waitForElement(WebElement elem){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(elem));}
+
+    public void waitForElementIsClickable(WebElement elem){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(elem));}
+
+
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] saveScreenshot() {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
