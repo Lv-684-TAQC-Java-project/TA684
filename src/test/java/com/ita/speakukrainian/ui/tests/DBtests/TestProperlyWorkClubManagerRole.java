@@ -17,7 +17,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
+public class TestProperlyWorkClubManagerRole extends BaseTestRunner {
     String clubNameMaliavky="Малявки";
     String rename = "Малявки$";
     int numbOfCheckBox = 3; //"Студії раннього розвитку"

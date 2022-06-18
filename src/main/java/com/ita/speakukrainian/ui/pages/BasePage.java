@@ -1,16 +1,16 @@
 package com.ita.speakukrainian.ui.pages;
 
+import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
+import com.ita.speakukrainian.utils.jdbc.services.ClubsService;
 import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage {
     protected WebDriver driver;
@@ -49,5 +49,27 @@ public class BasePage {
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] saveScreenshot() {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    @Attachment
+    public String saveText(List elements) {
+        String a=null;
+        if (elements.isEmpty()) {
+            ClubsService clubServise = new ClubsService();
+            List<ClubsEntity> clubIdCenterIdCheck = clubServise.getByUserIDAndCenterNotNull(264);
+            for (int i=0; i<clubIdCenterIdCheck.size();i++) {
+                a= clubIdCenterIdCheck.get(i).toString();
+            }
+            return a;
+        }
+        else {
+            return elements.toString();
+        }
+    }
+
+    public void deleteText(WebElement elem){
+        elem.click();
+        String del = Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
+        elem.sendKeys(del);
     }
 }
