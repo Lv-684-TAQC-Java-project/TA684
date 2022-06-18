@@ -19,6 +19,7 @@ public class TasksServise {
     public List<TasksEntity> getDescription(String s) {
 
         return tasksDao.selectDescription(s);
+    }
 
 
     public List<TasksEntity> getAllTasksWhereName(String name) {

@@ -33,11 +33,13 @@ public class TasksDAO {
             e.printStackTrace();
 
         }
+
         ManagerDao.getInstance().closeStatement(statement);
 
-        return  TasksEntity.getDescriptions(rows);
+        return TasksEntity.getDescriptions(rows);
+    }
 
-    public List<TasksEntity> selectAllWhereName(String name){
+    public List<TasksEntity> selectAllWhereName(String name) {
         Statement statement = ManagerDao.getInstance().getStatement();
         List<List<String>> rows = null;
         try {
