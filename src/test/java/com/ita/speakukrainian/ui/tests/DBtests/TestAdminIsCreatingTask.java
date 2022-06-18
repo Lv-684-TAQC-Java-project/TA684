@@ -24,14 +24,12 @@ import java.util.Base64;
 import java.util.List;
 
 public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
-    DateProvider dateProvider =new DateProvider();
     private final String header = "Українська-_-English=@#+123";
     private final String headerFilling = "Завдання на кмітливість та розвиток of attention for kids 6-9 years old!";
     private final String description = "Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!";
     private final String [] dataForNameField = new String[]{"", "ъэы; ผม, Ÿ, ð", "Good", "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm"};
    private final String [] ErrorsForNameField = new String[]{"name must not be blank", "name Can't contain foreign language symbols except english", "name must contain a minimum of 5 and a maximum of 50 letters", "name must contain a minimum of 5 and a maximum of 50 letters" };
-   private final String [] dataForDateField = new String[]{dateProvider.datePast(), dateProvider.dateFuture()};
-    private final String [] ErrorsForDateField = new String[]{"startDate не должно равняться null", "Дата не може бути у минулому"};
+
     private String listString(int size){
         List<String> list = new ArrayList<String>();
         for (int i = 1; i <= size; i++) {
@@ -93,18 +91,16 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         addTaskPage.clickSelectChallenge().clickDniproChallenge();
         softAssert.assertFalse(addTaskPage.isChallengeAdded(), "Challenge was not chosen");
 
+        addTaskPage.clickSave();
+        softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),"startDate не должно равняться null", "error massage is not the same");
 
-        for (int i = 0 ; i < dataForDateField.length; i++) {
-            addTaskPage.fillDateField(dataForDateField[i]).clickSave();
-            for (String a:
-                    ErrorsForDateField) {
-                softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),a, "error massage is not the same");
-            }
-            addTaskPage.clearDateField();
-        }
-//        TasksServise tasksServise = new TasksServise();
-//        List<TasksEntity> task = tasksServise.getDescription("Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!");
-//        softAssert.assertTrue(task.isEmpty(), "Invalid Task was added");
+        DateProvider dateProvider =new DateProvider();
+        addTaskPage.fillDateField(dateProvider.datePast()).clickSave();
+        softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),"Дата не може бути у минулому", "error massage is not the same");
+
+        TasksServise tasksServise = new TasksServise();
+        List<TasksEntity> name = tasksServise.getAllTasksWhereName("Українська-_-English=@#+123");
+        softAssert.assertTrue(name.isEmpty(), "Invalid Task was added");
     }
 
 
