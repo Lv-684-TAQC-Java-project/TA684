@@ -11,9 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AddChallengePage extends ChallengesPage{
     @FindBy (xpath = "//*[@id='sortNumber']")
@@ -26,12 +24,12 @@ public class AddChallengePage extends ChallengesPage{
     private WebElement depictionChallenge;
     @FindBy(xpath = "//div[@id='root']/section/section/main/div/form/div[4]/div[2]/div/div/div/div/div[2]/div/p")
     private List<WebElement> listDepictionChallenge;
-    @FindBy(xpath="//div[@id='root']/section/section/main/div/form/div[5]/div[2]/div/div/span/div/div[1]/div/div")
+    @FindBy(xpath = "//*[@id='root']/section/section/main/div/form/div[5]/div[2]/div/div/span/div/div[1]/div/div/span/a/img")
     private WebElement image;
-    @FindBy(id="picture")
+    @FindBy(id = "picture")
     private WebElement inputImage;
-
-
+    @FindBy(xpath = "//span[contains(.,'Зберегти')]")
+    private WebElement buttonSaveChallenge;
 
 
     public AddChallengePage(WebDriver driver) {
@@ -42,11 +40,13 @@ public class AddChallengePage extends ChallengesPage{
     public String getSortNumberValue() {
         return sortNumberChallenge.getAttribute("value");
     }
+
     @Step("Click sort Number challenge")
     public AddChallengePage clickSortNumber() {
         sortNumberChallenge.click();
         return this;
     }
+
     @Step("Fill in AddChallengePage sortNumberChallenge")
     public AddChallengePage addChallengeSortNumber(String sortNumbers) {
         sortNumberChallenge.sendKeys(sortNumbers);
@@ -56,25 +56,30 @@ public class AddChallengePage extends ChallengesPage{
     public String getChallengeNameValue() {
         return nameChallenge.getAttribute("value");
     }
+
     @Step("Click name Challenge")
     public AddChallengePage clickChallengeName() {
         nameChallenge.click();
         return this;
     }
+
     @Step("Fill in AddChallengePage name Challenge")
     public AddChallengePage addChallengeName(String names) {
         nameChallenge.sendKeys(names);
         return this;
     }
-    @Step("get Attribute title Challenge Value")
+
+   @Step("get Attribute title Challenge Value")
     public String getChallengeTitleValue() {
         return titleChallenge.getAttribute("value");
     }
+
     @Step("Click title Challenge")
     public AddChallengePage clickChallengeTitle() {
         titleChallenge.click();
         return this;
     }
+
     @Step("Fill in AddChallengePage title Challenge")
     public AddChallengePage addChallengeTitle(String titles) {
         titleChallenge.sendKeys(titles);
@@ -95,41 +100,32 @@ public class AddChallengePage extends ChallengesPage{
         }
         return list;
     }
-    @Step ("Verify that image was added")
-    public boolean checkIsImageAdded(){
+
+    @Step("Verify that image was added")
+    public boolean checkIsImageAdded() {
         if (!image.isEnabled()) {
             return false;
-        }
-        else return true;
+        } else return true;
     }
+
     @Step("Take the image")
-    public String takeSRCImageFromSite() {
-        WebElement image = driver.findElement(By.xpath("//*[@id=\"root\"]/section/section/main/div/form/div[5]/div[2]/div/div/span/div/div[1]/div/div/span/a/img"));
+    public String getUploadedImageBase64() {
         String s = image.getAttribute("src");
         String dataForCompare = s.replace("data:image/png;base64,", "");
         return dataForCompare;
     }
 
-    @Step("Get data of initial image")
-    public String getImageData(){
-        File inputFile = new File("src/test/resources/img2.png");
 
-        byte[] fileContent = new byte[0];
-        try {
-            fileContent = FileUtils.readFileToByteArray(inputFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        String encodedString = Base64
-                .getEncoder()
-                .encodeToString(fileContent);
-        return encodedString;
-    }
     @Step("Add image")
     public void addImage(File img) {
         inputImage.sendKeys(img.getAbsolutePath());
         sleep(3000);
     }
 
-
+    @Step("Click sort Number challenge")
+    public AddChallengePage clickButtonSaveChallenge() {
+        buttonSaveChallenge.click();
+        sleep(2000);
+        return this;
+    }
 }

@@ -20,20 +20,17 @@ public class MyliavkyClubPage extends BaseObjectPage{
         super(driver);
     }
     @Step("Read data about the club from the site and compare with the data")
-    public boolean isContain(){
+    public String TextDescription(){
         scrollToElement(content);
-       return content.getText().equals("Відділення образотворчого та декоративного мистецтва відкрите з моменту заснування Студії.\n" +
-               "\n" +
-               "У 2005р. відбулась перша виставка робіт учасників Студії у Львівському обласному палаці мистецтв.");
+        return content.getText();
     }
     @Step("Read data about the children's age from the site and compare with the data")
-    public boolean isCorrectAge(){
-        return age.getText().equals("від " + "4" + " до " + "6" + " років");
+    public String AgeData(){
+        return age.getText();
     }
 
     @Step("Read phone number from the site and compare with the data")
-    public boolean isCorrectPhone(){
-        return phone.getText().equals("+380934444444");
+    public String PhoneNum(){
+        return phone.getText();
     }
-
 }

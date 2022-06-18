@@ -107,7 +107,6 @@ public class AddTaskPage extends BaseObjectPage {
     public AddTaskPage fillDateField(){
         DateProvider dateProvider = new DateProvider();
         dateField.click();
-       // dateField.sendKeys("2022-06-30");
         dateField.sendKeys(dateProvider.date());
         dateField.sendKeys(Keys.ENTER);
         return this;
@@ -174,14 +173,10 @@ public class AddTaskPage extends BaseObjectPage {
 
     @Step ("Verify that image was added")
     public boolean errorMassageIsDisplayed(){
-        if (errorMassage.isDisplayed()) {
-            return true;
-        }else {
-            return false;
-        }
+            return errorMassage.isDisplayed();
     }
 
-    @Step ("Verify that image was appeared")
+    @Step ("Verify that error massage was appeared")
     public String errorMassageIsAppearing(){
         return errorMassage.getText();
     }
@@ -192,4 +187,9 @@ public class AddTaskPage extends BaseObjectPage {
         String dataForCompare = s.replace("data:image/png;base64,", "");
         return dataForCompare;
     }
+    @Step ("Verify that image was added")
+    public String errorMassage(){
+        return errorMassage.getText();
+    }
+
 }
