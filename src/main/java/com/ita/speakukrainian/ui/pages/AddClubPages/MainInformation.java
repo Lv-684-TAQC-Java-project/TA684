@@ -21,6 +21,12 @@ public class MainInformation extends BasePage {
     @FindBy(css = "[class*='add-club-content-next']")
     private WebElement nextStepButton;
 
+    @FindBy(css="#basic_centerId")
+    private WebElement selectCentre;
+
+    @FindBy(xpath="//div[2]/div/div/div/div[4]/div")
+    private WebElement academyOfSmartKids;
+
     public MainInformation(WebDriver driver) {
         super(driver);
     }
@@ -47,6 +53,7 @@ public class MainInformation extends BasePage {
 
     @Step("Fill in club name")
     public MainInformation fillInClubNameInput(String clubName) {
+        sleep(1000);
         getClubNameInput().sendKeys(clubName);
         return new MainInformation(driver);
     }
