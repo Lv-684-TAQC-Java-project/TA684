@@ -19,7 +19,7 @@ import java.util.List;
 
 public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
     String clubNameMaliavky="Малявки";
-    String rename = "Буцики";
+    String rename = "Малявки$";
     int numbOfCheckBox = 3; //"Студії раннього розвитку"
     String age1InMaliavky = "4";
     String age2InMaliavky = "6";
@@ -71,38 +71,37 @@ public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
         softAssert.assertTrue(myliavky.isContain(), "Information is incorrect");
         softAssert.assertTrue(myliavky.isCorrectAge(), "Age was specified incorrectly");
         softAssert.assertTrue(myliavky.isCorrectPhone(), "Phone number was specified incorrectly");
-        softAssert.assertAll();
-    }
 
-    @Test
-    public void GetClubFromBase(){
         ClubsService clubServise = new ClubsService();
         List<ClubsEntity> club = clubServise.getByName(clubNameMaliavky);
         ClubsEntity maliavky = club.get(0);
-        SoftAssert softAssert = new SoftAssert();
+        new BasePage(driver).saveText(club);
         softAssert.assertEquals(maliavky.getAgeFrom(), age1InMaliavky);
         softAssert.assertEquals(maliavky.getAgeTo(), age2InMaliavky);
         softAssert.assertEquals(maliavky.getName(), clubNameMaliavky);
         softAssert.assertEquals(maliavky.getDescription(), descriptionOfMaliavky);
         softAssert.assertAll();
     }
+
+
     @Test
     @Description("Checking if a changers was saved and if all it's parameters was created correct")
     @Issue("TUA-508")
     public void RewriteClubData(){
-        SoftAssert softAssert = new SoftAssert();
-        ClubsService clubServise = new ClubsService();
+        var softAssert = new SoftAssert();
+        var clubService = new ClubsService();
+        var myProfilePage = new MyProfilePage(driver);
         new HomePage(driver)
          .header()
                 .clickUserProFileButton()
                 .clickMyProfileButton();
-         List<ClubsEntity> clubIdCenterId = clubServise.getByUserIDAndCenterNotNull(centerId);
+         List<ClubsEntity> clubIdCenterId = clubService.getByUserIDAndCenterNotNull(centerId);
         softAssert.assertTrue(!clubIdCenterId.isEmpty(), "No such clubs in base");
         new BasePage(driver).saveText(clubIdCenterId);
-        new MyProfilePage(driver)
+        myProfilePage
                 .clickMoreActionMenu()
                 .clickRedactClub();
-        List<ClubsEntity> clubName = clubServise.getByName(clubNameMaliavky);
+        List<ClubsEntity> clubName = clubService.getByName(clubNameMaliavky);
         softAssert.assertTrue(!clubName.isEmpty(), "No such club in base");
         new BasePage(driver).saveText(clubName);
         new RedactClubMaliavkyPopUp(driver)
@@ -112,17 +111,17 @@ public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
                 .clickAgeToChangeDown()
                 .saveAgeChanges()
                 .chooseNewCenter()
-                .saveMainWindowChangers()
                 .addressAndContacts()
                 .changePhoneWindow(newPhone)
                  .saveContactWindowChangers()
                 .clubDescription()
                 .makeNewDescription(newDescription)
+                .saveMainWindowChangers()
                 .saveChanges();
-       new MyProfilePage(driver)
-                .clickDetailsButton();
+        softAssert.assertTrue(myProfilePage.isCardMaliavkyPresent(),"No such club on the page");
+        List<ClubsEntity> clubNameChanged = clubService.getByName(rename);
+        softAssert.assertTrue(!clubNameChanged.isEmpty(), "No such club in base");
         softAssert.assertAll();
-
     }
 
 }

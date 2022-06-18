@@ -32,7 +32,7 @@ public class RedactClubMaliavkyPopUp extends BaseObjectPage {
     @FindBy(xpath = "//*[@id='basic']/div[4]/div[2]/div/div/div/div")
     private WebElement selectNewCenter;
 
-    @FindBy(css=".ant-select-item-option-active >.ant-select-item-option-content")
+    @FindBy(xpath = "/html/body/div[7]/div/div/div/div[2]/div[1]/div/div/div[4]/div")
     private WebElement chooseNewCenter;
 
     @FindBy(css = "#rc-tabs-0-panel-3 .edit-club-button > span")
@@ -44,11 +44,12 @@ public class RedactClubMaliavkyPopUp extends BaseObjectPage {
     @FindBy(xpath = "//*[@id='basic_clubContactТелефон']")
     private WebElement phoneWindow;
 
-    @FindBy(xpath = "//*[@id='basic']/button[1]")
+    @FindBy(css = "#rc-tabs-0-panel-3 .edit-club-tab-button > span")
     private WebElement saveMainWindowChangers;
 
     @FindBy(css=".ant-btn:nth-child(4) > span")
     private WebElement saveContactsWindowChangers;
+
 
     @FindBy(xpath = "//*[@id='rc-tabs-0-tab-3']")
     private WebElement clubDescription;
@@ -90,12 +91,15 @@ public class RedactClubMaliavkyPopUp extends BaseObjectPage {
     }
 
     public RedactClubMaliavkyPopUp chooseNewCenter(){
+        sleep(3000);
+        waitForElementIsClickable(selectNewCenter);
         selectNewCenter.click();
         chooseNewCenter.click();
         return new RedactClubMaliavkyPopUp(driver);
     }
 
     public MyProfilePage saveChanges(){
+       waitForElementIsClickable(saveChanges);
         saveChanges.click();
         return new MyProfilePage(driver);
     }
@@ -112,11 +116,14 @@ public class RedactClubMaliavkyPopUp extends BaseObjectPage {
         return new RedactClubMaliavkyPopUp(driver);
     }
     public RedactClubMaliavkyPopUp saveMainWindowChangers(){
+        sleep(1000);
+        //waitForElementIsClickable(saveMainWindowChangers);
         saveMainWindowChangers.click();
         return new RedactClubMaliavkyPopUp(driver);
     }
 
     public RedactClubMaliavkyPopUp saveContactWindowChangers(){
+        waitForElementIsClickable(saveContactsWindowChangers);
         saveContactsWindowChangers.click();
         return new RedactClubMaliavkyPopUp(driver);
     }

@@ -22,6 +22,9 @@ public class MyProfilePage extends BaseObjectPage {
     @FindBy(xpath = "//div[contains(text(), 'Малявки')]")
     private WebElement cardMaliavky;
 
+    @FindBy(xpath = "//div[contains(text(), 'Малявки&')]")
+    private WebElement cardMaliavky$;
+
     @FindBy(xpath = "//section[@class='ant-layout user-clubs']/div/div[2]/div/div/button")
     private WebElement detailsMaliavky;
 
@@ -62,11 +65,19 @@ public class MyProfilePage extends BaseObjectPage {
         addClubButton.click();
         return new MainInformation(driver);
     }
-
+    @Step("is Card Maliavky Present")
     public boolean isCardMaliavkyPresent(){
        return cardMaliavky.isEnabled();
     }
-    @Step("Do to Myliavky club page")
+
+    @Step("is Card Maliavky& Present")
+    public boolean isCardMaliavky$Present(){
+        return cardMaliavky$.isEnabled();
+    }
+
+
+
+    @Step("Go to Myliavky club page")
     public MyliavkyClubPage clickDetailsButton(){
         detailsMaliavky.click();
         return new MyliavkyClubPage(driver);

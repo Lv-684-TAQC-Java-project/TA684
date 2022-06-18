@@ -39,16 +39,23 @@ public class BasePage {
 
     public void waitForElement(WebElement elem){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(elem));}
+        wait.until(ExpectedConditions.visibilityOf(elem));
+        wait.until(ExpectedConditions.elementToBeClickable(elem));
+    }
+    public void waitForElementIsClickable(WebElement elem){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(elem));
+    }
+
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] saveScreenshot() {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
     @Attachment
-    public String saveText(List clubIdCenterId) {
+    public String saveText(List elements) {
         String a=null;
-        if (clubIdCenterId.isEmpty()) {
+        if (elements.isEmpty()) {
         ClubsService clubServise = new ClubsService();
         List<ClubsEntity> clubIdCenterIdCheck = clubServise.getByUserIDAndCenterNotNull(264);
             for (int i=0; i<clubIdCenterIdCheck.size();i++) {
@@ -57,7 +64,7 @@ public class BasePage {
             return a;
         }
         else {
-            return clubIdCenterId.toString();
+            return elements.toString();
         }
     }
 

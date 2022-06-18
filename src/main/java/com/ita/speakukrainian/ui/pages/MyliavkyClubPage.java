@@ -28,7 +28,7 @@ public class MyliavkyClubPage extends BaseObjectPage{
     }
     @Step("Read data about the children's age from the site and compare with the data")
     public boolean isCorrectAge(){
-        return age.getText().equals("від " + "4" + " до " + "6" + " років");
+        return age.getText().equals("від " +"\n"+ "4"+"\n" + " до "+"\n" + "6"+"\n" + " років");
     }
 
     @Step("Read phone number from the site and compare with the data")
