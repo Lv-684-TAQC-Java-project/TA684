@@ -47,6 +47,9 @@ public class AddTaskPage extends BaseObjectPage {
     @FindBy(xpath = "//*[@id=\"root\"]/section/section/main/div/form/div[6]/div[2]/div/div/div/div/span[2]")
     private WebElement chosenDniproChallenge;
 
+    @FindBy(xpath = "//div[@class = 'ant-picker-input']/span[2]")
+    private WebElement dateFieldCleaner;
+
 
     public AddTaskPage(WebDriver driver) {
         super(driver);
@@ -126,6 +129,14 @@ public class AddTaskPage extends BaseObjectPage {
     }
 
     @Step("fill date field present date")
+    public AddTaskPage fillDateField(String date){
+        dateField.click();
+        dateField.sendKeys(date);
+        dateField.sendKeys(Keys.ENTER);
+        return this;
+    }
+
+    @Step("fill date field present date")
     public AddTaskPage fillDateFieldFuture(){
         DateProvider dateProvider = new DateProvider();
         dateField.click();
@@ -150,6 +161,18 @@ public class AddTaskPage extends BaseObjectPage {
     @Step("clear title field")
     public AddTaskPage clearTitleField(){
         titleField.clear();
+        return this;
+    }
+
+    @Step("clear name field")
+    public AddTaskPage clearNameField(){
+        nameField.clear();
+        return this;
+    }
+
+    @Step("clear date field")
+    public AddTaskPage clearDateField(){
+        dateFieldCleaner.clear();
         return this;
     }
 

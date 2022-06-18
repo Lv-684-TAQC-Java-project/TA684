@@ -18,4 +18,10 @@ public class DateProvider {
         return   localDateFuture.toString() ;
     }
 
+    public String datePast(){
+        LocalDate localDate = LocalDate.now();
+        LocalDate localDatePast = localDate.minusDays(1);
+        return   localDatePast.toString() ;
+    }
+
 }

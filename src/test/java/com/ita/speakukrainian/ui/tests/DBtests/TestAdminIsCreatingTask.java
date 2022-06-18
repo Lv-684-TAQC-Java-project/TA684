@@ -3,6 +3,7 @@ package com.ita.speakukrainian.ui.tests.DBtests;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.Tasks.AddTaskPage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
+import com.ita.speakukrainian.utils.DateProvider;
 import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
 import com.ita.speakukrainian.utils.jdbc.entity.TasksEntity;
 import com.ita.speakukrainian.utils.jdbc.services.ClubsService;
@@ -23,12 +24,14 @@ import java.util.Base64;
 import java.util.List;
 
 public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
+    DateProvider dateProvider =new DateProvider();
     private final String header = "Українська-_-English=@#+123";
     private final String headerFilling = "Завдання на кмітливість та розвиток of attention for kids 6-9 years old!";
     private final String description = "Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!";
     private final String [] dataForNameField = new String[]{"", "ъэы; ผม, Ÿ, ð", "Good", "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm"};
    private final String [] ErrorsForNameField = new String[]{"name must not be blank", "name Can't contain foreign language symbols except english", "name must contain a minimum of 5 and a maximum of 50 letters", "name must contain a minimum of 5 and a maximum of 50 letters" };
-
+   private final String [] dataForDateField = new String[]{dateProvider.datePast(), dateProvider.dateFuture()};
+    private final String [] ErrorsForDateField = new String[]{"startDate не должно равняться null", "Дата не може бути у минулому"};
     private String listString(int size){
         List<String> list = new ArrayList<String>();
         for (int i = 1; i <= size; i++) {
@@ -63,6 +66,47 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         return encodedString;
     }
 
+    @Test
+    @Description("Verify that admin can't create a task with invalid date on 'Додайте завдання' page")
+    @Issue("TUA-521")
+    public void CreatingTackWithInvalidDate() {
+
+        var addTaskPage = new AddTaskPage(driver);
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(), "Fields are not empty");
+
+        addTaskPage.addImage(valueProvider.getSunFlower());
+        softAssert.assertTrue(addTaskPage.checkIsImageAdded(), "Image was not added");
+
+        softAssert.assertEquals(addTaskPage.getUploadedImageBase64(), getImageDataBase64(valueProvider.getSunFlower()), "Image was not the same");
+
+        addTaskPage.fillNameField(header);
+        softAssert.assertFalse(addTaskPage.nameFieldIsEmpty(), "Title was not added");
+
+        addTaskPage.fillHeaderField(headerFilling);
+        softAssert.assertFalse(addTaskPage.headerFieldIsEmpty(), "Header was not added");
+
+        addTaskPage.fillDescriptionField(description);
+        softAssert.assertFalse(addTaskPage.isDescriptionFieldEmpty(), "Description was not added");
+
+        addTaskPage.clickSelectChallenge().clickDniproChallenge();
+        softAssert.assertFalse(addTaskPage.isChallengeAdded(), "Challenge was not chosen");
+
+
+        for (int i = 0 ; i < dataForDateField.length; i++) {
+            addTaskPage.fillDateField(dataForDateField[i]).clickSave();
+            for (String a:
+                    ErrorsForDateField) {
+                softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),a, "error massage is not the same");
+            }
+            addTaskPage.clearDateField();
+        }
+//        TasksServise tasksServise = new TasksServise();
+//        List<TasksEntity> task = tasksServise.getDescription("Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!");
+//        softAssert.assertTrue(task.isEmpty(), "Invalid Task was added");
+    }
+
 
     @Test
     @Description("Verify that admin can't create a task with invalid data in 'Назва' field on 'Додайте завдання' page")
@@ -92,7 +136,7 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         softAssert.assertFalse(addTaskPage.isChallengeAdded(), "Challenge was not chosen");
 
         for (int i = 0 ; i < dataForNameField.length; i++) {
-            addTaskPage.clearTitleField().fillTitleField(dataForNameField[i]).clickSave();
+            addTaskPage.clearNameField().fillNameField(dataForNameField[i]).clickSave();
             for (String a:
                  ErrorsForNameField) {
                 softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),a, "error massage is not the same");
