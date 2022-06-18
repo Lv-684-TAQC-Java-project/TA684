@@ -23,8 +23,8 @@ public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
     int numbOfCheckBox = 3; //"Студії раннього розвитку"
     String age1InMaliavky = "4";
     String age2InMaliavky = "6";
-    String phoneOfMaliavky = "0934444444";
-    String newPhone = "0935797009";
+    String phoneOfMaliavky = "+380934444444";
+    String newPhone = "+380935797009";
     Long centerId =264L;
     String descriptionOfMaliavky = "Відділення образотворчого та декоративного мистецтва відкрите з моменту заснування Студії.\n" +
             "\n" +
@@ -68,16 +68,16 @@ public class TestForProperlyWorkClubManagerRole extends BaseTestRunner {
         myProfilePage
                 .clickDetailsButton();
        var myliavky = new MyliavkyClubPage(driver);
-        softAssert.assertTrue(myliavky.isContain(), "Information is incorrect");
-        softAssert.assertTrue(myliavky.isCorrectAge(), "Age was specified incorrectly");
-        softAssert.assertTrue(myliavky.isCorrectPhone(), "Phone number was specified incorrectly");
+        softAssert.assertEquals(myliavky.TextDescription(), descriptionOfMaliavky, "Information is incorrect");
+        softAssert.assertEquals(myliavky.AgeData(),"від "+ "4"+ " до " + "6"+ " років", "Age was specified incorrectly");
+        softAssert.assertEquals(myliavky.PhoneNum(),phoneOfMaliavky, "Phone number was specified incorrectly");
 
         ClubsService clubServise = new ClubsService();
         List<ClubsEntity> club = clubServise.getByName(clubNameMaliavky);
         ClubsEntity maliavky = club.get(0);
         new BasePage(driver).saveText(club);
-        softAssert.assertEquals(maliavky.getAgeFrom(), age1InMaliavky);
-        softAssert.assertEquals(maliavky.getAgeTo(), age2InMaliavky);
+        softAssert.assertEquals(maliavky.getAgeFrom(), Integer. parseInt(age1InMaliavky));
+        softAssert.assertEquals(maliavky.getAgeTo(), Integer. parseInt(age2InMaliavky));
         softAssert.assertEquals(maliavky.getName(), clubNameMaliavky);
         softAssert.assertEquals(maliavky.getDescription(), descriptionOfMaliavky);
         softAssert.assertAll();
