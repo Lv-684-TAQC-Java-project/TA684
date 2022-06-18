@@ -57,6 +57,13 @@ public class MainInformation extends BasePage {
         return new MainInformation(driver);
     }
 
+    @Step("Choose in center")
+    public MainInformation selectCentre() {
+        selectCentre.click();
+        scrollToElement(academyOfSmartKids);
+        academyOfSmartKids.click();
+        return new MainInformation(driver);
+    }
 
     @Step("Fill in age from")
     public MainInformation fillInAgeFromInput(String age) {
