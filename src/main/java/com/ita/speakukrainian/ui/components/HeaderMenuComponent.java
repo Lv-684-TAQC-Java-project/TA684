@@ -141,6 +141,7 @@ public class HeaderMenuComponent extends BaseComponent {
     }
     @Step("Go to AddClubPopUp")
     public MainInformation clickAddClubButtonOnHeader() {
+
         addClubButtonOnHeader.click();
         return new MainInformation(driver);
     }
