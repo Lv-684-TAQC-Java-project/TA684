@@ -18,4 +18,9 @@ public class TaskPage extends BaseObjectPage {
         addTaskButton.click();
         return new AddTaskPage (driver);
     }
+    @Step("Go to AddTaskPage")
+    public AddTaskPageDG clickAddTaskButtonTwo(){
+        addTaskButton.click();
+        return new AddTaskPageDG (driver);
+    }
 }
