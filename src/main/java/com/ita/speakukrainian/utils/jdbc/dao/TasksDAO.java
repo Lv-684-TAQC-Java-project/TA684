@@ -28,7 +28,9 @@ public class TasksDAO {
         List<List<String>> rows = null;
         try {
             ResultSet resultSet = statement.executeQuery(String.format(TasksEntity.SELECT_BY_DESCRIPTION, s));
+            System.out.println(resultSet);
             rows = ManagerDao.getInstance().parseResultSet(resultSet);
+            System.out.println(rows);
         } catch (SQLException e) {
             e.printStackTrace();
 

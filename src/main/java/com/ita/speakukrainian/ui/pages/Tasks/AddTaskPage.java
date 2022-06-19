@@ -170,6 +170,14 @@ public class AddTaskPage extends BaseObjectPage {
         return this;
     }
 
+    @Step("clear name field")
+    public AddTaskPage delTextNameField(){
+        deleteText(nameField);
+        return this;
+    }
+
+
+
     @Step("clear date field")
     public AddTaskPage clearDateField(){
         dateFieldCleaner.clear();

@@ -15,7 +15,7 @@ import java.util.List;
 public class TasksEntity {
     public static final String SELECT_ALL = "SELECT * FROM tasks ORDER BY id";
 
-    public static final String SELECT_BY_DESCRIPTION = "SELECT description FROM tasks";
+    public static final String SELECT_BY_DESCRIPTION = "SELECT description FROM tasks WHERE description like '%s'";
 
     public static final String SELECT_ALL_WHERE_NAME = "SELECT * FROM tasks WHERE name = '%s'";
 

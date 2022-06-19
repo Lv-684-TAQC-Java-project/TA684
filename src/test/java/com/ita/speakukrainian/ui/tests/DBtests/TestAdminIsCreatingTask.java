@@ -12,6 +12,7 @@ import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import jdk.jfr.Description;
 import org.apache.commons.io.FileUtils;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -27,8 +28,9 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
     private final String header = "Українська-_-English=@#+123";
     private final String headerFilling = "Завдання на кмітливість та розвиток of attention for kids 6-9 years old!";
     private final String description = "Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!";
-    private final String [] dataForNameField = new String[]{"", "ъэы; ผม, Ÿ, ð", "Good", "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm"};
-   private final String [] ErrorsForNameField = new String[]{"name must not be blank", "name Can't contain foreign language symbols except english", "name must contain a minimum of 5 and a maximum of 50 letters", "name must contain a minimum of 5 and a maximum of 50 letters" };
+    private final String dataForNameField1 = "ъэы; ผม, Ÿ, ð";
+    private final String dataForNameField2= "Good";
+    private final String dataForNameField3="qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm";
 
     private String listString(int size){
         List<String> list = new ArrayList<String>();
@@ -100,7 +102,10 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
 
         TasksServise tasksServise = new TasksServise();
         List<TasksEntity> name = tasksServise.getAllTasksWhereName("Українська-_-English=@#+123");
-        softAssert.assertTrue(name.isEmpty(), "Invalid Task was added");
+        name.get(0);
+        System.out.println(name.get(0));
+        softAssert.assertTrue(name.get(0)==null, "Invalid Task was added");
+        softAssert.assertAll();
     }
 
 
@@ -114,7 +119,8 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
 
         softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(), "Fields are not empty");
 
-        addTaskPage.fillDateField();
+        DateProvider dateProvider = new DateProvider();
+        addTaskPage.fillDateField(dateProvider.dateFuture());
         softAssert.assertFalse(addTaskPage.dateFieldIsEmpty(), "Date was not added");
 
         addTaskPage.addImage(valueProvider.getSunFlower());
@@ -131,16 +137,25 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         addTaskPage.clickSelectChallenge().clickDniproChallenge();
         softAssert.assertFalse(addTaskPage.isChallengeAdded(), "Challenge was not chosen");
 
-        for (int i = 0 ; i < dataForNameField.length; i++) {
-            addTaskPage.clearNameField().fillNameField(dataForNameField[i]).clickSave();
-            for (String a:
-                 ErrorsForNameField) {
-                softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),a, "error massage is not the same");
-            }
-        }
+        addTaskPage.clickSave();
+        softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(), "name must not be blank", "error massage is not the same");
+
+        addTaskPage.fillNameField(dataForNameField1).clickSave();
+        softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(), "name Can't contain foreign language symbols except english", "error massage is not the same");
+        addTaskPage.delTextNameField();
+
+        addTaskPage.fillNameField(dataForNameField2).clickSave();
+        softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(), "name must contain a minimum of 5 and a maximum of 50 letters", "error massage is not the same");
+        addTaskPage.delTextNameField();
+
+        addTaskPage.fillNameField(dataForNameField3).clickSave();
+        softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(), "name must contain a minimum of 5 and a maximum of 50 letters", "error massage is not the same");
+
         TasksServise tasksServise = new TasksServise();
-        List<TasksEntity> task = tasksServise.getDescription("Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!");
-        softAssert.assertTrue(task.isEmpty(), "Invalid Task was added");
+        List<TasksEntity> task = tasksServise.getDescription("%Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!%");
+
+        softAssert.assertTrue(task.get(0) == null, "Invalid Task was added");
+        softAssert.assertAll();
     }
 
     @Test()
