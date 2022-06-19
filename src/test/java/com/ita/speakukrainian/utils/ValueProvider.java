@@ -32,6 +32,8 @@ public class ValueProvider {
         return properties.getProperty("baseURL");
     }
 
-
+    public String getImage() {
+        return properties.getProperty("imageFlower");
+    }
 
 }
