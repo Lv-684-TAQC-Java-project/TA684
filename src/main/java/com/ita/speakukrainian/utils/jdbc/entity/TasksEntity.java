@@ -48,7 +48,9 @@ public class TasksEntity {
         tasks.setName(row.get(2));
         tasks.setPicture(row.get(3));
         tasks.setDate(row.get(4));
-        tasks.setChallengeId(Long.parseLong(row.get(5)));
+        if (row.get(5) != null) {
+            tasks.setChallengeId(Long.parseLong(row.get(5)));
+        }
         tasks.setHeaderText(row.get(6));
         return tasks;
     }

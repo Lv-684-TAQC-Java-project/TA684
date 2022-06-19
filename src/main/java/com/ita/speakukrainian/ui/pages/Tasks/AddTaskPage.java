@@ -123,7 +123,7 @@ public class AddTaskPage extends BaseObjectPage {
     public AddTaskPage fillDateField(){
         DateProvider dateProvider = new DateProvider();
         dateField.click();
-        dateField.sendKeys(dateProvider.date());
+        dateField.sendKeys(dateProvider.dateFuture());
         dateField.sendKeys(Keys.ENTER);
         return this;
     }
