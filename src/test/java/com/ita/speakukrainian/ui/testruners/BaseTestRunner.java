@@ -37,6 +37,7 @@ public class BaseTestRunner {
     public void beforeMethod(ITestContext context) {
         context.setAttribute("myDriver", driver);
         driver.get(valueProvider.getBaseURL());
+
     }
 
 

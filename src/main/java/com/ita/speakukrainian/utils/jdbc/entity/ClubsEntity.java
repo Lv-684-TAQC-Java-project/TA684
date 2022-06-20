@@ -2,7 +2,6 @@ package com.ita.speakukrainian.utils.jdbc.entity;
 
 import lombok.Data;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +59,6 @@ public class ClubsEntity {
     }
     public static ClubsEntity getIdName(List<String> row) {
         ClubsEntity club = new ClubsEntity();
-       // club.setId(Long.parseLong(row.get(0)));
         club.setName(row.get(0));
         return club;
     }

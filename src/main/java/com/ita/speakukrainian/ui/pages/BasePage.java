@@ -53,18 +53,7 @@ public class BasePage {
 
     @Attachment
     public String saveText(List elements) {
-        String a=null;
-        if (elements.isEmpty()) {
-            ClubsService clubServise = new ClubsService();
-            List<ClubsEntity> clubIdCenterIdCheck = clubServise.getByUserIDAndCenterNotNull(264);
-            for (int i=0; i<clubIdCenterIdCheck.size();i++) {
-                a= clubIdCenterIdCheck.get(i).toString();
-            }
-            return a;
-        }
-        else {
             return elements.toString();
-        }
     }
 
     public void deleteText(WebElement elem){

@@ -11,6 +11,7 @@ import com.ita.speakukrainian.utils.jdbc.services.ClubsService;;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.apache.commons.lang.StringUtils;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -45,7 +46,7 @@ public class TestProperlyWorkClubManagerRole extends BaseTestRunner {
     @Test
     @Description("Checking if a new club was added and if all it's parameters was created correct")
     @Issue("TUA-506")
-    public void SavingNewInAddClubPopUp() {
+    public void SavingNewInAddClubPopUp(ITestContext context) {
         SoftAssert softAssert = new SoftAssert();
         var myProfilePage = new MyProfilePage(driver);
         new HomePage(driver)
@@ -75,11 +76,11 @@ public class TestProperlyWorkClubManagerRole extends BaseTestRunner {
         ClubsService clubServise = new ClubsService();
         List<ClubsEntity> club = clubServise.getByName(clubNameMaliavky);
         ClubsEntity maliavky = club.get(0);
-        new BasePage(driver).saveText(club);
+       // new BasePage(driver).saveText(club);
         softAssert.assertEquals(maliavky.getAgeFrom(), Integer. parseInt(age1InMaliavky));
         softAssert.assertEquals(maliavky.getAgeTo(), Integer. parseInt(age2InMaliavky));
         softAssert.assertEquals(maliavky.getName(), clubNameMaliavky);
-        softAssert.assertEquals(StringUtils.substringAfter((StringUtils.substringBefore(maliavky.getDescription(), "\",\"type\"")), "\"text\":\""), descriptionOfMaliavky);
+        softAssert.assertTrue(maliavky.getDescription().contains(descriptionOfMaliavky));
         softAssert.assertAll();
     }
 
@@ -87,7 +88,7 @@ public class TestProperlyWorkClubManagerRole extends BaseTestRunner {
     @Test
     @Description("Checking if a changers was saved and if all it's parameters was created correct")
     @Issue("TUA-508")
-    public void RewriteClubData(){
+    public void RewriteClubData(ITestContext context){
         var softAssert = new SoftAssert();
         var clubService = new ClubsService();
         var myProfilePage = new MyProfilePage(driver);

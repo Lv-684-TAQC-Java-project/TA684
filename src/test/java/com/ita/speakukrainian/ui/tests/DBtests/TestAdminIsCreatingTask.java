@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.ui.tests.DBtests;
 
+import com.ita.speakukrainian.ui.pages.BasePage;
 import com.ita.speakukrainian.ui.pages.HomePage;
 import com.ita.speakukrainian.ui.pages.Tasks.AddTaskPage;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
@@ -25,6 +26,7 @@ import java.util.Base64;
 import java.util.List;
 
 public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
+
     private final String header = "Українська-_-English=@#+123";
     private final String headerFilling = "Завдання на кмітливість та розвиток of attention for kids 6-9 years old!";
     private final String description = "Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!";
@@ -69,7 +71,7 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
     @Test
     @Description("Verify that admin can't create a task with invalid date on 'Додайте завдання' page")
     @Issue("TUA-521")
-    public void CreatingTackWithInvalidDate() {
+    public void CreatingTackWithInvalidDate(ITestContext context) {
 
         var addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
@@ -94,25 +96,23 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         softAssert.assertFalse(addTaskPage.isChallengeAdded(), "Challenge was not chosen");
 
         addTaskPage.clickSave();
-        softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),"startDate не должно равняться null", "error massage is not the same");
+        softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),"startDate must not be null", "error massage is not the same");
 
         DateProvider dateProvider =new DateProvider();
         addTaskPage.fillDateField(dateProvider.datePast()).clickSave();
         softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(),"Дата не може бути у минулому", "error massage is not the same");
 
-        TasksServise tasksServise = new TasksServise();
+        TasksServise tasksServise = new TasksServise(context);
         List<TasksEntity> name = tasksServise.getAllTasksWhereName("Українська-_-English=@#+123");
         name.get(0);
-        System.out.println(name.get(0));
         softAssert.assertTrue(name.get(0)==null, "Invalid Task was added");
         softAssert.assertAll();
     }
 
-
     @Test
     @Description("Verify that admin can't create a task with invalid data in 'Назва' field on 'Додайте завдання' page")
     @Issue("TUA-523")
-    public void CreatingTackWithInvalidNameData() {
+    public void CreatingTackWithInvalidNameData(ITestContext context) {
 
         var addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
@@ -151,7 +151,7 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         addTaskPage.fillNameField(dataForNameField3).clickSave();
         softAssert.assertEquals(addTaskPage.errorMassageIsAppearing(), "name must contain a minimum of 5 and a maximum of 50 letters", "error massage is not the same");
 
-        TasksServise tasksServise = new TasksServise();
+        TasksServise tasksServise = new TasksServise(context);
         List<TasksEntity> task = tasksServise.getDescription("%Very cool tasks for children 8 years old and its not all, for more information call on 141242353465474123!%");
 
         softAssert.assertTrue(task.get(0) == null, "Invalid Task was added");
