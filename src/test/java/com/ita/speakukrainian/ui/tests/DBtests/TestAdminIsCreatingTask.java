@@ -64,6 +64,19 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         return encodedString;
     }
 
+    public boolean verifyThatListContainsElementsInArray(String textForTitle, List<TasksEntity> tasksTable){
+        boolean tasksIsNotAdded = true;
+        String [] array = new String[]{textForTitle,header};
+        for (int i = 0 ; i < tasksTable.size() && tasksIsNotAdded;i++) {
+            for (int j = 0; j < array.length; j++) {
+                if (tasksTable.get(i).equals(array[j])) {
+                    tasksIsNotAdded = false;
+                }
+            }
+        }
+        return tasksIsNotAdded;
+    }
+
     @Test
     @Description("Verify that admin can't create a task with invalid date on 'Додайте завдання' page")
     @Issue("TUA-521")
@@ -153,29 +166,27 @@ public class TestAdminIsCreatingTask extends TestRuneWithAdmin {
         List<TasksEntity> tasksTable = tasksServise.getAllTasks();
         String textForTitle = "ъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ðъэы, ผม, Ÿ, ð";
         softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(),"verify all field is empty");
+
         addTaskPage.fillDateField().addImage(valueProvider.getSunFlower());
         softAssert.assertTrue(addTaskPage.isPhotoAdded());
+
         addTaskPage.fillNameField(header).fillDescriptionField(description);
         addTaskPage.clickSelectChallenge().clickDniproChallenge();
         addTaskPage.clickSave();
         softAssert.assertEquals(addTaskPage.errorMassage(),"Поле 'Заголовок' не може бути пустим");
+
         addTaskPage.clearTitleField().fillTitleField(textForTitle).clickSave();
         softAssert.assertEquals(addTaskPage.errorMassage(),"Поле 'Заголовок' може містити тільки українські та англійські літери, цифри та спеціальні символи");
+
         softAssert.assertTrue(addTaskPage.errorMassageIsDisplayed(),"is error massage displayed");
+
         addTaskPage.clearTitleField().fillTitleField("dsfsdfsdgdfghdfggjhdghjksghfgdfgdfgdfgg").clickSave();
         softAssert.assertEquals(addTaskPage.errorMassage(),"Поле 'Заголовок' може містити мінімум 40 максимум 3000 символів");
+
         addTaskPage.clearTitleField().fillTitleField(listString(3001));
         softAssert.assertEquals(addTaskPage.errorMassage(),"Поле 'Заголовок' може містити мінімум 40 максимум 3000 символів");
-        boolean tasksIsNotAdded = true;
-        String [] array = new String[]{textForTitle,header};
-        for (int i = 0 ; i < tasksTable.size() && tasksIsNotAdded;i++) {
-            for (int j = 0; j < array.length; j++) {
-                if (tasksTable.get(i).equals(array[j])) {
-                    tasksIsNotAdded = false;
-                }
-            }
-        }
-        softAssert.assertTrue(tasksIsNotAdded);
+
+        softAssert.assertTrue(verifyThatListContainsElementsInArray(textForTitle,tasksTable));
         softAssert.assertAll();
 
     }
