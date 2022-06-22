@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.utils.jdbc.dao;
 
 import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
+import io.qameta.allure.Step;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,6 +35,7 @@ public class ClubsDAO {
 //        ManagerDao.get().closeStatement(statement);
 //        return ClubsEntity.getClubsName(rows);
 //    }
+   @Step("select All Name Clubs use ClubsDAO")
     public List<ClubsEntity> selectAllNameClubs() {
         Statement statement = ManagerDao.getInstance().getStatement();
         List<List<String>> rows = null;
@@ -45,9 +47,10 @@ public class ClubsDAO {
 
         }
         ManagerDao.getInstance().closeStatement(statement);
-         return ClubsEntity.getClubs(rows);
-       // return  ClubsEntity.getIdNames(rows);
+        // return ClubsEntity.getClubs(rows);
+        return  ClubsEntity.getIdNames(rows);
     }
+    @Step("select All ame Clubs Use Like ClubsDAO")
     public List<ClubsEntity> selectAllNameClubsUseLike() {
         Statement statement = ManagerDao.getInstance().getStatement();
         List<List<String>> rows = null;
@@ -62,7 +65,7 @@ public class ClubsDAO {
        // return ClubsEntity.getClubs(rows);
         return  ClubsEntity.getIdNames(rows);
     }
-
+    @Step("select All ame Clubs by  name ClubsDAO")
     public List<ClubsEntity> selectByName(String name) {
         Statement statement = ManagerDao.getInstance().getStatement();
         List<List<String>> rows = null;

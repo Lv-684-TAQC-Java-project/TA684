@@ -14,7 +14,7 @@ public class ClubsEntity {
     public static final String SELECT_ALL = "SELECT * FROM clubs ORDER BY id";
     public static final String SELECT_ALL_NAME= "SELECT name FROM clubs ORDER BY id";
     public static final String SELECT_BY_USER_ID = "SELECT * FROM clubs WHERE user_id = %d";
-    public static final String SELECT_NAME_USER_WHERE_LIKE = "SELECT name FROM clubs WHERE name like 'Anda_usia%'";
+    public static final String SELECT_NAME_USER_WHERE_LIKE = "SELECT name FROM clubs WHERE name like 'Andalusia2%'";
 
 
     private int ageFrom;

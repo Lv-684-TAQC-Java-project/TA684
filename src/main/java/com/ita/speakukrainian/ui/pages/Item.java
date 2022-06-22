@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.pages;
 
 import com.ita.speakukrainian.ui.components.BaseComponent;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +17,7 @@ public class Item extends BaseComponent {
     public Item(WebDriver driver, WebElement element) {
         super(driver, element);
     }
-
+    @Step("Get name clubs")
     public String getName() {
         sleep(1000);
         return name.getText();

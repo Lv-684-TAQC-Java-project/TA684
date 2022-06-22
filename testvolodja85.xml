@@ -3,20 +3,26 @@
 <suite name="Test Suite">
     <test verbose="2" preserve-order="true" name="TA684">
         <classes>
-            <class name="com.ita.speakukrainian.ui.tests.TestRegistrationPage454">
-                <methods>
-                    <include name="enteredDataOnRegistrationPage"/>
-                </methods>
+            <!--            <class name="com.ita.speakukrainian.ui.tests.TestRegistrationPage454">-->
+            <!--                <methods>-->
+            <!--                    <include name="enteredDataOnRegistrationPage"/>-->
+            <!--                </methods>-->
+            <!--            </class>-->
+            <!--            <class name="com.ita.speakukrainian.ui.tests.TestClubPage">-->
+            <!--                <methods>-->
+            <!--                    <include name="AdvancedSearchIfIsOpenedAndSorted"/>-->
+            <!--                </methods>-->
+            <!--            </class>-->
+            <!--            <class name="com.ita.speakukrainian.ui.tests.TestAddClubPopUp">-->
+            <!--                <methods>-->
+            <!--                    <include name="TestVerifiesTheErrorMessageWhenEnterSameSymbols"/>-->
+            <!--                </methods>-->
+            <!--            </class>-->
+            <class name="com.ita.speakukrainian.ui.tests.DBtests.SearchByNameClub226">
             </class>
-            <class name="com.ita.speakukrainian.ui.tests.TestClubPage">
-                <methods>
-                    <include name="AdvancedSearchIfIsOpenedAndSorted"/>
-                </methods>
+            <class name="com.ita.speakukrainian.ui.tests.DBtests.VerifyAdminCreateTaskValidData520">
             </class>
-            <class name="com.ita.speakukrainian.ui.tests.TestAddClubPopUp">
-                <methods>
-                    <include name="TestVerifiesTheErrorMessageWhenEnterSameSymbols"/>
-                </methods>
+            <class name="com.ita.speakukrainian.ui.tests.DBtests.AdminCanCreateAChallenge527">
             </class>
         </classes>
     </test>

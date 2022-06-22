@@ -9,6 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.IOException;
 import java.time.Duration;
 
 public class TestRuneWithAdmin extends BaseTestRunner{
@@ -23,5 +24,12 @@ public class TestRuneWithAdmin extends BaseTestRunner{
                 .sendKeysPassword(valueProvider.getAdminPassword())
                 .clickLoginButton();
     }
+    @AfterClass
+    public void afterClass()throws IOException {
+        if (driver != null) {
+            driver.quit();
+            beforeSuite();
 
-}
+        }
+
+}}

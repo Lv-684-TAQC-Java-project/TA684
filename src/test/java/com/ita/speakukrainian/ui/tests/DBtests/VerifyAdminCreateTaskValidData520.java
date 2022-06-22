@@ -7,9 +7,9 @@ import com.ita.speakukrainian.utils.jdbc.entity.ChallengesEntity;
 import com.ita.speakukrainian.utils.jdbc.entity.TasksEntity;
 import com.ita.speakukrainian.utils.jdbc.services.ChallengesService;
 import com.ita.speakukrainian.utils.jdbc.services.TasksServise;
+import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
-import jdk.jfr.Description;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.testng.ITestContext;
@@ -42,7 +42,6 @@ public class VerifyAdminCreateTaskValidData520 extends TestRuneWithAdmin {
         return encodedString;
     }
 
-
     @BeforeMethod
     @Override
     public void beforeMethod(ITestContext context) {
@@ -55,39 +54,28 @@ public class VerifyAdminCreateTaskValidData520 extends TestRuneWithAdmin {
                 .clickAddTaskButton();
     }
 
-    @Test
-    @Description("")
+    @Description("Verify that admin can create a task with valid data on 'Додайте завдання' page")
+    @Test(description = "TUA-520")
     @Issue("TUA-520")
     public void CreatingTackWithValidData() {
-
         var addTaskPage = new AddTaskPage(driver);
         SoftAssert softAssert = new SoftAssert();
-
         softAssert.assertTrue(addTaskPage.AllFieldIsEmpty(), "Fields are not empty");
-
         addTaskPage.fillDateFieldFuture();
         softAssert.assertFalse(addTaskPage.dateFieldIsEmpty(), "Date was not added");
-
         addTaskPage.addImage(valueProvider.getSunFlower());
         softAssert.assertTrue(addTaskPage.checkIsImageAdded(), "Image was not added");
-
         softAssert.assertEquals(addTaskPage.getUploadedImageBase64(), getImageDataBase64(valueProvider.getSunFlower()), "Image was not the same");
-
         addTaskPage.fillNameField(name);
         softAssert.assertEquals(addTaskPage.nameFieldValue(), name);
-
         addTaskPage.fillHeaderField(TitleData50Symbols);
         softAssert.assertEquals(addTaskPage.TextHeaderField(), TitleData50Symbols);
-
         addTaskPage.fillDescriptionField(TitleData100Symbols);
         softAssert.assertEquals(addTaskPage.TextDescriptionField(), TitleData100Symbols);
-
         addTaskPage.clickSelectChallenge().clickDniproChallenge();
         String nameChallenge=addTaskPage.getAddTaskPageDropDown().TextChallenge();
         softAssert.assertFalse(addTaskPage.isChallengeAdded(), "Challenge was not chosen");
-
         addTaskPage.clickSave();
-
         TasksServise tasksServise=new TasksServise();
         List<TasksEntity> taskList = tasksServise.getAllTasksWhereName(name);
         TasksEntity first = taskList.get(0);
@@ -95,19 +83,12 @@ public class VerifyAdminCreateTaskValidData520 extends TestRuneWithAdmin {
         softAssert.assertEquals(first.getName(),name);
         softAssert.assertEquals(first.getPicture(),"/upload/tasks/img2.png");
         softAssert.assertEquals(first.getHeaderText(),"<p>"+TitleData50Symbols+"</p>");
-
         Long idChallenge=first.getChallengeId();
-
         softAssert.assertEquals(first.getChallengeId(),241);
-
         ChallengesService challengesService=new ChallengesService();
         List<ChallengesEntity> challengesList = challengesService.getMameWhereId(idChallenge);
         ChallengesEntity second = challengesList.get(0);
-
         softAssert.assertEquals(second.getName(),nameChallenge);
-
         softAssert.assertAll();
-
     }
-
 }

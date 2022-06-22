@@ -46,6 +46,8 @@ public class ExtendedSearchComponent extends BasePage {
     private WebElement clearDefaultCity;
     @FindBy(xpath = "//div[contains(@class,'content-clubs-list content-clubs-block')]/div")
     private List<WebElement> clubsCard;
+    @FindBy(css = ".anticon-search > svg")
+    private WebElement clickButtonFindElement;
 
 
     public ExtendedSearchComponent(WebDriver driver) {
@@ -64,14 +66,14 @@ public class ExtendedSearchComponent extends BasePage {
         saveScreenshot();
         return advancedSearch.isDisplayed();
     }
-    @Step("get cardFirst ")
+    @Step("get card First First")
     public List<WebElement> getcardFirst() {
         sleep(1000);
         return cardFirst;
     }
     @Step("get card ")
     public List<WebElement> getcard() {
-        sleep(1000);
+        sleep(3000);
         return card;
     }
 
@@ -170,6 +172,12 @@ public class ExtendedSearchComponent extends BasePage {
     public ExtendedSearchComponent clickSortedRatingButton() {
         sleep(1000);
         sortedRatingButton.click();
+        return this;
+    }
+    @Step("Click Button Find Element")
+    public ExtendedSearchComponent clickClickButtonFindElement() {
+        sleep(2000);
+        clickButtonFindElement.click();
         return this;
     }
 }

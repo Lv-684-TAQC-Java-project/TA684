@@ -173,6 +173,7 @@ public class HeaderMenuComponent extends BaseComponent {
      * Go to
      * ClubsPage
      */
+    @Step("click Clubs Page Header")
     public ClubsPage clickClubsPageHeader() {
         clubsPageHeader.click();
         return new ClubsPage(driver);

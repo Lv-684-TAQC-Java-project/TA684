@@ -14,11 +14,9 @@ import org.testng.asserts.SoftAssert;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertTrue;
-
 public class SearchByNameClub226 extends BaseTestRunner {
 
-    private boolean comparList(List<String> one, List<String> two) {
+    private boolean compareList(List<String> one, List<String> two) {
         for (int i = 0; i < one.size(); i++) {
             for (int j = 0; j < two.size(); j++) {
                 if (one.get(i).equals(two.get(j))) {
@@ -28,10 +26,10 @@ public class SearchByNameClub226 extends BaseTestRunner {
             }
         }
         return false;
-
     }
-    @Description
-    @Test(description = "TUA-252")
+
+    @Description("Verify that user can perform basic search by names of a club  and compare DB List")
+    @Test(description = "TUA-226")
     @Issue("TUA-226")
     public void TestAllNameClubs() {
         SoftAssert softAssert = new SoftAssert();
@@ -40,25 +38,22 @@ public class SearchByNameClub226 extends BaseTestRunner {
                 .clickClubsPageHeader()
                 .getExtendedSearchComponent()
                 .getcardFirst();
-
         List<String> cardsItem = new ArrayList<>();
         for (WebElement element : card) {
             cardsItem.add(new Item(driver, element).getName());
         }
-
         ClubsService clubsService = new ClubsService();
         List<ClubsEntity> NameClubs = clubsService.getAllNameClubs();
         List<String> rr = new ArrayList<>();
         for (int i = 0; i < NameClubs.size(); i++) {
             rr.add(NameClubs.get(i).getName());
-
         }
-
-        assertTrue(comparList(cardsItem, rr));
-
+        softAssert.assertTrue(compareList(cardsItem, rr));
+        softAssert.assertAll();
     }
-    @Description
-    @Test(description = "TUA-252")
+
+    @Description("Verify that user can perform basic search by names of a club  and compare DB name club")
+    @Test(description = "TUA-226")
     @Issue("TUA-226")
     public void TestAllNameClubsTwo() {
         SoftAssert softAssert = new SoftAssert();
@@ -67,29 +62,18 @@ public class SearchByNameClub226 extends BaseTestRunner {
                 .clickClubsPageHeader()
                 .getExtendedSearchComponent()
                 .getcardFirst();
-
         List<String> cardsItem = new ArrayList<>();
         for (WebElement element : card) {
             cardsItem.add(new Item(driver, element).getName());
         }
-
         ClubsService clubsService = new ClubsService();
         List<ClubsEntity> NameClubs = clubsService.getAllNameClubs();
-
-
-        for (int i = 0; i < cardsItem.size(); i++) {
-            System.out.println(cardsItem.get(i));
-            System.out.println(NameClubs.get(i).getName());
-            softAssert.assertEquals(cardsItem.get(i), NameClubs.get(i).getName());
-            System.out.println("----------------------");
-        }
-
+        softAssert.assertEquals(cardsItem.get(0), NameClubs.get(0).getName());
         softAssert.assertAll();
-
     }
 
-    @Description
-    @Test(description = "TUA-252")
+    @Description("Verify that user can perform basic search by name of a club use DB")
+    @Test(description = "TUA-226")
     @Issue("TUA-226")
     public void TestAllNameClubsUseLike() {
         SoftAssert softAssert = new SoftAssert();
@@ -99,27 +83,19 @@ public class SearchByNameClub226 extends BaseTestRunner {
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
                 .getExtendedSearchComponent()
-                .fillInMainSearchField("Andalusia")
+                .fillInMainSearchField("Andalusia2")
+                .clickClickButtonFindElement()
                 .getcard();
-
         List<String> cardsItem = new ArrayList<>();
         for (WebElement element : card) {
             cardsItem.add(new Item(driver, element).getName());
         }
-
         ClubsService clubsService = new ClubsService();
         List<ClubsEntity> NameClubs = clubsService.getAllNameClubsUseLike();
-
-
         for (int i = 0; i < cardsItem.size(); i++) {
-            System.out.println(cardsItem.get(i));
-            System.out.println(NameClubs.get(i).getName());
             softAssert.assertEquals(cardsItem.get(i), NameClubs.get(i).getName());
-            System.out.println("----------------------");
         }
-
         softAssert.assertAll();
-
     }
 }
 

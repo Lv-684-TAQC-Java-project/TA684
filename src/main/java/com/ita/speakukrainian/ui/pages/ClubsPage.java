@@ -132,11 +132,11 @@ public class ClubsPage extends BasePage {
     public String readAgeInput() {
         return getAgeInput().getAttribute("value");
     }
-
+    @Step("Get Extended Search Component")
     public ExtendedSearchComponent getExtendedSearchComponent() {
         return extendedSearchComponent;
     }
-
+    @Step("get  Header Menu Component")
     public HeaderMenuComponent getHeaderMenuComponent() {
         return headerMenuComponent;
     }

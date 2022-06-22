@@ -7,6 +7,8 @@ import com.ita.speakukrainian.utils.jdbc.entity.ChallengesEntity;
 import com.ita.speakukrainian.utils.jdbc.entity.ClubsEntity;
 import com.ita.speakukrainian.utils.jdbc.entity.DistrictEntity;
 import com.ita.speakukrainian.utils.jdbc.services.ChallengesService;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.testng.ITestContext;
@@ -35,8 +37,8 @@ public class AdminCanCreateAChallenge527 extends TestRuneWithAdmin {
                 .clickAdministrationButtonInDropdown()
                 .clickChallengeInAdministrationButton()
                 .clickAddChallengesButton();
-
     }
+
     @Step("Get data of initial image")
     public String getImageDataBase64(File inputFile){
         byte[] fileContent = new byte[0];
@@ -50,63 +52,50 @@ public class AdminCanCreateAChallenge527 extends TestRuneWithAdmin {
                 .encodeToString(fileContent);
         return encodedString;
     }
-    @Test()
+
+    @Description("Verify that admin can create a challegne with valid data 'Додайте челендж' page")
+    @Test(description = "TUA-527")
+    @Issue("TUA-527")
     public void TestVerifyAllFieldsEmpty() {
         SoftAssert softAssert = new SoftAssert();
-
         var addChallengePage = new AddChallengePage(driver);
-
         String NameValue = addChallengePage
                 .clickChallengeName()
                 .getChallengeNameValue();
         softAssert.assertEquals(NameValue, "");
-
         String NumberValue = addChallengePage
                 .clickSortNumber()
                 .getSortNumberValue();
         softAssert.assertEquals(NumberValue, "");
-
         String TitleValue = addChallengePage
                 .clickChallengeTitle()
                 .getChallengeTitleValue();
         softAssert.assertEquals(TitleValue, "");
-
         List<String> depictionChallengeOne = addChallengePage
                 .getDepictionChallenge();
         String GetListDepictionOne = String.join("\n", depictionChallengeOne);
         softAssert.assertEquals(GetListDepictionOne, "");
-
         String NumberValueTwo = addChallengePage
                 .addChallengeSortNumber("123" + number)
                 .getSortNumberValue();
         System.out.println("123" + number);
         softAssert.assertEquals(NumberValueTwo, "123" + number);
-
         String NameValueTwo = addChallengePage
                 .addChallengeName("Гопак")
                 .getChallengeNameValue();
         softAssert.assertEquals(NameValueTwo, "Гопак");
-
         String TitleValueTwo = addChallengePage
                 .addChallengeTitle("Присідання")
                 .getChallengeTitleValue();
         softAssert.assertEquals(TitleValueTwo, "Присідання");
-
         addChallengePage.addDepictionChallenge(expected);
         List<String> depictionChallenge = addChallengePage.getDepictionChallenge();
         String GetListDepiction = String.join("\n", depictionChallenge);
         softAssert.assertEquals(GetListDepiction, expected);
-
-        //softAssert.assertFalse(addChallengePage.checkIsImageAdded());
-
         addChallengePage.addImage(valueProvider.getSunFlower());
-
         softAssert.assertTrue(addChallengePage.checkIsImageAdded(), "Image was not added");
-
         softAssert.assertEquals(addChallengePage.getUploadedImageBase64() , getImageDataBase64(valueProvider.getSunFlower()));
-
         addChallengePage.clickButtonSaveChallenge();
-
         ChallengesService challengesService=new ChallengesService();
         List<ChallengesEntity> challengesList = challengesService.getAll("123",number);
         ChallengesEntity first = challengesList.get(0);
@@ -115,11 +104,6 @@ public class AdminCanCreateAChallenge527 extends TestRuneWithAdmin {
         softAssert.assertEquals(first.getPicture(),"/upload/challenges/img2.png");
         softAssert.assertEquals(first.getSortNumber(),"123"+number);
         softAssert.assertEquals(first.getTitle(),"Присідання");
-
-
-
-
-
         softAssert.assertAll();
 
 
