@@ -83,7 +83,7 @@ public class SearchByNameClub226 extends BaseTestRunner {
                 .getHeaderMenuComponent()
                 .clickExtendedSearchButton()
                 .getExtendedSearchComponent()
-                .fillInMainSearchField("Andalusia2")
+                .fillInMainSearchField("Andalusia")
                 .clickClickButtonFindElement()
                 .getcard();
         List<String> cardsItem = new ArrayList<>();
