@@ -2,7 +2,6 @@ package com.ita.speakukrainian.ui.tests.DBtests;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.HomePage;
-//import com.ita.speakukrainian.ui.pages.Tasks.AddTaskPage;
 import com.ita.speakukrainian.ui.pages.Tasks.AddTaskPageDG;
 import com.ita.speakukrainian.ui.testruners.TestRuneWithAdmin;
 import com.ita.speakukrainian.utils.jdbc.entity.TaskEntity;
@@ -16,7 +15,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class TestAddTask extends TestRuneWithAdmin {
 
@@ -51,11 +50,11 @@ public class TestAddTask extends TestRuneWithAdmin {
         boolean isAllFieldEmpty = addTaskPageDg.isAllFieldsEmpty();
         softAssert.assertTrue(isAllFieldEmpty);
 
-        String isDataEntered = addTaskPageDg
+        String isDataSaved = addTaskPageDg
                 .fillInDateInputField(validData)
                 .getValueDateField();
 
-        softAssert.assertEquals(validData, isDataEntered);
+        softAssert.assertEquals(validData, isDataSaved);
 
         boolean isImageAdd = addTaskPageDg
                 .uploadPhoto(valueProvider.getImage())
@@ -76,7 +75,8 @@ public class TestAddTask extends TestRuneWithAdmin {
                 .clickSaveButton()
                 .isDescriptionCharactersQuantityErrorMessageDisplayed();
 
-        softAssert.assertTrue(isDescriptionFieldEmptyErrorMessageDisplayed, "Description field is empty you can't add task");
+        softAssert.assertTrue(isDescriptionFieldEmptyErrorMessageDisplayed,
+                "Description field is empty you can't add task");
 
         boolean isDescriptionFieldInvalidDataErrorMessageDisplayed = headerMenuComponent
                 .clickUserProFileButton()
@@ -93,7 +93,8 @@ public class TestAddTask extends TestRuneWithAdmin {
                 .clickSaveButton()
                 .isDescriptionInvalidDataErrorMassageDisplayed();
 
-        softAssert.assertTrue(isDescriptionFieldInvalidDataErrorMessageDisplayed, "Description field invalid data");
+        softAssert.assertTrue(isDescriptionFieldInvalidDataErrorMessageDisplayed,
+                "Description field invalid data");
 
         boolean isDescriptionErrorMessageDisplayed = addTaskPageDg
                 .clearDescriptionField()
@@ -102,7 +103,8 @@ public class TestAddTask extends TestRuneWithAdmin {
                 .clickSaveButton()
                 .isDescriptionCharactersQuantityErrorMessageDisplayed();
 
-        softAssert.assertTrue(isDescriptionErrorMessageDisplayed, "Description field can't contains less the 40 symbols");
+        softAssert.assertTrue(isDescriptionErrorMessageDisplayed,
+                "Description field can't contains less the 40 symbols");
 
         boolean isDescriptionErrorMessageDisplayed2 = addTaskPageDg
                 .clearTitleField()
@@ -110,23 +112,12 @@ public class TestAddTask extends TestRuneWithAdmin {
                 .clickSaveButton()
                 .isDescriptionCharactersQuantityErrorMessageDisplayed();
 
-        softAssert.assertTrue(isDescriptionErrorMessageDisplayed2, "Description field can't contains more the 3001 symbols");
+        softAssert.assertTrue(isDescriptionErrorMessageDisplayed2,
+                "Description field can't contains more the 3001 symbols");
 
         List<TaskEntity> expectedTableFormDb = taskServise.getAllByName();
 
-        softAssert.assertEquals(expectedTableFormDb.get(0).getName(), validNameData);
-
-//        for(int i = 0; i < expectedTableFormDb.size(); i++) {
-//            System.out.println(expectedTableFormDb.get(i).getName());
-//            System.out.println("------------------------");
-//        }
-
-        System.out.println(expectedTableFormDb.stream().map(el -> el.getName()).collect(Collectors.joining()));
-
-        for (TaskEntity list : expectedTableFormDb) {
-            System.out.println(list);
-            System.out.println("------------------------");
-        }
+        softAssert.assertNotEquals(validNameData, expectedTableFormDb.get(0).getName(), "Task was added");
 
         softAssert.assertAll();
     }
