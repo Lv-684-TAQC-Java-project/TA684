@@ -136,6 +136,7 @@ public class AddTaskPageDG extends BaseObjectPage {
     public String getValueDateField() {
         return dataInputField.getAttribute("value");
     }
+
     @Step("Verify is challenge selected")
     public boolean isChallengeFieldSelected() {
         return challengeFieldIsEntered.isDisplayed();
