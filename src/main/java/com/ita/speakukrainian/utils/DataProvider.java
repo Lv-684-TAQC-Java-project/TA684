@@ -27,4 +27,8 @@ public class DataProvider {
         return properties.getProperty("jdbc_url");
 
     }
+
+    public String getApiUrl() {
+        return properties.getProperty("api_url");
+    }
 }
