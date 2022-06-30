@@ -26,39 +26,39 @@ public class ChallengeTests extends BaseApiTestRunner {
 
     @Test
     public void verifyUserIsNotAbleToCreateChallengeWithLessThenNeededCharacters() {
-    CreatedChallengeRequest createdChallengeRequest = new CreatedChallengeRequest();
-    createdChallengeRequest.setName("nam");
-    createdChallengeRequest.setTitle("tit");
-    createdChallengeRequest.setDescription("des");
+    CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+    challengeRequest.setName("nam");
+    challengeRequest.setTitle("tit");
+    challengeRequest.setDescription("des");
 
         ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
-        Response response = challengeClient.post(createdChallengeRequest);
+        Response response = challengeClient.post(challengeRequest);
 
         Assert.assertEquals(response.statusCode(), 400);
     }
 
  @Test
     public void verifyUserIsNotAbleToCreateChallengeWithMoreThenNeededCharacters() {
-    CreatedChallengeRequest createdChallengeRequest = new CreatedChallengeRequest();
-    createdChallengeRequest.setName("Lorem ipsum dolor sit amet, consect");
-    createdChallengeRequest.setTitle("Lorem ipsum dolor sit amet, consect");
-    createdChallengeRequest.setDescription(description);
+    CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+    challengeRequest.setName("Lorem ipsum dolor sit amet, consect");
+    challengeRequest.setTitle("Lorem ipsum dolor sit amet, consect");
+    challengeRequest.setDescription(description);
 
         ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
-        Response response = challengeClient.post(createdChallengeRequest);
+        Response response = challengeClient.post(challengeRequest);
 
         Assert.assertEquals(response.statusCode(), 400);
     }
 
     @Test
     public void verifyUserIsNotAbleToCreateChallengeWithRusCharacters() {
-    CreatedChallengeRequest createdChallengeRequest = new CreatedChallengeRequest();
-    createdChallengeRequest.setName("эЭъЪыЫёЁ");
-    createdChallengeRequest.setTitle("эЭъЪыЫёЁ");
-    createdChallengeRequest.setDescription("эЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁ");
+    CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+    challengeRequest.setName("эЭъЪыЫёЁ");
+    challengeRequest.setTitle("эЭъЪыЫёЁ");
+    challengeRequest.setDescription("эЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁ");
 
         ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
-        Response response = challengeClient.post(createdChallengeRequest);
+        Response response = challengeClient.post(challengeRequest);
 
         Assert.assertEquals(response.statusCode(), 400);
     }
