@@ -14,6 +14,14 @@ public class ValueProvider {
         properties.load(fileInputStream);
     }
 
+    public String getBasePassword(){
+        return  properties.getProperty("basePassword");
+    }
+
+    public String getBaseEmail(){
+        return  properties.getProperty("baseEmail");
+    }
+
     public String getAdminEmail() {
 
         return properties.getProperty("adminEmail");

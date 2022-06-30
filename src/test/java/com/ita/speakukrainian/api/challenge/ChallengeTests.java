@@ -1,4 +1,4 @@
-package com.ita.speakukrainian.api.center;
+package com.ita.speakukrainian.api.challenge;
 
 import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.ChallengeClient;
