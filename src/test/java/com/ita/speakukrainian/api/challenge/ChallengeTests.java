@@ -5,6 +5,7 @@ import com.ita.speakukrainian.api.clients.ChallengeClient;
 import com.ita.speakukrainian.api.clients.SignInClient;
 import com.ita.speakukrainian.api.models.challenge.ChallengeResponse;
 import com.ita.speakukrainian.api.models.challenge.CreateChallengeRequest;
+import com.ita.speakukrainian.api.models.ErrorResponse;
 import com.ita.speakukrainian.api.models.challenge.CreatedChallengeRequest;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
@@ -32,11 +33,15 @@ public class ChallengeTests extends BaseApiTestRunner {
     challengeRequest.setName("nam");
     challengeRequest.setTitle("tit");
     challengeRequest.setDescription("des");
+    challengeRequest.setPicture("/upload/test/test.png");
+    challengeRequest.setSortNumber("1");
 
         ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
         Response response = challengeClient.post(challengeRequest);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
         Assert.assertEquals(response.statusCode(), 400);
+        Assert.assertTrue(errorResponse.getMessage().contains("must contain a minimum of 5 and a maximum of 50"));
     }
 
  @Test
@@ -45,11 +50,17 @@ public class ChallengeTests extends BaseApiTestRunner {
     challengeRequest.setName("Lorem ipsum dolor sit amet, consect");
     challengeRequest.setTitle("Lorem ipsum dolor sit amet, consect");
     challengeRequest.setDescription(description);
+    challengeRequest.setPicture("/upload/test/test.png");
+    challengeRequest.setSortNumber("1");
 
         ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
         Response response = challengeClient.post(challengeRequest);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
         Assert.assertEquals(response.statusCode(), 400);
+        Assert.assertTrue(errorResponse
+                .getMessage()
+                .contains("name  must contain a minimum of 5 and a maximum of 30 letters"));
     }
 
     @Test
@@ -58,11 +69,16 @@ public class ChallengeTests extends BaseApiTestRunner {
     challengeRequest.setName("эЭъЪыЫёЁ");
     challengeRequest.setTitle("эЭъЪыЫёЁ");
     challengeRequest.setDescription("эЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁ");
+    challengeRequest.setPicture("/upload/test/test.png");
+    challengeRequest.setSortNumber("1");
 
         ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
         Response response = challengeClient.post(challengeRequest);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
         Assert.assertEquals(response.statusCode(), 400);
+        Assert.assertTrue(errorResponse
+                .getMessage().contains("Can't contain foreign language symbols except english"));
     }
 
     @Test
