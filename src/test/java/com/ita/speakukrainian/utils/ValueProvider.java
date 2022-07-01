@@ -42,5 +42,12 @@ public class ValueProvider {
         return new File("src/test/resources/img2.png");
     }
 
+    public String getBasePassword(){
+        return  properties.getProperty("basePassword");
+    }
+
+    public String getBaseEmail(){
+        return  properties.getProperty("baseEmail");
+    }
 
 }
