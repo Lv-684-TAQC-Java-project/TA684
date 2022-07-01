@@ -19,4 +19,11 @@ public class ChallengeClient  extends BaseClient{
                 .body(body)
                 .post(String.format("%s%s", this.baseUrl, this.path));
     }
+
+    public Response delete (int id){
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", this.authorizationToken))
+                .when()
+                .delete(String.format("%s%s/%s", this.baseUrl, this.path,id));
+    }
 }

@@ -29,7 +29,6 @@ public class EditProfileTest extends BaseApiTestRunner {
         SoftAssert softAssert = new SoftAssert();
         EditProfileClient client = new EditProfileClient(this.authorizationToken);
         CreateEditProfileRequest request = new CreateEditProfileRequest();
-        Response response = client.post(request);
 
         request.setId(203);
         request.setFirstName("Nastia1234");
@@ -39,19 +38,24 @@ public class EditProfileTest extends BaseApiTestRunner {
         request.setRoleName("ROLE_MANAGER");
         request.setUrlLogo(null);
         request.setStatus("true");
+        Response response = client.post(request);
         softAssert.assertEquals(response.statusCode(),400);
 
         request.setFirstName("NastiaNastiaNastiaNastiaNastia");
+        response = client.post(request);
         softAssert.assertEquals(response.statusCode(),400);
 
         request.setFirstName("Nastia!@##$#$%");
+        response = client.post(request);
         softAssert.assertEquals(response.statusCode(),400);
 
         request.setFirstName("Nastia");
         request.setLastName("Kukhar#%$#");
+        response = client.post(request);
         softAssert.assertEquals(response.statusCode(),400);
 
         request.setLastName("KukharKukharKukharKukharKukharKukharKukhar#");
+        response = client.post(request);
         softAssert.assertEquals(response.statusCode(),400);
 
         softAssert.assertAll();

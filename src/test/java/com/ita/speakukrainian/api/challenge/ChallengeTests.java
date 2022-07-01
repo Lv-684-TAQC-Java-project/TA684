@@ -3,6 +3,8 @@ package com.ita.speakukrainian.api.challenge;
 import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.ChallengeClient;
 import com.ita.speakukrainian.api.clients.SignInClient;
+import com.ita.speakukrainian.api.models.ErrorResponse;
+import com.ita.speakukrainian.api.models.challenge.ChallengeResponse;
 import com.ita.speakukrainian.api.models.challenge.CreateChallengeRequest;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
@@ -29,12 +31,13 @@ public class ChallengeTests extends BaseApiTestRunner {
         createChallengeRequest.setName("Example name");
         createChallengeRequest.setTitle("Example title");
         createChallengeRequest.setDescription("Lorem ipsum dolor sit amet, consectetuer adipiscin");
-        createChallengeRequest.setPicture("src/test/resources/foto.jpg");
-        createChallengeRequest.setSortNumber(1235897238);
+        createChallengeRequest.setPicture("/upload/test/test.png");
+        createChallengeRequest.setSortNumber(489437645);
 
         ChallengeClient client = new ChallengeClient(this.authorizationToken);
         Response response = client.post(createChallengeRequest);
+        ChallengeResponse challengeResponse = response.as(ChallengeResponse.class);
         Assert.assertEquals(response.statusCode(), 200);
-
+        response = client.delete(challengeResponse.getId());
     }
 }
