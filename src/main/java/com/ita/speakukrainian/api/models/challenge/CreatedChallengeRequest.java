@@ -7,4 +7,6 @@ public class CreatedChallengeRequest {
     public String name;
     public String title;
     public String description;
+    public String picture;
+    public String sortNumber;
 }
