@@ -6,9 +6,12 @@ import com.ita.speakukrainian.api.clients.SignInClient;
 import com.ita.speakukrainian.api.models.editProfile.CreateEditProfileRequest;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -24,7 +27,8 @@ public class EditProfileTest extends BaseApiTestRunner {
     }
 
     @Test
-
+    @Description("[allure] Cant save changes with entered invalid data")
+    @Issue("TUA-415")
     public void cantSaveChangesWithInvalidDataTest() {
         SoftAssert softAssert = new SoftAssert();
         EditProfileClient client = new EditProfileClient(this.authorizationToken);

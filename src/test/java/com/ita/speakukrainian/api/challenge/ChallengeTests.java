@@ -9,6 +9,8 @@ import com.ita.speakukrainian.api.models.ErrorResponse;
 import com.ita.speakukrainian.api.models.challenge.CreatedChallengeRequest;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -82,6 +84,8 @@ public class ChallengeTests extends BaseApiTestRunner {
     }
 
     @Test
+    @Description("[allure] Success created challenge test")
+    @Issue("TUA-429")
     public void successCreatedChallengeTest() {
         CreateChallengeRequest createChallengeRequest = new CreateChallengeRequest();
         createChallengeRequest.setName("Example name");
