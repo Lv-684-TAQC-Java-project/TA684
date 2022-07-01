@@ -39,9 +39,7 @@ public class ChallengeTests extends BaseApiTestRunner {
         ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
         Assert.assertEquals(response.statusCode(), 400);
-        Assert.assertEquals(errorResponse.getMessage()
-                ,"title must contain a minimum of 5 and a maximum of 50 letters and name  must contain " +
-                        "a minimum of 5 and a maximum of 30 letters");
+        Assert.assertTrue(errorResponse.getMessage().contains("must contain a minimum of 5 and a maximum of 50"));
     }
 
  @Test
@@ -58,8 +56,9 @@ public class ChallengeTests extends BaseApiTestRunner {
         ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
         Assert.assertEquals(response.statusCode(), 400);
-        Assert.assertEquals(errorResponse.getMessage()
-                ,"name  must contain a minimum of 5 and a maximum of 30 letters");
+        Assert.assertTrue(errorResponse
+                .getMessage()
+                .contains("name  must contain a minimum of 5 and a maximum of 30 letters"));
     }
 
     @Test
