@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class Category {
     private int id;
-    private int sortby;
+    private Integer sortby;
     private String name;
     private String description;
     private String urlLogo;

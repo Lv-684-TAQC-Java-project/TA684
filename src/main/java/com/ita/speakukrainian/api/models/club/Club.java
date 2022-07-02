@@ -7,8 +7,8 @@ import java.util.List;
 @Data
 public class Club {
     private int id;
-    private int ageFrom;
-    private int ageTo;
+    private Integer ageFrom;
+    private Integer ageTo;
     private String name;
     private String description;
     private String urlWeb;
@@ -16,16 +16,15 @@ public class Club {
     private String urlBackground;
     private List<String> urlGallery;
     private String workTime;
-    private int rating;
-    private int feedbackCount;
-    private boolean isOnline;
-    private List<Location> locations;
-    private List<Feedback> feedbacks;
+    private Integer rating;
+    private Integer feedbackCount;
+    private List<String> locations;
     private List<String> categories;
     private User user;
-    private Center center;
-    private boolean isApproved;
+    private String center;
+    private Integer isApproved;
+    private Boolean isOnline;
     private String contacts;
-    private int clubExternalId;
-    private int centerExternalId;
+    private Integer clubExternalId;
+    private Integer centerExternalId;
 }

@@ -1,6 +1,6 @@
 package com.ita.speakukrainian.api.clients;
 
-import com.ita.speakukrainian.api.models.signin.ClubsRequest;
+import com.ita.speakukrainian.api.models.club.ClubsRequest;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -28,6 +28,13 @@ public class ClubsClient extends BaseClient {
                 .body(json)
                 .when()
                 .post(baseUrl + "/api/club");
+    }
+    @Step("Delete a new club when we  have Id")
+    public Response delete (int id){
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", this.authorizationToken))
+                .when()
+                .delete(String.format("%s%s%s", this.baseUrl, "/api/club/",id));
     }
 
 

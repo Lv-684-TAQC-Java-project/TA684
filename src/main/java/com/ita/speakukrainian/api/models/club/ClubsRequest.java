@@ -1,4 +1,4 @@
-package com.ita.speakukrainian.api.models.signin;
+package com.ita.speakukrainian.api.models.club;
 
 import com.ita.speakukrainian.api.models.club.*;
 import lombok.AllArgsConstructor;

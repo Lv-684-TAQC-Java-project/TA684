@@ -14,6 +14,6 @@ public class User {
     private Role role;
     private String provider;
     private String providerId;
-    private boolean status;
+    private Boolean status;
     private String verificationCode;
 }

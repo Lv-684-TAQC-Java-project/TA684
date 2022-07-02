@@ -1,14 +1,15 @@
 package com.ita.speakukrainian.api.models.club;
 
+import com.ita.speakukrainian.api.models.club.*;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class Root {
+public class ClubsResponse {
     private int id;
-    private int ageFrom;
-    private int ageTo;
+    private Integer ageFrom;
+    private Integer ageTo;
     private String name;
     private String description;
     private String urlWeb;
@@ -19,8 +20,8 @@ public class Root {
     private List<Category> categories;
     private User user;
     private Center center;
-    private int rating;
+    private Integer rating;
     private List<Location> locations;
-    private boolean isApproved;
-    private boolean isOnline;
+    private Boolean isApproved;
+    private Boolean isOnline;
 }

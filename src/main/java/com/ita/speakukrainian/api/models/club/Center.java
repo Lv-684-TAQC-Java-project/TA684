@@ -10,16 +10,16 @@ public class Center {
     private String name;
     private String contacts;
     private String urlBackgroundPicture;
+    private String email;
+    private String phones;
     private String description;
     private String urlWeb;
     private String urlLogo;
-    private List<String> locations;
-    private List<String> clubs;
-    private User user;
-    private int centerExternalId;
-    private int rating;
-    private int clubCount;
-    private String email;
-    private String phones;
     private String socialLinks;
+    private List<Location> locations;
+    private List<Club> clubs;
+    private User user;
+    private Integer centerExternalId;
+    private Integer rating;
+    private Integer clubCount;
 }
