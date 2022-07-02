@@ -22,21 +22,21 @@ public class ChallengeTests extends BaseApiTestRunner {
 
     @BeforeClass
     public void beforeClass() {
-    SignInRequest credentials = new SignInRequest(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
-    SignInClient client = new SignInClient();
-    Response response = client.successSingInRequest(credentials);
-    SignInResponse signInResponse = response.as(SignInResponse.class);
-    authorizationToken = signInResponse.getAccessToken();
-}
+        SignInRequest credentials = new SignInRequest(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
+        SignInClient client = new SignInClient();
+        Response response = client.successSingInRequest(credentials);
+        SignInResponse signInResponse = response.as(SignInResponse.class);
+        authorizationToken = signInResponse.getAccessToken();
+    }
 
     @Test
     public void verifyUserIsNotAbleToCreateChallengeWithLessThenNeededCharacters() {
-    CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
-    challengeRequest.setName("nam");
-    challengeRequest.setTitle("tit");
-    challengeRequest.setDescription("des");
-    challengeRequest.setPicture("/upload/test/test.png");
-    challengeRequest.setSortNumber("1");
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        challengeRequest.setName("nam");
+        challengeRequest.setTitle("tit");
+        challengeRequest.setDescription("des");
+        challengeRequest.setPicture("/upload/test/test.png");
+        challengeRequest.setSortNumber("1");
 
         ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
         Response response = challengeClient.post(challengeRequest);
@@ -46,14 +46,14 @@ public class ChallengeTests extends BaseApiTestRunner {
         Assert.assertTrue(errorResponse.getMessage().contains("must contain a minimum of 5 and a maximum of 50"));
     }
 
- @Test
+    @Test
     public void verifyUserIsNotAbleToCreateChallengeWithMoreThenNeededCharacters() {
-    CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
-    challengeRequest.setName("Lorem ipsum dolor sit amet, consect");
-    challengeRequest.setTitle("Lorem ipsum dolor sit amet, consect");
-    challengeRequest.setDescription(description);
-    challengeRequest.setPicture("/upload/test/test.png");
-    challengeRequest.setSortNumber("1");
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        challengeRequest.setName("Lorem ipsum dolor sit amet, consect");
+        challengeRequest.setTitle("Lorem ipsum dolor sit amet, consect");
+        challengeRequest.setDescription(description);
+        challengeRequest.setPicture("/upload/test/test.png");
+        challengeRequest.setSortNumber("1");
 
         ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
         Response response = challengeClient.post(challengeRequest);
@@ -67,12 +67,12 @@ public class ChallengeTests extends BaseApiTestRunner {
 
     @Test
     public void verifyUserIsNotAbleToCreateChallengeWithRusCharacters() {
-    CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
-    challengeRequest.setName("эЭъЪыЫёЁ");
-    challengeRequest.setTitle("эЭъЪыЫёЁ");
-    challengeRequest.setDescription("эЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁ");
-    challengeRequest.setPicture("/upload/test/test.png");
-    challengeRequest.setSortNumber("1");
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        challengeRequest.setName("эЭъЪыЫёЁ");
+        challengeRequest.setTitle("эЭъЪыЫёЁ");
+        challengeRequest.setDescription("эЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁ");
+        challengeRequest.setPicture("/upload/test/test.png");
+        challengeRequest.setSortNumber("1");
 
         ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
         Response response = challengeClient.post(challengeRequest);
@@ -99,5 +99,73 @@ public class ChallengeTests extends BaseApiTestRunner {
         ChallengeResponse challengeResponse = response.as(ChallengeResponse.class);
         Assert.assertEquals(response.statusCode(), 200);
         response = client.delete(challengeResponse.getId());
+    }
+
+    @Test
+    @Description("[allure] Verify that user is not able to edit information about Challenge using invalid values")
+    @Issue("TUA-433")
+    public void verifyUserIsNotAbleToEditChallengeWithInvalidValues1Test() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        challengeRequest.setName("nam");
+        challengeRequest.setTitle("tit");
+        challengeRequest.setDescription("des");
+        challengeRequest.setPicture("abc");
+        challengeRequest.setSortNumber("abc");
+
+        ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
+        Response response = challengeClient.put(challengeRequest);
+
+        Assert.assertEquals(response.statusCode(), 400);
+    }
+
+    @Test
+    @Description("[allure] Verify that user is not able to edit information about Challenge using invalid values")
+    @Issue("TUA-433")
+    public void verifyUserIsNotAbleToEditChallengeWithInvalidValues2Test() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        challengeRequest.setName("Lorem ipsum dolor sit amet, consect");
+        challengeRequest.setTitle( "Lorem ipsum dolor sit amet, consect");
+        challengeRequest.setDescription("Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eu");
+        challengeRequest.setPicture("abc");
+        challengeRequest.setSortNumber("abc");
+
+        ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
+        Response response = challengeClient.put(challengeRequest);
+
+        Assert.assertEquals(response.statusCode(), 400);
+    }
+
+    @Test
+    @Description("[allure] Verify that user is not able to edit information about Challenge using invalid values")
+    @Issue("TUA-433")
+    public void verifyUserIsNotAbleToEditChallengeWithInvalidValues3Test() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        challengeRequest.setName("эЭъЪыЫёЁ");
+        challengeRequest.setTitle("эЭъЪыЫёЁ");
+        challengeRequest.setDescription("эЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁ");
+        challengeRequest.setPicture("эЭъЪыЫёЁ");
+        challengeRequest.setSortNumber("эЭъЪыЫёЁ");
+
+        ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
+        Response response = challengeClient.put(challengeRequest);
+
+        Assert.assertEquals(response.statusCode(), 400);
+    }
+
+    @Test
+    @Description("[allure] Verify that user is not able to edit information about Challenge using invalid values")
+    @Issue("TUA-433")
+    public void verifyUserIsNotAbleToEditChallengeWithInvalidValues4Test() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        challengeRequest.setName("_");
+        challengeRequest.setTitle("_");
+        challengeRequest.setDescription("_");
+        challengeRequest.setPicture("_");
+        challengeRequest.setSortNumber("_");
+
+        ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
+        Response response = challengeClient.put(challengeRequest);
+
+        Assert.assertEquals(response.statusCode(), 400);
     }
 }
