@@ -9,6 +9,7 @@ import com.ita.speakukrainian.api.models.task.CreateTaskRequest;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import jdk.jfr.Description;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -22,6 +23,57 @@ public class TaskTest extends BaseApiTestRunner {
         Response response = client.successSingInRequest(credentials);
         SignInResponse signInResponse = response.as(SignInResponse.class);
         authorizationToken = signInResponse.getAccessToken();
+    }
+
+    @Test
+    @Description("[allure] Verify that user can not create Task using null, spaces as values ")
+    @Issue("TUA-443")
+    public void cantCreateTaskUsingNull1Test(){
+        int taskId = 1;
+        TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+
+        request.setName("     ");
+        request.setDescription("     ");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate("2021-11-03");
+        Response response = client.post(request,taskId);
+        Assert.assertEquals(response.statusCode(),400);
+
+    }
+
+    @Test
+    @Description("[allure] Verify that user can not create Task using null, spaces as values ")
+    @Issue("TUA-443")
+    public void cantCreateTaskUsingNull2Test(){
+        int taskId = 1;
+        TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+
+        request.setName(" namenamena ");
+        request.setDescription(" descriptiondescriptiondescriptiondescriptiondescription");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate("2021-11-03");
+        Response response = client.post(request,taskId);
+        Assert.assertEquals(response.statusCode(),400);
+
+    }
+
+    @Test
+    @Description("[allure] Verify that user can not create Task using null, spaces as values ")
+    @Issue("TUA-443")
+    public void cantCreateTaskUsingNull3Test(){
+        int taskId = 1;
+        TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+
+        request.setName(null);
+        request.setDescription(null);
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate("2021-11-03");
+        Response response = client.post(request,taskId);
+        Assert.assertEquals(response.statusCode(),400);
+
     }
 
     @Test
