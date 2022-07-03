@@ -77,6 +77,23 @@ public class TaskTest extends BaseApiTestRunner {
     }
 
     @Test
+    @Description("[allure] Verify that user can edit Task with valid values ")
+    @Issue("TUA-444")
+    public void userCanEditTaskWithValidValuesTest(){
+        int taskId = 388;
+        TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+
+        request.setName("namenamename1213#$%");
+        request.setDescription(" descriptiondescriptiondescriptiondescriptiondescription12345$%%^$# ");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate("2021-12-03");
+        Response response = client.put(request,taskId);
+        Assert.assertEquals(response.statusCode(),200);
+
+    }
+
+    @Test
     @Description("[allure] Can not edit task with invalid values ")
     @Issue("TUA-445")
     public void cantSaveTaskChangesWithInvalidDataTest(){
