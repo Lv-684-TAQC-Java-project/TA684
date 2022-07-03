@@ -17,6 +17,7 @@ import org.testng.asserts.SoftAssert;
 
 public class EditProfileTest extends BaseApiTestRunner {
     private String authorizationToken = null;
+
     @BeforeClass
     public void beforeClass() {
         SignInRequest credentials = new SignInRequest(valueProvider.getBaseEmail(), valueProvider.getBasePassword());
@@ -33,8 +34,9 @@ public class EditProfileTest extends BaseApiTestRunner {
         SoftAssert softAssert = new SoftAssert();
         EditProfileClient client = new EditProfileClient(this.authorizationToken);
         CreateEditProfileRequest request = new CreateEditProfileRequest();
+        int taskId = 203;
 
-        request.setId(203);
+        request.setId(taskId);
         request.setFirstName("Nastia1234");
         request.setLastName("Kukh");
         request.setPhone("999999922");
@@ -42,26 +44,55 @@ public class EditProfileTest extends BaseApiTestRunner {
         request.setRoleName("ROLE_MANAGER");
         request.setUrlLogo(null);
         request.setStatus("true");
-        Response response = client.post(request);
-        softAssert.assertEquals(response.statusCode(),400);
+        Response response = client.post(request, taskId);
+        softAssert.assertEquals(response.statusCode(), 400);
 
         request.setFirstName("NastiaNastiaNastiaNastiaNastia");
-        response = client.post(request);
-        softAssert.assertEquals(response.statusCode(),400);
+        response = client.post(request, taskId);
+        softAssert.assertEquals(response.statusCode(), 400);
 
         request.setFirstName("Nastia!@##$#$%");
-        response = client.post(request);
-        softAssert.assertEquals(response.statusCode(),400);
+        response = client.post(request, taskId);
+        softAssert.assertEquals(response.statusCode(), 400);
 
         request.setFirstName("Nastia");
         request.setLastName("Kukhar#%$#");
-        response = client.post(request);
-        softAssert.assertEquals(response.statusCode(),400);
+        response = client.post(request, taskId);
+        softAssert.assertEquals(response.statusCode(), 400);
 
         request.setLastName("KukharKukharKukharKukharKukharKukharKukhar#");
-        response = client.post(request);
-        softAssert.assertEquals(response.statusCode(),400);
+        response = client.post(request, taskId);
+        softAssert.assertEquals(response.statusCode(), 400);
 
         softAssert.assertAll();
     }
+
+    @Test
+    @Description("[allure] The user or manager can change their role")
+    @Issue("TUA-416")
+    public void userOrManagerCanChangeRoleTest() {
+        SoftAssert softAssert = new SoftAssert();
+        EditProfileClient client = new EditProfileClient(this.authorizationToken);
+        CreateEditProfileRequest request = new CreateEditProfileRequest();
+        int taskId = 203;
+
+        request.setId(taskId);
+        request.setFirstName("Nastia");
+        request.setLastName("Kukh");
+        request.setPhone("999999922");
+        request.setEmail("soyec48727@busantei.com");
+        request.setRoleName("ROLE_MANAGER");
+        request.setUrlLogo(null);
+        request.setStatus("true");
+        Response response = client.post(request, taskId);
+        softAssert.assertEquals(response.statusCode(), 200);
+
+        request.setRoleName("ROLE_USER");
+        softAssert.assertEquals(response.statusCode(), 200);
+
+        request.setRoleName("ROLE_MANAGER");
+        softAssert.assertEquals(response.statusCode(), 200);
+        softAssert.assertAll();
+    }
+
 }
