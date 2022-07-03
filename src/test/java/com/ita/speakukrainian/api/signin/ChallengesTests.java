@@ -27,8 +27,8 @@ public class ChallengesTests extends BaseApiTestRunner {
     @Test
     public void getChallengesAsAdmin() {
         ChallengeClient client = new ChallengeClient(this.authorizationToken);
-        ChallengesResponse437 challengesResponse437= response.as(ChallengesResponse437.class);
         Response response = client.get(62);
+        ChallengesResponse437 challengesResponse437= response.as(ChallengesResponse437.class);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.statusCode(), 200);
         softAssert.assertEquals(challengesResponse437.getId(), 62);

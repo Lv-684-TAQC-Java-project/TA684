@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class ChallengesResponse437 {
  private int id;
  private String name;
- public String title;
- public String description;
- public String picture;
- public int sortNumber;
- public boolean isActive;
- public ArrayList<Task437> tasks;
- public User437 user;
- public String registrationLink;
+ private String title;
+ private String description;
+ private String picture;
+ private int sortNumber;
+ private boolean isActive;
+ private ArrayList<Task437> tasks;
+ private User437 user;
+ private String registrationLink;
 
 }
