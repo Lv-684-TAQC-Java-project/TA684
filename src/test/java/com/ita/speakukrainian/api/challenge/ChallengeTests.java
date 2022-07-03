@@ -168,4 +168,55 @@ public class ChallengeTests extends BaseApiTestRunner {
 
         Assert.assertEquals(response.statusCode(), 400);
     }
+
+    @Test
+    @Description("[allure] Verify that user is not able to edit information about Challenge using null, spaces or absence of symbols as values")
+    @Issue("TUA-434")
+    public void userCantEditInformationAboutChallengeUsingNullSpacesOrAbsence1Test() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
+
+        challengeRequest.setName(null);
+        challengeRequest.setTitle(null);
+        challengeRequest.setDescription(null);
+        challengeRequest.setPicture(null);
+        challengeRequest.setSortNumber(null);
+
+        Response response = challengeClient.put(challengeRequest);
+        Assert.assertEquals(response.statusCode(), 400);
+    }
+
+    @Test
+    @Description("[allure] Verify that user is not able to edit information about Challenge using null, spaces or absence of symbols as values")
+    @Issue("TUA-434")
+    public void userCantEditInformationAboutChallengeUsingNullSpacesOrAbsence2Test() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
+
+        challengeRequest.setName("  ");
+        challengeRequest.setTitle("  ");
+        challengeRequest.setDescription("  ");
+        challengeRequest.setPicture("  ");
+        challengeRequest.setSortNumber("  ");
+
+        Response response = challengeClient.put(challengeRequest);
+        Assert.assertEquals(response.statusCode(), 400);
+    }
+
+    @Test
+    @Description("[allure] Verify that user is not able to edit information about Challenge using null, spaces or absence of symbols as values")
+    @Issue("TUA-434")
+    public void userCantEditInformationAboutChallengeUsingNullSpacesOrAbsence3Test() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
+
+        challengeRequest.setName("");
+        challengeRequest.setTitle("");
+        challengeRequest.setDescription("");
+        challengeRequest.setPicture("");
+        challengeRequest.setSortNumber("");
+
+        Response response = challengeClient.put(challengeRequest);
+        Assert.assertEquals(response.statusCode(), 400);
+    }
 }
