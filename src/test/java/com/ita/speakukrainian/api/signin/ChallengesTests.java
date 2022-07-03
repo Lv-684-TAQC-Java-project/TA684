@@ -3,7 +3,7 @@ package com.ita.speakukrainian.api.signin;
 import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.ChallengeClient;
 import com.ita.speakukrainian.api.clients.SignInClient;
-import com.ita.speakukrainian.api.models.challenges.ChallengeRequest;
+import com.ita.speakukrainian.api.models.challenges.ChallengesResponse437;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
 import io.restassured.response.Response;
@@ -27,13 +27,11 @@ public class ChallengesTests extends BaseApiTestRunner {
     @Test
     public void getChallengesAsAdmin() {
         ChallengeClient client = new ChallengeClient(this.authorizationToken);
-        ChallengeRequest challengeRequest= new ChallengeRequest();
-
-
-
+        ChallengesResponse437 challengesResponse437= response.as(ChallengesResponse437.class);
         Response response = client.get(62);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.statusCode(), 200);
+        softAssert.assertEquals(challengesResponse437.getId(), 62);
         System.out.println(response.body().asString());
         softAssert.assertAll();
     }
