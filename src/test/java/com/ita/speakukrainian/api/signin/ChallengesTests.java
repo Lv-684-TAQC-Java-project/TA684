@@ -6,6 +6,8 @@ import com.ita.speakukrainian.api.clients.SignInClient;
 import com.ita.speakukrainian.api.models.challenges.ChallengeRequest;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

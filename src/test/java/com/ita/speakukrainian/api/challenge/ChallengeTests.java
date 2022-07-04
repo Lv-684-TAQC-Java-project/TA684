@@ -31,6 +31,8 @@ public class ChallengeTests extends BaseApiTestRunner {
     }
 
     @Test
+    @Description("Verify that user is not able to create Challenge using invalid values")
+    @Issue("TUA-430")
     public void verifyUserIsNotAbleToCreateChallengeWithLessThenNeededCharacters() {
         CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
         challengeRequest.setName("nam");
@@ -48,6 +50,8 @@ public class ChallengeTests extends BaseApiTestRunner {
     }
 
     @Test
+    @Description("Verify that user is not able to create Challenge using invalid values")
+    @Issue("TUA-430")
     public void verifyUserIsNotAbleToCreateChallengeWithMoreThenNeededCharacters() {
         CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
         challengeRequest.setName("Lorem ipsum dolor sit amet, consect");
@@ -67,6 +71,8 @@ public class ChallengeTests extends BaseApiTestRunner {
     }
 
     @Test
+    @Description("Verify that user is not able to create Challenge using invalid values")
+    @Issue("TUA-430")
     public void verifyUserIsNotAbleToCreateChallengeWithRusCharacters() {
         CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
         challengeRequest.setName("эЭъЪыЫёЁ");
@@ -184,6 +190,25 @@ public class ChallengeTests extends BaseApiTestRunner {
 
     }
 
+
+
+    @Test
+    @Description("[allure] Verify that user is able to edit information about Challenge using valid values")
+    @Issue("TUA-432")
+    public void verifyThatUserIsAbleToEditInformationAboutChallengeUsingValidValuesTest() {
+        CreateChallengeRequest request = new CreateChallengeRequest();
+        ChallengeClient client = new ChallengeClient(this.authorizationToken);
+        int taskId = 1;
+        request.setName("Example name");
+        request.setTitle("Example title");
+        request.setDescription("Lorem ipsum dolor sit amet, consectetuer adipiscin");
+        request.setPicture("/upload/test/test.png");
+        request.setSortNumber(1);
+
+        Response response = client.put(request,taskId);
+        Assert.assertEquals(response.statusCode(), 200);
+
+    }
 
 
     @Test
