@@ -30,6 +30,8 @@ public class ChallengeTests extends BaseApiTestRunner {
     }
 
     @Test
+    @Description("Verify that user is not able to create Challenge using invalid values")
+    @Issue("TUA-430")
     public void verifyUserIsNotAbleToCreateChallengeWithLessThenNeededCharacters() {
         CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
         challengeRequest.setName("nam");
@@ -47,6 +49,8 @@ public class ChallengeTests extends BaseApiTestRunner {
     }
 
     @Test
+    @Description("Verify that user is not able to create Challenge using invalid values")
+    @Issue("TUA-430")
     public void verifyUserIsNotAbleToCreateChallengeWithMoreThenNeededCharacters() {
         CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
         challengeRequest.setName("Lorem ipsum dolor sit amet, consect");
@@ -66,6 +70,8 @@ public class ChallengeTests extends BaseApiTestRunner {
     }
 
     @Test
+    @Description("Verify that user is not able to create Challenge using invalid values")
+    @Issue("TUA-430")
     public void verifyUserIsNotAbleToCreateChallengeWithRusCharacters() {
         CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
         challengeRequest.setName("эЭъЪыЫёЁ");

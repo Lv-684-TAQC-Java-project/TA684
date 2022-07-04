@@ -50,12 +50,23 @@ public class ValueProvider {
         return  properties.getProperty("baseEmail");
     }
 
+<<<<<<< HEAD
     public String getLeaderPassword(){
         return  properties.getProperty("leaderPassword");
     }
 
     public String getLeaderEmail(){
         return  properties.getProperty("leaderEmail");
+=======
+    public String getSoyecEmail() {
+
+        return properties.getProperty("soyecEmail");
+    }
+
+    public String getSoyecPassword() {
+        return properties.getProperty("soyecPassword");
+
+>>>>>>> 21e114faa7f608cc71abddeea9580b41b8fba218
     }
 
 }
