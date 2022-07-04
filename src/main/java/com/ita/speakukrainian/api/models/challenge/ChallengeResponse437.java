@@ -1,12 +1,14 @@
-package com.ita.speakukrainian.api.models.challenges;
+package com.ita.speakukrainian.api.models.challenge;
 
-import com.github.dockerjava.api.model.Task;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
-import java.util.ArrayList;
+import java.util.List;
+//@JsonIgnoreProperties(ignoreUnknown = true)
 
 @Data
-public class ChallengesResponse437 {
+public class ChallengeResponse437 {
  private int id;
  private String name;
  private String title;
@@ -14,8 +16,7 @@ public class ChallengesResponse437 {
  private String picture;
  private int sortNumber;
  private boolean isActive;
- private ArrayList<Task437> tasks;
+ private List<Task> tasks;
  private User437 user;
  private String registrationLink;
-
 }

@@ -45,14 +45,6 @@ public class ChallengeClient extends BaseClient{
                 .post(String.format("%s%s", this.baseUrl, this.path));
     }
 
-    public Response put (CreateChallengeRequest body){
-        return prepareRequest()
-                .header("Authorization", String.format("Bearer %s", this.authorizationToken))
-                .when()
-                .body(body)
-                .post(String.format("%s%s", this.baseUrl, this.path));
-    }
-
     public Response put (CreatedChallengeRequest body){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))

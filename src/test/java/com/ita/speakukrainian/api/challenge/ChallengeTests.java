@@ -99,6 +99,7 @@ public class ChallengeTests extends BaseApiTestRunner {
         ChallengeResponse challengeResponse = response.as(ChallengeResponse.class);
         Assert.assertEquals(response.statusCode(), 200);
         response = client.delete(challengeResponse.getId());
+
     }
 
     @Test
