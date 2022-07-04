@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class ChallengesTests extends BaseApiTestRunner {
-    private String challengeName="Днипро";
+    private String challengeName="Клуб української мови \\\"Розмовляй\\\"";
 
     private String authorizationToken = null;
 
@@ -31,15 +31,16 @@ public class ChallengesTests extends BaseApiTestRunner {
         ChallengeClient clientChallenge = new ChallengeClient(this.authorizationToken);
         Response responseChallenge = clientChallenge.get(62);
         String resp  = responseChallenge.asString();
-        ChallengeResponse437 challengesResponse437= null;
-        try {
-            challengesResponse437 = new ObjectMapper().readValue(resp, ChallengeResponse437.class);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println(resp);
+//        ChallengeResponse437 challengesResponse437= null;
+//        try {
+//            challengesResponse437 = new ObjectMapper().readValue(resp, ChallengeResponse437.class);
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.statusCode(), 200);
-        softAssert.assertEquals(challengesResponse437.getId(), 62);
+        softAssert.assertTrue(resp.contains(challengeName));
         softAssert.assertAll();
     }
 
