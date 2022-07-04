@@ -26,6 +26,91 @@ public class TaskTest extends BaseApiTestRunner {
     }
 
     @Test
+    @Description("[allure] Verify that user can not create Task with invalid values ")
+    @Issue("TUA-442")
+    public void cantCreateTaskWithInvalidValues1Test(){
+        int taskId = 1;
+        TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+
+        request.setName(" name");
+        request.setDescription(" descriptiondescriptiondescriptiondescriptiondescription ");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate("2021-11-03");
+        Response response = client.post(request,taskId);
+        Assert.assertEquals(response.statusCode(),400);
+
+    }
+
+    @Test
+    @Description("[allure] Verify that user can not create Task with invalid values ")
+    @Issue("TUA-442")
+    public void cantCreateTaskWithInvalidValues2Test(){
+        int taskId = 1;
+        TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+
+        request.setName( " namenamenamenamenamenamenamenamenamenam");
+        request.setDescription( " descriptiondescriptiondescriptiondescriptiondescription ");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate("2021-11-03");
+        Response response = client.post(request,taskId);
+        Assert.assertEquals(response.statusCode(),400);
+
+    }
+
+    @Test
+    @Description("[allure] Verify that user can not create Task with invalid values ")
+    @Issue("TUA-442")
+    public void cantCreateTaskWithInvalidValues3Test(){
+        int taskId = 1;
+        TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+
+        request.setName( " namenameЁ, Ы,Э");
+        request.setDescription(  " descriptiondescriptiondescriptiondescriptiondescription ");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate("2021-11-03");
+        Response response = client.post(request,taskId);
+        Assert.assertEquals(response.statusCode(),400);
+
+    }
+
+    @Test
+    @Description("[allure] Verify that user can not create Task with invalid values ")
+    @Issue("TUA-442")
+    public void cantCreateTaskWithInvalidValues4Test(){
+        int taskId = 1;
+        TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+
+        request.setName( " namenamename ");
+        request.setDescription(" descriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondescridescriptiondescriptiondescriptiondedescriptiondescriptiondescridescriptionde ");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate("2021-11-03");
+        Response response = client.post(request,taskId);
+        Assert.assertEquals(response.statusCode(),400);
+
+    }
+
+    @Test
+    @Description("[allure] Verify that user can not create Task with invalid values ")
+    @Issue("TUA-442")
+    public void cantCreateTaskWithInvalidValues5Test(){
+        int taskId = 1;
+        TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+
+        request.setName(" namenamenameЁ, Ы,Э ");
+        request.setDescription(" descriptiondescriptiondescriptiondescriptiondescription Ё, Ы,Э ");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate("2021-11-03");
+        Response response = client.post(request,taskId);
+        Assert.assertEquals(response.statusCode(),400);
+
+    }
+
+    @Test
     @Description("[allure] Verify that user can not create Task using null, spaces as values ")
     @Issue("TUA-443")
     public void cantCreateTaskUsingNull1Test(){
