@@ -2,12 +2,9 @@ package com.ita.speakukrainian.api.club;
 
 import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.ClubsClient;
-import com.ita.speakukrainian.api.clients.EditProfileClient;
 import com.ita.speakukrainian.api.clients.SignInClient;
 import com.ita.speakukrainian.api.models.ErrorResponse;
-import com.ita.speakukrainian.api.models.club.ClubsRequest;
-import com.ita.speakukrainian.api.models.club.ClubsResponse;
-import com.ita.speakukrainian.api.models.editProfile.CreateEditProfileRequest;
+import com.ita.speakukrainian.api.models.challenge.CreatedChallengeRequest;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
 import io.qameta.allure.Description;
@@ -22,27 +19,24 @@ import org.testng.reporters.Files;
 import java.io.File;
 import java.io.IOException;
 
-public class Clubs500Test extends BaseApiTestRunner {
+
+public class Test469 extends BaseApiTestRunner {
     private String authorizationToken = null;
 
     @BeforeClass
     public void beforeClass() {
-
-        SignInRequest credentials = new SignInRequest(valueProvider.getLeaderEmail(),valueProvider.getLeaderPassword());
+        SignInRequest credentials = new SignInRequest(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
         SignInClient client = new SignInClient();
         Response response = client.successSingInRequest(credentials);
         SignInResponse signInResponse = response.as(SignInResponse.class);
         authorizationToken = signInResponse.getAccessToken();
     }
 
+    @Description("Verify that the duplicate club cannot be created")
+    @Issue("TUA-469")
     @Test
-    @Description("[allure] Verify that User as \"Керiвник гуртка\" can create new club is in a center using valid characters for \"Назва\" field")
-    @Issue("TUA-500")
-    public void leaderCanCreateCenterUsingValidCharactersTest() {
-        ClubsClient client = new ClubsClient(this.authorizationToken);
-        ClubsResponse ClubsResponse = new ClubsResponse();
-        File file = new File("src/test/resources/json_500.json");
-
+    public void verifyTheDuplicateClubCannotBeCreated() {
+        File file = new File("src/test/resources/json_469.json");
         String json = null;
         try {
             json = Files.readFile(file);
@@ -50,11 +44,15 @@ public class Clubs500Test extends BaseApiTestRunner {
             e.printStackTrace();
         }
 
-        Response response = client.post(json);
-        Assert.assertEquals(response.statusCode(),200);
-        response = client.delete(ClubsResponse.getId());
-//        response = client.delete(Integer.parseInt(response.getSessionId()));
-    }
+        String textJson = String.format(json);
+        ClubsClient client = new ClubsClient(this.authorizationToken);
+        Response response = client.post(textJson);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.statusCode(), 403);
+        softAssert.assertEquals(errorResponse.getMessage(), "Club already exist with name: Спроба1");
+        softAssert.assertAll();
+    }
 
 }
