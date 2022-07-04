@@ -25,7 +25,7 @@ public class UserTest extends BaseApiTestRunner {
 
     @BeforeClass
     public void beforeClass() {
-        SignInRequest credentials = new SignInRequest(valueProvider.getSoyecEmail(), valueProvider.getSoyecPassword());
+        SignInRequest credentials = new SignInRequest(valueProvider.getBaseEmail(), valueProvider.getBasePassword());
         SignInClient client = new SignInClient();
         Response response = client.successSingInRequest(credentials);
         SignInResponse signInResponse = response.as(SignInResponse.class);

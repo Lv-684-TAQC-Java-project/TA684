@@ -38,7 +38,6 @@ public class Clubs500Test extends BaseApiTestRunner {
     @Description("[allure] Verify that User as \"Керiвник гуртка\" can create new club is in a center using valid characters for \"Назва\" field")
     @Issue("TUA-500")
     public void leaderCanCreateCenterUsingValidCharactersTest() {
-        SoftAssert softAssert = new SoftAssert();
         ClubsClient client = new ClubsClient(this.authorizationToken);
         ClubsRequest request = new ClubsRequest();
         ClubsResponse ClubsResponse = new ClubsResponse();
