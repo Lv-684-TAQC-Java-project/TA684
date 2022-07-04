@@ -1,16 +1,13 @@
 package com.ita.speakukrainian.api.signup;
 
 import com.ita.speakukrainian.api.BaseApiTestRunner;
-import com.ita.speakukrainian.api.clients.EditProfileClient;
 import com.ita.speakukrainian.api.clients.SignupClient;
-import com.ita.speakukrainian.api.models.editProfile.CreateEditProfileRequest;
 import com.ita.speakukrainian.api.models.signup.SignupRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 public class SignUpTest extends BaseApiTestRunner {
     private String authorizationToken = null;

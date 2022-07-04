@@ -329,4 +329,24 @@ public class ChallengeTests extends BaseApiTestRunner {
         Response response = challengeClient.put(challengeRequest);
         Assert.assertEquals(response.statusCode(), 400);
     }
+
+    @Test
+    @Description("[allure] Verify that user is able to delete Challenge using administrator rights")
+    @Issue("TUA-435")
+    public void userCanDeleteChallengeUsingAdministratorRightsTest() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        ChallengeClient client = new ChallengeClient(this.authorizationToken);
+        CreateChallengeRequest createChallengeRequest = new CreateChallengeRequest();
+
+        createChallengeRequest.setName("Example name");
+        createChallengeRequest.setTitle("Example title");
+        createChallengeRequest.setDescription("Lorem ipsum dolor sit amet, consectetuer adipiscin");
+        createChallengeRequest.setPicture("/upload/test/test.png");
+        createChallengeRequest.setSortNumber(489437645);
+
+        Response response = client.post(createChallengeRequest);
+        ChallengeResponse challengeResponse = response.as(ChallengeResponse.class);
+        response = client.delete(challengeResponse.getId());
+        Assert.assertEquals(response.statusCode(), 200);
+    }
 }
