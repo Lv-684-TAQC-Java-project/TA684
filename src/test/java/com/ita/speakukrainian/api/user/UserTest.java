@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 public class UserTest extends BaseApiTestRunner {
     private String authorizationToken = null;
     UsersService usersService = new UsersService();
-    private String firstName = "Anna";
 
     @BeforeClass
     public void beforeClass() {
@@ -38,8 +37,13 @@ public class UserTest extends BaseApiTestRunner {
     @Issue("TUA-408")
     public void userCanEditProfileWithValidDdata() {
         CreatedUserRequest userRequest = new CreatedUserRequest();
-        userRequest.setFirstName(firstName);
-        userRequest.setLastName("Kukarska");
+        String firstName = "Anna";
+        String lastName = "Kukarska";
+        String phone = "+380985405099";
+        int id = 203;
+
+        userRequest.setFirstName("Nastia");
+        userRequest.setLastName("Kukh");
         userRequest.setEmail("soyec48727@busantei.com");
         userRequest.setPhone("+380985405095");
         userRequest.setRoleName("ROLE_MANAGER");
@@ -47,14 +51,29 @@ public class UserTest extends BaseApiTestRunner {
         userRequest.setStatus(true);
 
         UserClient userClient = new UserClient(this.authorizationToken);
-        Response response = userClient.put(userRequest);
+        Response response = userClient.put(userRequest,id);
+        Assert.assertEquals(response.statusCode(), 200);
 
+        userRequest.setFirstName(firstName);
+        response = userClient.put(userRequest,id);
+        Assert.assertEquals(response.statusCode(), 200);
+
+        userRequest.setLastName(lastName);
+        response = userClient.put(userRequest,id);
+        Assert.assertEquals(response.statusCode(), 200);
+
+        userRequest.setPhone(phone);
+        response = userClient.put(userRequest,id);
         Assert.assertEquals(response.statusCode(), 200);
 
         List<UsersEntity> result = usersService.getAllNameWhereEmail();
-        String actualResult = result.stream().map(el -> el.getUserFirstName()).collect(Collectors.joining());
+        String actualFirstName = result.stream().map(el -> el.getUserFirstName()).collect(Collectors.joining());
+        String actualLastName = result.stream().map(el -> el.getUserLastName()).collect(Collectors.joining());
+        String actualPhone = result.stream().map(el -> el.getUserPhone()).collect(Collectors.joining());
 
-        Assert.assertEquals(actualResult,firstName);
+        Assert.assertEquals(actualFirstName,firstName);
+        Assert.assertEquals(actualLastName,lastName);
+        Assert.assertEquals(actualPhone,phone);
     }
 
     @Description("Verify that user can not save changes where enter to much numbers in field 'Phone'")
