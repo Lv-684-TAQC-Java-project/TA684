@@ -43,6 +43,7 @@ public class Test469 extends BaseApiTestRunner {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         String textJson = String.format(json);
         ClubsClient client = new ClubsClient(this.authorizationToken);
         Response response = client.post(textJson);
