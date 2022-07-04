@@ -4,6 +4,7 @@ import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.ClubsClient;
 import com.ita.speakukrainian.api.clients.EditProfileClient;
 import com.ita.speakukrainian.api.clients.SignInClient;
+import com.ita.speakukrainian.api.models.ErrorResponse;
 import com.ita.speakukrainian.api.models.club.ClubsRequest;
 import com.ita.speakukrainian.api.models.club.ClubsResponse;
 import com.ita.speakukrainian.api.models.editProfile.CreateEditProfileRequest;
@@ -39,7 +40,6 @@ public class Clubs500Test extends BaseApiTestRunner {
     @Issue("TUA-500")
     public void leaderCanCreateCenterUsingValidCharactersTest() {
         ClubsClient client = new ClubsClient(this.authorizationToken);
-        ClubsRequest request = new ClubsRequest();
         ClubsResponse ClubsResponse = new ClubsResponse();
         File file = new File("src/test/resources/json_500.json");
 
@@ -53,7 +53,7 @@ public class Clubs500Test extends BaseApiTestRunner {
         Response response = client.post(json);
         Assert.assertEquals(response.statusCode(),200);
         response = client.delete(ClubsResponse.getId());
-
+//        response = client.delete(Integer.parseInt(response.getSessionId()));
     }
 
 

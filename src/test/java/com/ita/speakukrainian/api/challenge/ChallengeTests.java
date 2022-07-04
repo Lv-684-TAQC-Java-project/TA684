@@ -108,6 +108,24 @@ public class ChallengeTests extends BaseApiTestRunner {
     }
 
     @Test
+    @Description("[allure] Verify that user is able to edit information about Challenge using valid values")
+    @Issue("TUA-432")
+    public void verifyThatUserIsAbleToEditInformationAboutChallengeUsingValidValuesTest() {
+        CreateChallengeRequest request = new CreateChallengeRequest();
+        ChallengeClient client = new ChallengeClient(this.authorizationToken);
+        int taskId = 1;
+        request.setName("Example name");
+        request.setTitle("Example title");
+        request.setDescription("Lorem ipsum dolor sit amet, consectetuer adipiscin");
+        request.setPicture("/upload/test/test.png");
+        request.setSortNumber(1);
+
+        Response response = client.put(request,taskId);
+        Assert.assertEquals(response.statusCode(), 200);
+
+    }
+
+    @Test
     @Description("[allure] Verify that user is not able to edit information about Challenge using invalid values")
     @Issue("TUA-433")
     public void verifyUserIsNotAbleToEditChallengeWithInvalidValues1Test() {
