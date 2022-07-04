@@ -7,11 +7,20 @@ import io.restassured.response.Response;
 public class UserClient extends BaseClient {
     private String authorizationToken;
     private final String path = "/api/user";
+    private final String fullPass = "/api/user/203";
 
             public UserClient(String authorizationToken) {
                 super();
                 this.authorizationToken = authorizationToken;
             }
+
+    public Response put(CreatedUserRequest body) {
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", this.authorizationToken))
+                .when()
+                .body(body)
+                .put(String.format("%s%s", this.baseUrl, this.fullPass));
+    }
 
 
     public Response put(CreatedUserRequest body,int id) {
@@ -20,7 +29,7 @@ public class UserClient extends BaseClient {
                 .when()
                 .body(body)
                 .put(String.format("%s%s/%s", this.baseUrl, this.path,id));
-    }          
+    }
 
             @Step("Update user by {id}")
             public Response put(int id, CreatedUserRequest body) {
