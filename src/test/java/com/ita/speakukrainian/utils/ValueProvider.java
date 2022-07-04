@@ -50,4 +50,14 @@ public class ValueProvider {
         return  properties.getProperty("baseEmail");
     }
 
+    public String getSoyecEmail() {
+
+        return properties.getProperty("soyecEmail");
+    }
+
+    public String getSoyecPassword() {
+        return properties.getProperty("soyecPassword");
+
+    }
+
 }

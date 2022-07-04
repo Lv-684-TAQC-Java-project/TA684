@@ -2,7 +2,6 @@ package com.ita.speakukrainian.api.clients;
 
 import com.ita.speakukrainian.api.models.challenge.CreateChallengeRequest;
 import com.ita.speakukrainian.api.models.challenge.CreatedChallengeRequest;
-import com.ita.speakukrainian.api.models.task.CreateTaskRequest;
 import io.restassured.response.Response;
 
 public class ChallengeClient extends BaseClient{
