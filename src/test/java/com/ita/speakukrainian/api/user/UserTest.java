@@ -55,4 +55,26 @@ public class UserTest extends BaseApiTestRunner {
 
         Assert.assertEquals(actualResult,firstName);
     }
+
+    @Description("Verify that user can not save changes where enter invalid data in field 'Phone'")
+    @Issue("TUA-421")
+    @Test
+    public void userCanEditProfileWithValidPhone() {
+        CreatedUserRequest userRequest = new CreatedUserRequest();
+        userRequest.setFirstName("Nastia");
+        userRequest.setLastName("Kukh");
+        userRequest.setEmail("soyec48727@busantei.com");
+        userRequest.setPhone("1180985405095");
+        userRequest.setRoleName("ROLE_MANAGER");
+        userRequest.setUrlLogo(null);
+        userRequest.setStatus(true);
+
+        UserClient userClient = new UserClient(this.authorizationToken);
+        Response response = userClient.put(userRequest);
+
+        Assert.assertEquals(response.statusCode(), 400);
+        Phone' field contain an invalid value
+
+        Assert.assertEquals(actualResult,firstName);
+    }
 }
