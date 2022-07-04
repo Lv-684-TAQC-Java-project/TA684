@@ -3,6 +3,7 @@ package com.ita.speakukrainian.api.user;
 import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.SignInClient;
 import com.ita.speakukrainian.api.clients.UserClient;
+import com.ita.speakukrainian.api.models.ErrorResponse;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
 import com.ita.speakukrainian.api.models.user.CreatedUserRequest;
@@ -54,5 +55,64 @@ public class UserTest extends BaseApiTestRunner {
         String actualResult = result.stream().map(el -> el.getUserFirstName()).collect(Collectors.joining());
 
         Assert.assertEquals(actualResult,firstName);
+    }
+
+    @Description("Verify that user can not save changes where enter to much numbers in field 'Phone'")
+    @Issue("TUA-421")
+    @Test
+    public void userCanEditProfileWithValidNumberOfPhone() {
+        CreatedUserRequest userRequest = new CreatedUserRequest();
+        userRequest.setFirstName("Nastia");
+        userRequest.setLastName("Kukh");
+        userRequest.setEmail("soyec48727@busantei.com");
+        userRequest.setPhone("123456789121212");
+        userRequest.setRoleName("ROLE_MANAGER");
+        userRequest.setUrlLogo(null);
+        userRequest.setStatus(true);
+
+        UserClient userClient = new UserClient(this.authorizationToken);
+        Response response = userClient.put(userRequest);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        Assert.assertEquals(response.statusCode(), 400);
+        Assert.assertEquals(errorResponse.getMessage(), "phone Phone number must contain 10 numbers and can`t contain other symbols");
+    }
+
+    @Description("Verify that user can not save changes where enter letters in field 'Phone'")
+    @Issue("TUA-421")
+    @Test
+    public void userCanEditProfileWithLettersInPhoneField() {
+        CreatedUserRequest userRequest = new CreatedUserRequest();
+        userRequest.setFirstName("Nastia");
+        userRequest.setLastName("Kukh");
+        userRequest.setEmail("soyec48727@busantei.com");
+        userRequest.setPhone("aasss");
+        userRequest.setRoleName("ROLE_MANAGER");
+        userRequest.setUrlLogo(null);
+        userRequest.setStatus(true);
+
+        UserClient userClient = new UserClient(this.authorizationToken);
+        Response response = userClient.put(userRequest);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        Assert.assertEquals(response.statusCode(), 400);
+        Assert.assertEquals(errorResponse.getMessage(), "phone Phone number must contain 10 numbers and can`t contain other symbols");
+    }
+    @Description("Verify that user can not save changes where enter invalid symbols in field 'Phone'")
+    @Issue("TUA-421")
+    @Test
+    public void userCanEditProfileWithSymbolsInPhoneField() {
+        CreatedUserRequest userRequest = new CreatedUserRequest();
+        userRequest.setFirstName("Nastia");
+        userRequest.setLastName("Kukh");
+        userRequest.setEmail("soyec48727@busantei.com");
+        userRequest.setPhone("@$#%#%^");
+        userRequest.setRoleName("ROLE_MANAGER");
+        userRequest.setUrlLogo(null);
+        userRequest.setStatus(true);
+
+        UserClient userClient = new UserClient(this.authorizationToken);
+        Response response = userClient.put(userRequest);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        Assert.assertEquals(response.statusCode(), 400);
+        Assert.assertEquals(errorResponse.getMessage(), "phone Phone number must contain 10 numbers and can`t contain other symbols");
     }
 }
