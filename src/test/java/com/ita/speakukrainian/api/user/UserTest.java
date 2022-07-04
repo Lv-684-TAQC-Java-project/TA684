@@ -76,7 +76,7 @@ public class UserTest extends BaseApiTestRunner {
         Assert.assertEquals(actualPhone,phone);
     }
 
-    @Description("Verify that user can not save changes where enter to much numbers in field 'Phone'")
+    @Description("Verify that user can not save changes where enter invalid data in field 'Phone'")
     @Issue("TUA-421")
     @Test
     public void userCanEditProfileWithValidNumberOfPhone() {
@@ -94,43 +94,14 @@ public class UserTest extends BaseApiTestRunner {
         ErrorResponse errorResponse = response.as(ErrorResponse.class);
         Assert.assertEquals(response.statusCode(), 400);
         Assert.assertEquals(errorResponse.getMessage(), "phone Phone number must contain 10 numbers and can`t contain other symbols");
-    }
 
-    @Description("Verify that user can not save changes where enter letters in field 'Phone'")
-    @Issue("TUA-421")
-    @Test
-    public void userCanEditProfileWithLettersInPhoneField() {
-        CreatedUserRequest userRequest = new CreatedUserRequest();
-        userRequest.setFirstName("Nastia");
-        userRequest.setLastName("Kukh");
-        userRequest.setEmail("soyec48727@busantei.com");
         userRequest.setPhone("aasss");
-        userRequest.setRoleName("ROLE_MANAGER");
-        userRequest.setUrlLogo(null);
-        userRequest.setStatus(true);
-
-        UserClient userClient = new UserClient(this.authorizationToken);
-        Response response = userClient.put(userRequest);
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        response = userClient.put(userRequest);
         Assert.assertEquals(response.statusCode(), 400);
         Assert.assertEquals(errorResponse.getMessage(), "phone Phone number must contain 10 numbers and can`t contain other symbols");
-    }
-    @Description("Verify that user can not save changes where enter invalid symbols in field 'Phone'")
-    @Issue("TUA-421")
-    @Test
-    public void userCanEditProfileWithSymbolsInPhoneField() {
-        CreatedUserRequest userRequest = new CreatedUserRequest();
-        userRequest.setFirstName("Nastia");
-        userRequest.setLastName("Kukh");
-        userRequest.setEmail("soyec48727@busantei.com");
-        userRequest.setPhone("@$#%#%^");
-        userRequest.setRoleName("ROLE_MANAGER");
-        userRequest.setUrlLogo(null);
-        userRequest.setStatus(true);
 
-        UserClient userClient = new UserClient(this.authorizationToken);
-        Response response = userClient.put(userRequest);
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        userRequest.setPhone("%&*%$#%%^&^");
+        response = userClient.put(userRequest);
         Assert.assertEquals(response.statusCode(), 400);
         Assert.assertEquals(errorResponse.getMessage(), "phone Phone number must contain 10 numbers and can`t contain other symbols");
     }
