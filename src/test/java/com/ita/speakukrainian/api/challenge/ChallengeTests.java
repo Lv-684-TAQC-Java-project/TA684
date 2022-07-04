@@ -15,6 +15,7 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class ChallengeTests extends BaseApiTestRunner {
     private String authorizationToken = null;
@@ -100,6 +101,89 @@ public class ChallengeTests extends BaseApiTestRunner {
         Assert.assertEquals(response.statusCode(), 200);
         response = client.delete(challengeResponse.getId());
     }
+
+    @Test
+    @Description("Verify that user is not able to create Challenge using null as values")
+    @Issue("TUA-431")
+    public void verifyUserIsNotAbleToCreateChallengeUsingNull() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        challengeRequest.setName(null);
+        challengeRequest.setTitle(null);
+        challengeRequest.setDescription(null);
+        challengeRequest.setPicture(null);
+        challengeRequest.setSortNumber(null);
+
+        ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
+        Response response = challengeClient.put(challengeRequest);
+
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+
+        Assert.assertEquals(response.statusCode(), 400);
+        System.out.println(errorResponse.getMessage());
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertTrue(errorResponse.getMessage().contains("name must not be blank"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("title must not be blank"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("description must not be blank"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("sortNumber must not be null"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("picture must not be blank"));
+        softAssert.assertAll();
+    }
+
+    @Test
+    @Description("Verify that user is not able to create Challenge using spaces as values")
+    @Issue("TUA-431")
+    public void verifyUserIsNotAbleToCreateChallengeUsingSpace() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        challengeRequest.setName(" ");
+        challengeRequest.setTitle(" ");
+        challengeRequest.setDescription(" ");
+        challengeRequest.setPicture(" ");
+        challengeRequest.setSortNumber(" ");
+
+        ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
+        Response response = challengeClient.put(challengeRequest);
+
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+
+        Assert.assertEquals(response.statusCode(), 400);
+        System.out.println(errorResponse.getMessage());
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertTrue(errorResponse.getMessage().contains("name  must contain a minimum of 5 and a maximum of 30 letters"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("title must contain a minimum of 5 and a maximum of 50 letters"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("description must not be blank"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("sortNumber must not be null"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("picture Incorrect file path. It must be like /upload/*/*.png"));
+        softAssert.assertAll();
+    }
+
+    @Test
+    @Description("Verify that user is not able to create Challenge using absence of symbols as values")
+    @Issue("TUA-431")
+    public void verifyUserIsNotAbleToCreateChallengeUsingAbsenceOfSymbols() {
+        CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
+        challengeRequest.setName("");
+        challengeRequest.setTitle("");
+        challengeRequest.setDescription("");
+        challengeRequest.setPicture("");
+        challengeRequest.setSortNumber("");
+
+        ChallengeClient challengeClient = new ChallengeClient(this.authorizationToken);
+        Response response = challengeClient.put(challengeRequest);
+
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+
+        Assert.assertEquals(response.statusCode(), 400);
+        System.out.println(errorResponse.getMessage());
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertTrue(errorResponse.getMessage().contains("name  must contain a minimum of 5 and a maximum of 30 letters"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("title must contain a minimum of 5 and a maximum of 50 letters"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("description must not be blank"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("sortNumber must not be null"));
+        softAssert.assertTrue(errorResponse.getMessage().contains("picture Incorrect file path. It must be like /upload/*/*.png"));
+        softAssert.assertAll();
+    }
+
+
 
     @Test
     @Description("[allure] Verify that user is not able to edit information about Challenge using invalid values")
