@@ -1,5 +1,6 @@
 package com.ita.speakukrainian.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -32,24 +33,21 @@ public class ValueProvider {
         return properties.getProperty("baseURL");
     }
 
-    public String getContactFacebook() {
-        return properties.getProperty("contactFacebook");
+
+    public String getImage() {
+        return properties.getProperty("imageFlower");
     }
 
-    public String getContactEmail() {
-        return properties.getProperty("contactEmail");
+    public File getSunFlower() {
+        return new File("src/test/resources/img2.png");
     }
 
-    public String getContactWhatsUpp() {
-        return properties.getProperty("contactWhatsUpp");
+    public String getBasePassword(){
+        return  properties.getProperty("basePassword");
     }
 
-    public String getContactName() {
-        return properties.getProperty("contactName");
-    }
-
-    public String getContactSkype() {
-        return properties.getProperty("contactSkype");
+    public String getBaseEmail(){
+        return  properties.getProperty("baseEmail");
     }
 
 }

@@ -5,10 +5,15 @@ import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchCityDistrictDropDown;
 import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchCityDropDown;
 import com.ita.speakukrainian.ui.dropdowns.ExtendedSearchNearestMetroStationDropDown;
 import io.qameta.allure.Step;
+import org.checkerframework.checker.units.qual.C;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class ClubsPage extends BasePage {
     private HeaderMenuComponent headerMenuComponent;
@@ -28,7 +33,6 @@ public class ClubsPage extends BasePage {
     private WebElement clubRadioButton;
     @FindBy(xpath = "//*[@id=\"basic_isCenter\"]/label[2]/span[1]/input")
     private WebElement centreRadioButton;
-
     @FindBy(xpath ="//div[@id='basic_isCenter']/label[@class='ant-radio-wrapper ant-radio-wrapper-checked ant-radio-wrapper-in-form-item']/span[contains(text(),'Центр')]")
     private WebElement centreRadioButtonIsPushed;
     @FindBy(xpath = "//*[@id=\"basic\"]/div[2]/div[2]/div/div/div/div")
@@ -41,8 +45,18 @@ public class ClubsPage extends BasePage {
     private WebElement sortMenuBarButton;
     @FindBy ( css=".content-center-list.false")
     private WebElement listOfCentres;
-
-
+    @FindBy(xpath = "//div[contains(@class,'content-center-list content-center-block')]/div")
+    private List<WebElement> centersCard;
+    @FindBy(xpath = "//section[@class='ant-layout ant-layout-has-sider club-list']")
+    private WebElement extendedSearchPage;
+    @FindBy(xpath = "//span[text()='за алфавітом']")
+    private WebElement sortAlphabeticallyButton;
+    @FindBy(xpath = "//*[@id='basic']/div[2]/div[2]/div/div/div/span[2]")
+    private WebElement clearButton;
+    @FindBy(xpath = "//span[@class='anticon anticon-arrow-up control-sort-arrow']")
+    private WebElement arrowUpButton;
+    @FindBy(xpath = "//*[text()='за рейтингом']")
+    private WebElement sortedRatingButton;
 
     public ClubsPage(WebDriver driver) {
         super(driver);
@@ -98,6 +112,11 @@ public class ClubsPage extends BasePage {
         return listOfCentres;
     }
 
+    public List<WebElement> getCentersCard() {
+        sleep(1000);
+        return centersCard;
+    }
+
     @Step("Fill in age")
     public ClubsPage fillInAgeInput(int age) {
         getAgeInput().sendKeys(Integer.toString(age));
@@ -113,11 +132,11 @@ public class ClubsPage extends BasePage {
     public String readAgeInput() {
         return getAgeInput().getAttribute("value");
     }
-
+    @Step("Get Extended Search Component")
     public ExtendedSearchComponent getExtendedSearchComponent() {
         return extendedSearchComponent;
     }
-
+    @Step("get  Header Menu Component")
     public HeaderMenuComponent getHeaderMenuComponent() {
         return headerMenuComponent;
     }
@@ -175,7 +194,6 @@ public class ClubsPage extends BasePage {
     @Step("Check extended search menu is hidden")
     public boolean isExtendedSearchMenuHidden(){
         extendedSearchButton.click();
-        extendedSearchButton.click();
         try {
             extendSearchMenu.isDisplayed();
         }catch (NoSuchElementException e){
@@ -183,21 +201,21 @@ public class ClubsPage extends BasePage {
         }
         return false;
     }
+    @Step("Click button for sorting centers as list")
     public ClubsPage clickSortMenuBarButton() {
         getSortMenuBarButton().click();
         sleep(1000);
         return new ClubsPage(driver);
     }
-    @Step("Verify is Club radio-button selected")
+    @Step("Verify is 'Гурток' radio-button selected")
     public boolean IsClubButtonSelected(){
         return getClubRadioButton().isSelected();
     }
-    @Step("Verify is Centre radio-button selected")
+    @Step("Verify is 'Цент' radio-button selected")
     public boolean IsCentreButtonSelected(){
-
         return getCentreRadioButton().isSelected();
     }
-    @Step("Verify is Centre As List radio-button selected")
+    @Step("Verify is Centres was sorted as list")
     public boolean IsCentresSortedAsList(){
         try{
             getListOfCentres().isEnabled();
@@ -207,5 +225,51 @@ public class ClubsPage extends BasePage {
         }
         return true;
     }
-}
+
+    @Step("Clear age field")
+    public ClubsPage clearAgeField() {
+        getAgeInput().sendKeys(Keys.BACK_SPACE);
+        return new ClubsPage(driver);
+    }
+
+    @Step("Double click on age field ")
+    public ClubsPage doubleClickAgeField() {
+        Actions actions = new Actions(driver);
+        actions.doubleClick(getAgeInput()).perform();
+        return new ClubsPage(driver);
+    }
+    @Step("Verify is extended search page displayed")
+    public boolean isExtendedSearchPageDisplayed() {
+       return extendedSearchPage.isDisplayed();
+
+    }
+    @Step("Click sort alphabetically button")
+    public ClubsPage clickSortAlphabeticallyButton() {
+        sleep(2000);
+        sortAlphabeticallyButton.click();
+        return new ClubsPage(driver);
+    }
+    @Step("Click center button")
+    public ClubsPage clickClearButton() {
+        sleep(2000);
+        clearButton.click();
+        return new ClubsPage(driver);
+    }
+    @Step("Click arrow up button")
+    public ClubsPage clickArrowUpButton() {
+        sleep(2000);
+        arrowUpButton.click();
+        return new ClubsPage(driver);
+    }
+
+
+    @Step("Click sort rating button")
+    public ClubsPage clickSortedRatingButton() {
+        sleep(1000);
+        sortedRatingButton.click();
+        return this;
+    }
+
+
+  }
 

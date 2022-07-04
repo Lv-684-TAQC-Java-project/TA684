@@ -3,6 +3,7 @@ package com.ita.speakukrainian.ui.pages;
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
 import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
+import com.ita.speakukrainian.ui.popup.RedactClubMaliavkyPopUp;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,18 @@ public class MyProfilePage extends BaseObjectPage {
     @FindBy(xpath = "//*[@class=\"ant-btn ant-btn-text button\"]")
     private WebElement editProfile;
 
+    @FindBy(xpath = "//div[contains(text(), 'Малявки')]")
+    private WebElement cardMaliavky;
+
+    @FindBy(xpath = "//section[@class='ant-layout user-clubs']/div/div[2]/div/div/button")
+    private WebElement detailsMaliavky;
+
+    @FindBy(xpath = "//section[@class='ant-layout user-clubs']/div/div[2]/div/div/div[1]/div[2]/div")
+    private WebElement moreActionMenu;
+
+    @FindBy(css =".ant-dropdown-menu-title-content > div > div" )
+    private WebElement redactClub;
+
     private final HeaderMenuComponent headerMenu;
 
     public MyProfilePage(WebDriver driver) {
@@ -32,12 +45,12 @@ public class MyProfilePage extends BaseObjectPage {
         return new EditProfilePage(driver);
     }
 
-    @Step("Click add button ")
+    @Step("Click Add 'Додати' button ")
     public MyProfilePage clickAddButton() {
         addButton.click();
         return new MyProfilePage(driver);
     }
-    @Step("Click add center button")
+    @Step("Go to AddCenter")
     public AddCenterPopUp clickAddCenterButton() {
         addCenterButton.click();
         return new AddCenterPopUp(driver);
@@ -45,9 +58,29 @@ public class MyProfilePage extends BaseObjectPage {
 
     @Step("Click add club button")
     public MainInformation clickAddClubButton() {
-        sleep(2000);
+        sleep(3000);
         addClubButton.click();
         return new MainInformation(driver);
+    }
+
+    public boolean isCardMaliavkyPresent(){
+       return cardMaliavky.isEnabled();
+    }
+    @Step("Do to Myliavky club page")
+    public MyliavkyClubPage clickDetailsButton(){
+        detailsMaliavky.click();
+        return new MyliavkyClubPage(driver);
+    }
+
+    @Step("Choose menu to Myliavky club page")
+    public MyProfilePage clickMoreActionMenu(){
+        moreActionMenu.click();
+        return new MyProfilePage(driver);
+    }
+
+    public RedactClubMaliavkyPopUp clickRedactClub(){
+        redactClub.click();
+        return new RedactClubMaliavkyPopUp(driver);
     }
 }
 

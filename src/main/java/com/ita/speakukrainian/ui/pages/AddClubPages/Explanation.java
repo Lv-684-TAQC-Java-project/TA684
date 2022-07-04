@@ -1,20 +1,18 @@
 package com.ita.speakukrainian.ui.pages.AddClubPages;
 
 import com.ita.speakukrainian.ui.pages.BasePage;
+import com.ita.speakukrainian.ui.pages.HomePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-
-import java.util.List;
 
 public class Explanation extends BasePage {
 
     @FindBy(css = "#basic_description")
     private WebElement basicDescriptionInput;
     @FindBy(css = "[role='alert']")
-    private List<WebElement> alerts;
+    private WebElement alert;
     @FindBy(xpath = "//*[@id=\"basic\"]/div[4]/div[2]/div[2]/div[1]")
     private WebElement wrongDescriptionAlert;
     @FindBy(xpath = "//form/div[4]/div[2]/div[2]/div")
@@ -24,16 +22,15 @@ public class Explanation extends BasePage {
     @FindBy(css = "#basic [class$='ant-form-item-feedback-icon-error']")
     private WebElement successIconError;
 
+    @FindBy(xpath = "//*[@id='basic']/div[5]/button[2]")
+    private WebElement toComplete;
+
     public Explanation(WebDriver driver) {
         super(driver);
     }
 
     public WebElement getBasicDescriptionInput() {
         return basicDescriptionInput;
-    }
-
-    public List<WebElement> getAlerts() {
-        return alerts;
     }
 
     public WebElement getSuccessIcon() {
@@ -57,9 +54,10 @@ public class Explanation extends BasePage {
         sleep(2000);
         return new Explanation(driver);
     }
-    @Step("Show is alert displayed")
-    public boolean isAlertDisplayed() {
-        return getAlerts().stream().allMatch(el -> el.isDisplayed());
+
+    @Step("Get actual error message")
+    public String getActualErrorMessage() {
+        return alert.getText();
     }
 
     @Step("Get isDisplayed() massage")
@@ -77,5 +75,10 @@ public class Explanation extends BasePage {
     @Step("Clear description field")
     public void clearDescriptionField() {
         getBasicDescriptionInput().clear();
+    }
+    @Step("Click button 'Завершити' to complete registration of new club")
+    public HomePage toCompleteClubsRegistration(){
+        toComplete.click();
+        return new HomePage(driver);
     }
 }
