@@ -57,7 +57,7 @@ public class ChallengeClient extends BaseClient{
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
                 .when()
                 .body(body)
-                .post(String.format("%s%s/%s", this.baseUrl, this.path,id));
+                .put(String.format("%s%s/%s", this.baseUrl, this.path,id));
     }
 
     public Response put (CreatedChallengeRequest body){
