@@ -157,7 +157,7 @@ public class ChallengeTests extends BaseApiTestRunner {
     }
 
     @Test
-    @Description("Verify that user is not able to create Challenge using absence of symbols as values")
+    @Description("Verify that user is not able to create Challenge with absence of symbols as values")
     @Issue("TUA-431")
     public void verifyUserIsNotAbleToCreateChallengeUsingAbsenceOfSymbols() {
         CreatedChallengeRequest challengeRequest = new CreatedChallengeRequest();
@@ -181,6 +181,7 @@ public class ChallengeTests extends BaseApiTestRunner {
         softAssert.assertTrue(errorResponse.getMessage().contains("sortNumber must not be null"));
         softAssert.assertTrue(errorResponse.getMessage().contains("picture Incorrect file path. It must be like /upload/*/*.png"));
         softAssert.assertAll();
+
     }
 
 
