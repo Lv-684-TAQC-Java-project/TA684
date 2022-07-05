@@ -76,6 +76,48 @@ public class UserTest extends BaseApiTestRunner {
         Assert.assertEquals(actualPhone,phone);
     }
 
+    @Test
+    @Description("The user or manager can not change their role on Admin")
+    @Issue("TUA-417")
+    public void userOrManagerCanNotChangeRoleOnAdmin() {
+        CreatedUserRequest userRequest = new CreatedUserRequest();
+        int id = 203;
+
+        userRequest.setFirstName("Nastia");
+        userRequest.setLastName("Kukh");
+        userRequest.setEmail("soyec48727@busantei.com");
+        userRequest.setPhone("+380985405095");
+        userRequest.setRoleName("ROLE_MANAGER");
+        userRequest.setUrlLogo(null);
+        userRequest.setStatus(true);
+
+        UserClient userClient = new UserClient(this.authorizationToken);
+        Response response = userClient.put(userRequest,id);
+        Assert.assertEquals(response.statusCode(), 200);
+
+        SignInRequest credentials = new SignInRequest(valueProvider.getUserEmail(), valueProvider.getUserPassword());
+        SignInClient client = new SignInClient();
+        response = client.successSingInRequest(credentials);
+        SignInResponse signInResponse = response.as(SignInResponse.class);
+        authorizationToken = signInResponse.getAccessToken();
+
+        userRequest.setFirstName("Nastia");
+        userRequest.setLastName("Kukh");
+        userRequest.setEmail("soyec48727@busantei.com");
+        userRequest.setPhone("+380985405095");
+        userRequest.setRoleName("ROLE_ADMIN");
+        userRequest.setUrlLogo(null);
+        userRequest.setStatus(true);
+
+        int idUser = 1;
+        userClient = new UserClient(authorizationToken);
+        response = userClient.put(userRequest,idUser);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        Assert.assertEquals(response.statusCode(), 400);
+        Assert.assertEquals(errorResponse.getMessage(),"No one have access to admin profile");
+
+    }
+
     @Description("Verify that user can not save changes where enter invalid data in field 'Phone'")
     @Issue("TUA-421")
     @Test

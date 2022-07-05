@@ -42,22 +42,29 @@ public class ValueProvider {
         return new File("src/test/resources/img2.png");
     }
 
-    public String getBasePassword(){
-        return  properties.getProperty("basePassword");
+    public String getBasePassword() {
+        return properties.getProperty("basePassword");
     }
 
-    public String getBaseEmail(){
-        return  properties.getProperty("baseEmail");
+    public String getBaseEmail() {
+        return properties.getProperty("baseEmail");
     }
 
-    public String getLeaderPassword(){
-        return  properties.getProperty("leaderPassword");
+    public String getLeaderPassword() {
+        return properties.getProperty("leaderPassword");
     }
 
-    public String getLeaderEmail(){
-        return  properties.getProperty("leaderEmail");
+    public String getLeaderEmail() {
+        return properties.getProperty("leaderEmail");
+    }
 
+    public String getUserEmail() {
+        return properties.getProperty("userEmail");
 
+    }
+
+    public String getUserPassword() {
+        return properties.getProperty("userPassword");
     }
 
 }
