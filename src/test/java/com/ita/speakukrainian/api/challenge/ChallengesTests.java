@@ -17,7 +17,9 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class ChallengesTests extends BaseApiTestRunner {
-    private String challengeName="Клуб української мови \\\"Розмовляй\\\"";
+    private int challengeId = 62;
+    private String challengeName="Клуб української мови \"Розмовляй\"";
+    private String challengeDescription = "Клуб української мови \"Розмовляй\" допоможе опанувати мовні практики, здолати мовні бар’єри, створити середовище підтримки та обміну досвідом між батьками дошкільнят, здобути необхідну лексичну базу українською мовою для повсякденного спілкування з дітьми.";
 
     private String authorizationToken = null;
 
@@ -32,17 +34,15 @@ public class ChallengesTests extends BaseApiTestRunner {
 
         ChallengeClient clientChallenge = new ChallengeClient(this.authorizationToken);
         Response responseChallenge = clientChallenge.get(62);
-        String resp  = responseChallenge.asString();
-        System.out.println(resp);
-//        ChallengeResponse437 challengesResponse437= null;
-//        try {
-//            challengesResponse437 = new ObjectMapper().readValue(resp, ChallengeResponse437.class);
-//        } catch (JsonProcessingException e) {
-//            throw new RuntimeException(e);
-//        }
+        ChallengeResponse437 challengesResponse437=responseChallenge.as(ChallengeResponse437.class);
+
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.statusCode(), 200);
-        softAssert.assertTrue(resp.contains(challengeName));
+
+        softAssert.assertEquals(challengesResponse437.getId(),challengeId);
+        softAssert.assertTrue(challengesResponse437.getName().contains(challengeName));
+        softAssert.assertTrue(challengesResponse437.getDescription().contains(challengeDescription));
+
         softAssert.assertAll();
     }
 

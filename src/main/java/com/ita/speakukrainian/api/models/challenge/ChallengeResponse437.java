@@ -14,8 +14,8 @@ public class ChallengeResponse437 {
  private String title;
  private String description;
  private String picture;
- private int sortNumber;
- private boolean isActive;
+ private Integer sortNumber;
+ private Boolean isActive;
  private List<Task> tasks;
  private User437 user;
  private String registrationLink;
