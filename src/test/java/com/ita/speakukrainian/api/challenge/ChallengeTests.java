@@ -4,11 +4,13 @@ import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.ChallengeClient;
 import com.ita.speakukrainian.api.clients.SignInClient;
 import com.ita.speakukrainian.api.models.challenge.ChallengeResponse;
-import com.ita.speakukrainian.api.models.challenge.CreateChallengeRequest;
+import com.ita.speakukrainian.api.models.challenge.ChallengePutRequest;
 import com.ita.speakukrainian.api.models.ErrorResponse;
+import com.ita.speakukrainian.api.models.challenge.CreateChallengeRequest;
 import com.ita.speakukrainian.api.models.challenge.CreatedChallengeRequest;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
+import com.ita.speakukrainian.utils.DateProvider;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
@@ -196,18 +198,23 @@ public class ChallengeTests extends BaseApiTestRunner {
     @Description("[allure] Verify that user is able to edit information about Challenge using valid values")
     @Issue("TUA-432")
     public void verifyThatUserIsAbleToEditInformationAboutChallengeUsingValidValuesTest() {
-        CreateChallengeRequest request = new CreateChallengeRequest();
+        ChallengePutRequest request = new ChallengePutRequest();
         ChallengeClient client = new ChallengeClient(this.authorizationToken);
-        int taskId = 1;
+        DateProvider date = new DateProvider();
+        int taskId = 388;
+        Integer challengeId = 241;
+
         request.setName("Example name");
         request.setTitle("Example title");
+        request.setHeaderText("stringstringstringstringstringstringstri");
         request.setDescription("Lorem ipsum dolor sit amet, consectetuer adipiscin");
         request.setPicture("/upload/test/test.png");
         request.setSortNumber(1);
+        request.setStartDate(date.dateFuture());
+        request.setChallengeId(challengeId);
 
         Response response = client.put(request,taskId);
         Assert.assertEquals(response.statusCode(), 200);
-
     }
 
 
