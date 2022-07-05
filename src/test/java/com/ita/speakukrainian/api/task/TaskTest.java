@@ -6,6 +6,8 @@ import com.ita.speakukrainian.api.clients.TaskClient;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
 import com.ita.speakukrainian.api.models.task.CreateTaskRequest;
+import com.ita.speakukrainian.api.models.task.CreateTaskPutRequest;
+import com.ita.speakukrainian.utils.DateProvider;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import jdk.jfr.Description;
@@ -166,13 +168,17 @@ public class TaskTest extends BaseApiTestRunner {
     @Issue("TUA-444")
     public void userCanEditTaskWithValidValuesTest(){
         int taskId = 388;
+        int challengeId = 241;
         TaskClient client = new TaskClient(this.authorizationToken);
-        CreateTaskRequest request = new CreateTaskRequest();
+        CreateTaskPutRequest request = new CreateTaskPutRequest();
+        DateProvider date = new DateProvider();
 
         request.setName("namenamename1213#$%");
+        request.setHeaderText("stringstringstringstringstringstringstri");
         request.setDescription(" descriptiondescriptiondescriptiondescriptiondescription12345$%%^$# ");
         request.setPicture("/upload/test/test.png");
-        request.setStartDate("2021-12-03");
+        request.setStartDate(date.dateFuture());
+        request.setChallengeId(challengeId);
         Response response = client.put(request,taskId);
         Assert.assertEquals(response.statusCode(),200);
 
