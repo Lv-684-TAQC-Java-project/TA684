@@ -21,12 +21,12 @@ public class SignUpTest extends BaseApiTestRunner {
 
         request.setFirstName("firstname");
         request.setLastName("lastname");
-        request.setEmail("email");
-        request.setPassword("Ab34567@");
+        request.setEmail("soyec48727@busantei.com");
+        request.setPassword("123456");
         request.setPhone("0453567890");
         request.setRoleName("ROLE_MANAGER");
 
         Response response = client.post(request);
-        Assert.assertEquals(response.statusCode(), 401);
+        Assert.assertEquals(response.statusCode(), 400);
     }
 }
