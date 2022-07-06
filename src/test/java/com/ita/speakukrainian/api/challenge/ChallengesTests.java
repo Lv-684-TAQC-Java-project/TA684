@@ -1,19 +1,12 @@
 package com.ita.speakukrainian.api.challenge;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.ChallengeClient;
 import com.ita.speakukrainian.api.clients.SignInClient;
-import com.ita.speakukrainian.api.models.challenge.ChallengeResponse;
-import com.ita.speakukrainian.api.models.challenge.ChallengeResponse437;
 import com.ita.speakukrainian.api.models.challenge.ChallengeResponseForGet;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
 import io.restassured.response.Response;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
