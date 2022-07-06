@@ -26,6 +26,18 @@ public class ClubsTest {
     private String authorizationToken = null;
     private static int idClub;
 
+    private String parseJson (String jsonName, String name){
+        File file = new File(jsonName);
+        String json = null;
+        try {
+            json = Files.readFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String textJson = String.format(json, name);
+        return textJson;
+    }
+
     @BeforeClass
     public void beforeClass() {
         SignInRequest credentials = new SignInRequest("TestTeach.ua@meta.ua", "123456789");
@@ -40,16 +52,8 @@ public class ClubsTest {
     @Test(description = "TUA-463")
     public void verifyThatUserAsClubCanCreateNewClub() {
         String name = RandomStringUtils.randomAlphabetic(8);
-        File file = new File("src/test/resources/json_463.json");
-        String json = null;
-        try {
-            json = Files.readFile(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String textJson = String.format(json, name);
         ClubsClient client = new ClubsClient(this.authorizationToken);
-        Response response = client.post(textJson);
+        Response response = client.post(parseJson("src/test/resources/json_463.json", name));
         ClubsResponse clubsResponse = response.as(ClubsResponse.class);
         idClub=clubsResponse.getId();
         System.out.println(idClub);
@@ -78,7 +82,6 @@ public class ClubsTest {
     @Issue("TUA-500")
     public void leaderCanCreateCenterUsingValidCharactersTest() {
         ClubsClient client = new ClubsClient(this.authorizationToken);
-        ClubsResponse ClubsResponse = new ClubsResponse();
         File file = new File("src/test/resources/json_500.json");
 
         String json = null;
@@ -89,9 +92,10 @@ public class ClubsTest {
         }
 
         Response response = client.post(json);
+        ClubsResponse clubsResponse = response.as(ClubsResponse.class);
         Assert.assertEquals(response.statusCode(),200);
-        response = client.delete(ClubsResponse.getId());
-//        response = client.delete(Integer.parseInt(response.getSessionId()));
+        response = client.delete(clubsResponse.getId());
+
     }
 
     @Description("This test case verify  that User as 'Керiвник гуртка' cannot create new club is in a center if 'Назва' field contain more than 100 characters using Postman.")
