@@ -7,6 +7,7 @@ import com.ita.speakukrainian.api.clients.ChallengeClient;
 import com.ita.speakukrainian.api.clients.SignInClient;
 import com.ita.speakukrainian.api.models.challenge.ChallengeResponse;
 import com.ita.speakukrainian.api.models.challenge.ChallengeResponse437;
+import com.ita.speakukrainian.api.models.challenge.ChallengeResponseForGet;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
 import io.qameta.allure.Description;
@@ -34,14 +35,14 @@ public class ChallengesTests extends BaseApiTestRunner {
 
         ChallengeClient clientChallenge = new ChallengeClient(this.authorizationToken);
         Response responseChallenge = clientChallenge.get(62);
-        ChallengeResponse437 challengesResponse437=responseChallenge.as(ChallengeResponse437.class);
+        ChallengeResponseForGet challengesResponse=responseChallenge.as(ChallengeResponseForGet.class);
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.statusCode(), 200);
 
-        softAssert.assertEquals(challengesResponse437.getId(),challengeId);
-        softAssert.assertTrue(challengesResponse437.getName().contains(challengeName));
-        softAssert.assertTrue(challengesResponse437.getDescription().contains(challengeDescription));
+        softAssert.assertEquals(challengesResponse.getId(),challengeId);
+        softAssert.assertTrue(challengesResponse.getName().contains(challengeName));
+        softAssert.assertTrue(challengesResponse.getDescription().contains(challengeDescription));
 
         softAssert.assertAll();
     }
