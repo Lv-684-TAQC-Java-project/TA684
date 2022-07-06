@@ -22,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class clubsTest463And468 {
+public class ClubsTest {
     private String authorizationToken = null;
     private static int idClub;
 
