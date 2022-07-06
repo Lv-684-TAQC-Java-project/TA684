@@ -16,4 +16,8 @@ public class UsersService {
     public List<UsersEntity> getAllNameWhereEmail() {
         return usersDAO.selectAllWhereEmail();
     }
+
+    public List<UsersEntity> getAllNameWhereEmailIs(String name) {
+        return usersDAO.selectAllWhereEmailIs(name);
+    }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 public class UsersEntity {
 
     public static final String SELECT_FROM_USERS_WHERE_EMAIL = "SELECT * FROM users WHERE email like 'soyec%'";
+    public static final String SELECT_FROM_USERS_WHERE_EMAIL_IS = "SELECT * FROM users WHERE email = '%s'";
 
     private long id;
     private String userEmail;
