@@ -10,7 +10,6 @@ public class CreateChallengeRequest {
     public  String name;
     public String title;
     public String description;
-    //   public String registrationLink;
     public String picture;
     public Integer sortNumber;
 
