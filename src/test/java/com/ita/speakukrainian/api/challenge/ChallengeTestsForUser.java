@@ -30,9 +30,10 @@ public class ChallengeTestsForUser extends BaseApiTestRunner {
     public void deleteChallengeAsUser(){
         ChallengeClient client = new ChallengeClient(this.authorizationToken);
         Response responseDel = client.delete(62);
-       // Assert.assertEquals(responseDel.statusCode(), 403);
+        Assert.assertEquals(responseDel.statusCode(), 401);
         ErrorResponse errorResponse =responseDel.as(ErrorResponse.class);
-        System.out.println(errorResponse.getMessage());
+        Assert.assertEquals(errorResponse.getMessage(), "You have no necessary permissions (role)");
+
     }
 
 }
