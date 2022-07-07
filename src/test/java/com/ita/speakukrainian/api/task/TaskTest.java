@@ -15,6 +15,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import org.testng.reporters.Files;
+
+import java.io.File;
+import java.io.IOException;
 
 public class TaskTest extends BaseApiTestRunner {
     private String authorizationToken = null;
@@ -25,6 +29,29 @@ public class TaskTest extends BaseApiTestRunner {
         Response response = client.successSingInRequest(credentials);
         SignInResponse signInResponse = response.as(SignInResponse.class);
         authorizationToken = signInResponse.getAccessToken();
+    }
+
+    @Test
+    @Description("Verify that user can create Task with valid values. ")
+    @Issue("TUA-441")
+    public void cantCreateTaskWithValidValue(){
+        int taskId = 1;
+       // CreateTaskRequest request = new CreateTaskRequest();
+
+        File file = new File("src/test/resources/json_469.json");
+        String json = null;
+        try {
+            json = Files.readFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String textJson = String.format(json);
+        TaskClient client = new TaskClient(this.authorizationToken);
+        Response response = client.postJs(textJson,taskId);
+        CreateTaskRequest request =response.as(CreateTaskRequest.class);
+                Assert.assertEquals(response.statusCode(),200);
+
     }
 
     @Test
