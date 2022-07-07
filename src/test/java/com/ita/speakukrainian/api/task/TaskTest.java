@@ -3,25 +3,25 @@ package com.ita.speakukrainian.api.task;
 import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.SignInClient;
 import com.ita.speakukrainian.api.clients.TaskClient;
+import com.ita.speakukrainian.api.models.ErrorResponse;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
 import com.ita.speakukrainian.api.models.task.CreateTaskRequest;
 import com.ita.speakukrainian.api.models.task.CreateTaskPutRequest;
+import com.ita.speakukrainian.api.models.task.TaskCreateResponse;
 import com.ita.speakukrainian.utils.DateProvider;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import jdk.jfr.Description;
+import org.apache.commons.lang.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import org.testng.reporters.Files;
-
-import java.io.File;
-import java.io.IOException;
 
 public class TaskTest extends BaseApiTestRunner {
     private String authorizationToken = null;
+    private int id = 1;
     @BeforeClass
     public void beforeClass() {
         SignInRequest credentials = new SignInRequest(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
@@ -35,24 +35,41 @@ public class TaskTest extends BaseApiTestRunner {
     @Description("Verify that user can create Task with valid values. ")
     @Issue("TUA-441")
     public void cantCreateTaskWithValidValue(){
-        int taskId = 1;
-       // CreateTaskRequest request = new CreateTaskRequest();
+        String name = RandomStringUtils.randomAlphabetic(13);
 
-        File file = new File("src/test/resources/json_469.json");
-        String json = null;
-        try {
-            json = Files.readFile(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        CreateTaskRequest request = new CreateTaskRequest();
+        request.setName(name);
+        request.setHeaderText("djghdjfzblkdfzjgblkjfdzgjdkbj jdngjdnsjg djgjdsgdjskn");
+        request.setDescription("descriptiondescriptiondescriptiondescriptiondescription12345$%%^$#");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate("2022-12-12");
 
-        String textJson = String.format(json);
         TaskClient client = new TaskClient(this.authorizationToken);
-        Response response = client.postJs(textJson,taskId);
-        CreateTaskRequest request =response.as(CreateTaskRequest.class);
-                Assert.assertEquals(response.statusCode(),200);
+        Response response = client.post(request,id);
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertEquals(response.statusCode(),200);
+
+        TaskCreateResponse taskCreateResponse = new TaskCreateResponse();
+        //Response response1 = client.post(taskCreateResponse,id);
+        softAssert.assertEquals(taskCreateResponse.getDescription(), "descriptiondescriptiondescriptiondescriptiondescription12345$%%^$#" );
 
     }
+
+//        File file = new File("src/test/resources/json_469.json");
+//        String json = null;
+//        try {
+//            json = Files.readFile(file);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        String textJson = String.format(json);
+//        TaskClient client = new TaskClient(this.authorizationToken);
+//        Response response = client.postJs(textJson,taskId);
+//        CreateTaskRequest request =response.as(CreateTaskRequest.class);
+//                Assert.assertEquals(response.statusCode(),200);
+
+   // }
 
     @Test
     @Description("[allure] Verify that user can not create Task with invalid values ")

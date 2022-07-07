@@ -2,13 +2,15 @@ package com.ita.speakukrainian.api.models.task;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-public class CreateTaskRequest {
-    //public int id;
+public class TaskCreateResponse {
+    private int id;
     private String name;
     private String headerText;
     private String description;
     private String picture;
-    private String startDate;
-    //public int challengeId;
+    private List<Integer> startDate;
+    private Integer challengeId;
 }

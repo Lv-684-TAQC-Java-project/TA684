@@ -2,6 +2,7 @@ package com.ita.speakukrainian.api.clients;
 
 import com.ita.speakukrainian.api.models.task.CreateTaskRequest;
 import com.ita.speakukrainian.api.models.task.CreateTaskPutRequest;
+import com.ita.speakukrainian.api.models.task.TaskCreateResponse;
 import io.restassured.response.Response;
 
 public class TaskClient extends BaseClient{
@@ -36,6 +37,14 @@ public class TaskClient extends BaseClient{
                 .when()
                 .body(body)
                 .post(String.format("%s%s/%s/task", this.baseUrl, this.path1,id));
+    }
+
+    public Response post (TaskCreateResponse body, int id) {
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", this.authorizationToken))
+                .when()
+                .body(body)
+                .post(String.format("%s%s/%s/", this.baseUrl, this.path1, id, "task"));
     }
     public Response postJs (String json, int id){
         return prepareRequest()
