@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.api.clients;
 
 import com.ita.speakukrainian.api.models.challenge.ChallengePutRequest;
+import com.ita.speakukrainian.api.models.challenge.ChallengeRequest;
 import com.ita.speakukrainian.api.models.challenge.CreateChallengeRequest;
 import com.ita.speakukrainian.api.models.challenge.CreatedChallengeRequest;
 import io.qameta.allure.Step;
@@ -25,7 +26,7 @@ public class ChallengeClient extends BaseClient {
     }
 
     @Step("Create new challenge")
-    public Response post(CreatedChallengeRequest body) {
+    public Response post(ChallengeRequest body) {
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
                 .when()
@@ -39,15 +40,6 @@ public class ChallengeClient extends BaseClient {
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
                 .when()
                 .delete(String.format("%s%s/%s", this.baseUrl, this.path, id));
-    }
-
-    @Step("Create new challenge")
-    public Response post(CreateChallengeRequest body) {
-        return prepareRequest()
-                .header("Authorization", String.format("Bearer %s", this.authorizationToken))
-                .when()
-                .body(body)
-                .post(String.format("%s%s", this.baseUrl, this.path));
     }
 
     @Step("Edit information about challenge by id")
