@@ -40,4 +40,26 @@ public class ChallengesTests extends BaseApiTestRunner {
         softAssert.assertAll();
     }
 
+    @Test
+    public void getChallengesAsUser() {
+        SignInRequest credentials = new SignInRequest(valueProvider.getUserEmail(), valueProvider.getUserPassword());
+        SignInClient client = new SignInClient();
+        Response response = client.successSingInRequest(credentials);
+        SignInResponse signInResponse = response.as(SignInResponse.class);
+        authorizationToken = signInResponse.getAccessToken();
+
+        ChallengeClient clientChallenge = new ChallengeClient(this.authorizationToken);
+        Response responseChallenge = clientChallenge.get(62);
+        ChallengeResponseForGet challengesResponse=responseChallenge.as(ChallengeResponseForGet.class);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.statusCode(), 200);
+
+        softAssert.assertEquals(challengesResponse.getId(),challengeId);
+        softAssert.assertTrue(challengesResponse.getName().contains(challengeName));
+        softAssert.assertTrue(challengesResponse.getDescription().contains(challengeDescription));
+
+        softAssert.assertAll();
+    }
+
 }
