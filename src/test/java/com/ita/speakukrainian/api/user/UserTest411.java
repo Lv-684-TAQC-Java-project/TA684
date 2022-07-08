@@ -45,21 +45,21 @@ public class UserTest411 extends BaseApiTestRunner {
         UserClient userClient = new UserClient(this.authorizationToken);
 
         userRequest.setFirstName(null);
-        Response response = userClient.put(203, userRequest);
+        Response response = userClient.put(userRequest, 203);
         ErrorResponse userResponse = response.as(ErrorResponse.class);
         softAssert.assertEquals(userResponse.getStatus(), 400);
         softAssert.assertEquals(userResponse.getMessage(), "\"firstName\" can`t be null");
         userRequest.setFirstName("Nastia");
 
         userRequest.setLastName(null);
-        response = userClient.put(203, userRequest);
+        response = userClient.put(userRequest, 203);
         userResponse = response.as(ErrorResponse.class);
         softAssert.assertEquals(userResponse.getStatus(), 400);
         softAssert.assertEquals(userResponse.getMessage(), "\"lastName\" can`t be null");
         userRequest.setLastName("Kukh");
 
         userRequest.setPhone(null);
-        response = userClient.put(203, userRequest);
+        response = userClient.put(userRequest, 203);
         userResponse = response.as(ErrorResponse.class);
         softAssert.assertEquals(userResponse.getStatus(), 400);
         softAssert.assertEquals(userResponse.getMessage(), "phone must not be blank");
