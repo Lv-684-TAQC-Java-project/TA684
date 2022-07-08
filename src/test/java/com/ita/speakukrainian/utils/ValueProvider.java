@@ -67,4 +67,10 @@ public class ValueProvider {
         return properties.getProperty("userPassword");
     }
 
+    public String getUserULPEmail() {
+        return properties.getProperty("userULPEmail");
+    }
+    public String getUserULPPassword() {
+        return properties.getProperty("userULPPassword");
+    }
 }

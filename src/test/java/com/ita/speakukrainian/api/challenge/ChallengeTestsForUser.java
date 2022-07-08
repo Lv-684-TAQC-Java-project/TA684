@@ -18,7 +18,7 @@ public class ChallengeTestsForUser extends BaseApiTestRunner {
 
     @BeforeClass
     public void beforeClass() {
-        SignInRequest credentials = new SignInRequest(valueProvider.getUserEmail(), valueProvider.getUserPassword());
+        SignInRequest credentials = new SignInRequest(valueProvider.getUserULPEmail(), valueProvider.getUserULPPassword());
         SignInClient client = new SignInClient();
         Response response = client.successSingInRequest(credentials);
         SignInResponse signInResponse = response.as(SignInResponse.class);
