@@ -2,6 +2,7 @@ package com.ita.speakukrainian.api.clients;
 
 import com.ita.speakukrainian.api.models.task.CreateTaskRequest;
 import com.ita.speakukrainian.api.models.task.CreateTaskPutRequest;
+import com.ita.speakukrainian.api.models.task.TaskRequest;
 import io.restassured.response.Response;
 
 public class TaskClient extends BaseClient{
@@ -14,15 +15,7 @@ public class TaskClient extends BaseClient{
         this.authorizationToken = authorizationToken;
     }
 
-    public Response put (CreateTaskRequest body, int id){
-        return prepareRequest()
-                .header("Authorization", String.format("Bearer %s", this.authorizationToken))
-                .when()
-                .body(body)
-                .put(String.format("%s%s/%s", this.baseUrl, this.path,id));
-    }
-
-    public Response put (CreateTaskPutRequest body, int id){
+    public Response put (TaskRequest body, int id){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
                 .when()
