@@ -3,6 +3,7 @@ package com.ita.speakukrainian.api.editProfile;
 import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.EditProfileClient;
 import com.ita.speakukrainian.api.clients.SignInClient;
+import com.ita.speakukrainian.api.models.ErrorResponse;
 import com.ita.speakukrainian.api.models.editProfile.CreateEditProfileRequest;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
@@ -34,9 +35,8 @@ public class EditProfileTest extends BaseApiTestRunner {
         SoftAssert softAssert = new SoftAssert();
         EditProfileClient client = new EditProfileClient(this.authorizationToken);
         CreateEditProfileRequest request = new CreateEditProfileRequest();
-        int taskId = 2;
+        int taskId = 203;
 
-        request.setId(taskId);
         request.setFirstName("Nastia1234");
         request.setLastName("Kukh");
         request.setPhone("999999922");
@@ -75,12 +75,11 @@ public class EditProfileTest extends BaseApiTestRunner {
         SoftAssert softAssert = new SoftAssert();
         EditProfileClient client = new EditProfileClient(this.authorizationToken);
         CreateEditProfileRequest request = new CreateEditProfileRequest();
-        int taskId = 2;
+        int taskId = 203;
 
-        request.setId(taskId);
         request.setFirstName("Nastia");
         request.setLastName("Kukh");
-        request.setPhone("999999922");
+        request.setPhone("0999999922");
         request.setEmail("soyec48727@busantei.com");
         request.setRoleName("ROLE_MANAGER");
         request.setUrlLogo(null);

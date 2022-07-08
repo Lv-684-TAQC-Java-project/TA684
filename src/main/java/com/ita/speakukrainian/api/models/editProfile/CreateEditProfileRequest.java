@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class CreateEditProfileRequest {
-    public Integer Id;
     public String email;
     public String firstName;
     public String lastName;
