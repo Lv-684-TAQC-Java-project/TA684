@@ -15,6 +15,7 @@ import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,6 +75,45 @@ public class UserTest extends BaseApiTestRunner {
         Assert.assertEquals(actualFirstName,firstName);
         Assert.assertEquals(actualLastName,lastName);
         Assert.assertEquals(actualPhone,phone);
+    }
+
+    @Description("This test case verifies that user can not save changes where mandatory fields are empty")
+    @Issue("TUA-411")
+    @Test(description = "TUA-411")
+    public void VerifyThatUserCanNotSaveChangesWhereMandatoryFieldsAreEmpty() {
+        CreatedUserRequest userRequest = new CreatedUserRequest();
+        SoftAssert softAssert = new SoftAssert();
+        userRequest.setFirstName("Nastia");
+        userRequest.setLastName("Kukh");
+        userRequest.setEmail("soyec48727@busantei.com");
+        userRequest.setPhone("0999999922");
+        userRequest.setRoleName("ROLE_MANAGER");
+        userRequest.setUrlLogo(null);
+        userRequest.setStatus(true);
+
+        UserClient userClient = new UserClient(this.authorizationToken);
+
+        userRequest.setFirstName(null);
+        Response response = userClient.put(userRequest, 203);
+        ErrorResponse userResponse = response.as(ErrorResponse.class);
+        softAssert.assertEquals(userResponse.getStatus(), 400);
+        softAssert.assertEquals(userResponse.getMessage(), "\"firstName\" can`t be null");
+        userRequest.setFirstName("Nastia");
+
+        userRequest.setLastName(null);
+        response = userClient.put(userRequest, 203);
+        userResponse = response.as(ErrorResponse.class);
+        softAssert.assertEquals(userResponse.getStatus(), 400);
+        softAssert.assertEquals(userResponse.getMessage(), "\"lastName\" can`t be null");
+        userRequest.setLastName("Kukh");
+
+        userRequest.setPhone(null);
+        response = userClient.put(userRequest, 203);
+        userResponse = response.as(ErrorResponse.class);
+        softAssert.assertEquals(userResponse.getStatus(), 400);
+        softAssert.assertEquals(userResponse.getMessage(), "phone must not be blank");
+
+        softAssert.assertAll();
     }
 
     @Test
