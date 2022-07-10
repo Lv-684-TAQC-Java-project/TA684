@@ -38,19 +38,4 @@ public class TaskClient extends BaseClient{
                 .body(body)
                 .post(String.format("%s%s/%s/task", this.baseUrl, this.path1,id));
     }
-
-    public Response post (TaskCreateResponse body, int id) {
-        return prepareRequest()
-                .header("Authorization", String.format("Bearer %s", this.authorizationToken))
-                .when()
-                .body(body)
-                .post(String.format("%s%s/%s/", this.baseUrl, this.path1, id, "task"));
-    }
-    public Response postJs (String json, int id){
-        return prepareRequest()
-                .header("Authorization", String.format("Bearer %s", this.authorizationToken))
-                .when()
-                .body(json)
-                .post(String.format("%s%s/%s/task", this.baseUrl, this.path1,id));
-    }
 }

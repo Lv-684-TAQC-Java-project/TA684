@@ -18,10 +18,16 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import org.testng.reporters.Files;
+
+import java.io.File;
+import java.io.IOException;
 
 public class TaskTest extends BaseApiTestRunner {
     private String authorizationToken = null;
-    private int id = 1;
+    private String name = RandomStringUtils.randomAlphabetic(13);
+    private int id = 62;
+
     @BeforeClass
     public void beforeClass() {
         SignInRequest credentials = new SignInRequest(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
@@ -35,41 +41,29 @@ public class TaskTest extends BaseApiTestRunner {
     @Description("Verify that user can create Task with valid values. ")
     @Issue("TUA-441")
     public void cantCreateTaskWithValidValue(){
-        String name = RandomStringUtils.randomAlphabetic(13);
-
-        CreateTaskRequest request = new CreateTaskRequest();
-        request.setName(name);
-        request.setHeaderText("djghdjfzblkdfzjgblkjfdzgjdkbj jdngjdnsjg djgjdsgdjskn");
-        request.setDescription("descriptiondescriptiondescriptiondescriptiondescription12345$%%^$#");
-        request.setPicture("/upload/test/test.png");
-        request.setStartDate("2022-12-12");
 
         TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+        DateProvider dateProvider = new DateProvider();
+
+        request.setName(name);
+        request.setHeaderText("djghdjfzblkdfzjgblkjfdzgjdkbj jdngjdnsjg djgjdsgdjskn");
+        request.setDescription( "descriptiondescriptiondescriptiondescriptiondescription12345$%%^$#");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate(dateProvider.dateFuture());
+
         Response response = client.post(request,id);
-        SoftAssert softAssert=new SoftAssert();
-        softAssert.assertEquals(response.statusCode(),200);
+        Assert.assertEquals(response.statusCode(),200);
 
-        TaskCreateResponse taskCreateResponse = new TaskCreateResponse();
-        //Response response1 = client.post(taskCreateResponse,id);
-        softAssert.assertEquals(taskCreateResponse.getDescription(), "descriptiondescriptiondescriptiondescriptiondescription12345$%%^$#" );
-
+        TaskCreateResponse r = response.as(TaskCreateResponse.class);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(r.getName(), name);
+        softAssert.assertEquals(r.getHeaderText(), "djghdjfzblkdfzjgblkjfdzgjdkbj jdngjdnsjg djgjdsgdjskn");
+        softAssert.assertEquals(r.getDescription(), "descriptiondescriptiondescriptiondescriptiondescription12345$%%^$#");
+        softAssert.assertEquals(r.getStartDate(), dateProvider.dateFuture());
+        System.out.println(r.getName());
     }
 
-//        File file = new File("src/test/resources/json_469.json");
-//        String json = null;
-//        try {
-//            json = Files.readFile(file);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String textJson = String.format(json);
-//        TaskClient client = new TaskClient(this.authorizationToken);
-//        Response response = client.postJs(textJson,taskId);
-//        CreateTaskRequest request =response.as(CreateTaskRequest.class);
-//                Assert.assertEquals(response.statusCode(),200);
-
-   // }
 
     @Test
     @Description("[allure] Verify that user can not create Task with invalid values ")
