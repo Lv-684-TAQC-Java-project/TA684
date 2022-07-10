@@ -29,6 +29,7 @@ public class CenterTests extends BaseApiTestRunner {
         authorizationToken = signInResponse.getAccessToken();
     }
 
+
     @Test
     public void successCreatedCenterTest() {
         CreatedCenterRequest createdCenterRequest = new CreatedCenterRequest();
