@@ -3,7 +3,7 @@ package com.ita.speakukrainian.api.models.user;
 import lombok.Data;
 
 @Data
-public class CreatedUserRequest {
+public class CreatedUserRequest implements UsersRequest{
     public String firstName;
     public String lastName;
     public String email;

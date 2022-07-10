@@ -1,9 +1,10 @@
 package com.ita.speakukrainian.api.club;
 
-import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.ClubsClient;
 import com.ita.speakukrainian.api.clients.SignInClient;
+import com.ita.speakukrainian.api.models.ErrorResponse;
 import com.ita.speakukrainian.api.models.club.ClubsRequest;
+import com.ita.speakukrainian.api.models.club.ClubsResponse;
 import com.ita.speakukrainian.api.models.club.Location;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
@@ -14,14 +15,28 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import org.testng.reporters.Files;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-
-public class ClubsTest505 extends BaseApiTestRunner {
+public class ClubsTest {
     private String authorizationToken = null;
+    private static int idClub;
+
+    private String parseJson (String jsonName, String name){
+        File file = new File(jsonName);
+        String json = null;
+        try {
+            json = Files.readFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String textJson = String.format(json, name);
+        return textJson;
+    }
 
     @BeforeClass
     public void beforeClass() {
@@ -30,6 +45,80 @@ public class ClubsTest505 extends BaseApiTestRunner {
         Response response = client.successSingInRequest(credentials);
         SignInResponse signInResponse = response.as(SignInResponse.class);
         authorizationToken = signInResponse.getAccessToken();
+    }
+
+    @Description("This test case verify that user as 'Керiвник гуртка' can create new club with valid data using Postman")
+    @Issue("TUA-463")
+    @Test(description = "TUA-463")
+    public void verifyThatUserAsClubCanCreateNewClub() {
+        String name = RandomStringUtils.randomAlphabetic(8);
+        ClubsClient client = new ClubsClient(this.authorizationToken);
+        Response response = client.post(parseJson("src/test/resources/json_463.json", name));
+        ClubsResponse clubsResponse = response.as(ClubsResponse.class);
+        idClub=clubsResponse.getId();
+        System.out.println(idClub);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 200);
+        softAssert.assertEquals(clubsResponse.getName(), name);
+        softAssert.assertEquals(clubsResponse.getUser().getId(),264);
+        softAssert.assertAll();
+    }
+
+    @Description("This test case verify that user as 'Керiвник гуртка' can delete club Postman")
+    @Issue("TUA-468")
+    @Test(description = "TUA-468")
+    public void verifyThatUserAsClubCanDeleteClub() {
+        ClubsClient client = new ClubsClient(this.authorizationToken);
+        System.out.println(idClub);
+        Response response = client.delete(idClub);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 200);
+        softAssert.assertAll();
+
+    }
+
+    @Test
+    @Description("[allure] Verify that User as \"Керiвник гуртка\" can create new club is in a center using valid characters for \"Назва\" field")
+    @Issue("TUA-500")
+    public void leaderCanCreateCenterUsingValidCharactersTest() {
+        ClubsClient client = new ClubsClient(this.authorizationToken);
+        File file = new File("src/test/resources/json_500.json");
+
+        String json = null;
+        try {
+            json = Files.readFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Response response = client.post(json);
+        ClubsResponse clubsResponse = response.as(ClubsResponse.class);
+        Assert.assertEquals(response.statusCode(),200);
+        response = client.delete(clubsResponse.getId());
+
+    }
+
+    @Description("This test case verify  that User as 'Керiвник гуртка' cannot create new club is in a center if 'Назва' field contain more than 100 characters using Postman.")
+    @Issue("TUA-503")
+    @Test(description = "TUA-503")
+    public void verifyThatUserCannotCreateNewClubIfNameContainMore100Characters() {
+        File file = new File("src/test/resources/json_503.json");
+        String json = null;
+        try {
+            json = Files.readFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String textJson = String.format(json);
+        ClubsClient client = new ClubsClient(this.authorizationToken);
+        Response response = client.post(textJson);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.statusCode(), 400);
+        softAssert.assertEquals(errorResponse.getMessage(), "name Довжина назви має бути від 5 до 100 символів");
+        softAssert.assertAll();
+
     }
 
     @Description("Verify that User as 'Керiвник гуртка' can create new club is in a center if 'Назва' field consists of a word length of 100 characters when use clubsRequest")

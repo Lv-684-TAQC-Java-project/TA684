@@ -48,7 +48,9 @@ public class ChallengeTests extends BaseApiTestRunner {
         ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
         Assert.assertEquals(response.statusCode(), 400);
-        Assert.assertTrue(errorResponse.getMessage().contains("must contain a minimum of 5 and a maximum of 50"));
+        Assert.assertTrue(errorResponse
+                .getMessage()
+                .contains("must contain a minimum of 5 and a maximum of 50"));
     }
 
     @Test
@@ -89,7 +91,8 @@ public class ChallengeTests extends BaseApiTestRunner {
 
         Assert.assertEquals(response.statusCode(), 400);
         Assert.assertTrue(errorResponse
-                .getMessage().contains("Can't contain foreign language symbols except english"));
+                .getMessage()
+                .contains("Can't contain foreign language symbols except english"));
     }
 
     @Test
@@ -193,8 +196,6 @@ public class ChallengeTests extends BaseApiTestRunner {
 
     }
 
-
-
     @Test
     @Description("[allure] Verify that user is able to edit information about Challenge using valid values")
     @Issue("TUA-432")
@@ -217,7 +218,6 @@ public class ChallengeTests extends BaseApiTestRunner {
         Response response = client.put(request,taskId);
         Assert.assertEquals(response.statusCode(), 200);
     }
-
 
     @Test
     @Description("Verify that user is not able to create Challenge using null as values")

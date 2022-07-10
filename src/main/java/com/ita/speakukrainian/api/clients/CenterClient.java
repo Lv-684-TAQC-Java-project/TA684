@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.api.clients;
 
 import com.ita.speakukrainian.api.models.center.CreatedCenterRequest;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 public class CenterClient extends BaseClient {
@@ -11,7 +12,7 @@ public class CenterClient extends BaseClient {
         super();
         this.authorizationToken = authorizationToken;
     }
-
+    @Step("Create a new centre")
     public Response post(CreatedCenterRequest body){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))

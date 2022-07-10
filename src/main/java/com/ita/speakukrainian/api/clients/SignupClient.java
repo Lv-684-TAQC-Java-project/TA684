@@ -2,6 +2,7 @@ package com.ita.speakukrainian.api.clients;
 
 import com.ita.speakukrainian.api.models.editProfile.CreateEditProfileRequest;
 import com.ita.speakukrainian.api.models.signup.SignupRequest;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 public class SignupClient extends BaseClient{
@@ -12,6 +13,7 @@ public class SignupClient extends BaseClient{
         super();
         this.authorizationToken = authorizationToken;
     }
+    @Step("Send method post for url /api/signup")
     public Response post (SignupRequest body){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))

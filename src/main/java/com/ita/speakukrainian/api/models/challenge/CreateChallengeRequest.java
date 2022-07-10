@@ -5,12 +5,11 @@ import lombok.Data;
 
 
 @Data
-public class CreateChallengeRequest {
+public class CreateChallengeRequest implements ChallengeRequest {
 
     public  String name;
     public String title;
     public String description;
-    //   public String registrationLink;
     public String picture;
     public Integer sortNumber;
 
