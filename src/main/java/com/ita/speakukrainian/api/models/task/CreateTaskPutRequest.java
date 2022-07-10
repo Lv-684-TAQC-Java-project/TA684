@@ -4,7 +4,7 @@ package com.ita.speakukrainian.api.models.task;
 import lombok.Data;
 
 @Data
-public class CreateTaskPutRequest {
+public class CreateTaskPutRequest implements TaskRequest {
     public  String name;
     public String headerText;
     public String description;

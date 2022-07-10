@@ -2,6 +2,7 @@ package com.ita.speakukrainian.api.clients;
 
 import com.ita.speakukrainian.api.models.challenge.CreateChallengeRequest;
 import com.ita.speakukrainian.api.models.editProfile.CreateEditProfileRequest;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 public class EditProfileClient extends BaseClient {
@@ -12,7 +13,7 @@ public class EditProfileClient extends BaseClient {
         super();
         this.authorizationToken = authorizationToken;
     }
-
+    @Step("Send method post for url /api/user ")
     public Response post (CreateEditProfileRequest body, int id){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
@@ -20,7 +21,7 @@ public class EditProfileClient extends BaseClient {
                 .body(body)
                 .post(String.format("%s%s/%s", this.baseUrl, this.path,id));
     }
-
+    @Step("Send method put for url /api/user ")
     public Response put (CreateEditProfileRequest body, int id){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))

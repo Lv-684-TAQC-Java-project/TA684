@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.api.clients;
 
 import com.ita.speakukrainian.api.models.user.CreatedUserRequest;
+import com.ita.speakukrainian.api.models.user.UsersRequest;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -9,11 +10,12 @@ public class UserClient extends BaseClient {
     private final String path = "/api/user";
     private final String fullPass = "/api/user/203";
 
-            public UserClient(String authorizationToken) {
-                super();
-                this.authorizationToken = authorizationToken;
-            }
+    public UserClient(String authorizationToken) {
+        super();
+        this.authorizationToken = authorizationToken;
+    }
 
+    @Step("Edit user profile")
     public Response put(CreatedUserRequest body) {
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
@@ -22,22 +24,13 @@ public class UserClient extends BaseClient {
                 .put(String.format("%s%s", this.baseUrl, this.fullPass));
     }
 
-
-    public Response put(CreatedUserRequest body,int id) {
+    @Step("Edit user profile by id")
+    public Response put(UsersRequest body, int id) {
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
                 .when()
                 .body(body)
-                .put(String.format("%s%s/%s", this.baseUrl, this.path,id));
+                .put(String.format("%s%s/%s", this.baseUrl, this.path, id));
     }
-
-            @Step("Update user by {id}")
-            public Response put(int id, CreatedUserRequest body) {
-                return prepareRequest()
-                        .header("Authorization", String.format("Bearer %s", authorizationToken))
-                        .body(body)
-                        .when()
-                        .put(String.format("%s/api/user/%s", baseUrl, id));
-            }
-        }
+}
 
