@@ -24,7 +24,7 @@ public class UserClient extends BaseClient {
                 .put(String.format("%s%s", this.baseUrl, this.fullPass));
     }
 
-    @Step("Edit user profile by id")
+    @Step("Edit user profile by id {id}")
     public Response put(UsersRequest body, int id) {
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
