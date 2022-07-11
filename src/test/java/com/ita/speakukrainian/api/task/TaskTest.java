@@ -3,21 +3,31 @@ package com.ita.speakukrainian.api.task;
 import com.ita.speakukrainian.api.BaseApiTestRunner;
 import com.ita.speakukrainian.api.clients.SignInClient;
 import com.ita.speakukrainian.api.clients.TaskClient;
+import com.ita.speakukrainian.api.models.ErrorResponse;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
 import com.ita.speakukrainian.api.models.task.CreateTaskRequest;
 import com.ita.speakukrainian.api.models.task.CreateTaskPutRequest;
+import com.ita.speakukrainian.api.models.task.TaskCreateResponse;
 import com.ita.speakukrainian.utils.DateProvider;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import jdk.jfr.Description;
+import org.apache.commons.lang.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import org.testng.reporters.Files;
+
+import java.io.File;
+import java.io.IOException;
 
 public class TaskTest extends BaseApiTestRunner {
     private String authorizationToken = null;
+    private String name = RandomStringUtils.randomAlphabetic(13);
+    private int id = 62;
+
     @BeforeClass
     public void beforeClass() {
         SignInRequest credentials = new SignInRequest(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
@@ -26,6 +36,34 @@ public class TaskTest extends BaseApiTestRunner {
         SignInResponse signInResponse = response.as(SignInResponse.class);
         authorizationToken = signInResponse.getAccessToken();
     }
+
+    @Test
+    @Description("Verify that user can create Task with valid values. ")
+    @Issue("TUA-441")
+    public void cantCreateTaskWithValidValue(){
+
+        TaskClient client = new TaskClient(this.authorizationToken);
+        CreateTaskRequest request = new CreateTaskRequest();
+        DateProvider dateProvider = new DateProvider();
+
+        request.setName(name);
+        request.setHeaderText("djghdjfzblkdfzjgblkjfdzgjdkbj jdngjdnsjg djgjdsgdjskn");
+        request.setDescription( "descriptiondescriptiondescriptiondescriptiondescription12345$%%^$#");
+        request.setPicture("/upload/test/test.png");
+        request.setStartDate(dateProvider.dateFuture());
+
+        Response response = client.post(request,id);
+        Assert.assertEquals(response.statusCode(),200);
+
+        TaskCreateResponse r = response.as(TaskCreateResponse.class);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(r.getName(), name);
+        softAssert.assertEquals(r.getHeaderText(), "djghdjfzblkdfzjgblkjfdzgjdkbj jdngjdnsjg djgjdsgdjskn");
+        softAssert.assertEquals(r.getDescription(), "descriptiondescriptiondescriptiondescriptiondescription12345$%%^$#");
+        softAssert.assertEquals(r.getStartDate(), dateProvider.dateFuture());
+        System.out.println(r.getName());
+    }
+
 
     @Test
     @Description("[allure] Verify that user can not create Task with invalid values ")
@@ -227,6 +265,4 @@ public class TaskTest extends BaseApiTestRunner {
         softAssert.assertAll();
 
     }
-
-
 }

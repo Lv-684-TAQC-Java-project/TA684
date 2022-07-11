@@ -1,8 +1,8 @@
 package com.ita.speakukrainian.api.clients;
 
 import com.ita.speakukrainian.api.models.task.CreateTaskRequest;
-import com.ita.speakukrainian.api.models.task.CreateTaskPutRequest;
 import com.ita.speakukrainian.api.models.task.TaskRequest;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 public class TaskClient extends BaseClient{
@@ -14,7 +14,7 @@ public class TaskClient extends BaseClient{
         super();
         this.authorizationToken = authorizationToken;
     }
-
+    @Step("Update some values of task, including the id of the challenge to which it is linked ")
     public Response put (TaskRequest body, int id){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
@@ -23,6 +23,7 @@ public class TaskClient extends BaseClient{
                 .put(String.format("%s%s/%s", this.baseUrl, this.path,id));
     }
 
+    @Step("Create new task by using challenge id")
     public Response post (CreateTaskRequest body, int id){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))

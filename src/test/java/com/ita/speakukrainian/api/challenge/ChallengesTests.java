@@ -6,7 +6,9 @@ import com.ita.speakukrainian.api.clients.SignInClient;
 import com.ita.speakukrainian.api.models.challenge.ChallengeResponseForGet;
 import com.ita.speakukrainian.api.models.signin.SignInRequest;
 import com.ita.speakukrainian.api.models.signin.SignInResponse;
+import io.qameta.allure.Issue;
 import io.restassured.response.Response;
+import jdk.jfr.Description;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -19,6 +21,8 @@ public class ChallengesTests extends BaseApiTestRunner {
 
 
     @Test
+    @Description("Verify that user with any rights can view info about specific Challenge(using admin rights)")
+    @Issue("TUA-437")
     public void getChallengesAsAdmin() {
         SignInRequest credentials = new SignInRequest(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
         SignInClient client = new SignInClient();
@@ -39,7 +43,8 @@ public class ChallengesTests extends BaseApiTestRunner {
 
         softAssert.assertAll();
     }
-
+    @Description("Verify that user with any rights can view info about specific Challenge(using user rights)")
+    @Issue("TUA-437")
     @Test
     public void getChallengesAsUser() {
         SignInRequest credentials = new SignInRequest(valueProvider.getUserEmail(), valueProvider.getUserPassword());

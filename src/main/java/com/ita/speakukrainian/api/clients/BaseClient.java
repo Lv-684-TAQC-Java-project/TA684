@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.api.clients;
 
 import com.ita.speakukrainian.utils.DataProvider;
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
@@ -25,7 +26,7 @@ public class BaseClient {
         baseUrl = dataProvider.getApiUrl();
         contentType = ContentType.JSON;
     }
-
+    @Step("Get URL for API connection")
     protected RequestSpecification prepareRequest() {
         return given().baseUri(baseUrl).contentType(contentType).accept(contentType);
     }
