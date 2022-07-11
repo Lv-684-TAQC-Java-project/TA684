@@ -29,7 +29,7 @@ public class ClubsClient extends BaseClient {
                 .when()
                 .post(baseUrl + "/api/club");
     }
-    @Step("Delete a new club when we  have Id")
+    @Step("Delete a new club when we  have id {id}")
     public Response delete (int id){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
