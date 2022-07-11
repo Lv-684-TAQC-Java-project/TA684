@@ -12,7 +12,7 @@ public class CenterClient extends BaseClient {
         super();
         this.authorizationToken = authorizationToken;
     }
-    @Step("Create a new centre")
+    @Step("Create a new centre ")
     public Response post(CreatedCenterRequest body){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", this.authorizationToken))
