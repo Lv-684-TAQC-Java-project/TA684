@@ -1,6 +1,7 @@
 package com.ita.speakukrainian.ui.pages;
 
 import com.ita.speakukrainian.ui.components.HeaderMenuComponent;
+import com.ita.speakukrainian.ui.dropdowns.MyProfilePageDropDown;
 import com.ita.speakukrainian.ui.pages.AddClubPages.MainInformation;
 import com.ita.speakukrainian.ui.popup.AddCenterPopUp;
 import com.ita.speakukrainian.ui.popup.RedactClubMaliavkyPopUp;
@@ -18,9 +19,10 @@ public class MyProfilePage extends BaseObjectPage {
     private WebElement addClubButton;
     @FindBy(xpath = "//*[@class=\"ant-btn ant-btn-text button\"]")
     private WebElement editProfile;
-
     @FindBy(xpath = "//div[contains(text(), 'Малявки')]")
     private WebElement cardMaliavky;
+    @FindBy(xpath = "//*[@title=\"2\"]")
+    private WebElement secondPage;
 
     @FindBy(xpath = "//section[@class='ant-layout user-clubs']/div/div[2]/div/div/button")
     private WebElement detailsMaliavky;
@@ -76,6 +78,25 @@ public class MyProfilePage extends BaseObjectPage {
     public MyProfilePage clickMoreActionMenu(){
         moreActionMenu.click();
         return new MyProfilePage(driver);
+    }
+
+    @Step("Click second page")
+    public MyProfilePage clickSecondPage(){
+        sleep(1000);
+        secondPage.click();
+        sleep(5000);
+        return this;
+    }
+
+    @Step("Click my centers in DropDown")
+    public MyProfilePage clickMyCenters(){
+        MyProfilePageDropDown dropDown = new MyProfilePageDropDown(driver);
+        dropDown.clickMyProfileCenterDropDownPage();
+        return this;
+    }
+
+    public boolean secondPageIsSelected(){
+        return secondPage.getAttribute("class").equals("ant-pagination-item ant-pagination-item-2 ant-pagination-item-active");
     }
 
     public RedactClubMaliavkyPopUp clickRedactClub(){
