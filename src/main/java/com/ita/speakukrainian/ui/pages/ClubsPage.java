@@ -122,6 +122,12 @@ public class ClubsPage extends BasePage {
         getAgeInput().sendKeys(Integer.toString(age));
         return new ClubsPage(driver);
     }
+    @Step("Fill in age")
+    public ClubsPage fillInAgeInput(String age) {
+        getAgeInput().sendKeys(age);
+        return new ClubsPage(driver);
+    }
+
 
     public ExtendedSearchComponent clickCheckedToCenterButton() {
         checkedToCenterButton.click();

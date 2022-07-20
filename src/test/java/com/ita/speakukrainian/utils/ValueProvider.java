@@ -73,4 +73,12 @@ public class ValueProvider {
     public String getUserULPPassword() {
         return properties.getProperty("userULPPassword");
     }
+
+
+
+    public boolean getHeadlessMode() {
+        return  properties != null ?
+                Boolean.parseBoolean(properties.getProperty("HeadlessMode")) :
+                Boolean.parseBoolean(System.getenv("TEST_TEACH_UA_HEADLESS_MODE"));
+    }
 }
