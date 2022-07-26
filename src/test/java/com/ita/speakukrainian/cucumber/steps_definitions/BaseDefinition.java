@@ -1,4 +1,4 @@
-package com.ita.speakukrainian.cucumber.cucumberTestRunner;
+package com.ita.speakukrainian.cucumber.steps_definitions;
 
 import com.ita.speakukrainian.utils.ValueProvider;
 import io.cucumber.java.After;

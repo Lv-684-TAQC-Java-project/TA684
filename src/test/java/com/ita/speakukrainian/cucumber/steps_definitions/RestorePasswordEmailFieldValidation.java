@@ -1,7 +1,5 @@
 package com.ita.speakukrainian.cucumber.steps_definitions;
 
-import com.ita.speakukrainian.cucumber.cucumberTestRunner.BaseDefinition;
-import com.ita.speakukrainian.cucumber.cucumberTestRunner.PageContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;

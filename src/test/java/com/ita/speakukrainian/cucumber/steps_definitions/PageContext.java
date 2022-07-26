@@ -1,5 +1,7 @@
-package com.ita.speakukrainian.cucumber.cucumberTestRunner;
+package com.ita.speakukrainian.cucumber.steps_definitions;
 
+import com.ita.speakukrainian.cucumber.steps_definitions.AllHeaderComponents;
+import com.ita.speakukrainian.cucumber.steps_definitions.AllPages;
 import org.openqa.selenium.WebDriver;
 
 public class PageContext {
